@@ -5,6 +5,61 @@ nav{background-color: #666}
 article{background-color: #888}
 footer{background-color: #AAA}
 
+/* ヘッダー */
+/* ナビゲーション */
+nav{
+    height: 300px;
+    width: 1000px;
+    float: left;
+}
+/* ページ内容 */
+artocle{
+    width: 1000px;
+    height: 200px;
+}
+/* フッター */
+footer{
+    width: 1000px;
+    height: 50px;
+}
+
+footer ul li{
+    float: left;
+}
+
+/* css icon */
+.menu.icon {
+    color: #000;
+    position: absolute;
+    margin-left: 2px;
+    margin-top: 10px;
+    width: 17px;
+    height: 1px;
+    background-color: currentColor;
+  }
+  
+  .menu.icon:before {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: 0;
+    width: 17px;
+    height: 1px;
+    background-color: currentColor;
+  }
+  
+  .menu.icon:after {
+    content: '';
+    position: absolute;
+    top: 5px;
+    left: 0;
+    width: 17px;
+    height: 1px;
+    background-color: currentColor;
+  }
+  
+  
+
 
 
 
