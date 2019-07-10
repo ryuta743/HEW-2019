@@ -16,25 +16,33 @@ body{
   margin: 0 auto;
 }
 
-/* ヘッダー */
-header{
-  padding-left: 5vw;
-}
 
 /* ナビゲーション */
 nav{
     height: 100vh;
-    width: 5vw;
+    width: 5%;
     position: fixed;
     z-index: 9999;
 }
 
 /* ページ内容 */
 article{
-    width: 95vw;
+    width: 100%;
     height: auto;
+    display: flex;
+    justify-content: flex-end;
+    /* 
     margin: 0 auto;
-    padding-left: 5vw;
+    padding-left: 5vw; */
+}
+
+article div.box{
+  width: 95%;
+  height: auto;
+  min-height: 100vh;
+  background-size: cover;
+  background-position: center;
+  background-image: url('../images/mainVisual.jpg');
 }
 
 article img#mainVisual{
@@ -44,8 +52,12 @@ article img#mainVisual{
 
 /* フッター */
 footer{
+<<<<<<< HEAD
     width: 800px;
     padding-left: 35vw;
+=======
+    
+>>>>>>> master
 }
 
 footer ul li{
