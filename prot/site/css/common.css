@@ -44,8 +44,8 @@ article img#mainVisual{
 
 /* フッター */
 footer{
-    wid th: 1000px;
-    hei ght: 50px;
+    width: 100vw;
+    height: 150px;
     padding-left: 5vw;
 }
 
