@@ -27,10 +27,13 @@ nav{
 
 /* ページ内容 */
 article{
-    width: 95vw;
+    width: 100vw;
     height: auto;
+    display: flex;
+    justify-content: flex-end;
+    /* 
     margin: 0 auto;
-    padding-left: 5vw;
+    padding-left: 5vw; */
 }
 
 article div.box{
@@ -49,7 +52,7 @@ article img#mainVisual{
 
 /* フッター */
 footer{
-    padding-left: 5vw;
+    
 }
 
 footer ul li{
