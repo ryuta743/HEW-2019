@@ -44,12 +44,11 @@ article img#mainVisual{
 
 /* フッター */
 footer{
-    wid th: 1000px;
-    hei ght: 50px;
     padding-left: 5vw;
 }
 
 footer ul li{
+    list-style:none;
     float: left;
 }
 
@@ -62,6 +61,7 @@ footer ul li{
     width: 17px;
     height: 1px;
     background-color: currentColor;
+    margin: 0 auto;
   }
   
   .menu.icon:before {
