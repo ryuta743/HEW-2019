@@ -40,12 +40,18 @@ article img#mainVisual{
 
 /* フッター */
 footer{
-    padding-left: 5vw;
+    width: 800px;
+    padding-left: 35vw;
 }
 
 footer ul li{
+    margin: 0 auto;
     list-style:none;
     float: left;
+}
+
+footer ul li a{
+  margin-left: 20px;
 }
 
 /* css icon */
