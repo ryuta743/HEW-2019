@@ -18,30 +18,35 @@ body{
 
 /* ヘッダー */
 header{
-  padding-left: 100px;
+  padding-left: 5vw;
 }
 
 /* ナビゲーション */
 nav{
-    height: 100%;
-    width: 100px;
+    height: 100vh;
+    width: 5vw;
     position: fixed;
+    z-index: 9999;
 }
 
 /* ページ内容 */
 article{
-    padding-left: 101px;
+    width: 95vw;
+    height: 100vh;
+    margin: 0 auto;
+    padding-left: 5vw;
 }
 
 article img#mainVisual{
-  width: 100vw;
+  width: 95vw;
+  height: 100vh;
 }
 
 /* フッター */
 footer{
-    width: 1000px;
-    height: 50px;
-    padding-left: 101px;
+    wid th: 1000px;
+    hei ght: 50px;
+    padding-left: 5vw;
 }
 
 footer ul li{
@@ -78,73 +83,3 @@ footer ul li{
     height: 1px;
     background-color: currentColor;
   }
-  
-  
-
-
->>>>>>> master
-
-/* ヘッダー */
-/* ナビゲーション */
-nav{
-    height: 300px;
-    width: 1000px;
-    float: left;
-}
-/* ページ内容 */
-artocle{
-    width: 1000px;
-    height: 200px;
-}
-/* フッター */
-footer{
-    width: 1000px;
-    height: 50px;
-}
-
-footer ul li{
-    float: left;
-}
-
-/* css icon */
-.menu.icon {
-    color: #000;
-    position: absolute;
-    margin-left: 2px;
-    margin-top: 10px;
-    width: 17px;
-    height: 1px;
-    background-color: currentColor;
-  }
-  
-  .menu.icon:before {
-    content: '';
-    position: absolute;
-    top: -5px;
-    left: 0;
-    width: 17px;
-    height: 1px;
-    background-color: currentColor;
-  }
-  
-  .menu.icon:after {
-    content: '';
-    position: absolute;
-    top: 5px;
-    left: 0;
-    width: 17px;
-    height: 1px;
-    background-color: currentColor;
-  }
-  
-  
-
-=======
-#video{
-    width: 100vw;
-    height: 100vh;
-}
->>>>>>> d29b908... メインビジュアル画像
-
-
-
