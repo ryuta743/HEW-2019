@@ -11,22 +11,37 @@ footer{background-color: #AAA}
 <<<<<<< HEAD
 =======
 
+/* body */
+body{
+  margin: 0 auto;
+}
+
 /* ヘッダー */
+header{
+  padding-left: 100px;
+}
+
 /* ナビゲーション */
 nav{
-    height: 300px;
-    width: 1000px;
-    float: left;
+    height: 100%;
+    width: 100px;
+    position: fixed;
 }
+
 /* ページ内容 */
-artocle{
-    width: 1000px;
-    height: 200px;
+article{
+    padding-left: 101px;
 }
+
+article img#mainVisual{
+  width: 100vw;
+}
+
 /* フッター */
 footer{
     width: 1000px;
     height: 50px;
+    padding-left: 101px;
 }
 
 footer ul li{
