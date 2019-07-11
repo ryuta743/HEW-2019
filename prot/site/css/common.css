@@ -8,6 +8,10 @@ body{
 }
 
 
+
+
+
+
 /* ナビゲーション */
 nav{
     height: 100vh;
@@ -18,6 +22,11 @@ nav{
 
 nav div{
 }
+
+
+
+
+
 
 /* ページ内容 */
 article{
@@ -43,6 +52,21 @@ article img#mainVisual{
   width: 95vw;
   height: auto;
 }
+
+/* 右下配置ボックス */
+.sampleBox {
+      height: 100vh;
+      position: relative;
+  }
+  .sampleBox img {
+      z-index: 9999;
+      position: absolute;
+      right: 0;
+      bottom: 0;
+  }
+  
+
+
 
 /* フッター */
 footer{
