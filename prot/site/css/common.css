@@ -4,6 +4,7 @@
 body{
   margin: 0 auto;
   z-index: 1;
+  height: 5000px;
 }
 
 
@@ -72,19 +73,14 @@ footer div#copyright{
 
 
 /* pageTop */
-#pageTop {
+p#pageTop {
+  width: 100px;
+  height: 100px;
   position: fixed;
   bottom: 20px;
   right: 20px;
-}
-
-#pageTop img {
   z-index: 9999;
 }
-
-#pageTop img:hover {
-}
-
 
 
 
