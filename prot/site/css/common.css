@@ -1,19 +1,9 @@
 @charset "utf-8";
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> master
-header{background-color: #444;}
-nav{background-color: #666}
-article{background-color: #888}
-footer{background-color: #AAA}
-<<<<<<< HEAD
-=======
-
 /* body */
 body{
   margin: 0 auto;
+  z-index: 1;
 }
 
 
@@ -23,6 +13,9 @@ nav{
     width: 5%;
     position: fixed;
     z-index: 9999;
+}
+
+nav div{
 }
 
 /* ページ内容 */
@@ -52,23 +45,49 @@ article img#mainVisual{
 
 /* フッター */
 footer{
-<<<<<<< HEAD
-    width: 800px;
-    padding-left: 35vw;
-=======
-    
->>>>>>> master
+    width: 95%;
+    margin-left: 5%;
+}
+
+footer ul{
+    margin-left: 300px;
 }
 
 footer ul li{
-    margin: 0 auto;
     list-style:none;
     float: left;
 }
 
 footer ul li a{
-  margin-left: 20px;
+  margin-left: 100px;
 }
+
+footer div#copyright{
+  background-color: #444;
+  color: #ccc;
+}
+
+
+
+
+
+/* pageTop */
+#pageTop {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+}
+
+#pageTop img {
+  z-index: 9999;
+}
+
+#pageTop img:hover {
+}
+
+
+
+
 
 /* css icon */
 .menu.icon {
@@ -79,7 +98,6 @@ footer ul li a{
     width: 17px;
     height: 1px;
     background-color: currentColor;
-    margin: 0 auto;
   }
   
   .menu.icon:before {
