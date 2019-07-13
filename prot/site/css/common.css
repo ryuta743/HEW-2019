@@ -1,33 +1,36 @@
 @charset "utf-8";
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> master
-header{background-color: #444;}
-nav{background-color: #666}
-article{background-color: #888}
-footer{background-color: #AAA}
-<<<<<<< HEAD
-=======
-
 /* body */
 body{
   margin: 0 auto;
+  z-index: 1;
+  height: 5000px;
 }
+
+
+
+
 
 
 /* ナビゲーション */
 nav{
     height: 100vh;
-    width: 5vw;
+    width: 5%;
     position: fixed;
     z-index: 9999;
 }
 
+nav div{
+}
+
+
+
+
+
+
 /* ページ内容 */
 article{
-    width: 100vw;
+    width: 100%;
     height: auto;
     display: flex;
     justify-content: flex-end;
@@ -37,7 +40,7 @@ article{
 }
 
 article div.box{
-  width: 95vw;
+  width: 95%;
   height: auto;
   min-height: 100vh;
   background-size: cover;
@@ -50,15 +53,61 @@ article img#mainVisual{
   height: auto;
 }
 
+/* 右下配置ボックス */
+.sampleBox {
+      height: 100vh;
+      position: relative;
+  }
+  .sampleBox img {
+      z-index: 9999;
+      position: absolute;
+      right: 0;
+      bottom: 0;
+  }
+  
+
+
+
 /* フッター */
 footer{
-    
+    width: 95%;
+    margin-left: 5%;
+}
+
+footer ul{
+    margin-left: 300px;
 }
 
 footer ul li{
     list-style:none;
     float: left;
 }
+
+footer ul li a{
+  margin-left: 100px;
+}
+
+footer div#copyright{
+  background-color: #444;
+  color: #ccc;
+}
+
+
+
+
+
+/* pageTop */
+p#pageTop {
+  width: 100px;
+  height: 100px;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 9999;
+}
+
+
+
 
 /* css icon */
 .menu.icon {
@@ -69,7 +118,6 @@ footer ul li{
     width: 17px;
     height: 1px;
     background-color: currentColor;
-    margin: 0 auto;
   }
   
   .menu.icon:before {

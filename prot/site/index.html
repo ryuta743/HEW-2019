@@ -14,6 +14,7 @@
     
     <script src="js/jquery-3.4.0.min.js"></script>
     <script src="js/vue.js"></script>
+    <script src="js/pageTop.js"></script>
     
   </head>
   
@@ -30,8 +31,20 @@
 
     <!-- ページ内容 -->
     <article>
-      <div class="box"></div>
+      <div class="box">
+        <!-- 右下配置ボックス -->
+        <div class="sampleBox">
+          <a href="#"><img src="./banner.gif" alt="買い物ボタン" /></a>
+        </div>
+      </div>
     </article>
+
+    <!-- ページトップボタン -->
+    <p id="pageTop">
+      <a href="#">
+        <img src="images/pageTop.png" alt="ページトップへ">
+      </a>
+    </p>
 
     <!-- フッター -->
     <footer>
@@ -41,7 +54,10 @@
         <li><a href="#">NEWS</a></li>
         <li><a href="#">HELP</a></li>
       </ul>
-      <p>&copy;2019 tenshyoku.com All Rights Reserved.</p>
+
+      <div id="copyright">
+        <p>&copy;2019 tenshyoku.com All Rights Reserved.</p>
+      </div>
     </footer>
   </body>
   
