@@ -1,0 +1,144 @@
+#main{
+    display: flex;
+    width: 95%;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #4C6E29;
+}
+
+div#inputbox{
+    padding: 10px 50px 50px 50px;
+    width: 700px;
+    background-color: white;
+    border-radius: 5px;
+    border: 1px solid black;
+}
+
+label{
+    color: #444;
+}
+
+h1{
+   font-size: 22px;
+   height: 80px;
+   display: flex;
+   align-items: center; 
+}
+
+#nextbutton{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+#nextbutton button{
+    cursor: pointer;
+    color: white;
+    background-color: #4C6E29;
+    width: 150px;
+    height: 35px;
+    font-weight: bold;
+}
+
+.space{
+    padding-top: 5px;
+    font-size: 13px;
+    color: #98A51C;
+}
+
+.cp_iptxt {
+	position: relative;
+	width: 95%;
+	margin: 40px 3%;
+}
+.cp_iptxt input[type='text'] {
+	font: 15px/24px sans-serif;
+	box-sizing: border-box;
+	width: 100%;
+	letter-spacing: 1px;
+	padding-left: 4em;
+}
+.cp_iptxt input[type='text']:focus {
+	outline: none;
+}
+.ef {
+	padding: 4px 0;
+	border: 0;
+	border-bottom: 1px solid #1b2538;
+	background-color: transparent;
+}
+.ef ~ .focus_line {
+	position: absolute;
+	z-index: 99;
+	bottom: 6;
+	left: 0;
+	width: 100%;
+	height: 1px;
+}
+.ef ~ .focus_line:before,
+.ef ~ .focus_line:after {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 0;
+	height: 100%;
+	content: '';
+	transition: 0.4s;
+	background-color: #4C6E29;
+}
+.ef ~ .focus_line:after {
+	right: 0;
+	left: auto;
+}
+.ef:focus ~ .focus_line:before,
+.ef:focus ~ .focus_line:after,
+.cp_iptxt.ef ~ .focus_line:before,
+.cp_iptxt.ef ~ .focus_line:after {
+	width: 50%;
+	transition: 0.4s;
+}
+.ef ~ label {
+	position: absolute;
+	z-index: -1;
+	top: 4px;
+	left: 0;
+	width: 100%;
+	transition: 0.3s;
+	letter-spacing: 0.5px;
+	color: #aaaaaa;
+}
+.ef:focus ~ label,
+.cp_iptxt.ef ~ label {
+	font-size: 12px;
+	top: -16px;
+	transition: 0.3s;
+	color: #da3c41;
+}
+
+div#donebox{
+    padding: 10px 50px 200px 50px;
+    width: 700px;
+    background-color: white;
+    border-radius: 5px;
+    border: 1px solid black;
+}
+
+div.done{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+div.donebutton{
+    display: flex;
+    justify-content: center;
+}
+
+div.donebutton button{
+    cursor: pointer;
+    width: 200px;
+    height: 35px;
+    color: white;
+    background-color: #4C6E29;
+}
