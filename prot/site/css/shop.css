@@ -1,0 +1,88 @@
+@charset "utf-8";
+
+/* トップ画像 */
+.top_img{
+    max-width: 60%;
+    height: 400px;
+    margin: 0 auto;
+    border: solid 1px #000000;
+    display: block;
+}
+
+
+/* ショップ情報の設定 */
+.shop_info{
+    max-width: 50%;
+    margin: 0 auto;
+    padding-top: 20px;
+    display: block;
+}
+
+.shop_icon{
+   
+}
+
+.shop_title{
+    
+}
+
+.shop_intro{
+    
+}
+
+.shop_fav{
+    float:right;
+}
+
+.shop_messe{
+    clear: right;
+    float: right;
+    margin-bottom: 20px;
+}
+
+/* ショップ紹介文 */
+.shop_detail{
+    clear: right;
+    width: 50%;
+    margin: 0 auto;
+    display: block;
+}
+
+.shop_sentence{
+    margin: 0 auto;
+    border: solid 1px #000000;
+    text-align: center;
+    padding: 15px;
+}
+
+/* 商品 */
+.products{
+    width: 50%;
+    display: block;
+    margin: 20px auto 0 auto;
+}
+
+.pro_1{
+    float: left;
+    padding: 1em;
+    margin: 1em;
+    background: #FFF;
+    border: solid 3px #4C6E29;/*線*/
+    border-radius: 10px;/*角の丸み*/
+}
+
+/* ショップレビュー */
+.shop_review{
+    clear: left;
+    width: 50%;
+    display: block;
+    margin:20px auto 0 auto;
+}
+
+.review_box{
+    padding: 1em;
+    margin: 1em;
+    background: #FFF;
+    border: solid 3px #4C6E29;/*線*/
+    border-radius: 10px;/*角の丸み*/
+}
