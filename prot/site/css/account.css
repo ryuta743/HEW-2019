@@ -1,0 +1,114 @@
+@charset "utf-8";
+
+#wrap{
+  width: 95%;
+  background-color: #4c6e29;
+  margin-bottom: 50px;
+}
+
+#link{
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+.link_box{
+  width: 220px;
+  height: 20px;
+  margin: 10px;
+  text-align: center;
+  background-color: #fff;
+  padding: 5px;
+  float: left;
+}
+
+.a_link{
+  text-decoration: none;
+  color: #4c6e29;
+}
+
+.a_link:hover{
+  color: #98a51c;
+}
+
+#account_box{
+  background-color: #eee;
+  width: 60%;
+  height: 80%;
+  margin: 0 auto;
+  border: solid 5px #8c7042;
+  font-size: 20px;
+  color: #aaa;
+}
+
+.title{
+  background-color: #8c7042;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin: 0 0 20px 0;
+  padding: 10px 0 10px 0;
+}
+
+.subtitle{
+  background-color: #8c7042;
+}
+
+.img{
+  background-color: #fff;
+  width: 20%;
+  height: 210px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.img p{
+  padding-top: 5px;
+}
+
+.img p.subtitle{
+  margin-bottom: 10px;
+}
+
+.img img{
+  width: 80%;
+  height: 140px;
+}
+
+.mail{
+  background-color: #fff;
+  width: 40%;
+  height: 60px;
+  line-height: 30px;
+  text-align: center;
+  margin: 0 auto;
+}
+
+.id_box{
+  background-color: #fff;
+  width: 40%;
+  height: 60px;
+  line-height: 30px;
+  text-align: center;
+  margin: 0 auto;
+}
+
+.name_box{
+  background-color: #fff;
+  width: 40%;
+  height: 60px;
+  line-height: 30px;
+  text-align: center;
+  margin: 0 auto;
+}
+
+.null{
+  margin-bottom: 30px;
+}
+
+#return{
+  margin-top: 20px;
+  margin-bottom: 30px;
+  display: flex;
+  justify-content: center;
+}
