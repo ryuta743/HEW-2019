@@ -67,12 +67,21 @@ article img#mainVisual{
 
 /* フッター */
 footer{
+<<<<<<< Updated upstream
     width: 95%;
     margin-left: 5%;
 }
 
 footer ul{
     margin-left: 300px;
+=======
+<<<<<<< HEAD
+    width: 800px;
+    padding-left: 35vw;
+=======
+    
+>>>>>>> master
+>>>>>>> Stashed changes
 }
 
 footer ul li{

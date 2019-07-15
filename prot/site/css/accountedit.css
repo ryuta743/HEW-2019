@@ -1,0 +1,25 @@
+@charset "utf-8";
+
+.img{
+  background-color: #fff;
+  width: 40%;
+  height: 40%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.img img{
+  margin-top: 5px;
+  width: 80%;
+  height: 80%;
+}
+
+
+.button{
+  background-color: #fff;
+  width: 40%;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  margin: 0 auto;
+}
