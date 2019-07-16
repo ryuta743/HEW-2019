@@ -1,0 +1,22 @@
+@charset "utf-8";
+
+.delete_check{
+  text-align: center;
+  margin: 10px 0 10px 0;
+}
+
+.delete_done{
+  text-align: center;
+}
+
+.delete_done input[type="submit"]{
+  background-color: red;
+  border: solid 1px #000;
+  width: 20%;
+  text-decoration: none;
+  color: #fff;
+}
+
+.delete_done input[type="submit"]:hover{
+  color: #98a51c;
+}

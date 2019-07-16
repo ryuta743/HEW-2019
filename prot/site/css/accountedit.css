@@ -23,3 +23,19 @@
   text-align: center;
   margin: 0 auto;
 }
+
+.delete{
+  text-align: center;
+}
+
+.delete input[type="submit"]{
+  background-color: red;
+  border: solid 1px #000;
+  width: 30%;
+  text-decoration: none;
+  color: #fff;
+}
+
+.delete input[type="submit"]:hover{
+  color: #98a51c;
+}
