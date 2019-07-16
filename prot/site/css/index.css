@@ -61,7 +61,9 @@ article div.first_box{
     left: 200px;
     width: 300px;
     height: 70px;
-    background-color: 
+    background-color: #000;
+    color: #fff;
+    font-size: 20px;
   }
 
   article div.second_box img{
