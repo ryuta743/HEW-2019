@@ -1,17 +1,76 @@
-article div.box{
-    width: 95%;
+first{
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: flex-end;
+  /* 
+  margin: 0 auto;
+  padding-left: 5vw; */
+}
+
+second{
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: flex-end;
+}
+
+
+
+article div.first_box{
+    width: 95vw;
     height: auto;
     min-height: 100vh;
     background-size: cover;
     background-position: center;
     background-image: url('../images/mainVisual.jpg');
   }
-  
-  article img#mainVisual{
+
+  article div.second_box{
     width: 95vw;
     height: auto;
+    min-height: 100vh;
+    background-size: cover;
+    background-position: center;
+    background-color: #FFFFFF;
   }
-  
+
+  article div.second_box h1{
+    position: relative;
+    top: 70px;
+    left: 80px;
+    font-size: 50px;
+  }
+
+  article div.second_box h2{
+    position: relative;
+    top: 150px;
+    left: 80px;
+    font-size: 40px;
+  }
+  article div.second_box p{
+    position: relative;
+    top: 180px;
+    left: 80px;
+    font-size: 20px;
+  }
+
+  article div.second_box button{
+    position: relative;
+    top: 40px;
+    left: 200px;
+    width: 300px;
+    height: 70px;
+    background-color: 
+  }
+
+  article div.second_box img{
+    position: relative;
+    top: 250px;
+    left: 450px;
+    z-index: 999;
+  }
+
   /* 右下配置ボックス */
   .sampleBox {
         width: 300px;
