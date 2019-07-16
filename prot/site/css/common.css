@@ -7,26 +7,25 @@ body{
   height: 5000px;
 }
 
-
-
-
-
-
 /* ナビゲーション */
 nav{
     height: 100vh;
-    width: 5%;
+    width: 5vw;
+    background: #ccc;
     position: fixed;
-    z-index: 9999;
+    z-index: 99;
 }
 
-nav div{
+nav img{
+    width: 5vw;
 }
 
-
-
-
-
+nav div.menu.icon{
+    display: inline-block;
+    position: relative;
+    top: 40vh;
+    left: 2vw;
+}
 
 /* ページ内容 */
 article{
@@ -39,43 +38,25 @@ article{
     padding-left: 5vw; */
 }
 
-article div.box{
-  width: 95%;
-  height: auto;
-  min-height: 100vh;
-  background-size: cover;
-  background-position: center;
-  background-image: url('../images/mainVisual.jpg');
-}
-
-article img#mainVisual{
-  width: 95vw;
-  height: auto;
-}
-
-/* 右下配置ボックス */
-.sampleBox {
-      height: 100vh;
-      position: relative;
-  }
-  .sampleBox img {
-      z-index: 9999;
-      position: absolute;
-      right: 0;
-      bottom: 0;
-  }
-  
-
 
 
 /* フッター */
 footer{
+<<<<<<< Updated upstream
     width: 95%;
     margin-left: 5%;
 }
 
 footer ul{
     margin-left: 300px;
+=======
+<<<<<<< HEAD
+    width: 800px;
+    padding-left: 35vw;
+=======
+    
+>>>>>>> master
+>>>>>>> Stashed changes
 }
 
 footer ul li{
@@ -103,7 +84,7 @@ p#pageTop {
   position: fixed;
   bottom: 20px;
   right: 20px;
-  z-index: 9999;
+  z-index: 99;
 }
 
 
@@ -139,3 +120,34 @@ p#pageTop {
     height: 1px;
     background-color: currentColor;
   }
+
+
+
+
+
+
+
+  /* ハンバーガーメニュー */
+  #gloval-nav {
+    background: #000;
+    color: #fff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 990;
+    text-align: center;
+    display: flex;
+    visibility: hidden;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 29px;
+    opacity: 0;
+    transition: opacity .6s ease, visibility .6s ease;
+}
+.open #gloval-nav {
+    visibility: visible;
+    opacity: 1;
+}

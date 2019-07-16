@@ -11,10 +11,12 @@
     <link rel="stylesheet" href="css/reset.css">
     <link href="https://cdn.jsdelivr.net/npm/animate.css@3.5.1" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/index.css">
     
     <script src="js/jquery-3.4.0.min.js"></script>
     <script src="js/vue.js"></script>
     <script src="js/pageTop.js"></script>
+    <script src="js/Velocity.js"></script>
     
   </head>
   
@@ -24,19 +26,42 @@
     <nav>
       <div>
         <!-- ロゴ画像 -->
-        <a href="index.html"><img src="images/logo.png" alt="ロゴ画像"></a>
-        <div class="menu icon"></div>
-      </div>
-    </nav>
+        <!--<a href="index.html"><img src="images/logo.png" alt="ロゴ画像"></a>-->
+        <!--<div class="menu icon"></div>-->
+
+        <div id="nav-toggle">
+            <div>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        
+        <div id="gloval-nav">
+            <nav>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">News</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Works</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </nav>
+
+      </nav>
 
     <!-- ページ内容 -->
     <article>
+
       <div class="box">
+
         <!-- 右下配置ボックス -->
         <div class="sampleBox">
-          <a href="#"><img src="./banner.gif" alt="買い物ボタン" /></a>
+          <a href="#"><img src="images/banner.png" alt="買い物ボタン" /></a>
         </div>
+
       </div>
+
     </article>
 
     <!-- ページトップボタン -->

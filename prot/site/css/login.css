@@ -1,0 +1,53 @@
+a{
+    	
+text-decoration: none;
+color: #98A51C;
+}
+
+div#main{
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    width: 95%;
+    height: 100vh;
+    background-color: #4C6E29;
+}
+
+div#inputbox{
+    margin-top: 50px;
+    width: 500px;
+    padding: 40px 120px 40px 120px;
+    background-color: white;
+    border: 1px solid black;
+}
+
+table td{
+    padding: 8px;
+}
+
+td h1{
+    font-size: 22px;
+}
+
+input[type="text"] {
+    width: 250px;
+    height: 22px;
+    border: 1px solid #e6e6e6; 
+    border-radius: 3px;
+}
+
+td p{
+    margin-left: 5px;
+    font-size: 13px;
+    color:  #98A51C;
+}
+
+#loginbutton{
+    cursor: pointer;
+    width: 100px;
+    height: 33px;
+    color: white;
+    font-weight: bold;
+    border: 1px solid white;
+    background-color: #98A51C;
+}
