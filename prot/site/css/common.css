@@ -10,13 +10,14 @@ body{
   margin: 0 auto;
   z-index: 1;
   height: auto;
+  overflow-x: hidden;
 }
 
 /* ナビゲーション */
 nav{
     height: 100vh;
     width: 5vw;
-    background: #ccc;
+    background: #fff;
     position: fixed;
     z-index: 1000;
     cursor: pointer;
@@ -34,15 +35,6 @@ nav div.menu.icon{
 }
 
 /* ページ内容 */
-article{
-    width: 100%;
-    height: auto;
-    display: flex;
-    justify-content: flex-end;
-    /* 
-    margin: 0 auto;
-    padding-left: 5vw; */
-}
 
 
 
