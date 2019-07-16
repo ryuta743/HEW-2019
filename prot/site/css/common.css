@@ -4,7 +4,7 @@
 body{
   margin: 0 auto;
   z-index: 1;
-  height: 5000px;
+  height: auto;
 }
 
 /* ナビゲーション */
