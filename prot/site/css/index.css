@@ -15,8 +15,6 @@ second{
   justify-content: flex-end;
 }
 
-
-
 article div.first_box{
     width: 95vw;
     height: auto;
@@ -32,46 +30,57 @@ article div.first_box{
     min-height: 100vh;
     background-size: cover;
     background-position: center;
-    background-color: #FFFFFF;
+    background-image: url('../images/second.png');
   }
 
   article div.second_box h1{
     position: relative;
-    top: 70px;
-    left: 80px;
+    top: 190px;
+    left: 620px;
     font-size: 50px;
   }
 
-  article div.second_box h2{
+  article div.second_box a{
     position: relative;
-    top: 150px;
-    left: 80px;
-    font-size: 40px;
-  }
-  article div.second_box p{
-    position: relative;
-    top: 180px;
-    left: 80px;
-    font-size: 20px;
+    top: 560px;
+    left: 615px;
   }
 
-  article div.second_box button{
+  /*ボタン*/
+  .button {
     position: relative;
-    top: 40px;
-    left: 200px;
-    width: 300px;
-    height: 70px;
-    background-color: #000;
+    display: inline-block;
+    padding: .5em 4em;
+    border: 2px solid #333;
+    color: #333;
+    text-align: center;
+    text-decoration: none;
+    transition: .3s;
+  }
+  .button:hover {
     color: #fff;
-    font-size: 20px;
+  }
+  .button {
+    overflow: hidden;
+  }
+  .button::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    content: '';
+    width: 120%;
+    height: 100%;
+    background: #333;
+    transform-origin: right top;
+    transform: skewX(-30deg) scale(0, 1);
+    transition: transform .3s;
+  }
+  .button:hover::before {
+    transform-origin: left top;
+    transform: skewX(-30deg) scale(1, 1);
   }
 
-  article div.second_box img{
-    position: relative;
-    top: 250px;
-    left: 450px;
-    z-index: 999;
-  }
 
   /* 右下配置ボックス */
   .sampleBox {
