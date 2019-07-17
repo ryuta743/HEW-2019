@@ -40,21 +40,13 @@ nav div.menu.icon{
 
 /* フッター */
 footer{
-<<<<<<< Updated upstream
     width: 95%;
     margin-left: 5%;
+    margin-bottom: 0px;
 }
 
 footer ul{
     margin-left: 300px;
-=======
-<<<<<<< HEAD
-    width: 800px;
-    padding-left: 35vw;
-=======
-    
->>>>>>> master
->>>>>>> Stashed changes
 }
 
 footer ul li{
@@ -63,7 +55,7 @@ footer ul li{
 }
 
 footer ul li a{
-  margin-left: 100px;
+  margin-left: 50px;
 }
 
 footer div#copyright{
