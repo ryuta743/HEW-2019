@@ -76,7 +76,11 @@
 
           <v-divider></v-divider>
 
-          <v-stepper-step step="3">Name of step 3</v-stepper-step>
+          <v-stepper-step step="3">登録内容確認</v-stepper-step>
+
+          <v-divider></v-divider>
+
+          <v-stepper-step step="4">登録完了</v-stepper-step>
         </v-stepper-header>
 
         <v-stepper-items>
@@ -100,13 +104,17 @@
           <v-stepper-content step="2">
             <v-layout row wrap justify-center>
               <v-flex md10>
+                <v-subheader>お名前（当サイトでご使用になられるお名前）</v-subheader>
+                <v-text-field label placeholder="天職太朗" outlined></v-text-field>
+              </v-flex>
+
+              <v-flex md11>
+                <v-divider style="margin-top: 15px;"></v-divider>
+              </v-flex>
+
+              <v-flex md10>
                 <v-subheader>国籍</v-subheader>
-                <v-select
-                  outlined
-                  :items="items"
-                  v-model="value"
-                  label="label"
-                ></v-select>
+                <v-select outlined :items="countorys" label="在住している国を選択してください"></v-select>
               </v-flex>
               <v-flex md11>
                 <v-divider style="margin-top: 15px;"></v-divider>
@@ -114,29 +122,78 @@
 
               <v-flex md10>
                 <v-subheader>性別</v-subheader>
-                <v-layout row wrap>
+                <v-layout row wrap style="padding-bottom: 30px;">
                   <v-radio label="男性" value="value"></v-radio>
                   <v-radio label="女性" value="value"></v-radio>
                   <v-radio label="その他" value="value"></v-radio>
                 </v-layout>
               </v-flex>
 
-              
+              <v-flex md11>
+                <v-divider style="margin-top: 15px;"></v-divider>
+              </v-flex>
+
+              <v-flex md10>
+                <v-subheader>日本伝統工芸品関係者（伝統工芸職人）の方は下のボックスにチェックを入れてください</v-subheader>
+                <v-checkbox label="日本伝統工芸品関係者です" value="value"></v-checkbox>
+              </v-flex>
             </v-layout>
 
             <v-btn color="primary" @click="e1 = 3">確認</v-btn>
           </v-stepper-content>
 
           <v-stepper-content step="3">
-            <v-card class="mb-12" color="grey lighten-1" height="200px"></v-card>
+            <v-subheader>この内容で登録してもよろしいですか？</v-subheader>
+            <v-simple-table>
+              <tbody>
+                <tr>
+                  <td>メールアドレス</td>
+                  <td>tenshoku@hal.co.jp</td>
+                </tr>
+                <tr>
+                  <td>お名前</td>
+                  <td>天職太朗</td>
+                </tr>
+                <tr>
+                  <td>性別</td>
+                  <td>男性</td>
+                </tr>
+                <tr>
+                  <td>国籍</td>
+                  <td>日本(Japan)</td>
+                </tr>
+                <tr>
+                  <td>ご質問</td>
+                  <td>私は日本伝統工芸品関係者です</td>
+                </tr>
+              </tbody>
+            </v-simple-table>
+            <v-btn color="primary" @click="e1 = 4">OK</v-btn>
+          </v-stepper-content>
 
-            <v-btn color="primary" @click="e1 = 1">OK</v-btn>
+          <v-stepper-content step="4">
+            <v-layout row wrap justify-center>
+              <v-flex md10>
+                <v-card>
+                  <v-card-text style="text-align:center;">
+                    <v-icon size="50px" color="success">mdi-check</v-icon>
+                  </v-card-text>
+                  <v-card-text style="text-align: center;font-size: 20px;">
+                    登録が完了いたしました！
+                    <br />お疲れ様でした！
+                  </v-card-text>
+                  <v-card-text style="text-align: center;">
+                    <v-btn color="primary" @click="createADialog = false">OK</v-btn>
+                  </v-card-text>
+                </v-card>
+              </v-flex>
+            </v-layout>
           </v-stepper-content>
         </v-stepper-items>
       </v-stepper>
     </v-dialog>
 
-    <v-navigation-drawer v-model="drawer" :mini-variant="miniVariant" :clipped="clipped" fixed app>
+    <!-- <v-navigation-drawer v-model="drawer" :mini-variant="miniVariant" :clipped="clipped" fixed app>
       <v-list>
         <v-list-item v-for="(item, i) in items" :key="i" :to="item.to" router exact>
           <v-list-item-action>
@@ -147,7 +204,7 @@
           </v-list-item-content>
         </v-list-item>
       </v-list>
-    </v-navigation-drawer>
+    </v-navigation-drawer> -->
     <v-app-bar elevate-on-scroll :clipped-left="clipped" app>
       <!-- <v-app-bar-nav-icon @click.stop="drawer = !drawer" /> -->
       <v-btn outlined>ここにlogo</v-btn>
@@ -211,6 +268,8 @@ export default {
       fixed: false,
       loginDialog: false,
       successDialog: false,
+
+      countorys: ["日本(Japan)", "アメリカ合衆国(U.S.A)"],
       items: [
         {
           icon: "mdi-account-box",

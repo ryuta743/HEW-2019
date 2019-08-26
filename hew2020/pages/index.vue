@@ -22,7 +22,7 @@
           </v-layout>
           <v-layout row wrap>
             <v-flex xs12 md4 v-for="(item, index) in pickups" :key="index" style="padding: 5px;">
-              <v-card>
+              <v-card hover>
                 <v-card-text>
                   <v-img
                     :src="item.src"
@@ -50,7 +50,7 @@
           </v-layout>
           <v-layout row wrap>
             <v-flex xs12 md4 v-for="(item, index) in pickups" :key="index" style="padding: 5px;">
-              <v-card>
+              <v-card hover>
                 <v-card-text>
                   <v-img
                     :src="item.src"
@@ -78,7 +78,7 @@
           </v-layout>
           <v-layout row wrap>
             <v-flex xs12 md4 v-for="(item, index) in pickups" :key="index" style="padding: 5px;">
-              <v-card>
+              <v-card hover>
                 <v-card-text>
                   <v-img
                     :src="item.src"
