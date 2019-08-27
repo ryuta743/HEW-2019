@@ -4,6 +4,18 @@
       <v-content>
         <h5 style="width: 100%;text-align: center;">詳細検索</h5>
         <h4 style="width: 100%;text-align: center;">ADVANCED SEARCH</h4>
+
+        <v-layout row wrap justify-center style="padding-top: 10px;">
+          <v-flex xs12 md6>
+            <form @submit.prevent>
+              <v-layout row wrap>
+                <v-text-field outlined label="検索"></v-text-field>
+                <v-btn type="submit" color="info" style="height: 55px;">検索</v-btn>
+              </v-layout>
+            </form>
+          </v-flex>
+        </v-layout>
+
         <v-layout row wrap>
           <v-flex xs4 md2 style="margin-right: 5px;">
             <v-subheader>検索対象</v-subheader>
@@ -98,7 +110,7 @@ export default {
 </script>
 
 <style>
-.target{
+.target {
   cursor: pointer;
 }
 </style>

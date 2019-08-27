@@ -209,10 +209,10 @@
       <!-- <v-app-bar-nav-icon @click.stop="drawer = !drawer" /> -->
       <v-btn outlined>ここにlogo</v-btn>
       <v-tabs>
-        <v-tab @click="$router.push('/')">TOP</v-tab>
-        <v-tab @click="$router.push('/shop')">SHOP</v-tab>
-        <v-tab>メニュー03</v-tab>
-        <v-tab>メニュー04</v-tab>
+        <v-tab @click="$router.push('/')">トップ</v-tab>
+        <v-tab @click="$router.push('/shop')">ショップ</v-tab>
+        <v-tab>モール</v-tab>
+        <v-tab>コンタクト</v-tab>
       </v-tabs>
 
       <v-btn outlined @click="loginDialog = true" v-if="!isLogin">
@@ -222,6 +222,13 @@
       <v-btn outlined style="margin: ;" v-if="!isLogin" @click="createADialog = true">
         <v-icon color="success">mdi-account</v-icon>新規登録
       </v-btn>
+
+      <v-badge left color="primary" v-if="isLogin && isCreater">
+        <span slot="badge">5</span>
+        <v-btn outlined>
+          <v-icon color="primary">mdi-shop</v-icon>マイショップ
+        </v-btn>
+      </v-badge>
 
       <v-badge left color="primary" v-if="isLogin">
         <span slot="badge">0</span>
@@ -263,6 +270,7 @@ export default {
       e1: 0,
       createADialog: false,
       isLogin: false,
+      isCreater: true,
       clipped: false,
       drawer: false,
       fixed: false,
