@@ -53,7 +53,7 @@
                   ({{item.rating}})
                 </v-layout>
               </v-card-text>
-              <v-card-text>{{item.creater}}</v-card-text>
+              <v-card-text><nuxt-link to="customer/workshop">{{item.creater}}</nuxt-link></v-card-text>
             </v-card>
           </v-flex>
         </v-layout>
