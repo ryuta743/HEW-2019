@@ -62,7 +62,6 @@
       v-model="createADialog"
       scrollable
       persistent
-      :overlay="false"
       max-width="900px"
       transition="dialog-transition"
     >
@@ -96,9 +95,11 @@
               </v-flex>
             </v-layout>
 
-            <v-btn color="primary" @click="e1 = 2">確認</v-btn>
+            <v-layout row wrap justify-end>
+              <v-btn color="primary" @click="e1 = 2">確認</v-btn>
 
-            <v-btn text @click="createADialog = false">キャンセル</v-btn>
+              <v-btn text @click="createADialog = false">キャンセル</v-btn>
+            </v-layout>
           </v-stepper-content>
 
           <v-stepper-content step="2">
@@ -117,7 +118,7 @@
                 <v-select outlined :items="countorys" label="在住している国を選択してください"></v-select>
               </v-flex>
               <v-flex md11>
-                <v-divider style="margin-top: 15px;"></v-divider>
+                <v-divider style="margin-top: 10px;"></v-divider>
               </v-flex>
 
               <v-flex md10>
@@ -130,16 +131,19 @@
               </v-flex>
 
               <v-flex md11>
-                <v-divider style="margin-top: 15px;"></v-divider>
+                <v-divider style="margin-top: 10px;"></v-divider>
               </v-flex>
 
               <v-flex md10>
                 <v-subheader>日本伝統工芸品関係者（伝統工芸職人）の方は下のボックスにチェックを入れてください</v-subheader>
-                <v-checkbox label="日本伝統工芸品関係者です" value="value"></v-checkbox>
+                <v-layout row wrap align-center>
+                  <v-checkbox label="日本伝統工芸品関係者です" value="value"></v-checkbox>
+                  <v-layout row wrap justify-end>
+                    <v-btn color="primary" @click="e1 = 3">確認</v-btn>
+                  </v-layout>
+                </v-layout>
               </v-flex>
             </v-layout>
-
-            <v-btn color="primary" @click="e1 = 3">確認</v-btn>
           </v-stepper-content>
 
           <v-stepper-content step="3">
@@ -168,7 +172,10 @@
                 </tr>
               </tbody>
             </v-simple-table>
-            <v-btn color="primary" @click="e1 = 4">OK</v-btn>
+            <v-layout row wrap justify-end style="margin-right: 10px;">
+              <v-btn color="primary" @click="e1 = 4">OK</v-btn>
+            </v-layout>
+            
           </v-stepper-content>
 
           <v-stepper-content step="4">
@@ -183,7 +190,7 @@
                     <br />お疲れ様でした！
                   </v-card-text>
                   <v-card-text style="text-align: center;">
-                    <v-btn color="primary" @click="createADialog = false">OK</v-btn>
+                    <v-btn color="primary" @click="createADialog = false" >OK</v-btn>
                   </v-card-text>
                 </v-card>
               </v-flex>
@@ -204,15 +211,15 @@
           </v-list-item-content>
         </v-list-item>
       </v-list>
-    </v-navigation-drawer> -->
+    </v-navigation-drawer>-->
     <v-app-bar elevate-on-scroll :clipped-left="clipped" app>
       <!-- <v-app-bar-nav-icon @click.stop="drawer = !drawer" /> -->
       <v-btn outlined>ここにlogo</v-btn>
       <v-tabs>
         <v-tab @click="$router.push('/')">トップ</v-tab>
         <v-tab @click="$router.push('/shop')">ショップ</v-tab>
-        <v-tab>モール</v-tab>
-        <v-tab>コンタクト</v-tab>
+        <v-tab @click="$router.push('/mall')">モール</v-tab>
+        <v-tab @click="$router.push('/contact')">コンタクト</v-tab>
       </v-tabs>
 
       <v-btn outlined @click="loginDialog = true" v-if="!isLogin">

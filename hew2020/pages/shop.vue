@@ -39,8 +39,20 @@
           >
             <v-card hover @click="$router.push('/shop')">
               <v-img :src="item.src"></v-img>
-              <v-card-text style="font-weight: bold;">- {{item.title}} -</v-card-text>
-              <v-card-text>{{item.description}}</v-card-text>
+              <v-card-text style="font-weight: bold;height: 10px;">{{item.title}}</v-card-text>
+              <v-card-text style="height : 10px;">
+                <v-layout row wrap align-center>
+                  <v-rating
+                    color="yellow darken-3"
+                    background-color="grey darken-1"
+                    v-model="item.rating"
+                    readonly
+                    size="19px"
+                    half-increments
+                  ></v-rating>
+                  ({{item.rating}})
+                </v-layout>
+              </v-card-text>
               <v-card-text>{{item.creater}}</v-card-text>
             </v-card>
           </v-flex>
@@ -58,49 +70,49 @@ export default {
         {
           title: "美しい日本刀",
           src: "https://picsum.photos/id/11/500/300",
-          description: "ここに説明が入ります",
+          rating: 4.0,
           creater: "ここに出品工房情報"
         },
         {
           title: "やばいこけし",
           src: "https://picsum.photos/id/11/500/300",
-          description: "ここに説明が入ります",
+          rating: 2.5,
           creater: "ここに出品工房情報"
         },
         {
           title: "話題の組紐",
           src: "https://picsum.photos/id/11/500/300",
-          description: "ここに説明が入ります",
+          rating: 4.9,
           creater: "ここに出品工房情報"
         },
         {
           title: "組紐",
           src: "https://picsum.photos/id/11/500/300",
-          description: "ここに説明が入ります",
+          rating: 4.0,
           creater: "ここに出品工房情報"
         },
         {
           title: "組紐",
           src: "https://picsum.photos/id/11/500/300",
-          description: "ここに説明が入ります",
+          rating: 3.5,
           creater: "ここに出品工房情報"
         },
         {
           title: "組紐",
           src: "https://picsum.photos/id/11/500/300",
-          description: "ここに説明が入ります",
+          rating: 3.5,
           creater: "ここに出品工房情報"
         },
         {
           title: "やばいこけし",
           src: "https://picsum.photos/id/11/500/300",
-          description: "ここに説明が入ります",
+          rating: 5.0,
           creater: "ここに出品工房情報"
         },
         {
           title: "やばいこけし",
           src: "https://picsum.photos/id/11/500/300",
-          description: "ここに説明が入ります",
+          rating: 5.0,
           creater: "ここに出品工房情報"
         }
       ]
