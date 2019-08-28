@@ -38,15 +38,16 @@
             style="padding: 0 10px 20px 10px;"
           >
             <v-card hover @click="$router.push('/shop')">
-              <v-card-text style="font-weight: bold;">- {{item.title}} -</v-card-text>
               <v-img :src="item.src"></v-img>
-              <v-card-text>
+              <v-card-text style="font-weight: bold;height: 10px;">{{item.title}}</v-card-text>
+              <v-card-text style="height : 10px;">
                 <v-layout row wrap align-center>
                   <v-rating
                     color="yellow darken-3"
                     background-color="grey darken-1"
                     v-model="item.rating"
                     readonly
+                    size="19px"
                     half-increments
                   ></v-rating>
                   ({{item.rating}})

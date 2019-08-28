@@ -218,8 +218,8 @@
       <v-tabs>
         <v-tab @click="$router.push('/')">トップ</v-tab>
         <v-tab @click="$router.push('/shop')">ショップ</v-tab>
-        <v-tab>モール</v-tab>
-        <v-tab>コンタクト</v-tab>
+        <v-tab @click="$router.push('/mall')">モール</v-tab>
+        <v-tab @click="$router.push('/contact')">コンタクト</v-tab>
       </v-tabs>
 
       <v-btn outlined @click="loginDialog = true" v-if="!isLogin">
