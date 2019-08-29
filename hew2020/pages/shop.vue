@@ -1,6 +1,6 @@
 <template>
   <v-layout>
-    <v-container>
+    <v-container grid-list-xs>
       <v-content>
         <h5 style="width: 100%;text-align: center;">詳細検索</h5>
         <h4 style="width: 100%;text-align: center;">ADVANCED SEARCH</h4>

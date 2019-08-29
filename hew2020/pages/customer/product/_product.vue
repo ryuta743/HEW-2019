@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container grid-list-xs>
     <v-content>
       <v-card>
         <v-card-text>
@@ -23,7 +23,7 @@
                 </v-layout>
               </v-card-text>
               <v-card-text>
-                  出品工房:
+                出品工房:
                 <nuxt-link :to="`../workshop/${item.creater}`">{{item.creater}}</nuxt-link>
               </v-card-text>
               <v-card-text style="font-weight: bold;">{{item.description}}</v-card-text>
@@ -53,6 +53,34 @@
             </v-card>
           </v-flex>
         </v-card-text>
+        <v-divider></v-divider>
+        <v-card-text>
+          <v-subheader>この商品を評価する</v-subheader>
+          <v-rating></v-rating>
+          <v-layout row wrap justify-center>
+            <v-flex xs9 md9>
+              <v-text-field label placeholder="商品レビュー" outlined></v-text-field>
+            </v-flex>
+            <v-flex xs2 md2>
+              <v-btn color="success" style="height: 55px;">送信</v-btn>
+            </v-flex>
+          </v-layout>
+          <v-divider />
+        </v-card-text>
+        <v-card-text v-for="(item, index) in reviews" :key="index">
+          <v-layout row wrap align-center>
+            <v-rating
+              v-model="item.rating"
+              color="yellow darken-3"
+              background-color="grey darken-1"
+              readonly
+              size="19px"
+            />
+            ({{item.rating}})
+          </v-layout>
+          　{{item.review}}
+          <v-divider style="margin-top: 5px;"></v-divider>
+        </v-card-text>
       </v-card>
     </v-content>
   </v-container>
@@ -68,7 +96,17 @@ export default {
         tags: ["陶器", "食卓"],
         description: "とてもいい品です",
         creater: "ゆう工房"
-      }
+      },
+      reviews: [
+        {
+          review: "この商品を買ったその日から、僕の人生は変わりました。",
+          rating: 5.0
+        },
+        {
+          review: "とてもいい",
+          rating: 4.0
+        }
+      ]
     };
   }
 };
