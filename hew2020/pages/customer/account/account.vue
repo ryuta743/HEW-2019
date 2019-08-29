@@ -11,6 +11,10 @@
               <td>{{item.name}}</td>
             </tr>
             <tr>
+              <td>国籍</td>
+              <td>{{item.countory}}</td>
+            </tr>
+            <tr>
               <td>登録メールアドレス</td>
               <td>{{item.mail}}</td>
             </tr>
@@ -46,6 +50,7 @@ export default {
     return {
       item: {
         name: "寺田神",
+        countory:"日本(Japan)",
         mail: "terada_manji@hal.co.jp"
       }
     };
