@@ -10,7 +10,7 @@
             <form @submit.prevent>
               <v-layout row wrap>
                 <v-text-field outlined label="検索"></v-text-field>
-                <v-btn type="submit" color="info" style="height: 55px;">検索</v-btn>
+                <v-btn type="submit" color="info" style="height: 55px;"><v-icon>mdi-magnify</v-icon></v-btn>
               </v-layout>
             </form>
           </v-flex>
@@ -124,5 +124,9 @@ export default {
 <style>
 .target {
   cursor: pointer;
+}
+
+a{
+  text-decoration: none
 }
 </style>
