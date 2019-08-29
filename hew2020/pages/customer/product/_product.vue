@@ -68,6 +68,7 @@
           <v-divider />
         </v-card-text>
         <v-card-text v-for="(item, index) in reviews" :key="index">
+        　{{item.name}}
           <v-layout row wrap align-center>
             <v-rating
               v-model="item.rating"
@@ -78,7 +79,7 @@
             />
             ({{item.rating}})
           </v-layout>
-          　{{item.review}}
+          {{item.review}}
           <v-divider style="margin-top: 5px;"></v-divider>
         </v-card-text>
       </v-card>
@@ -99,10 +100,12 @@ export default {
       },
       reviews: [
         {
+        　name:'寺田神',
           review: "この商品を買ったその日から、僕の人生は変わりました。",
           rating: 5.0
         },
         {
+        　name:'寺田神アンチ',
           review: "とてもいい",
           rating: 4.0
         }
