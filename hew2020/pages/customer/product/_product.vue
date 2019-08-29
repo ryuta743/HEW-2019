@@ -22,12 +22,33 @@
                   ({{item.rating}})
                 </v-layout>
               </v-card-text>
-              <v-card-text><nuxt-link :to="`../workshop/${item.creater}`">{{item.creater}}</nuxt-link></v-card-text>
+              <v-card-text>
+                  出品工房:
+                <nuxt-link :to="`../workshop/${item.creater}`">{{item.creater}}</nuxt-link>
+              </v-card-text>
               <v-card-text style="font-weight: bold;">{{item.description}}</v-card-text>
+              <v-card-text>
+                関連づけられたタグ:
+                <v-chip
+                  class="ma-2"
+                  color="primary"
+                  label
+                  text-color="white"
+                  v-for="(item, index) in item.tags"
+                  :key="index"
+                >
+                  <v-icon left>mdi-label</v-icon>
+                  {{item}}
+                </v-chip>
+              </v-card-text>
               <v-divider></v-divider>
               <v-card-actions>
-                <v-btn color="success"><v-icon>mdi-cart</v-icon>カートに追加する</v-btn>
-                <v-btn color="yellow darken-4" dark outlined><v-icon>mdi-star</v-icon>お気に入りに追加する</v-btn>
+                <v-btn color="success">
+                  <v-icon>mdi-cart</v-icon>カートに追加する
+                </v-btn>
+                <v-btn color="yellow darken-4" dark outlined>
+                  <v-icon>mdi-star</v-icon>お気に入りに追加する
+                </v-btn>
               </v-card-actions>
             </v-card>
           </v-flex>
@@ -44,8 +65,9 @@ export default {
       item: {
         title: "",
         rating: 4.5,
+        tags: ["陶器", "食卓"],
         description: "とてもいい品です",
-        creater:'ゆう工房'
+        creater: "ゆう工房"
       }
     };
   }
@@ -53,7 +75,7 @@ export default {
 </script>
 
 <style>
-a{
-    text-decoration: none
+a {
+  text-decoration: none;
 }
 </style>
