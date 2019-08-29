@@ -1,5 +1,36 @@
 <template>
   <v-container>
+    <v-dialog
+      v-model="purchaseHistoryDialog"
+      scrollable
+      overlay="false"
+      max-width="900px"
+      transition="dialog-transition"
+    >
+      <v-card scrollable>
+        <v-card-title primary-title style="font-weight: bold;">
+            購入履歴
+        </v-card-title>
+        <v-simple-table>
+          <thead>
+              <tr>
+                <th style="color: #111;">商品名</th>
+                <th style="color: #111;">出品工房名</th>
+                <th style="color: #111;">購入日</th>
+                <th style="color: #111;">価格</th>
+              </tr>
+          </thead>
+          <tbody>
+            <tr v-for="(purchaseProduct, index) in purchaseProducts" :key="index">
+              <td>{{purchaseProduct.title}}</td>
+              <td>{{purchaseProduct.creater}}</td>
+              <td>{{purchaseProduct.date}}</td>
+              <td>{{purchaseProduct.price}}円</td>
+            </tr>
+          </tbody>
+        </v-simple-table>
+      </v-card>
+    </v-dialog>
     <v-content>
       <h5 style="width: 100%;text-align: center;">登録情報</h5>
       <h4 style="width: 100%;text-align: center;padding: 0 0 5px 0;">REGISTRATION INFORMATION</h4>
@@ -34,7 +65,13 @@
             <v-btn x-large color="success" outlined style="margin: 0 5px 0 5px;">
               <v-icon>mdi-star-circle-outline</v-icon>お気に入り工房
             </v-btn>
-            <v-btn x-large color="success" outlined style="margin: 0 5px 0 5px;">
+            <v-btn
+              x-large
+              color="success"
+              outlined
+              style="margin: 0 5px 0 5px;"
+              @click="purchaseHistoryDialog = true"
+            >
               <v-icon>mdi-format-list-bulleted</v-icon>購入履歴
             </v-btn>
           </v-layout>
@@ -50,9 +87,84 @@ export default {
     return {
       item: {
         name: "寺田神",
-        countory:"日本(Japan)",
+        countory: "日本(Japan)",
         mail: "terada_manji@hal.co.jp"
-      }
+      },
+      purchaseHistoryDialog: false,
+      purchaseProducts:[
+          {
+              title:'陶器01',
+              price: 3000,
+              creater: 'ゆう工房',
+              date: "2019/8/29"
+          },
+          {
+              title:'陶器02',
+              price: 3000,
+              creater: 'ゆう工房',
+              date: "2019/8/29"
+          },
+          {
+              title:'陶器03',
+              price: 3000,
+              creater: 'ゆう工房',
+              date: "2019/8/29"
+          },
+          {
+              title:'陶器01',
+              price: 3000,
+              creater: 'ゆう工房',
+              date: "2019/8/29"
+          },
+          {
+              title:'陶器02',
+              price: 3000,
+              creater: 'ゆう工房',
+              date: "2019/8/29"
+          },
+          {
+              title:'陶器03',
+              price: 3000,
+              creater: 'ゆう工房',
+              date: "2019/8/29"
+          },
+          {
+              title:'陶器01',
+              price: 3000,
+              creater: 'ゆう工房',
+              date: "2019/8/29"
+          },
+          {
+              title:'陶器02',
+              price: 3000,
+              creater: 'ゆう工房',
+              date: "2019/8/29"
+          },
+          {
+              title:'陶器03',
+              price: 3000,
+              creater: 'ゆう工房',
+              date: "2019/8/29"
+          },
+          {
+              title:'陶器01',
+              price: 3000,
+              creater: 'ゆう工房',
+              date: "2019/8/29"
+          },
+          {
+              title:'陶器02',
+              price: 3000,
+              creater: 'ゆう工房',
+              date: "2019/8/29"
+          },
+          {
+              title:'陶器03',
+              price: 3000,
+              creater: 'ゆう工房',
+              date: "2019/8/29"
+          },
+      ]
     };
   }
 };
