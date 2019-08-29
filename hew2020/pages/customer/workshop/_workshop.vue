@@ -6,7 +6,7 @@
     <v-flex xs12 md12>
       <v-card style="padding: 10px;font-weight: bold;">
         <v-card-title primary-title style="font-size: 25px;">
-          {{item.title}}
+          {{$route.params.workshop}}
           <span
             style="font-size: 15px;color: #555;padding-left: 10px;font-weight: bold;"
           >〜{{item.subTitle}}〜</span>

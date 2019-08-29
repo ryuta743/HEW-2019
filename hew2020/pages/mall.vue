@@ -7,7 +7,7 @@
         <v-icon>mdi-reload</v-icon>
       </v-btn>
     </h4>
-    <v-flex xs12 md6 v-for="(item, index) in items" :key="index" @click="$router.push('/customer/workshop')">
+    <v-flex xs12 md6 v-for="(item, index) in items" :key="index" @click="$router.push(`/customer/workshop/${item.title}`)">
       <v-hover v-slot:default="{ hover }">
         <v-card>
           <v-img :src="item.src" />

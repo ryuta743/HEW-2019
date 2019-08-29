@@ -53,7 +53,7 @@
                   ({{item.rating}})
                 </v-layout>
               </v-card-text>
-              <v-card-text><nuxt-link to="customer/workshop">{{item.creater}}</nuxt-link></v-card-text>
+              <v-card-text><nuxt-link :to="`customer/workshop/${item.creater}`">{{item.creater}}</nuxt-link></v-card-text>
             </v-card>
           </v-flex>
         </v-layout>
@@ -68,22 +68,22 @@ export default {
     return {
       products: [
         {
-          title: "美しい日本刀",
+          title: "陶器01",
           src: "https://picsum.photos/id/11/500/300",
-          rating: 4.0,
-          creater: "ここに出品工房情報"
+          rating: 4.5,
+          creater: "ゆう工房"
         },
         {
           title: "やばいこけし",
           src: "https://picsum.photos/id/11/500/300",
           rating: 2.5,
-          creater: "ここに出品工房情報"
+          creater: "サバンナ工房"
         },
         {
           title: "話題の組紐",
           src: "https://picsum.photos/id/11/500/300",
           rating: 4.9,
-          creater: "ここに出品工房情報"
+          creater: "北九州組み紐工房"
         },
         {
           title: "組紐",
