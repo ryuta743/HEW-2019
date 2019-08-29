@@ -3,13 +3,29 @@
     <v-flex xs12 sm12 md12>
       <div class="text-center">
         <v-carousel cycle height="750px" show-arrows-on-hover hide-delimiter-background>
-          <v-carousel-item v-for="(color, i) in colors" :key="color">
+          <v-carousel-item>
             <!-- <v-sheet :color="color" height="100%" tile>
               <v-row class="fill-height" align="center" justify="center">
                 <div class="display-3">ここにスライド画像({{ i + 1 }})</div>
               </v-row>
             </v-sheet> -->
-            <img src="../static/mainVisual.jpg" alt="メインビジュアル" style="width: 100%;">
+            <img src="../static/mainVisual03.jpg" alt="メインビジュアル" style="width: 100%;">
+          </v-carousel-item>
+          <v-carousel-item>
+            <!-- <v-sheet :color="color" height="100%" tile>
+              <v-row class="fill-height" align="center" justify="center">
+                <div class="display-3">ここにスライド画像({{ i + 1 }})</div>
+              </v-row>
+            </v-sheet> -->
+            <img src="../static/mainVisual05.jpg" alt="メインビジュアル" style="width: 100%;">
+          </v-carousel-item>
+          <v-carousel-item>
+            <!-- <v-sheet :color="color" height="100%" tile>
+              <v-row class="fill-height" align="center" justify="center">
+                <div class="display-3">ここにスライド画像({{ i + 1 }})</div>
+              </v-row>
+            </v-sheet> -->
+            <img src="../static/mainVisual04.jpg" alt="メインビジュアル" style="width: 100%;">
           </v-carousel-item>
         </v-carousel>
       </div>
