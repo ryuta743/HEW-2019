@@ -14,7 +14,7 @@
             </v-flex>
           </v-layout>
           <v-divider></v-divider>
-          <v-card-text>
+          <v-card-text style="min-height: 80vh;">
             <v-layout row wrap>
               <v-flex
                 xs12
