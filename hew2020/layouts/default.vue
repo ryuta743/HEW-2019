@@ -252,9 +252,13 @@
             </v-btn>
           </template>
           <v-list>
-            <v-list-item v-for="(item, index) in items" :key="index" @click="logoutDialog = true">
-              <v-icon>{{item.icon}}</v-icon>
-              <v-list-item-title>{{ item.title }}</v-list-item-title>
+            <v-list-item @click="$router.push('/customer/account/account')">
+              <v-icon>mdi-account-box</v-icon>
+              <v-list-item-title>アカウント情報</v-list-item-title>
+            </v-list-item>
+            <v-list-item @click="logoutDialog = true">
+              <v-icon>mdi-close</v-icon>
+              <v-list-item-title>ログアウト</v-list-item-title>
             </v-list-item>
           </v-list>
         </v-menu>

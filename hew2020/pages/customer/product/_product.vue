@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container grid-list-xs>
     <v-content>
       <v-card>
         <v-card-text>
@@ -16,21 +16,76 @@
                     background-color="grey darken-1"
                     v-model="item.rating"
                     readonly
-                    size="19px"
                     half-increments
                   ></v-rating>
                   ({{item.rating}})
                 </v-layout>
               </v-card-text>
-              <v-card-text><nuxt-link :to="`../workshop/${item.creater}`">{{item.creater}}</nuxt-link></v-card-text>
+              <v-card-text>
+                出品工房:
+                <nuxt-link :to="`../workshop/${item.creater}`">{{item.creater}}</nuxt-link>
+              </v-card-text>
               <v-card-text style="font-weight: bold;">{{item.description}}</v-card-text>
+              <v-card-text>
+                関連づけられたタグ:
+                <v-chip
+                  class="ma-2"
+                  color="primary"
+                  label
+                  text-color="white"
+                  v-for="(item, index) in item.tags"
+                  :key="index"
+                >
+                  <v-icon left>mdi-label</v-icon>
+                  {{item}}
+                </v-chip>
+              </v-card-text>
               <v-divider></v-divider>
               <v-card-actions>
-                <v-btn color="success"><v-icon>mdi-cart</v-icon>カートに追加する</v-btn>
-                <v-btn color="yellow darken-4" dark outlined><v-icon>mdi-star</v-icon>お気に入りに追加する</v-btn>
+                <v-layout row wrap>
+                  <v-flex xs12 md2>
+                    <v-btn color="success" style="width: 100%;">
+                      <v-icon>mdi-cart</v-icon>カートに追加
+                    </v-btn>
+                  </v-flex>
+                  <v-flex xs12 md2>
+                    <v-btn color="yellow darken-4" dark outlined style="width: 100%;">
+                      <v-icon>mdi-star</v-icon>お気に入りに追加
+                    </v-btn>
+                  </v-flex>
+                </v-layout>
               </v-card-actions>
             </v-card>
           </v-flex>
+        </v-card-text>
+        <v-divider></v-divider>
+        <v-card-text>
+          <v-subheader>この商品を評価する</v-subheader>
+          <v-rating></v-rating>
+          <v-layout row wrap justify-center>
+            <v-flex xs9 md11>
+              <v-text-field label placeholder="商品レビュー" outlined></v-text-field>
+            </v-flex>
+            <v-flex xs2 md1>
+              <v-btn color="success" style="height: 55px;width: 100%;">送信</v-btn>
+            </v-flex>
+          </v-layout>
+          <v-divider />
+        </v-card-text>
+        <v-card-text v-for="(item, index) in reviews" :key="index">
+          {{item.name}}
+          <v-layout row wrap align-center>
+            <v-rating
+              v-model="item.rating"
+              color="yellow darken-3"
+              background-color="grey darken-1"
+              readonly
+              size="19px"
+            />
+            ({{item.rating}})
+          </v-layout>
+          {{item.review}}
+          <v-divider style="margin-top: 5px;"></v-divider>
         </v-card-text>
       </v-card>
     </v-content>
@@ -44,16 +99,29 @@ export default {
       item: {
         title: "",
         rating: 4.5,
+        tags: ["陶器", "食卓"],
         description: "とてもいい品です",
-        creater:'ゆう工房'
-      }
+        creater: "ゆう工房"
+      },
+      reviews: [
+        {
+          name: "寺田神",
+          review: "この商品を買ったその日から、僕の人生は変わりました。",
+          rating: 5.0
+        },
+        {
+          name: "寺田神アンチ",
+          review: "とてもいい",
+          rating: 4.0
+        }
+      ]
     };
   }
 };
 </script>
 
 <style>
-a{
-    text-decoration: none
+a {
+  text-decoration: none;
 }
 </style>

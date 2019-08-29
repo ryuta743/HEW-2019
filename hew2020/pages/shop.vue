@@ -1,6 +1,6 @@
 <template>
   <v-layout>
-    <v-container>
+    <v-container grid-list-xs>
       <v-content>
         <h5 style="width: 100%;text-align: center;">詳細検索</h5>
         <h4 style="width: 100%;text-align: center;">ADVANCED SEARCH</h4>
@@ -10,7 +10,9 @@
             <form @submit.prevent>
               <v-layout row wrap>
                 <v-text-field outlined label="検索"></v-text-field>
-                <v-btn type="submit" color="info" style="height: 55px;"><v-icon>mdi-magnify</v-icon></v-btn>
+                <v-btn type="submit" color="info" style="height: 55px;">
+                  <v-icon>mdi-magnify</v-icon>
+                </v-btn>
               </v-layout>
             </form>
           </v-flex>
@@ -53,7 +55,23 @@
                   ({{item.rating}})
                 </v-layout>
               </v-card-text>
-              <v-card-text><nuxt-link :to="`customer/workshop/${item.creater}`">{{item.creater}}</nuxt-link></v-card-text>
+              <v-card-text>
+                <nuxt-link :to="`customer/workshop/${item.creater}`">{{item.creater}}</nuxt-link>
+              </v-card-text>
+              <v-card-text style="height: 8px;">¥{{item.price}}</v-card-text>
+              <v-card-text>
+                <v-chip
+                  class="ma-2"
+                  color="primary"
+                  label
+                  text-color="white"
+                  v-for="(item, index) in item.tags"
+                  :key="index"
+                >
+                  <v-icon left>mdi-label</v-icon>
+                  {{item}}
+                </v-chip>
+              </v-card-text>
             </v-card>
           </v-flex>
         </v-layout>
@@ -71,48 +89,64 @@ export default {
           title: "陶器01",
           src: "https://picsum.photos/id/11/500/300",
           rating: 4.5,
+          price: 3000,
+          tags: ["陶器", "食卓"],
           creater: "ゆう工房"
         },
         {
           title: "やばいこけし",
           src: "https://picsum.photos/id/11/500/300",
           rating: 2.5,
+          price: 3000,
+          tags: ["陶器", "食卓"],
           creater: "サバンナ工房"
         },
         {
           title: "話題の組紐",
           src: "https://picsum.photos/id/11/500/300",
           rating: 4.9,
+          price: 3000,
+          tags: ["陶器", "食卓"],
           creater: "北九州組み紐工房"
         },
         {
           title: "組紐",
           src: "https://picsum.photos/id/11/500/300",
           rating: 4.0,
+          price: 3000,
+          tags: ["陶器", "食卓"],
           creater: "ここに出品工房情報"
         },
         {
           title: "組紐",
           src: "https://picsum.photos/id/11/500/300",
           rating: 3.5,
+          price: 3000,
+          tags: ["陶器", "食卓"],
           creater: "ここに出品工房情報"
         },
         {
           title: "組紐",
           src: "https://picsum.photos/id/11/500/300",
           rating: 3.5,
+          price: 3000,
+          tags: ["陶器", "食卓"],
           creater: "ここに出品工房情報"
         },
         {
           title: "やばいこけし",
           src: "https://picsum.photos/id/11/500/300",
           rating: 5.0,
+          price: 3000,
+          tags: ["陶器", "食卓"],
           creater: "ここに出品工房情報"
         },
         {
           title: "やばいこけし",
           src: "https://picsum.photos/id/11/500/300",
           rating: 5.0,
+          price: 3000,
+          tags: ["陶器", "食卓"],
           creater: "ここに出品工房情報"
         }
       ]
@@ -126,7 +160,7 @@ export default {
   cursor: pointer;
 }
 
-a{
-  text-decoration: none
+a {
+  text-decoration: none;
 }
 </style>
