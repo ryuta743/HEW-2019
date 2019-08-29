@@ -42,16 +42,18 @@
         </v-card-text>
         <v-divider></v-divider>
         <v-card-actions>
-          <v-btn color="success">
-            <v-icon>mdi-star</v-icon>お気に入りに追加する
-          </v-btn>
+          <v-flex xs12 md2>
+            <v-btn color="success" style="width: 100%;">
+              <v-icon>mdi-star</v-icon>お気に入りに追加する
+            </v-btn>
+          </v-flex>
         </v-card-actions>
       </v-card>
     </v-flex>
     <!--  <v-container>
     <v-content style="background-color: #999;">-->
     <v-layout row wrap justify-center>
-      <v-flex xs11 md11>
+      <v-flex xs10 md11>
         <v-layout row wrap>
           <v-flex xs12 md4 v-for="(item, index) in products" :key="index" style="padding: 5px;">
             <v-card hover @click="$router.push(`/customer/product/${item.title}`)">
