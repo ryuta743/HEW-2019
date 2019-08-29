@@ -40,6 +40,12 @@
             {{item}}
           </v-chip>
         </v-card-text>
+        <v-divider></v-divider>
+        <v-card-actions>
+          <v-btn color="success">
+            <v-icon>mdi-star</v-icon>お気に入りに追加する
+          </v-btn>
+        </v-card-actions>
       </v-card>
     </v-flex>
     <!--  <v-container>
