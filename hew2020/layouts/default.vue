@@ -239,7 +239,7 @@
 
       <v-badge left color="primary" v-if="isLogin">
         <span slot="badge">0</span>
-        <v-btn outlined v-if="isLogin">
+        <v-btn outlined v-if="isLogin" @click="$router.push('/customer/cart/cart')">
           <v-icon color="primary">mdi-cart</v-icon>カート
         </v-btn>
       </v-badge>
