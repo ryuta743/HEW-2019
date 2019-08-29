@@ -1,5 +1,7 @@
 <template>
   <v-container>
+
+    <!-- 購入履歴ダイアログ -->
     <v-dialog
       v-model="purchaseHistoryDialog"
       scrollable
@@ -26,6 +28,39 @@
               <td>{{purchaseProduct.creater}}</td>
               <td>{{purchaseProduct.date}}</td>
               <td>{{purchaseProduct.price}}円</td>
+            </tr>
+          </tbody>
+        </v-simple-table>
+      </v-card>
+    </v-dialog>
+
+    <!-- お気に入り商品ダイアログ -->
+    <v-dialog
+      v-model="favProductDialog"
+      scrollable
+      overlay="false"
+      max-width="900px"
+      transition="dialog-transition"
+    >
+      <v-card scrollable>
+        <v-card-title primary-title style="font-weight: bold;">
+            お気に入り商品
+        </v-card-title>
+        <v-simple-table>
+          <thead>
+              <tr>
+                <th style="color: #111;">商品名</th>
+                <th style="color: #111;">出品工房名</th>
+                <th style="color: #111;">価格</th>
+                <th style="color: #111;">　　</th>
+              </tr>
+          </thead>
+          <tbody>
+            <tr v-for="(favProduct, index) in favProducts" :key="index">
+              <td>{{favProduct.title}}</td>
+              <td>{{favProduct.creater}}</td>
+              <td>{{favProduct.price}}円</td>
+              <td><v-btn color="info" outlined @click="$router.push(`/customer/product/${favProduct.title}`)">商品ページへ</v-btn></td>
             </tr>
           </tbody>
         </v-simple-table>
@@ -59,10 +94,10 @@
       <v-card>
         <v-card-text>
           <v-layout row wrap justify-center>
-            <v-btn x-large color="success" outlined style="margin: 0 5px 0 5px;">
+            <v-btn x-large color="success" outlined style="margin: 0 5px 0 5px;" @click="favProductDialog = true">
               <v-icon>mdi-star-circle</v-icon>お気に入り商品
             </v-btn>
-            <v-btn x-large color="success" outlined style="margin: 0 5px 0 5px;">
+            <v-btn x-large color="success" outlined style="margin: 0 5px 0 5px;" @click="favWorkshopDialog = true">
               <v-icon>mdi-star-circle-outline</v-icon>お気に入り工房
             </v-btn>
             <v-btn
@@ -91,6 +126,8 @@ export default {
         mail: "terada_manji@hal.co.jp"
       },
       purchaseHistoryDialog: false,
+      favWorkshopDialog:false,
+      favProductDialog:false,
       purchaseProducts:[
           {
               title:'陶器01',
@@ -163,6 +200,34 @@ export default {
               price: 3000,
               creater: 'ゆう工房',
               date: "2019/8/29"
+          },
+      ],
+      favProducts:[
+          {
+              title:'陶器01',
+              price: 3000,
+              creater: 'ゆう工房',
+          },
+          {
+              title:'陶器02',
+              price: 3000,
+              creater: 'ゆう工房',
+              date: "2019/8/29"
+          },
+          {
+              title:'陶器03',
+              price: 3000,
+              creater: 'ゆう工房',
+          },
+          {
+              title:'陶器01',
+              price: 3000,
+              creater: 'ゆう工房',
+          },
+          {
+              title:'陶器02',
+              price: 3000,
+              creater: 'ゆう工房',
           },
       ]
     };
