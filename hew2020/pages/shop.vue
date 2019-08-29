@@ -37,7 +37,7 @@
             :key="index"
             style="padding: 0 10px 20px 10px;"
           >
-            <v-card hover @click="$router.push('/shop')">
+            <v-card hover @click="$router.push(`/customer/product/${item.title}`)">
               <v-img :src="item.src"></v-img>
               <v-card-text style="font-weight: bold;height: 10px;">{{item.title}}</v-card-text>
               <v-card-text style="height : 10px;">
