@@ -3,24 +3,40 @@
     <v-flex xs12 md12>
       <v-img :src="item.src" />
     </v-flex>
-    <v-flex xs12 md12>
+    <v-flex xs12 md12 style="padding: 10px 0 10px 0;">
       <v-card style="padding: 10px;font-weight: bold;">
         <v-card-title primary-title style="font-size: 25px;">
-          {{item.title}}
+          {{$route.params.workshop}}
           <span
             style="font-size: 15px;color: #555;padding-left: 10px;font-weight: bold;"
           >〜{{item.subTitle}}〜</span>
         </v-card-title>
+
+        <v-card-text>
+          <v-layout row wrap align-center>
+            <v-rating
+              color="yellow darken-3"
+              background-color="grey darken-1"
+              v-model="item.rating"
+              readonly
+              size="19px"
+              half-increments
+            ></v-rating>
+            ({{item.rating}})
+          </v-layout>
+        </v-card-text>
         <v-card-text>{{item.description}}</v-card-text>
       </v-card>
     </v-flex>
-    <v-container>
-      <v-content>
+    <!--  <v-container>
+    <v-content style="background-color: #999;">-->
+    <v-layout row wrap justify-center>
+      <v-flex xs11 md11 >
         <v-layout row wrap>
           <v-flex xs12 md4 v-for="(item, index) in products" :key="index" style="padding: 5px;">
-            <v-card hover>
+            <v-card hover @click="$router.push(`/customer/product/${item.title}`)">
               <v-img src="https://picsum.photos/id/11/500/300"></v-img>
-              <v-card-text style="font-weight: bold;">{{item.title}}</v-card-text>
+              <v-card-text style="font-weight: bold;height: 8px;">{{item.title}}</v-card-text>
               <v-card-text>
                 <v-layout row wrap align-center>
                   <v-rating
@@ -38,8 +54,11 @@
             </v-card>
           </v-flex>
         </v-layout>
-      </v-content>
-    </v-container>
+      </v-flex>
+    </v-layout>
+
+    <!-- </v-content>
+    </v-container>-->
   </v-layout>
 </template>
 
@@ -49,6 +68,7 @@ export default {
     return {
       item: {
         title: "ゆう工房",
+        rating: 5,
         subTitle: "自然あふれる食卓へ",
         src: "https://picsum.photos/1500/400?random=1",
         description:
