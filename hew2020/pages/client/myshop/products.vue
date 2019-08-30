@@ -1,9 +1,15 @@
 <template>
   <v-container grid-list-xs>
     <v-content>
-      <v-card>
-        <v-card-title primary-title>取り扱い商品一覧</v-card-title>
-        <v-card-text style="min-height: 70vh;">
+        <v-toolbar dark color="primary">
+        <v-toolbar-title>取り扱い商品</v-toolbar-title>
+        <div class="flex-grow-1"></div>
+        <v-btn color="grey" @click="$router.push('/client/myshop/myshop')">管理画面へ戻る</v-btn>
+      </v-toolbar>
+
+    　<v-card>
+          <v-card-text>
+              
           <v-layout row wrap>
             <v-flex
               xs12
@@ -17,7 +23,7 @@
                     在庫：{{item.num}}個
                     <v-btn color="success" icon @click="item.num++"><v-icon>mdi-plus</v-icon></v-btn>
                     <v-btn color="red" icon @click="item.num--"><v-icon>mdi-minus</v-icon></v-btn>
-                    <v-chip color="red" v-if="item.num < item.warning" dark>安全在庫不足</v-chip>
+                    <v-chip color="red" v-if="item.num < item.warning" dark>安全在庫{{item.warning - item.num}}個不足</v-chip>
                 </v-card-text>
                 <v-img :src="item.src" @click="$router.push(`/customer/product/${item.title}`)"></v-img>
                 <v-card-text style="font-weight: bold;height: 10px;" @click="$router.push(`/customer/product/${item.title}`)">{{item.title}}</v-card-text>
