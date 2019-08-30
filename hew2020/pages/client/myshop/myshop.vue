@@ -38,7 +38,7 @@
                 <h3>
                   <v-icon>mdi-format-list-bulleted</v-icon>
                 </h3>
-                <h3>商品一覧</h3>
+                <h3>商品一覧・在庫状況</h3>
               </v-btn>
             </v-flex>
             <v-flex xs12 md6 v-if="haveWorkshop">
@@ -56,7 +56,7 @@
             </v-flex>
             <v-flex xs12 md6 v-if="haveWorkshop">
               <v-btn
-                color="grey lighten-1"
+                color="error"
                 dark
                 style="width: 100%;height: 300px;"
                 @click="$router.push('/client/myshop/productdel')"
@@ -64,7 +64,7 @@
                 <h3>
                   <v-icon>mdi-close</v-icon>
                 </h3>
-                <h3>商品削除</h3>
+                <h3>商品編集・削除</h3>
               </v-btn>
             </v-flex>
           </v-layout>

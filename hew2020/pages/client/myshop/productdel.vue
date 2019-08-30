@@ -2,7 +2,7 @@
   <v-container grid-list-xs>
     <v-content>
         <v-toolbar dark color="error">
-        <v-toolbar-title>取り扱い商品削除</v-toolbar-title>
+        <v-toolbar-title>取り扱い商品編集・削除</v-toolbar-title>
         <div class="flex-grow-1"></div>
         <v-btn color="grey" @click="$router.push('/client/myshop/myshop')">管理画面へ戻る</v-btn>
       </v-toolbar>
@@ -21,6 +21,7 @@
               <v-card hover>
                 <v-card-text>
                     <v-btn color="error" outlined @click="targetSel(index)"><v-icon hover color="red">mdi-close</v-icon></v-btn>
+                    <v-btn color="info" outlined><v-icon hover>mdi-pencil</v-icon></v-btn>
                   </v-card-text>
                 <v-img :src="item.src" @click="$router.push(`/customer/product/${item.title}`)"></v-img>
                 <v-card-text style="font-weight: bold;height: 10px;" @click="$router.push(`/customer/product/${item.title}`)">{{item.title}}</v-card-text>

@@ -63,6 +63,7 @@
               <v-layout row wrap>
                 <v-flex xs6 md12>
                   <v-chip
+                    @click="formData.tags.splice(index,1)"
                     class="ma-2"
                     color="primary"
                     label
@@ -70,7 +71,7 @@
                     v-for="(item, index) in formData.tags"
                     :key="index"
                   >
-                    <v-icon left>mdi-label</v-icon>
+                    <v-icon left>mdi-backspace</v-icon>
                     {{item}}
                   </v-chip>
                 </v-flex>
