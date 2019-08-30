@@ -46,7 +46,7 @@
                 color="orange"
                 dark
                 style="width: 100%;height: 300px;"
-                @click="$router.push('/client/myshop/create')"
+                @click="$router.push('/client/myshop/productadd')"
               >
                 <h3>
                   <v-icon>mdi-plus</v-icon>
