@@ -59,7 +59,7 @@
                 color="grey lighten-1"
                 dark
                 style="width: 100%;height: 300px;"
-                @click="$router.push('/client/myshop/create')"
+                @click="$router.push('/client/myshop/productdel')"
               >
                 <h3>
                   <v-icon>mdi-close</v-icon>
