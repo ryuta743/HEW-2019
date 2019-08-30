@@ -61,6 +61,7 @@
     <v-dialog
       v-model="createADialog"
       scrollable
+      fullscreen
       persistent
       max-width="900px"
       transition="dialog-transition"
@@ -102,26 +103,26 @@
             </v-layout>
           </v-stepper-content>
 
-          <v-stepper-content step="2">
-            <v-layout row wrap justify-center>
-              <v-flex md10>
+          <v-stepper-content step="2" scrollable>
+            <v-layout row wrap justify-center scrollable>
+              <v-flex md10 xs8>
                 <v-subheader>お名前（当サイトでご使用になられるお名前）</v-subheader>
                 <v-text-field label placeholder="天職太朗" outlined></v-text-field>
               </v-flex>
 
-              <v-flex md11>
+              <v-flex md11 xs9>
                 <v-divider style="margin-top: 15px;"></v-divider>
               </v-flex>
 
-              <v-flex md10>
+              <v-flex md10 xs8>
                 <v-subheader>国籍</v-subheader>
                 <v-select outlined :items="countorys" label="在住している国を選択してください"></v-select>
               </v-flex>
-              <v-flex md11>
+              <v-flex md11 xs9>
                 <v-divider style="margin-top: 10px;"></v-divider>
               </v-flex>
 
-              <v-flex md10>
+              <v-flex md10 xs8>
                 <v-subheader>性別</v-subheader>
                 <v-layout row wrap style="padding-bottom: 30px;">
                   <v-radio label="男性" value="value"></v-radio>
@@ -130,11 +131,11 @@
                 </v-layout>
               </v-flex>
 
-              <v-flex md11>
-                <v-divider style="margin-top: 10px;"></v-divider>
+              <v-flex md11 xs9>
+                <v-divider style="margin: 10px 0 10px 0;"></v-divider>
               </v-flex>
 
-              <v-flex md10>
+              <v-flex md10 xs8>
                 <v-subheader>日本伝統工芸品関係者（伝統工芸職人）の方は下のボックスにチェックを入れてください</v-subheader>
                 <v-layout row wrap align-center>
                   <v-checkbox label="日本伝統工芸品関係者です" value="value"></v-checkbox>
