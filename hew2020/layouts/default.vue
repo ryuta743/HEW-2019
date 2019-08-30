@@ -76,11 +76,11 @@
 
           <v-divider></v-divider>
 
-          <v-stepper-step step="3">登録内容確認</v-stepper-step>
+          <v-stepper-step step="3" :complete="e1 > 3">登録内容確認</v-stepper-step>
 
           <v-divider></v-divider>
 
-          <v-stepper-step step="4">登録完了</v-stepper-step>
+          <v-stepper-step step="4" :complete="e1 > 4">登録完了</v-stepper-step>
         </v-stepper-header>
 
         <v-stepper-items>
