@@ -232,8 +232,8 @@
 
       <v-badge left color="primary" v-if="isLogin && isCreater">
         <span slot="badge">5</span>
-        <v-btn outlined>
-          <v-icon color="primary">mdi-shop</v-icon>マイショップ
+        <v-btn outlined @click="$router.push('/client/myshop/myshop')">
+          <v-icon color="primary">mdi-shop</v-icon>マイ工房管理
         </v-btn>
       </v-badge>
 
