@@ -46,7 +46,7 @@ export default {
         return{
             items:[
                 {
-                    title:'陶器01',
+                    title:'俺の陶器',
                     price: 3000,
                     num: 2,
                     date: '2019/8/30'
