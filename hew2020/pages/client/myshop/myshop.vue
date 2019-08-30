@@ -21,7 +21,7 @@
               <v-btn
                 color="success"
                 style="width: 100%;height: 300px;"
-                @click="$router.push('/client/myshop/create')"
+                @click="$router.push('/client/myshop/sales')"
               >
                 <h3>
                   <v-icon>mdi-chart-bar</v-icon>
