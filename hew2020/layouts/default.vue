@@ -317,6 +317,7 @@ export default {
       this.isLogin = false;
       this.successDialog = true;
       this.logoutDialog = false;
+      this.$router.push('/')
     }
   }
 };

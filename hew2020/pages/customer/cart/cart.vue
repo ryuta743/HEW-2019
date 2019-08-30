@@ -10,7 +10,7 @@
               </v-card-title>
             </v-flex>
             <v-flex xs12 md2>
-              <v-card-title primary-title><v-btn color="success" style="width: 100%;">カート内商品を購入</v-btn></v-card-title>
+              <v-card-title primary-title><v-btn color="success" style="width: 100%;" @click="$router.push('/customer/cart/cartBuy')">カート内商品を購入</v-btn></v-card-title>
             </v-flex>
           </v-layout>
           <v-divider></v-divider>
