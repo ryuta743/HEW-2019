@@ -176,7 +176,6 @@
             <v-layout row wrap justify-end style="margin-right: 10px;">
               <v-btn color="primary" @click="e1 = 4">OK</v-btn>
             </v-layout>
-            
           </v-stepper-content>
 
           <v-stepper-content step="4">
@@ -191,7 +190,7 @@
                     <br />お疲れ様でした！
                   </v-card-text>
                   <v-card-text style="text-align: center;">
-                    <v-btn color="primary" @click="createADialog = false" >OK</v-btn>
+                    <v-btn color="primary" @click="createADialog = false">OK</v-btn>
                   </v-card-text>
                 </v-card>
               </v-flex>
@@ -264,6 +263,10 @@
           </v-list>
         </v-menu>
       </div>
+
+      <div>
+        <v-switch label="English" style="padding: 25px 0 0 5px;" color="success"></v-switch>
+      </div>
     </v-app-bar>
 
     <nuxt />
@@ -318,7 +321,7 @@ export default {
       this.isLogin = false;
       this.successDialog = true;
       this.logoutDialog = false;
-      this.$router.push('/')
+      this.$router.push("/");
     }
   }
 };
