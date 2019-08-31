@@ -4,10 +4,10 @@
       <div class="text-center">
         <v-carousel cycle height="750px" show-arrows-on-hover hide-delimiter-background>
           <v-carousel-item>
-            <img src="../static/mainVisual03.jpg" alt="メインビジュアル" style="width: 100%;">
+            <img src="../static/mainVisual05.jpg" alt="メインビジュアル" style="width: 100%;">
           </v-carousel-item>
           <v-carousel-item>
-            <img src="../static/mainVisual05.jpg" alt="メインビジュアル" style="width: 100%;">
+            <img src="../static/mainVisual03.jpg" alt="メインビジュアル" style="width: 100%;">
           </v-carousel-item>
           <v-carousel-item>
             <img src="../static/mainVisual04.jpg" alt="メインビジュアル" style="width: 100%;">
@@ -23,7 +23,7 @@
           </v-layout>
           <v-layout row wrap>
             <v-flex xs12 md4 v-for="(item, index) in pickups" :key="index" style="padding: 5px;">
-              <v-card hover>
+              <v-card hover flat>
                 <v-card-text>
                   <v-img
                     :src="item.src"
@@ -51,7 +51,7 @@
           </v-layout>
           <v-layout row wrap>
             <v-flex xs12 md4 v-for="(item, index) in pickups" :key="index" style="padding: 5px;">
-              <v-card hover>
+              <v-card hover flat>
                 <v-card-text>
                   <v-img
                     :src="item.src"
@@ -79,7 +79,7 @@
           </v-layout>
           <v-layout row wrap>
             <v-flex xs12 md4 v-for="(item, index) in pickups" :key="index" style="padding: 5px;">
-              <v-card hover>
+              <v-card hover flat>
                 <v-card-text>
                   <v-img
                     :src="item.src"

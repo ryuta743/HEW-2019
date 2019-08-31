@@ -61,6 +61,7 @@
     <v-dialog
       v-model="createADialog"
       scrollable
+      fullscreen
       persistent
       max-width="900px"
       transition="dialog-transition"
@@ -75,11 +76,11 @@
 
           <v-divider></v-divider>
 
-          <v-stepper-step step="3">登録内容確認</v-stepper-step>
+          <v-stepper-step step="3" :complete="e1 > 3">登録内容確認</v-stepper-step>
 
           <v-divider></v-divider>
 
-          <v-stepper-step step="4">登録完了</v-stepper-step>
+          <v-stepper-step step="4" :complete="e1 > 4">登録完了</v-stepper-step>
         </v-stepper-header>
 
         <v-stepper-items>
@@ -102,26 +103,26 @@
             </v-layout>
           </v-stepper-content>
 
-          <v-stepper-content step="2">
-            <v-layout row wrap justify-center>
-              <v-flex md10>
+          <v-stepper-content step="2" scrollable>
+            <v-layout row wrap justify-center scrollable>
+              <v-flex md10 xs8>
                 <v-subheader>お名前（当サイトでご使用になられるお名前）</v-subheader>
                 <v-text-field label placeholder="天職太朗" outlined></v-text-field>
               </v-flex>
 
-              <v-flex md11>
+              <v-flex md11 xs9>
                 <v-divider style="margin-top: 15px;"></v-divider>
               </v-flex>
 
-              <v-flex md10>
+              <v-flex md10 xs8>
                 <v-subheader>国籍</v-subheader>
                 <v-select outlined :items="countorys" label="在住している国を選択してください"></v-select>
               </v-flex>
-              <v-flex md11>
+              <v-flex md11 xs9>
                 <v-divider style="margin-top: 10px;"></v-divider>
               </v-flex>
 
-              <v-flex md10>
+              <v-flex md10 xs8>
                 <v-subheader>性別</v-subheader>
                 <v-layout row wrap style="padding-bottom: 30px;">
                   <v-radio label="男性" value="value"></v-radio>
@@ -130,11 +131,11 @@
                 </v-layout>
               </v-flex>
 
-              <v-flex md11>
-                <v-divider style="margin-top: 10px;"></v-divider>
+              <v-flex md11 xs9>
+                <v-divider style="margin: 10px 0 10px 0;"></v-divider>
               </v-flex>
 
-              <v-flex md10>
+              <v-flex md10 xs8>
                 <v-subheader>日本伝統工芸品関係者（伝統工芸職人）の方は下のボックスにチェックを入れてください</v-subheader>
                 <v-layout row wrap align-center>
                   <v-checkbox label="日本伝統工芸品関係者です" value="value"></v-checkbox>
@@ -175,7 +176,6 @@
             <v-layout row wrap justify-end style="margin-right: 10px;">
               <v-btn color="primary" @click="e1 = 4">OK</v-btn>
             </v-layout>
-            
           </v-stepper-content>
 
           <v-stepper-content step="4">
@@ -190,7 +190,7 @@
                     <br />お疲れ様でした！
                   </v-card-text>
                   <v-card-text style="text-align: center;">
-                    <v-btn color="primary" @click="createADialog = false" >OK</v-btn>
+                    <v-btn color="primary" @click="createADialog = false">OK</v-btn>
                   </v-card-text>
                 </v-card>
               </v-flex>
@@ -232,8 +232,8 @@
 
       <v-badge left color="primary" v-if="isLogin && isCreater">
         <span slot="badge">5</span>
-        <v-btn outlined>
-          <v-icon color="primary">mdi-shop</v-icon>マイショップ
+        <v-btn outlined @click="$router.push('/client/myshop/myshop')">
+          <v-icon color="primary">mdi-shop</v-icon>マイ工房管理
         </v-btn>
       </v-badge>
 
@@ -262,6 +262,10 @@
             </v-list-item>
           </v-list>
         </v-menu>
+      </div>
+
+      <div>
+        <v-switch label="English" style="padding: 25px 0 0 5px;" color="success"></v-switch>
       </div>
     </v-app-bar>
 
@@ -317,7 +321,7 @@ export default {
       this.isLogin = false;
       this.successDialog = true;
       this.logoutDialog = false;
-      this.$router.push('/')
+      this.$router.push("/");
     }
   }
 };
