@@ -42,11 +42,18 @@
         </v-card-text>
         <v-divider></v-divider>
         <v-card-actions>
-          <v-flex xs12 md2>
-            <v-btn color="success" style="width: 100%;">
-              <v-icon>mdi-star</v-icon>お気に入りに追加する
-            </v-btn>
-          </v-flex>
+          <v-layout row wrap>
+            <v-flex xs12 md2>
+              <v-btn color="success" style="width: 100%;">
+                <v-icon>mdi-star</v-icon>お気に入りに追加する
+              </v-btn>
+            </v-flex>
+            <v-flex xs12 md2>
+              <v-btn color="info" style="width: 100%;" @click="$router.push('/customer/workshop/chat')">
+                <v-icon>mdi-chat</v-icon>チャットを送る
+              </v-btn>
+            </v-flex>
+          </v-layout>
         </v-card-actions>
       </v-card>
     </v-flex>
