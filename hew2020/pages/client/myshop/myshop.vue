@@ -67,6 +67,19 @@
                 <h3>商品編集・削除</h3>
               </v-btn>
             </v-flex>
+            <v-flex xs12 md6 v-if="haveWorkshop">
+              <v-btn
+                color="info"
+                dark
+                style="width: 100%;height: 300px;"
+                @click="$router.push('/client/myshop/chat')"
+              >
+                <h3>
+                  <v-icon>mdi-chat</v-icon>
+                </h3>
+                <h3>チャットメッセージ</h3>
+              </v-btn>
+            </v-flex>
           </v-layout>
         </v-card-text>
       </v-card>
