@@ -1,7 +1,9 @@
 <template>
   <v-container grid-list-xs>
     <v-content>
-      <v-btn icon @click="$router.go(-1)"><v-icon>mdi-chevron-left</v-icon>back</v-btn>
+      <v-btn icon @click="$router.go(-1)">
+        <v-icon>mdi-chevron-left</v-icon>back
+      </v-btn>
       <v-card>
         <v-card-text>
           <v-flex xs12 md12>
@@ -54,6 +56,11 @@
                       <v-icon>mdi-star</v-icon>お気に入りに追加
                     </v-btn>
                   </v-flex>
+                  <v-flex xs12 md2>
+                    <v-btn color="info" dark outlined style="width: 100%;" @click="circleOpen">
+                      <v-icon>mdi-flattr</v-icon>360°
+                    </v-btn>
+                  </v-flex>
                 </v-layout>
               </v-card-actions>
             </v-card>
@@ -89,14 +96,47 @@
           <v-divider style="margin-top: 5px;"></v-divider>
         </v-card-text>
       </v-card>
+
+      <v-dialog v-model="circle" persistent :overlay="false" transition="dialog-transition">
+        <v-card style="background-color: #999;">
+          <v-layout row wrap align-center>
+            <v-flex xs12 md3>
+              <v-card-text style="background-color: #999;">
+                <div id="fyu_7u5u1lu09a" class="fyu_container fyu_vertical"></div>
+              </v-card-text>
+            </v-flex>
+            <v-flex xs12 md9 style="background-color: #999;">
+              <v-card-text style="text-align: center;background-color: #999;color: white;">
+                <v-icon color="primary" size="50px">mdi-flattr</v-icon>
+              </v-card-text>
+              <v-card-text style="color: #555;font-size: 28px;text-align: center;color: white;background-color: #999;">
+                ドラッグで写真を回してください!<br>
+                Drag to rotate the photo!
+              </v-card-text>
+              <v-card-text style="color: #555;font-size: 28px;text-align: center;color: white;background-color: #999;">
+                <v-btn color="info" @click="reload">close</v-btn>
+              </v-card-text>
+            </v-flex>
+          </v-layout>
+        </v-card>
+      </v-dialog>
     </v-content>
   </v-container>
 </template>
 
 <script>
 export default {
+  head() {
+    return {
+      script: [{ src: "https://fyu.se/embed?v=2.0" }]
+    };
+  },
+  mounted() {
+    /* aa: FYU.add("7u5u1lu09a", "fyu_7u5u1lu09a", { nologo: 1 }); */
+  },
   data() {
     return {
+      circle: false,
       item: {
         title: "",
         rating: 4.5,
@@ -117,6 +157,15 @@ export default {
         }
       ]
     };
+  },
+  methods:{
+    circleOpen(){
+      this.circle = true
+      FYU.add("7u5u1lu09a", "fyu_7u5u1lu09a", { nologo: 1 });
+    },
+    reload() {
+        this.$router.go({path: this.$router.currentRoute.path, force: true});
+    }
   }
 };
 </script>
