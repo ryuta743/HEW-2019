@@ -36,7 +36,7 @@
               <h3>送信しました</h3>
             </v-layout>
             <v-layout row wrap justify-center>
-              <v-btn color="success" @click="dialog = false">OK</v-btn>
+              <v-btn color="success" @click="$router.push('/')">OK</v-btn>
             </v-layout>
           </v-card-text>
         </v-card>
