@@ -1,7 +1,10 @@
 <template>
   <v-layout row wrap>
     <v-flex xs12 md12>
-      <v-img :src="item.src" />
+      <div style="position: relative;">
+        <v-btn style="position: absolute;z-index: 1;top: 65px;left: 25px;" icon @click="$router.go(-1)"><v-icon>mdi-chevron-left</v-icon>back</v-btn>
+        <v-img :src="item.src" />
+      </div>
     </v-flex>
     <v-flex xs12 md12 style="padding: 10px 0 10px 0;">
       <v-card style="padding: 10px;font-weight: bold;">
@@ -49,7 +52,11 @@
               </v-btn>
             </v-flex>
             <v-flex xs12 md2>
-              <v-btn color="info" style="width: 100%;" @click="$router.push('/customer/workshop/chat')">
+              <v-btn
+                color="info"
+                style="width: 100%;"
+                @click="$router.push('/customer/workshop/chat')"
+              >
                 <v-icon>mdi-chat</v-icon>チャットを送る
               </v-btn>
             </v-flex>

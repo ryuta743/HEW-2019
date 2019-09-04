@@ -6,7 +6,8 @@
         <v-toolbar-items style="padding-left: 10px;">
             <v-btn outlined @click="userSwitch">{{ nowuser }}になるボタン</v-btn>
         </v-toolbar-items>
-        
+        <div class="flex-grow-1"></div>
+        <v-btn color="grey" dark @click="$router.push('/client/myshop/myshop')">管理画面へ戻る</v-btn>
       </v-toolbar>
       <v-card scrollable style="height: 80vh;">
         <v-card-text scrollable　style="overflow:scroll;height: 70vh;background-color: #e9e9e9;">

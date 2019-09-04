@@ -19,6 +19,19 @@
             </v-flex>
             <v-flex xs12 md6 v-if="haveWorkshop">
               <v-btn
+                color="grey"
+                dark
+                style="width: 100%;height: 300px;"
+                @click="$router.push('/client/myshop/orderlist')"
+              >
+                <h3>
+                  <v-icon>mdi-format-list-checks</v-icon>
+                </h3>
+                <h3>注文一覧</h3>
+              </v-btn>
+            </v-flex>
+            <v-flex xs12 md6 v-if="haveWorkshop">
+              <v-btn
                 color="success"
                 style="width: 100%;height: 300px;"
                 @click="$router.push('/client/myshop/sales')"
