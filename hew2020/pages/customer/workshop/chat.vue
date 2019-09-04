@@ -1,12 +1,14 @@
 <template>
   <v-container grid-list-xs>
     <v-content>
+      <v-btn icon @click="$router.go(-1)">
+        <v-icon>mdi-chevron-left</v-icon>back
+      </v-btn>
       <v-toolbar color="orange">
         <v-toolbar-title style="color: white;">ゆう工房</v-toolbar-title>
         <v-toolbar-items style="padding-left: 10px;">
-            <v-btn outlined @click="userSwitch">{{ nowuser }}になるボタン</v-btn>
+          <v-btn outlined @click="userSwitch">{{ nowuser }}になるボタン</v-btn>
         </v-toolbar-items>
-        
       </v-toolbar>
       <v-card scrollable style="height: 80vh;">
         <v-card-text scrollable　style="overflow:scroll;height: 70vh;background-color: #e9e9e9;">
@@ -23,10 +25,12 @@
                   <div>{{item.username}}</div>
                 </v-layout>
                 <v-card style="padding: 10px;" @click="item.messageSub = 'この工房は私に幸せな時間を提供してくれます!!'">
-                    {{item.message}}
-                    <div v-if="item.messageSub" style="color: #666;" transition="slide-x-transition">
-                        ({{item.messageSub}})
-                    </div>
+                  {{item.message}}
+                  <div
+                    v-if="item.messageSub"
+                    style="color: #666;"
+                    transition="slide-x-transition"
+                  >({{item.messageSub}})</div>
                 </v-card>
                 <div>
                   <v-layout row wrap :justify-end="item.userid != userid">{{item.time}}</v-layout>
@@ -65,7 +69,7 @@ export default {
           userid: "05",
           username: "Xavier",
           message: "this workshop provide Happylife for me!!",
-          messageSub:'',
+          messageSub: "",
           time: "2019/8/29"
         },
         {
@@ -78,7 +82,7 @@ export default {
           userid: "05",
           username: "Xavier",
           message: "this workshop provide Happylife for me!!",
-          messageSub:'',
+          messageSub: "",
           time: "2019/8/29"
         },
         {
@@ -91,7 +95,7 @@ export default {
           userid: "05",
           username: "Xavier",
           message: "this workshop provide Happylife for me!!",
-          messageSub:'',
+          messageSub: "",
           time: "2019/8/29"
         },
         {
@@ -104,7 +108,7 @@ export default {
           userid: "05",
           username: "Xavier",
           message: "this workshop provide Happylife for me!!",
-          messageSub:'',
+          messageSub: "",
           time: "2019/8/29"
         },
         {
@@ -117,7 +121,7 @@ export default {
           userid: "05",
           username: "Xavier",
           message: "this workshop provide Happylife for me!!",
-          messageSub:'',
+          messageSub: "",
           time: "2019/8/29"
         },
         {
@@ -125,23 +129,23 @@ export default {
           username: "国山",
           message: "もったいなきお言葉",
           time: "2019/8/29"
-        },
+        }
       ]
     };
   },
-  methods:{
-      userSwitch(){
-          if(this.userid == '01'){
-              this.userid = '05'
-          }else{
-              this.userid = '01'
-          }
+  methods: {
+    userSwitch() {
+      if (this.userid == "01") {
+        this.userid = "05";
+      } else {
+        this.userid = "01";
       }
+    }
   },
-  computed:{
-      nowuser(){
-          return this.userid == '05' ? '国山':'Xavier'
-      }
+  computed: {
+    nowuser() {
+      return this.userid == "05" ? "国山" : "Xavier";
+    }
   }
 };
 </script>

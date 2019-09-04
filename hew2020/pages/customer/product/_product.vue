@@ -1,6 +1,7 @@
 <template>
   <v-container grid-list-xs>
     <v-content>
+      <v-btn icon @click="$router.go(-1)"><v-icon>mdi-chevron-left</v-icon>back</v-btn>
       <v-card>
         <v-card-text>
           <v-flex xs12 md12>

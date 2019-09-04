@@ -1,5 +1,5 @@
 <template>
-  <v-container grid-list-xs style="min-height: 80vh;">
+  <v-container grid-list-xs style="min-height: 90vh;">
     <v-content>
       <v-toolbar dark color="primary">
         <v-toolbar-items>
