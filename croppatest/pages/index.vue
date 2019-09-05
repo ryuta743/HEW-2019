@@ -9,7 +9,7 @@
         <v-card-title class="headline">Welcome to the Vuetify + Nuxt.js template</v-card-title>
         <v-card-text>
           <client-only>
-            <croppa v-model="myCroppa" width="1000" height="400" canvas-color="transparent"></croppa>
+            <croppa v-model="myCroppa" width="1000" height="400" canvas-color="transparent" :remove-button-size="30"></croppa>
             <button @click="generateImage">画像作成</button>
             <br />
             <img class="output" :src="imgUrl" width="1000" height="400" />
