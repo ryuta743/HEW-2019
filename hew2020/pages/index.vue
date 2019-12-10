@@ -6,12 +6,12 @@
           <v-carousel-item>
             <img src="../static/mainVisual05.jpg" alt="メインビジュアル" style="width: 100%;">
           </v-carousel-item>
-          <v-carousel-item>
+          <!-- <v-carousel-item>
             <img src="../static/mainVisual03.jpg" alt="メインビジュアル" style="width: 100%;">
           </v-carousel-item>
           <v-carousel-item>
             <img src="../static/mainVisual04.jpg" alt="メインビジュアル" style="width: 100%;">
-          </v-carousel-item>
+          </v-carousel-item> -->
         </v-carousel>
       </div>
 

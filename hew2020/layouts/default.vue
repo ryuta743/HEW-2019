@@ -212,10 +212,11 @@
         </v-list-item>
       </v-list>
     </v-navigation-drawer>-->
-    <v-app-bar elevate-on-scroll :clipped-left="clipped" app>
+    <v-app-bar :clipped-left="clipped" flat>
       <!-- <v-app-bar-nav-icon @click.stop="drawer = !drawer" /> -->
-      <v-btn outlined>ここにlogo</v-btn>
-      <v-tabs>
+      <!-- <v-btn outlined>ここにlogo</v-btn> -->
+      <img src="../static/tenshokuLogoH.png" alt="ロゴ" width="150px">
+      <v-tabs style="padding-left: 10px;">
         <v-tab @click="$router.push('/')">トップ</v-tab>
         <v-tab @click="$router.push('/shop')">ショップ</v-tab>
         <v-tab @click="$router.push('/mall')">モール</v-tab>
@@ -326,3 +327,9 @@ export default {
   }
 };
 </script>
+
+<style>
+*{
+  font-family: 'M PLUS Rounded 1c', sans-serif;
+}
+</style>
