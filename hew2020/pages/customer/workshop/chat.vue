@@ -7,7 +7,7 @@
       <v-toolbar color="orange">
         <v-toolbar-title style="color: white;">ゆう工房</v-toolbar-title>
         <v-toolbar-items style="padding-left: 10px;">
-          <v-btn outlined @click="userSwitch">{{ nowuser }}になるボタン</v-btn>
+          <v-btn outlined @click="userSwitch">{{ nowuser }}ボタン</v-btn>
         </v-toolbar-items>
       </v-toolbar>
       <v-card scrollable style="height: 80vh;">
@@ -44,10 +44,10 @@
             <form>
               <v-layout row wrap>
                 <v-flex xs11 md11>
-                  <v-text-field outlined label="メッセージ"></v-text-field>
+                  <v-text-field outlined label="メッセージ" v-model="message"></v-text-field>
                 </v-flex>
                 <v-flex xs1 md1>
-                  <v-btn style="width: 100%;height: 55px;" color="orange" dark>送信</v-btn>
+                  <v-btn style="width: 100%;height: 55px;" color="orange" dark @click="sendChatReq()">送信</v-btn>
                 </v-flex>
               </v-layout>
             </form>
@@ -59,10 +59,14 @@
 </template>
 
 <script>
+import {mapGetters,mapActions} from 'vuex';
+
 export default {
   data() {
     return {
       userid: "05",
+      username: 'Xavier',
+      message: '',
       chatlog: [
         //チャットデータ
         {
@@ -133,20 +137,46 @@ export default {
       ]
     };
   },
+  async mounted(){
+    const payload = {
+      wsid: '80000000'
+    }
+    await this.openChat({payload});
+  },
   methods: {
     userSwitch() {
       if (this.userid == "01") {
         this.userid = "05";
+        this.username = "Xavier"
       } else {
         this.userid = "01";
+        this.username = "国山";
       }
-    }
+    },
+    async sendChatReq(){
+      console.log('action1')
+      if(this.message == '') return
+      const payload = {
+        wsid: '80000000',
+        userid: this.userid,
+        username: this.username, 
+        message: this.message
+      }
+      try{
+        await this.sendChat({payload});
+      }catch(e){
+        console.log('エラーが発生しました:' + e);
+      }
+      this.message = '';
+    },
+    ...mapActions('realtimechat',['openChat','sendChat'])
   },
   computed: {
     nowuser() {
       return this.userid == "05" ? "国山" : "Xavier";
-    }
-  }
+    },
+    ...mapGetters('realtimechat',['chatlogs'])
+  },
 };
 </script>
 
