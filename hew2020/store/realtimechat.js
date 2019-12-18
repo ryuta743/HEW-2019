@@ -4,7 +4,7 @@ import moment from '~/plugins/moment';
 
 const database = firebase.database();
 
-export const state = () =>({
+export const state = () => ({
     chatlogs: null,
 })
 
@@ -13,21 +13,21 @@ export const getters = {
 }
 
 export const mutations = {
-    setChatlogs(state,logs){
+    setChatlogs(state, logs) {
         state.chatlogs = logs;
     }
 }
 
 export const actions = {
-    async openChat({commit},{payload}){
+    async openChat({ commit }, { payload }) {
         const wsid = payload.wsid;
         const fb = await database.ref('chatroom/' + wsid);
-        await fb.on('value',(snapshot)=>{
-            commit('setChatlogs',snapshot.val());
+        await fb.on('value', (snapshot) => {
+            commit('setChatlogs', snapshot.val());
         });
         return true;
     },
-    async sendChat({commit},{payload}){
+    async sendChat({ commit }, { payload }) {
         const wsid = payload.wsid;
         const userid = payload.userid;
         const username = payload.username;
@@ -39,7 +39,6 @@ export const actions = {
             username: username,
             message: message,
             timestamp: now
-        });
-        return true;
+        })
     }
 }

@@ -15,7 +15,7 @@
           <v-flex
             xs12
             md12
-            v-for="(item, index) in chatlog"
+            v-for="(item, index) in chatlogs"
             :key="index"
             style="margin: 5px 0 5px 0;"
           >
@@ -154,7 +154,6 @@ export default {
       }
     },
     async sendChatReq(){
-      console.log('action1')
       if(this.message == '') return
       const payload = {
         wsid: '80000000',
@@ -168,6 +167,7 @@ export default {
         console.log('エラーが発生しました:' + e);
       }
       this.message = '';
+      return true;
     },
     ...mapActions('realtimechat',['openChat','sendChat'])
   },
