@@ -212,7 +212,7 @@
         </v-list-item>
       </v-list>
     </v-navigation-drawer>-->
-    <v-app-bar :clipped-left="clipped" flat>
+    <v-app-bar :clipped-left="clipped" flat class="no-print">
       <!-- <v-app-bar-nav-icon @click.stop="drawer = !drawer" /> -->
       <!-- <v-btn outlined>ここにlogo</v-btn> -->
       <img src="../static/tenshokuLogoH.png" alt="ロゴ" width="150px">
@@ -272,7 +272,7 @@
 
     <nuxt />
 
-    <v-footer style="height: 400px;" dark>
+    <v-footer style="height: 400px;" dark class="no-print">
       <span>&copy; ここはフッター</span>
     </v-footer>
   </v-app>

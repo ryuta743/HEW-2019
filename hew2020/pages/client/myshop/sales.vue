@@ -13,7 +13,7 @@
       <v-card>
         <v-card-title primary-title>売り上げ一覧表</v-card-title>
         <v-card-text>
-            <v-btn color="info"><v-icon>mdi-file</v-icon>売上一覧表を印刷する</v-btn>
+            <v-btn color="info" @click="$router.push('/client/myshop/sales_print')"><v-icon>mdi-file</v-icon>売上一覧表を印刷する</v-btn>
         </v-card-text>
         <v-card-text>
           <v-simple-table>
