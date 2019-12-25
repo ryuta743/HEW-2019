@@ -3,26 +3,36 @@
     <div id="receipt">
       <div style="display: flex;">
         <h2 id="graphtitle" class="mincho">領収証</h2>
-        <h3 id="number" class="mincho">No.</h3>
+        <h3 id="number" class="mincho">No.　　0002</h3>
       </div>
       <div id="date" class="mincho"></div>
       <div id="send">
-        <div id="customer_name" class="mincho">寺田隆太</div>
+        <div id="customer_name" class="mincho">加藤正都</div>
         <div style="width: 100px;font-weight: bold;" class="mincho">様</div>
       </div>
       <div id="paybox">
-          <div class="mincho" style="width: 100px;text-align: center;font-weight: bold;">
-              金額
-          </div>
-          <div id="money" class="mincho">
-              ¥ 200,000-
-          </div>
+        <div class="mincho" style="width: 100px;text-align: center;font-weight: bold;">金額</div>
+        <div id="money" class="mincho">¥ 200,000-</div>
+      </div>
+      <div id="description">
+        <div style="margin-bottom: 20px;width: 100%;" class="mincho">但</div>
+        <div class="mincho" style="margin-bottom: 40px;">上記金額を正に領収しました</div>
+        <div class="mincho" style="width: 100%;">2019年   12月   31日</div>
+      </div>
+      <div id="my_shop">
+        <div style="width: 100px;height: 100px;border: 1px solid #222222;"></div>
+        <div id="info">
+          <div class="mincho">天職工房</div>
+          <div class="mincho">〒8891902</div>
+          <div class="mincho">宮崎県北諸県三股町五本松13-2</div>
+        </div>
+        <div style="display: flex;justify-content: center;align-items: center;width: 50px;height: 50px;border: 1px solid #222222;" class="mincho">領</div>
       </div>
     </div>
     <form style="width: 100%;">
       <div style="width: 100%;margin: 20px 0 20px 0;text-align: center;" class="no-print">
         <v-btn color="info" width="200px" @click="print">印刷</v-btn>
-        <v-btn color="grey" width="200px" @click="$router.push('/client/myshop/sales')">キャンセル</v-btn>
+        <v-btn color="grey" width="200px" @click="$router.push('/client/myshop/orderlist')">キャンセル</v-btn>
       </div>
     </form>
   </div>
@@ -33,49 +43,11 @@ export default {
   data() {
     return {
       ordernumber: this.$route.params.print,
-      datacollection: null,
-      options: {
-        scales: {
-          xAxes: [
-            {
-              scaleLabel: {
-                display: true,
-                labelString: "(月)"
-              }
-            }
-          ],
-          yAxes: [
-            {
-              ticks: {
-                beginAtZero: true,
-                stepSize: 15
-              }
-            }
-          ]
-        }
-      }
     };
   },
   mounted() {
-    if (process.client) {
-      this.fillData();
-    }
   },
   methods: {
-    fillData() {
-      this.datacollection = {
-        labels: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
-        datasets: [
-          {
-            label: "売上総額（千円）",
-            data: [10, 20, 30, 40, 50, 30, 20, 30, 50, 50, 10, 30],
-            backgroundColor: "rgba(255, 206, 86, 0.2)",
-            borderColor: "rgba(255, 159, 64, 1)",
-            borderWidth: 1
-          }
-        ]
-      };
-    },
     print() {
       window.print();
     }
@@ -90,7 +62,7 @@ export default {
 }
 
 #number {
-  width: 300px;
+  width: 350px;
   box-sizing: border-box;
   padding-left: 20px;
   padding-top: 18px;
@@ -134,7 +106,7 @@ export default {
 }
 
 #send {
-    margin-top: 50px;
+  margin-top: 50px;
   display: flex;
   align-items: center;
   width: 700px;
@@ -149,24 +121,47 @@ export default {
   text-align: center;
 }
 
-#paybox{
-    display: flex;
-    margin-top: 20px;
-    width: 950px;
-    height: 100px;
-    border: 6px double #111111;
-    background-color: antiquewhite;
-    border-width: 6px 0;
+#paybox {
+  display: flex;
+  margin-top: 20px;
+  width: 950px;
+  height: 100px;
+  border: 6px double #111111;
+  border-width: 6px 0;
 }
 
-#money{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 500px;
-    height: 90px;
-    font-size: 30px;
-    font-weight: bold;
+#money {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 750px;
+  height: 90px;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+#description{
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 20px;
+  width: 950px;
+  padding-left: 100px;
+  box-sizing: border-box;
+  margin-bottom: 50px;
+}
+
+#my_shop{
+  display: flex;
+  align-items: flex-end;
+  margin-top: 20px;
+  width: 950px;
+  padding-left: 100px;
+  box-sizing: border-box;
+}
+
+#info{
+  margin-left: 100px;
+  width: 300px;
 }
 
 @media print {
