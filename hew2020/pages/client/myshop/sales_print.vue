@@ -6,7 +6,7 @@
     <form style="width: 100%;">
       <div style="width: 100%;margin: 20px 0 20px 0;text-align: center;" class="no-print">
         <v-btn color="info" width="200px" @click="print">印刷</v-btn>
-        <v-btn color="grey" width="200px" @click="$router.push('/client/myshop/sales')">キャンセル</v-btn>
+        <a href="./sales"><v-btn color="grey" width="200px">キャンセル</v-btn></a>
       </div>
     </form>
   </div>
@@ -50,11 +50,9 @@ export default {
         labels: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
         datasets: [
           {
-            label: "売上総額（千円）",
-            data: [10, 20, 30, 40, 50, 30, 20, 30, 50, 50, 10, 30],
-            backgroundColor: "rgba(255, 206, 86, 0.2)",
-            borderColor: "rgba(255, 159, 64, 1)",
-            borderWidth: 1
+            data: [10, 15, 6, 22, 11, 49, 32],
+            backgroundColor: ['#f87979', '#aa4c8f', '#38b48b', '#006e54', '#c1e4e9', '#89c3eb', '#c3d825'],
+            borderColor: 'transparent' // ★この行追加
           }
         ]
       };
@@ -67,6 +65,10 @@ export default {
 </script>
 
 <style>
+a{
+  text-decoration: none;
+}
+
 #graphtitle {
   width: 950px;
   text-align: center;
