@@ -9,7 +9,7 @@
           <v-icon>mdi-format-list-checks</v-icon> 注文一覧
         </li>
         <li @click="$router.push('/client/myshop/sales')" class="check"><v-icon>mdi-chart-bar</v-icon> 売上一覧</li>
-        <li @click="$router.push('/client/myshop/sales_trend')"><v-icon>mdi-chart-arc</v-icon> 売上推移表</li>
+        <li @click="$router.push('/client/myshop/sales_trend')"><v-icon>mdi-chart-arc</v-icon> 売上傾向表</li>
         <li @click="$router.push('/client/myshop/products')">
           <v-icon>mdi-format-list-bulleted</v-icon> 商品一覧・在庫状況
         </li>
@@ -27,7 +27,7 @@
     <v-container grid-list-xs style="min-height: 85vh;width: 85%;overflow-y: scroll;">
       <v-content>
         <div id="sub_title">
-          <h3>売上表</h3>
+          <h3><v-icon>mdi-chart-bar</v-icon>売上表</h3>
           <div class="flex-grow-1"></div>
           <v-btn color="info" @click="$router.push('/client/myshop/sales_print')"><v-icon>mdi-file</v-icon>売上一覧表を印刷する</v-btn>
         </div>

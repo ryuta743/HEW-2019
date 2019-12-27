@@ -5,7 +5,7 @@
         <li @click="$router.push('/client/myshop/myshop')" class="check"><v-icon>mdi-home</v-icon> 管理ツールトップ</li>
         <li @click="$router.push('/client/myshop/orderlist')"><v-icon>mdi-format-list-checks</v-icon> 注文一覧</li>
         <li @click="$router.push('/client/myshop/sales')"><v-icon>mdi-chart-bar</v-icon> 売上一覧</li>
-        <li @click="$router.push('/client/myshop/sales_trend')"><v-icon>mdi-chart-arc</v-icon> 売上推移表</li>
+        <li @click="$router.push('/client/myshop/sales_trend')"><v-icon>mdi-chart-arc</v-icon> 売上傾向表</li>
         <li @click="$router.push('/client/myshop/products')"><v-icon>mdi-format-list-bulleted</v-icon> 商品一覧・在庫状況</li>
         <li @click="$router.push('/client/myshop/productadd')"><v-icon>mdi-plus</v-icon> 新規商品登録</li>
         <li @click="$router.push('/client/myshop/productdel')"><v-icon>mdi-close</v-icon> 商品編集・削除</li>

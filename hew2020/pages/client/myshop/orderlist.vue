@@ -27,7 +27,7 @@
     <v-container grid-list-xs style="max-height: 85vh;width: 85%;overflow-y: scroll;">
       <v-content>
         <div id="sub_title">
-          <h3>注文一覧</h3>
+          <h3><v-icon>mdi-format-list-checks</v-icon>注文一覧</h3>
         </div>
         <v-simple-table>
           <thead>

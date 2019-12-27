@@ -27,7 +27,7 @@
     <v-container grid-list-xs style="min-height: 85vh;width: 85%;overflow-y: scroll;">
       <v-content>
         <div id="sub_title">
-          <h3>売上傾向表</h3>
+          <h3><v-icon>mdi-chart-arc</v-icon>売上傾向表</h3>
         </div>
         
         <div id="trend_body">

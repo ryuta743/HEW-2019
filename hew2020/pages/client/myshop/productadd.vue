@@ -9,7 +9,7 @@
           <v-icon>mdi-format-list-checks</v-icon> 注文一覧
         </li>
         <li @click="$router.push('/client/myshop/sales')"><v-icon>mdi-chart-bar</v-icon> 売上一覧</li>
-        <li @click="$router.push('/client/myshop/sales_trend')"><v-icon>mdi-chart-arc</v-icon> 売上推移表</li>
+        <li @click="$router.push('/client/myshop/sales_trend')"><v-icon>mdi-chart-arc</v-icon> 売上傾向表</li>
         <li @click="$router.push('/client/myshop/products')">
           <v-icon>mdi-format-list-bulleted</v-icon> 商品一覧・在庫状況
         </li>
@@ -27,7 +27,7 @@
     <v-container grid-list-xs style="min-height: 85vh;width: 85%;overflow-y: scroll;">
       <v-content v-if="check == 0">
         <v-card>
-          <v-card-title primary-title>新規登録商品情報入力</v-card-title>
+          <v-card-title primary-title><v-icon>mdi-plus</v-icon>新規登録商品情報入力</v-card-title>
           <v-divider></v-divider>
           <v-card-text>
             <v-flex xs12 md5>
