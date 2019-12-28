@@ -13,9 +13,10 @@
       </ul>
     </v-container>
     <v-container grid-list-xs style="min-height: 100vh;width: 85%;">
-      <v-content>
+      <v-btn color="info" icon :loading="loading" v-if="loading" large></v-btn>
+      <v-content v-if="!loading">
         <v-card>
-          <v-card-title primary-title>マイ工房管理画面</v-card-title>
+          <v-card-title primary-title>マイ工房管理画面{{workshop_data.shop_name}}</v-card-title>
           <v-card-text>
             <v-switch label="工房を持っている" v-model="haveWorkshop"></v-switch>
           </v-card-text>
@@ -43,12 +44,14 @@ import {mapActions,mapGetters} from 'vuex'
 export default {
   data() {
     return {
+      loading: true,
       haveWorkshop: true,
       shop_id: 1
     };
   },
   async mounted() {
     await this.getShopdata({wsid:this.shop_id})
+    this.loading = false
   },
   methods:{
     ...mapActions('workshop_manage',['getShopdata'])
