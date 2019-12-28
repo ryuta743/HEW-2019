@@ -45,7 +45,7 @@ export default {
     }
   },
   methods: {
-    fillData() {
+    async fillData() {
       this.datacollection = {
         labels: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
         datasets: [
@@ -66,7 +66,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 a{
   text-decoration: none;
 }
