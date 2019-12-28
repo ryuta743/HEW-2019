@@ -28,6 +28,8 @@
       <v-content>
         <div id="sub_title">
           <h3><v-icon>mdi-chart-arc</v-icon>売上傾向表</h3>
+          <div class="flex-grow-1"></div>
+          <v-btn color="info" @click="$router.push(`/client/myshop/trend_print/${year}`)"><v-icon>mdi-file</v-icon>売上傾向表を印刷する</v-btn>
         </div>
         
         <div id="trend_body">
