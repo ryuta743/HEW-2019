@@ -55,7 +55,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 #receipt {
   box-sizing: border-box;
   padding: 50px 100px;
