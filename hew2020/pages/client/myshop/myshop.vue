@@ -39,11 +39,22 @@
 </template>
 
 <script>
+import {mapActions,mapGetters} from 'vuex'
 export default {
   data() {
     return {
-      haveWorkshop: false
+      haveWorkshop: true,
+      shop_id: 1
     };
+  },
+  async mounted() {
+    await this.getShopdata({wsid:this.shop_id})
+  },
+  methods:{
+    ...mapActions('workshop_manage',['getShopdata'])
+  },
+  computed:{
+    ...mapGetters('workshop_manage',['workshop_data'])
   }
 };
 </script>
