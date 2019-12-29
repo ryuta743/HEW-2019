@@ -33,7 +33,8 @@ module.exports = {
   */
   plugins: [
     {src:'~/plugins/bar_chart.js',ssr:false},
-    {src:'~/plugins/chart.js',ssr:false}
+    {src:'~/plugins/chart.js',ssr:false},
+    {src:'~/plugins/v-lazy-image'}
   ],
   /*
   ** Nuxt.js dev-modules
