@@ -96,7 +96,7 @@
     <form style="width: 100%;">
       <div style="width: 100%;margin: 20px 0 20px 0;text-align: center;" class="no-print">
         <v-btn color="info" width="200px" @click="print">印刷</v-btn>
-        <v-btn color="grey" width="200px" @click="$router.push('/client/myshop/orderlist')">キャンセル</v-btn>
+        <v-btn color="grey" width="200px" @click="$router.push(`/client/myshop/order/${$route.params.delivery}`)">キャンセル</v-btn>
       </div>
     </form>
   </div>

@@ -52,7 +52,7 @@ export default {
           {
             label: "売上総額（千円）",
             data: [10, 20, 30, 40, 50, 30, 20, 30, 50, 50, 10, 30],
-            backgroundColor: "rgba(255, 206, 86, 0.2)",
+            backgroundColor: "rgba(255, 206, 86, 0.9)",
             borderColor: "rgba(255, 159, 64, 1)",
             borderWidth: 1
           }

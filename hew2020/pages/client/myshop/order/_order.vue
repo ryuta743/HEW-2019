@@ -5,7 +5,7 @@
         <li @click="$router.push('/client/myshop/myshop')">
           <v-icon>mdi-home</v-icon> 管理ツールトップ
         </li>
-        <li @click="$router.push('/client/myshop/orderlist')">
+        <li @click="$router.push('/client/myshop/orderlist')" class="check">
           <v-icon>mdi-format-list-checks</v-icon> 注文一覧
         </li>
         <li @click="$router.push('/client/myshop/sales')"><v-icon>mdi-chart-bar</v-icon> 売上一覧</li>
@@ -19,7 +19,7 @@
         <li @click="$router.push('/client/myshop/productdel')">
           <v-icon>mdi-close</v-icon> 商品編集・削除
         </li>
-        <li @click="$router.push('/client/myshop/chat')" class="check">
+        <li @click="$router.push('/client/myshop/chat')">
           <v-icon>mdi-chat</v-icon> チャットメッセージ
         </li>
       </ul>
