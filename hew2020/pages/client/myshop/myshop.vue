@@ -22,8 +22,6 @@
             <!-- <v-switch label="工房を持っている" v-model="haveWorkshop"></v-switch> -->
           </h3>
         </div>
-        <v-card>
-          <v-card-text>
             <v-layout row wrap>
               <v-flex xs12 md12 v-if="!haveWorkshop">
                 <v-btn
@@ -36,20 +34,55 @@
               </v-flex>
               <v-flex xs12 md12 v-if="haveWorkshop">              
                 <div id="ws_background">
-                  <h3>あなたの工房</h3>
                   <div id="imgs">
                     <div id="header_img">
-                    <v-lazy-image style="width: 700px;" src="https://firebasestorage.googleapis.com/v0/b/hackmdbase-57369.appspot.com/o/tenshokuheader.jpg?alt=media&token=8f7e8a3a-b5e2-497e-9110-c251ad18c8aa"></v-lazy-image>
+                      <v-lazy-image style="width: 100%;opacity: 0.5;" src="https://firebasestorage.googleapis.com/v0/b/hackmdbase-57369.appspot.com/o/tenshokuheader.jpg?alt=media&token=8f7e8a3a-b5e2-497e-9110-c251ad18c8aa"></v-lazy-image>
                     </div>
-                    <div id="ws_icon">
-                      <v-lazy-image :src=workshop_data.shop_img style="width: 100px;"></v-lazy-image>
+                    <div id="ws_posi">
+                      <div id="ws_icon">
+                        <v-lazy-image :src=workshop_data.shop_img style="width: 100px;"></v-lazy-image>
+                      </div>
+                      <div id="ws_name"><v-icon color="white" small>mdi-hammer</v-icon>{{ workshop_data.shop_name }}</div>
                     </div>
+                  </div>
+                  <div id="access_graph">
+                    <div id="graph">
+                      <h4>累計アクセス数</h4>
+                      <access :chart-data="datacollection" :options="options" width="80%" ></access>
+                    </div>
+                  </div>
+                  <div style="width: 1%;height:500px;"></div>
+                  <div id="ws_info">
+                    <table style="width: 80%;color: #555;">
+                      <tr>
+                        <td>工房名</td>
+                        <td>{{ workshop_data.shop_name }}</td>
+                      </tr>
+                      <tr>
+                        <td>管理人</td>
+                        <td>{{ workshop_data.shop_owner }}</td>
+                      </tr>
+                      <tr>
+                        <td>工房説明文</td>
+                        <td>{{ workshop_data.shop_description }}</td>
+                      </tr>
+                      <tr>
+                        <td>郵便番号</td>
+                        <td>{{ workshop_data.postal_code }}</td>
+                      </tr>
+                      <tr>
+                        <td>住所</td>
+                        <td>{{ workshop_data.address }}</td>
+                      </tr>
+                      <tr>
+                        <td>仕事依頼用メールアドレス</td>
+                        <td>{{ workshop_data.work_mail }}</td>
+                      </tr>
+                    </table>
                   </div>                 
-                </div>         
+                </div>
               </v-flex>
             </v-layout>
-          </v-card-text>
-        </v-card>
       </v-content>
     </v-container>
   </div>
@@ -62,14 +95,52 @@ export default {
     return {
       loading: true,
       haveWorkshop: true,
-      shop_id: 1
+      shop_id: 1,
+      datacollection: null,
+      options: {
+        scales: {
+          xAxes: [
+            {
+              scaleLabel: {
+                display: true,
+                labelString: "(月)"
+              }
+            }
+          ],
+          yAxes: [
+            {
+              ticks: {
+                beginAtZero: true,
+                stepSize: 50
+              }
+            }
+          ]
+        }
+      }
     };
   },
   async mounted() {
     await this.getShopdata({wsid:this.shop_id})
     this.loading = false
+    if (process.client) {
+      this.fillData();
+    }
   },
   methods:{
+    async fillData() {
+      this.datacollection = {
+        labels: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+        datasets: [
+          {
+            label: "アクセス数",
+            data: [10, 20, 30, 40, 50, 55, 58, 70, 98, 120, 143, 155],
+            backgroundColor: "rgba(255, 206, 86, 0.2)",
+            borderColor: "rgba(255, 159, 64, 1)",
+            borderWidth: 1
+          }
+        ]
+      };
+    },
     ...mapActions('workshop_manage',['getShopdata'])
   },
   computed:{
@@ -116,38 +187,99 @@ export default {
 }
 
 #ws_background{
+  display: flex;
+  flex-wrap: wrap;
   margin: 0 auto;
-  width: 700px;
+  width: 100%;
   height: 750px;
 }
 
 #imgs{
-  width: 700px;
+  width: 100%;
   position: relative;
 }
 
 #header_img{
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border-radius: 5px;
-  width: 700px;
+  width: 100%;
   height: 250px;
   overflow: hidden;
   z-index: 1;
-  background-color: #efefef;
+  background-color: #000000;
 }
 
-#ws_icon{
-  background-color: #e6e6e6;
+#ws_posi{
+  width: 100px;
+  height: 130px;
   position: absolute;
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
   margin: auto;
+  z-index: 2;
+}
+
+#ws_name{
+  color: #efefef;
+  font-weight: bold;
+  width: 100px;
+  height: 30px;
+  text-align: center;
+
+}
+
+#ws_icon{
+  background-color: #e6e6e6;
   width: 100px;
   height: 100px;
   border-radius: 300px;
   overflow: hidden;
-  z-index: 2;
+}
+
+#access_graph{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  width: 49%;
+  height: 400px;
+  box-sizing: border-box;
+  border: 1.2px solid #e2e2e2;
+  border-radius: 4px;
+  background-color: #ffffff;
+}
+
+#ws_info{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  width: 50%;
+  height: 400px;
+  box-sizing: border-box;
+  border: 1.2px solid #e2e2e2;
+  border-radius: 4px;
+  background-color: #ffffff;
+}
+
+#graph{
+  margin: 0 auto;
+  width: 80%;
+}
+
+table{
+  font-size: 14px;
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+table td{
+  border-bottom: 1.2px solid #efefef;
+  padding: 10px;
 }
 
 .v-lazy-image {
