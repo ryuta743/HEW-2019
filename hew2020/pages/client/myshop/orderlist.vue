@@ -58,7 +58,7 @@
                   color="primary"
                   outlined
                   @click="$router.push(`order/${item.order_number}`)"
-                >注文詳細をみる</v-btn>
+                >注文明細をみる</v-btn>
               </td>
             </tr>
           </tbody>

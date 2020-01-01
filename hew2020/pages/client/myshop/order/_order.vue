@@ -27,23 +27,28 @@
     <v-container grid-list-xs style="min-height: 85vh;width: 85%;overflow-y: scroll;">
       <v-btn color="info" icon :loading="loading" v-if="loading" large></v-btn>
       <v-content v-if="!loading">
-        <v-toolbar color="info">
-          <v-toolbar-title style="color: white;">注文詳細 注文No.{{$route.params.order}}</v-toolbar-title>
+        <div id="sub_title">
+          <h3>注文No.{{$route.params.order}}</h3>
           <div class="flex-grow-1"></div>
           <v-btn color="grey" dark @click="$router.push('/client/myshop/orderlist')">注文一覧へ戻る</v-btn>
-        </v-toolbar>
+        </div>
         <v-card>
           <v-card>
             <v-card-text>
               <v-layout row wrap>
                 <v-flex xs12 md6>
-                  注文者名
-                  <h4>{{orderInfo.orderName}}</h4>
+                  <h5>注文者名:</h5>
+                  <h4>{{ orderlist[0] ? orderlist[0].user_name:'' }}</h4>
                 </v-flex>
                 <v-flex xs12 md6>
-                  お届け先住所
-                  <h4>{{orderInfo.address}}</h4>注文日
-                  <h4>{{orderInfo.date}}</h4>
+                  <h5>お届け先国:</h5>
+                  {{ orderlist[0] ? orderlist[0].countory:'' }}<br>
+                  <h5>お届け郵便番号:</h5>
+                  {{ orderlist[0] ? orderlist[0].post_address:'' }}<br>
+                  <h5>お届け先住所:</h5>
+                  {{ orderlist[0] ? orderlist[0].address:'' }}<br>
+                  <h5>注文日:</h5>
+                  {{ orderlist[0] ? orderlist[0].buy_date:'' }}
                 </v-flex>
               </v-layout>
             </v-card-text>
