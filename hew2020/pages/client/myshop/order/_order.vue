@@ -71,7 +71,7 @@
                     <td style="color: #111;text-align: center;">{{item.product_number}}</td>
                     <td style="color: #111;text-align: center;">{{item.product_name}}</td>
                     <td style="color: #111;text-align: center;">{{item.count}}</td>
-                    <td style="color: #111;text-align: center;">{{item.price}}円</td>
+                    <td style="color: #111;text-align: center;">{{exprice(item.price)}}円</td>
                     <td style="display: flex;justify-content: center;box-sizing: border-box;padding-bottom:60px;">
                       <v-checkbox v-model="item.proccess"></v-checkbox>
                     </td>
@@ -160,6 +160,9 @@ export default {
     this.loading = false
   },
   methods: {
+    exprice(val){
+      return val.toLocaleString();
+    },
     ...mapActions("workshop_manage", ["getOrderdetail","getOrderlist"])
   },
   computed: {

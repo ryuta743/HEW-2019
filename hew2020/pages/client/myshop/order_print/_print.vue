@@ -12,7 +12,7 @@
       </div>
       <div id="paybox">
         <div class="mincho" style="width: 100px;text-align: center;font-weight: bold;">金額</div>
-        <div id="money" class="mincho">¥ 200,000-</div>
+        <div id="money" class="mincho">¥ {{exprice(200000)}}-</div>
       </div>
       <div id="description">
         <div style="margin-bottom: 20px;width: 100%;" class="mincho">但</div>
@@ -50,7 +50,10 @@ export default {
   methods: {
     print() {
       window.print();
-    }
+    },
+    exprice(val){
+      return val.toLocaleString();
+    },
   }
 };
 </script>
