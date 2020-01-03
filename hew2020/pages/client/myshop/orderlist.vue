@@ -8,8 +8,12 @@
         <li @click="$router.push('/client/myshop/orderlist')" class="check">
           <v-icon>mdi-format-list-checks</v-icon> 注文一覧
         </li>
-        <li @click="$router.push('/client/myshop/sales')"><v-icon>mdi-chart-bar</v-icon> 売上一覧</li>
-        <li @click="$router.push('/client/myshop/sales_trend')"><v-icon>mdi-chart-arc</v-icon> 売上傾向表</li>
+        <li @click="$router.push('/client/myshop/sales')">
+          <v-icon>mdi-chart-bar</v-icon> 売上一覧
+        </li>
+        <li @click="$router.push('/client/myshop/sales_trend')">
+          <v-icon>mdi-chart-arc</v-icon> 売上傾向表
+        </li>
         <li @click="$router.push('/client/myshop/products')">
           <v-icon>mdi-format-list-bulleted</v-icon> 商品一覧・在庫状況
         </li>
@@ -25,9 +29,13 @@
       </ul>
     </v-container>
     <v-container grid-list-xs style="max-height: 85vh;width: 85%;overflow-y: scroll;">
-      <v-content>
+      <v-btn color="info" icon :loading="loading" v-if="loading" large></v-btn>
+      <v-content v-if="!loading">
         <div id="sub_title">
-          <h3><v-icon>mdi-format-list-checks</v-icon>注文一覧</h3>
+          <h3>
+            <v-icon>mdi-format-list-checks</v-icon>
+            注文一覧{{orderlist.length!=0 ? orderlist[0].shop_name:''}}
+          </h3>
         </div>
         <v-simple-table>
           <thead>
@@ -40,17 +48,17 @@
             </tr>
           </thead>
           <tbody>
-            <tr v-for="(item, index) in items" :key="index">
-              <td>{{item.orderno}}</td>
-              <td>{{item.username}}</td>
-              <td>{{item.date}}</td>
-              <td>{{item.isCheck? '発送済み':'未発送'}}</td>
+            <tr v-for="(item, index) in orderlist" :key="index">
+              <td>{{item.order_number}}</td>
+              <td>{{item.user_name}}</td>
+              <td>{{item.buy_date}}</td>
+              <td>{{item.status==1 ? '発送済み':'未発送'}}</td>
               <td>
                 <v-btn
                   color="primary"
                   outlined
-                  @click="$router.push(`order/${item.orderno}`)"
-                >注文詳細をみる</v-btn>
+                  @click="$router.push(`order/${item.order_number}`)"
+                >注文明細をみる</v-btn>
               </td>
             </tr>
           </tbody>
@@ -61,131 +69,23 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from "vuex";
 export default {
   data() {
     return {
-      items: [
-        {
-          orderno: "0002",
-          userid: "805",
-          username: "Xavier",
-          date: 20190812,
-          isCheck: false
-        },
-        {
-          orderno: "0001",
-          userid: "805",
-          username: "Xavier",
-          date: 20190812,
-          isCheck: true
-        },
-        {
-          orderno: "0001",
-          userid: "805",
-          username: "Xavier",
-          date: 20190812,
-          isCheck: true
-        },
-        {
-          orderno: "0001",
-          userid: "805",
-          username: "Xavier",
-          date: 20190812,
-          isCheck: true
-        },
-        {
-          orderno: "0001",
-          userid: "805",
-          username: "Xavier",
-          date: 20190812,
-          isCheck: true
-        },
-        {
-          orderno: "0001",
-          userid: "805",
-          username: "Xavier",
-          date: 20190812,
-          isCheck: true
-        },
-        {
-          orderno: "0001",
-          userid: "805",
-          username: "Xavier",
-          date: 20190812,
-          isCheck: true
-        },
-        {
-          orderno: "0001",
-          userid: "805",
-          username: "Xavier",
-          date: 20190812,
-          isCheck: true
-        },
-        {
-          orderno: "0001",
-          userid: "805",
-          username: "Xavier",
-          date: 20190812,
-          isCheck: true
-        },
-        {
-          orderno: "0001",
-          userid: "805",
-          username: "Xavier",
-          date: 20190812,
-          isCheck: true
-        },
-        {
-          orderno: "0001",
-          userid: "805",
-          username: "Xavier",
-          date: 20190812,
-          isCheck: true
-        },
-        {
-          orderno: "0001",
-          userid: "805",
-          username: "Xavier",
-          date: 20190812,
-          isCheck: true
-        },
-        {
-          orderno: "0001",
-          userid: "805",
-          username: "Xavier",
-          date: 20190812,
-          isCheck: true
-        },
-        {
-          orderno: "0001",
-          userid: "805",
-          username: "Xavier",
-          date: 20190812,
-          isCheck: true
-        },
-        {
-          orderno: "0001",
-          userid: "805",
-          username: "Xavier",
-          date: 20190812,
-          isCheck: true
-        },
-        {
-          orderno: "0001",
-          userid: "805",
-          username: "Xavier",
-          date: 20190812,
-          isCheck: true
-        },
-        {
-          orderno: "0001",
-          userid: "805",
-          username: "Xavier",
-          date: 20190812,
-          isCheck: true
-        }
-      ]
+      loading: true,
+      shop_id: 1,
     };
+  },
+  async mounted() {
+    await this.getOrderlist({ wsid: this.shop_id });
+    this.loading = false
+  },
+  methods: {
+    ...mapActions("workshop_manage", ["getShopdata", "getOrderlist"])
+  },
+  computed: {
+    ...mapGetters("workshop_manage", ["workshop_data","orderlist"])
   }
 };
 </script>
@@ -220,7 +120,7 @@ export default {
   color: rgb(66, 185, 0);
 }
 
-#sub_title{
+#sub_title {
   box-sizing: border-box;
   padding: 20px;
   border-bottom: 1.2px solid #e6e6e6;

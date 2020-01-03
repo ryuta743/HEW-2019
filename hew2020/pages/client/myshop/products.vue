@@ -25,7 +25,8 @@
       </ul>
     </v-container>
     <v-container grid-list-xs style="min-height: 85vh;width: 85%;overflow-y: scroll;">
-      <v-content>
+      <v-btn color="info" icon :loading="loading" v-if="loading" large></v-btn>
+      <v-content v-if="!loading">
         <div id="sub_title">
           <h3><v-icon>mdi-format-list-bulleted</v-icon>商品一覧・在庫状況</h3>
         </div>
@@ -43,29 +44,31 @@
               >
                 <v-card hover>
                   <v-card-text>
-                      在庫：{{item.num}}個
-                      <v-btn color="success" icon @click="item.num++"><v-icon>mdi-plus</v-icon></v-btn>
-                      <v-btn color="red" icon @click="item.num--"><v-icon>mdi-minus</v-icon></v-btn>
-                      <v-chip color="red" v-if="item.num < item.warning" dark>安全在庫{{item.warning - item.num}}個不足</v-chip>
+                      在庫：{{item.stock}}個
+                      <v-btn color="success" icon @click="setStock(item.stock + 1)"><v-icon>mdi-plus</v-icon></v-btn>
+                      <v-btn color="red" icon @click="setStock(item.stock - 1)"><v-icon>mdi-minus</v-icon></v-btn>
+                      <v-chip color="red" v-if="item.stock < item.safety" dark>安全在庫{{item.safety - item.stock}}個不足</v-chip>
                   </v-card-text>
-                  <v-img :src="item.src" @click="$router.push(`/customer/product/${item.title}`)"></v-img>
-                  <v-card-text style="font-weight: bold;height: 10px;" @click="$router.push(`/customer/product/${item.title}`)">{{item.title}}</v-card-text>
-                  <v-card-text style="height : 10px;" @click="$router.push(`/customer/product/${item.title}`)">
-                    <v-layout row wrap align-center @click="$router.push(`/customer/product/${item.title}`)">
+                  <v-flex xs12 md12>
+                    <v-lazy-image style="width: 100%;object-fit: scale-down;" :src="item.product_img" @click="$router.push(`/customer/product/${item.product_name}`)"></v-lazy-image>
+                  </v-flex>
+                  <v-card-text style="font-weight: bold;height: 10px;" @click="$router.push(`/customer/product/${item.product_name}`)">{{item.product_name}}</v-card-text>
+                  <v-card-text style="height : 10px;" @click="$router.push(`/customer/product/${item.product_name}`)">
+                    <v-layout row wrap align-center @click="$router.push(`/customer/product/${item.product_name}`)">
                       <v-rating
                         color="yellow darken-3"
                         background-color="grey darken-1"
-                        v-model="item.rating"
+                        v-model="item.stock"
                         readonly
                         size="19px"
                         half-increments
                       ></v-rating>
-                      ({{item.rating}})
+                      ({{item.stock}})
                     </v-layout>
-                  </v-card-text @click="$router.push(`/customer/product/${item.title}`)">
+                  </v-card-text @click="$router.push(`/customer/product/${item.product_name}`)">
                   <v-card-text style="height: 8px;">¥{{item.price}}</v-card-text>
-                  <v-card-text @click="$router.push(`/customer/product/${item.title}`)">
-                    <v-chip
+                  <v-card-text @click="$router.push(`/customer/product/${item.product_name}`)">
+                    <!-- <v-chip
                       class="ma-2"
                       color="primary"
                       label
@@ -75,7 +78,7 @@
                     >
                       <v-icon left>mdi-label</v-icon>
                       {{item}}
-                    </v-chip>
+                    </v-chip> -->
                   </v-card-text>
                 </v-card>
               </v-flex>
@@ -88,62 +91,24 @@
 </template>
 
 <script>
+import {mapActions,mapGetters,mapMutations} from 'vuex'
 export default {
   data() {
     return {
-      products: [
-        {
-          title: "陶器01",
-          src: "https://picsum.photos/id/11/500/300",
-          rating: 4.5,
-          price: 3000,
-          tags: ["陶器", "食卓"],
-          creater: "ゆう工房",
-          num: 32,
-          warning: 10
-        },
-        {
-          title: "やばいこけし",
-          src: "https://picsum.photos/id/11/500/300",
-          rating: 2.5,
-          price: 3000,
-          tags: ["陶器", "食卓"],
-          creater: "サバンナ工房",
-          num: 12,
-          warning: 10
-        },
-        {
-          title: "話題の組紐",
-          src: "https://picsum.photos/id/11/500/300",
-          rating: 4.9,
-          price: 3000,
-          tags: ["陶器", "食卓"],
-          creater: "北九州組み紐工房",
-          num: 10,
-          warning: 10
-        },
-        {
-          title: "組紐",
-          src: "https://picsum.photos/id/11/500/300",
-          rating: 4.0,
-          price: 3000,
-          tags: ["陶器", "食卓"],
-          creater: "ここに出品工房情報",
-          num: 67,
-          warning: 10
-        },
-        {
-          title: "組紐",
-          src: "https://picsum.photos/id/11/500/300",
-          rating: 3.5,
-          price: 3000,
-          tags: ["陶器", "食卓"],
-          creater: "ここに出品工房情報",
-          num: 32,
-          warning: 10
-        }
-      ]
+      loading: true,
+      shop_id: 1
     };
+  },
+  async mounted() {
+    await this.getProduct({ wsid: this.shop_id });
+    this.loading = false
+  },
+  methods:{
+    ...mapActions('workshop_manage',['getProduct']),
+    ...mapMutations('workshop_manage',['setStock'])
+  },
+  computed:{
+    ...mapGetters('workshop_manage',['products'])
   }
 };
 </script>
@@ -185,5 +150,13 @@ export default {
   padding: 20px;
   border-bottom: 1.2px solid #e6e6e6;
   margin-bottom: 10px;
+}
+
+.v-lazy-image {
+  opacity: 0;
+  transition: opacity .4s;
+}
+.v-lazy-image-loaded {
+  opacity: 1;
 }
 </style>

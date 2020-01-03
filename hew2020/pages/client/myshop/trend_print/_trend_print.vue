@@ -111,6 +111,7 @@ a{
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
+  width: 950px;
 }
 
 .links {
