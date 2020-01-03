@@ -3,7 +3,8 @@ import moment from '~/plugins/moment';
 export const state = () => ({
     workshop_data: {},
     orderlist: [],
-    details: []
+    details: [],
+    products: []
 })
 
 export const getters = {
@@ -11,6 +12,7 @@ export const getters = {
     loading: state => state.loading,
     orderlist: state => state.orderlist,
     details: state => state.details,
+    products: state => state.products
 }
 
 export const mutations = {
@@ -22,6 +24,12 @@ export const mutations = {
     },
     setOrderdetail(state, val) {
         state.details = val
+    },
+    setProduct(state, val) {
+        state.products = val
+    },
+    setStock(state,val){
+        state.products.stock = val;
     }
 }
 
@@ -58,6 +66,18 @@ export const actions = {
             }
             commit('setOrderdetail', ws_inf)
             console.log(ws_inf)
+        } catch (error) {
+            if (error.response.status === 403) {
+                throw new Error("You don't have workshop")
+            }
+        }
+    },
+    async getProduct({ commit }, { wsid }) {
+        console.log('受け取ったデータ:' + wsid)
+        try {
+            const products = await this.$axios.$get(`http://133.18.194.128:5000/workshopManage/getProducts?shop_id=${wsid}`);
+            commit('setProduct', products)
+            console.log(products)
         } catch (error) {
             if (error.response.status === 403) {
                 throw new Error("You don't have workshop")
