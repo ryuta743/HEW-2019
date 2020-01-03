@@ -1,82 +1,95 @@
 <template>
   <div class="container">
     <div id="receipt">
+      <div id="send" style="margin-bottom:10px;">
+        <div id="customer_name" class="mincho">加藤正都</div>
+        <div style="width: 100px;font-weight: bold;" class="mincho">様</div>
+      </div>
       <div style="width: 650px;">
-        <div id="hiduke" class="mincho" style="margin:  0 0 0 auto;">日付　　2019年12月27日</div>
+        <div id="hiduke" class="mincho" style="margin:  0 0 0 auto;">日付　2019年12月27日</div>
+        <div id="hiduke" class="mincho" style="margin:  0 0 0 auto;">天職工房</div>
+        <div id="hiduke" class="mincho" style="margin:  0 0 0 auto;">TEL:0000-00-0000</div>
       </div>
       <div style="display: flex;">
         <h2 id="graphtitle" class="mincho">納品書</h2>
       </div>
       <div id="date" class="mincho"></div>
-      <div id="send" style="margin-bottom:10px;">
-        <div id="customer_name" class="mincho">加藤正都</div>
-        <div style="width: 100px;font-weight: bold;" class="mincho">様</div>
-      </div>
       <div class="mincho">
         下記の通り納品いたしました
         <table border="1" style="border-collapse: collapse">
             <tr>
-                <th class="mincho" style="width: 300px;">品名</th>
+                <th class="mincho" style="width: 50px;font-size: 11px;">商品番号</th>
+                <th class="mincho" style="width: 250px;">品名</th>
                 <th class="mincho" style="width: 75px;">数量</th>
                 <th class="mincho" style="width: 75px;">単価</th>
                 <th class="mincho" style="width: 190px;">金額</th>
             </tr>
             <tr>
-                <td class="mincho" style="width: 300px;">{{items[0] ? items[0].product_name:''}}</td>
+                <td class="mincho" style="width: 50px;text-align: center;">{{items[0] ? items[0].product_number:''}}</td>
+                <td class="mincho" style="width: 250px;">{{items[0] ? items[0].product_name:''}}</td>
                 <td class="mincho" style="width: 75px;text-align: end;">{{items[0] ? items[0].count:''}}</td>
                 <td class="mincho" style="width: 75px;text-align: end;">{{exprice(items[0] ? items[0].price:'')}}円</td>
                 <td class="mincho" style="width: 190px;text-align: end;">{{exprice(items[0] ? items[0].price * items[0].count:'')}}円</td>
             </tr>
             <tr>
-                <td class="mincho" style="width: 300px;">{{items[1] ? items[1].product_name:''}}</td>
+                <td class="mincho" style="width: 50px;text-align: center;">{{items[1] ? items[1].product_number:''}}</td>
+                <td class="mincho" style="width: 250px;">{{items[1] ? items[1].product_name:''}}</td>
                 <td class="mincho" style="width: 75px;text-align: end;">{{items[1] ? items[1].count:''}}</td>
                 <td class="mincho" style="width: 75px;text-align: end;">{{exprice(items[1] ? items[1].price:'')}}円</td>
                 <td class="mincho" style="width: 190px;text-align: end;">{{exprice(items[1] ? items[1].price * items[1].count:'')}}円</td>
             </tr>
             <tr>
-                <td class="mincho" style="width: 300px;">{{items[2] ? items[2].product_name:''}}</td>
+                <td class="mincho" style="width: 50px;text-align: center;">{{items[2] ? items[2].product_number:''}}</td>
+                <td class="mincho" style="width: 250px;">{{items[2] ? items[2].product_name:''}}</td>
                 <td class="mincho" style="width: 75px;text-align: end;">{{items[2] ? items[2].count:''}}</td>
                 <td class="mincho" style="width: 75px;text-align: end;">{{exprice(items[2] ? items[2].price:'')}}円</td>
                 <td class="mincho" style="width: 190px;text-align: end;">{{exprice(items[2] ? items[2].price * items[2].count:'')}}円</td>
             </tr>
             <tr>
-                <td class="mincho" style="width: 300px;">{{items[3] ? items[3].product_name:''}}</td>
+                <td class="mincho" style="width: 50px;text-align: center;">{{items[3] ? items[3].product_number:''}}</td>
+                <td class="mincho" style="width: 250px;">{{items[3] ? items[3].product_name:''}}</td>
                 <td class="mincho" style="width: 75px;text-align: end;">{{items[3] ? items[3].count:''}}</td>
                 <td class="mincho" style="width: 75px;text-align: end;">{{exprice(items[3] ? items[3].price:'')}}円</td>
                 <td class="mincho" style="width: 190px;text-align: end;">{{exprice(items[3] ? items[3].price * items[3].count:'')}}円</td>
             </tr>
             <tr>
-                <td class="mincho" style="width: 300px;">{{items[4] ? items[4].product_name:''}}</td>
+                <td class="mincho" style="width: 50px;text-align: center;">{{items[4] ? items[4].product_number:''}}</td>
+                <td class="mincho" style="width: 250px;">{{items[4] ? items[4].product_name:''}}</td>
                 <td class="mincho" style="width: 75px;text-align: end;">{{items[4] ? items[4].count:''}}</td>
                 <td class="mincho" style="width: 75px;text-align: end;">{{exprice(items[4] ? items[4].price:'')}}円</td>
                 <td class="mincho" style="width: 190px;text-align: end;">{{exprice(items[4] ? items[4].price * items[4].count:'')}}円</td>
             </tr>
             <tr>
-                <td class="mincho" style="width: 300px;">{{items[5] ? items[5].product_name:''}}</td>
+                <td class="mincho" style="width: 50px;text-align: center;">{{items[5] ? items[5].product_number:''}}</td>
+                <td class="mincho" style="width: 250px;">{{items[5] ? items[5].product_name:''}}</td>
                 <td class="mincho" style="width: 75px;text-align: end;">{{items[5] ? items[5].count:''}}</td>
                 <td class="mincho" style="width: 75px;text-align: end;">{{exprice(items[5] ? items[5].price:'')}}円</td>
                 <td class="mincho" style="width: 190px;text-align: end;">{{exprice(items[5] ? items[5].price * items[5].count:'')}}円</td>
             </tr>
             <tr>
-                <td class="mincho" style="width: 300px;">{{items[6] ? items[6].product_name:''}}</td>
+                <td class="mincho" style="width: 50px;text-align: center;">{{items[6] ? items[6].product_number:''}}</td>
+                <td class="mincho" style="width: 250px;">{{items[6] ? items[6].product_name:''}}</td>
                 <td class="mincho" style="width: 75px;text-align: end;">{{items[6] ? items[6].count:''}}</td>
                 <td class="mincho" style="width: 75px;text-align: end;">{{exprice(items[6] ? items[6].price:'')}}円</td>
                 <td class="mincho" style="width: 190px;text-align: end;">{{exprice(items[6] ? items[6].price * items[6].count:'')}}円</td>
             </tr>
             <tr>
-                <td class="mincho" style="width: 300px;">{{items[7] ? items[7].product_name:''}}</td>
+                <td class="mincho" style="width: 50px;text-align: center;">{{items[7] ? items[7].product_number:''}}</td>
+                <td class="mincho" style="width: 250px;">{{items[7] ? items[7].product_name:''}}</td>
                 <td class="mincho" style="width: 75px;text-align: end;">{{items[7] ? items[7].count:''}}</td>
                 <td class="mincho" style="width: 75px;text-align: end;">{{exprice(items[7] ? items[7].price:'')}}円</td>
                 <td class="mincho" style="width: 190px;text-align: end;">{{exprice(items[7] ? items[7].price * items[7].count:'')}}円</td>
             </tr>
             <tr>
-                <td class="mincho" style="width: 300px;">{{items[8] ? items[8].product_name:''}}</td>
+                <td class="mincho" style="width: 50px;text-align: center;">{{items[8] ? items[8].product_number:''}}</td>
+                <td class="mincho" style="width: 250px;">{{items[8] ? items[8].product_name:''}}</td>
                 <td class="mincho" style="width: 75px;text-align: end;">{{items[8] ? items[8].count:''}}</td>
                 <td class="mincho" style="width: 75px;text-align: end;">{{exprice(items[8] ? items[8].price:'')}}円</td>
                 <td class="mincho" style="width: 190px;text-align: end;">{{exprice(items[8] ? items[8].price * items[8].count:'')}}円</td>
             </tr>
             <tr>
-                <td class="mincho" style="width: 300px;">{{items[9] ? items[9].product_name:''}}</td>
+                <td class="mincho" style="width: 50px;text-align: center;">{{items[9] ? items[9].product_number:''}}</td>
+                <td class="mincho" style="width: 250px;">{{items[9] ? items[9].product_name:''}}</td>
                 <td class="mincho" style="width: 75px;text-align: end;">{{items[9] ? items[9].count:''}}</td>
                 <td class="mincho" style="width: 75px;text-align: end;">{{exprice(items[9] ? items[9].price:'')}}円</td>
                 <td class="mincho" style="width: 190px;text-align: end;">{{exprice(items[9] ? items[9].price * items[9].count:'')}}円</td>
@@ -105,10 +118,14 @@
               </tr>
           </table>
         </div>
-        <div style="display: flex;align-items: flex-end;">
+        <div id="send_day">
+          <div class="mincho">発送日　　　　年　　月　　日</div>
+          <div class="mincho">着予定日　　　年　　月　　日</div>
+        </div>
+        <!-- <div style="display: flex;align-items: flex-end;">
             <div style="width: 70px;height: 70px;border: 1.2px solid #111;margin-top: 10px;"></div>
             <div class="mincho" style="margin-left: 10px;">天職工房</div>
-        </div>
+        </div> -->
     　</div>
     </div>
     <form style="width: 100%;">
@@ -129,32 +146,38 @@ export default {
                 user_name: '桒畑 天',
                 count: 4,
                 price: 1200,
-                product_name: '砂岩模様のこだわりプレート'
+                product_name: '砂岩模様のこだわりプレート',
+                product_number:1
             },{
                 user_name: '桒畑 天',
                 count: 4,
                 price: 1200,
-                product_name: '砂岩模様のこだわりプレート'
+                product_name: '砂岩模様のこだわりプレート',
+                product_number:2
             },{
                 user_name: '桒畑 天',
                 count: 4,
                 price: 1200,
-                product_name: '砂岩模様のこだわりプレート'
+                product_name: '砂岩模様のこだわりプレート',
+                product_number:3
             },{
                 user_name: '桒畑 天',
                 count: 4,
                 price: 1200,
-                product_name: '砂岩模様のこだわりプレート'
+                product_name: '砂岩模様のこだわりプレート',
+                product_number:4
             },{
                 user_name: '桒畑 天',
                 count: 4,
                 price: 1200,
-                product_name: '砂岩模様のこだわりプレート'
+                product_name: '砂岩模様のこだわりプレート',
+                product_number:5
             },{
                 user_name: '桒畑 天',
                 count: 4,
                 price: 1200,
-                product_name: '砂岩模様のこだわりプレート'
+                product_name: '砂岩模様のこだわりプレート',
+                product_number:6
             }
         ]
     };
@@ -165,7 +188,7 @@ export default {
     sumAll(){
         var sum = 0;
         this.items.forEach(element => {
-            sum += element.price;
+            sum += element.price * element.count;
         })
         return sum;
     },
@@ -199,10 +222,8 @@ table td{
 }
 
 #hiduke{
-  width: 200px;
+  width: 180px;
   box-sizing: border-box;
-  border: 1.2px solid #222222;
-  border-width: 0 0 1.2px 0;
 }
 
 #graphtitle {
@@ -242,14 +263,24 @@ table td{
   margin-top: 20px;
   display: flex;
   align-items: center;
-  width: 550px;
-  border: 1.5px solid #222222;
-  border-width: 0 0 1.5px 0;
+  width: 250px;
+  border: 1.2px solid #222222;
+  border-width: 0 0 1.2px 0;
+}
+
+#send_day{
+  text-align: center;
+  width: 500px;
+  margin: 0 auto;
+}
+
+#send_day div{
+  padding-top: 40px;
 }
 
 #customer_name {
   font-weight: bold;
-  width: 550px;
+  width: 250px;
   font-size: 30px;
   text-align: center;
 }

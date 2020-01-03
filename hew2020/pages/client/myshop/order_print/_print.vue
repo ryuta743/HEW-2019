@@ -22,9 +22,9 @@
       <div id="my_shop">
         <div style="width: 100px;height: 100px;border: 1px solid #222222;"></div>
         <div id="info">
-          <div class="mincho">天職工房</div>
           <div class="mincho">〒8891902</div>
           <div class="mincho">宮崎県北諸県三股町五本松13-2</div>
+          <div class="mincho">天職工房</div>
         </div>
         <div style="display: flex;justify-content: center;align-items: center;width: 50px;height: 50px;border: 1px solid #222222;" class="mincho">領</div>
       </div>

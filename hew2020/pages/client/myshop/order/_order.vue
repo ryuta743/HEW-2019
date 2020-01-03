@@ -86,7 +86,8 @@
             <v-layout row wrap justify-center v-if="orderlist[0] ? checkStatus:''">
               <v-btn color="success" @click="dialog = true">発送完了</v-btn>
               <v-btn color="white" @click="$router.push(`/client/myshop/order_print/${$route.params.order}`)">領収書発行</v-btn>
-              <v-btn color="white" @click="$router.push(`/client/myshop/delivery/${$route.params.order}`)">納品書</v-btn>
+              <v-btn color="white" @click="$router.push(`/client/myshop/delivery/${$route.params.order}`)">納品書発行</v-btn>
+              <v-btn color="white" @click="$router.push(`/client/myshop/invoice/${$route.params.order}`)">インボイス発行</v-btn>
             </v-layout>
           </v-card-actions>
         </v-card>
