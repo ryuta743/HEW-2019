@@ -60,8 +60,6 @@
     <!-- アカウント作成ダイアログ -->
     <v-dialog
       v-model="createADialog"
-      scrollable
-      fullscreen
       persistent
       max-width="900px"
       transition="dialog-transition"
@@ -87,17 +85,19 @@
           <v-stepper-content step="1">
             <v-layout row wrap justify-center>
               <v-flex md10>
-                <v-subheader>お使いのメールアドレスをご入力ください</v-subheader>
-                <v-text-field placeholder="例：tenshoku@hal.co.jp" label id="id" outlined></v-text-field>
+
+                <v-subheader>メールアドレス</v-subheader>
+                <v-text-field label id="id" outlined v-model="user_mail"></v-text-field>
               </v-flex>
               <v-flex md10>
-                <v-subheader>確認のため再度ご入力ください</v-subheader>
-                <v-text-field placeholder="例：tenshoku@hal.co.jp" label id="id" outlined></v-text-field>
+                <v-subheader>パスワード</v-subheader>
+                <v-text-field label type="password" id="id" outlined v-model="user_pass"></v-text-field>
               </v-flex>
+              <h1 v-if="e1errorflg == 1" style="color: red;">未入力の場所あるよ</h1>
             </v-layout>
 
             <v-layout row wrap justify-end>
-              <v-btn color="primary" @click="e1 = 2">確認</v-btn>
+              <v-btn color="primary" @click="e1check">確認</v-btn>
 
               <v-btn text @click="createADialog = false">キャンセル</v-btn>
             </v-layout>
@@ -107,7 +107,7 @@
             <v-layout row wrap justify-center scrollable>
               <v-flex md10 xs8>
                 <v-subheader>お名前（当サイトでご使用になられるお名前）</v-subheader>
-                <v-text-field label placeholder="天職太朗" outlined></v-text-field>
+                <v-text-field label placeholder="天職太朗" outlined v-model="user_name"></v-text-field>
               </v-flex>
 
               <v-flex md11 xs9>
@@ -116,7 +116,7 @@
 
               <v-flex md10 xs8>
                 <v-subheader>国籍</v-subheader>
-                <v-select outlined :items="countorys" label="在住している国を選択してください"></v-select>
+                <v-select outlined :items="countorys" label="在住している国を選択してください" v-model="countory"></v-select>
               </v-flex>
               <v-flex md11 xs9>
                 <v-divider style="margin-top: 10px;"></v-divider>
@@ -125,9 +125,11 @@
               <v-flex md10 xs8>
                 <v-subheader>性別</v-subheader>
                 <v-layout row wrap style="padding-bottom: 30px;">
-                  <v-radio label="男性" value="value"></v-radio>
-                  <v-radio label="女性" value="value"></v-radio>
-                  <v-radio label="その他" value="value"></v-radio>
+                  <v-radio-group v-model="gender">
+                    <v-radio label="男性" value="0"></v-radio>
+                    <v-radio label="女性" value="1"></v-radio>
+                    <v-radio label="その他" value="2"></v-radio>
+                  </v-radio-group>
                 </v-layout>
               </v-flex>
 
@@ -138,9 +140,9 @@
               <v-flex md10 xs8>
                 <v-subheader>日本伝統工芸品関係者（伝統工芸職人）の方は下のボックスにチェックを入れてください</v-subheader>
                 <v-layout row wrap align-center>
-                  <v-checkbox label="日本伝統工芸品関係者です" value="value"></v-checkbox>
+                  <v-checkbox label="日本伝統工芸品関係者です" value="1"  v-model="craft"></v-checkbox>
                   <v-layout row wrap justify-end>
-                    <v-btn color="primary" @click="e1 = 3">確認</v-btn>
+                    <v-btn color="primary" @click="e1check2">確認</v-btn>
                   </v-layout>
                 </v-layout>
               </v-flex>
@@ -153,28 +155,32 @@
               <tbody>
                 <tr>
                   <td>メールアドレス</td>
-                  <td>tenshoku@hal.co.jp</td>
+                  <td>{{user_mail}}</td>
+                </tr>
+                <tr>
+                  <td>パスワード</td>
+                  <td>{{user_pass}}</td>
                 </tr>
                 <tr>
                   <td>お名前</td>
-                  <td>天職太朗</td>
+                  <td>{{user_name}}</td>
                 </tr>
                 <tr>
                   <td>性別</td>
-                  <td>男性</td>
+                  <td>{{genders[gender]}}</td>
                 </tr>
                 <tr>
                   <td>国籍</td>
-                  <td>日本(Japan)</td>
+                  <td>{{countory}}</td>
                 </tr>
                 <tr>
                   <td>ご質問</td>
-                  <td>私は日本伝統工芸品関係者です</td>
+                  <td>{{craft}}</td>
                 </tr>
               </tbody>
             </v-simple-table>
             <v-layout row wrap justify-end style="margin-right: 10px;">
-              <v-btn color="primary" @click="e1 = 4">OK</v-btn>
+              <v-btn color="primary" @click="inuserdatareq">OK</v-btn>
             </v-layout>
           </v-stepper-content>
 
@@ -279,6 +285,8 @@
 </template>
 
 <script>
+import {mapActions,mapGetters} from 'vuex';
+
 export default {
   data() {
     return {
@@ -293,7 +301,17 @@ export default {
       loginDialog: false,
       successDialog: false,
 
-      countorys: ["日本(Japan)", "アメリカ合衆国(U.S.A)"],
+
+      e1errorflg: 0,
+
+      user_mail: '',
+      user_pass: '',
+      user_name: '',
+      gender: 0,
+      genders: ["男", "女" ,"その他"],
+      countorys: ["日本(Japan)", "アメリカ合衆国(U.S.A)", "中国 (china)" ,"ロシア (russia)" ,"タイ(thailand)" ,"フランス(france)","その他(sonota)"],
+      countory: '',
+      craft:0,
       items: [
         {
           icon: "mdi-account-box",
@@ -313,17 +331,57 @@ export default {
     };
   },
   methods: {
+    e1check() {
+      if (this.user_mail == '' || this.user_pass == '' ){
+        this.e1errorflg = 1
+      }else{
+        this.e1 = 2
+      }
+    },
+
+    e1check2() {
+      if(this.user_name == '' || this.countorys == '' || this.gender == ''){
+        this.e1errorflg = 1
+      }else{
+        this.e1 = 3
+      }
+    },
+
+    inuserdatareq() {
+      const payload = {
+        user_name: this.user_name,
+        pass : this.user_pass,
+        mail : this.user_mail,
+        gender : this.gender,
+        countory : this.countory,
+        user_type : this.craft,
+      }
+
+      try{
+        this.inuserdata({payload});
+      }catch(e){
+        console.log('エラー発生'),
+        console.log(e)
+      }
+    },
+    
+
     login() {
       this.isLogin = true;
       this.successDialog = true;
       this.loginDialog = false;
     },
+
     logout() {
       this.isLogin = false;
       this.successDialog = true;
       this.logoutDialog = false;
       this.$router.push("/");
-    }
+    },
+    ...mapActions('userdata',['inuserdata']),
+  },
+  computed: {
+    ...mapGetters('userdata',['userdata']),
   }
 };
 </script>
