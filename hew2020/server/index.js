@@ -1,6 +1,8 @@
 const express = require('express')
 const consola = require('consola')
+const http = require('http')
 const { Nuxt, Builder } = require('nuxt')
+const { createTerminus } = require('@godaddy/terminus')
 const app = express()
 
 // Import and Set Nuxt.js options
@@ -24,11 +26,24 @@ async function start () {
   // Give nuxt middleware to express
   app.use(nuxt.render)
 
+  const server = http.createServer(app)
+
+  async function beforeShutdown () {
+    return new Promise(resolve => {
+      setTimeout(resolve, 5000)
+    })
+  }
+  
+  createTerminus(server, {
+    beforeShutdown
+  })
+
   // Listen the server
-  app.listen(port, host)
+  server.listen(port, host)
   consola.ready({
     message: `Server listening on http://${host}:${port}`,
     badge: true
   })
 }
+
 start()

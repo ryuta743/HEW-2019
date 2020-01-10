@@ -4,7 +4,8 @@ export const state = () => ({
     workshop_data: {},
     orderlist: [],
     details: [],
-    products: []
+    products: [],
+    sales: []
 })
 
 export const getters = {
@@ -12,7 +13,8 @@ export const getters = {
     loading: state => state.loading,
     orderlist: state => state.orderlist,
     details: state => state.details,
-    products: state => state.products
+    products: state => state.products,
+    sales: state => state.sales
 }
 
 export const mutations = {
@@ -30,6 +32,9 @@ export const mutations = {
     },
     setStock(state,val){
         state.products.stock = val;
+    },
+    setSales(state,val){
+        state.sales = val;
     }
 }
 
@@ -78,6 +83,18 @@ export const actions = {
             const products = await this.$axios.$get(`http://133.18.194.128:5000/workshopManage/getProducts?shop_id=${wsid}`);
             commit('setProduct', products)
             console.log(products)
+        } catch (error) {
+            if (error.response.status === 403) {
+                throw new Error("You don't have workshop")
+            }
+        }
+    },
+    async getSale({ commit }, { wsid }) {
+        console.log('受け取ったデータ:' + wsid)
+        try {
+            const sales = await this.$axios.$get(`http://133.18.194.128:5000/workshopManage/getSale?shop_id=${wsid}`);
+            commit('setSales', sales)
+            console.log(sales)
         } catch (error) {
             if (error.response.status === 403) {
                 throw new Error("You don't have workshop")
