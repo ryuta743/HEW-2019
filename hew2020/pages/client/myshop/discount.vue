@@ -32,6 +32,28 @@
       </ul>
     </v-container>
     <v-container grid-list-xs style="max-height: 85vh;width: 85%;overflow-y: scroll;">
+
+      <v-dialog
+        v-model="dialog"
+        transition="dialog-transition"
+        max-width="900px"
+      >
+        <div style="background-color: #ffffff;padding: 20px;">
+            <h4 style="color: #4BAf50;"><v-icon color="black">mdi-cash-usd</v-icon>{{ saleitem[0]? saleitem[0].sale_name:'' }}</h4>
+            <p style="color: #444;margin-top: 10px;margin-left:10px;">割引率: {{saleitem[0] ? saleitem[0].rate + '%':''}}</p>
+        </div>
+        <div id="saleitems">
+            <div class="saleitem" v-for="(item, index) in saleitem" :key="index">
+              <v-lazy-image :src="item ? item.product_img:''"></v-lazy-image>
+              <div>
+                <h4 style="border-bottom: 1.2px solid #444;">{{item ? item.product_number + '.' +item.product_name:''}}</h4>
+                <h5>単価:{{item ? item.price + '円':''}}</h5>
+              </div>
+            </div>
+            <v-btn color="grey" @click="dialog =false">戻る</v-btn>
+        </div>
+      </v-dialog>
+
       <v-btn color="info" icon :loading="loading" v-if="loading" large></v-btn>
       <v-content v-if="!loading">
         <div id="sub_title">
@@ -54,7 +76,7 @@
             </thead>
             <tbody>
                 <tr v-for="(item, index) in sales" :key="index">
-                    <td style="color: #111;"><v-btn color="info" outlined>詳細</v-btn></td>
+                    <td style="color: #111;"><v-btn color="info" outlined @click="getSaleitemReq(item.sale_id)">詳細</v-btn></td>
                     <td style="color: #111;">{{item.sale_name}}</td>
                     <td style="color: #111;">{{item.rate + '%'}}</td>
                 </tr>
@@ -73,6 +95,7 @@ export default {
     return {
       loading: true,
       shop_id: 1,
+      dialog: false,
     };
   },
   async mounted() {
@@ -80,15 +103,23 @@ export default {
     this.loading = false
   },
   methods: {
-    ...mapActions("workshop_manage", ["getShopdata", "getOrderlist","getSale"])
+    exprice(val){
+      return val.toLocaleString();
+    },
+    async getSaleitemReq(saleid){
+      var result = await this.getSaleitem({saleid:saleid})
+      console.log(this.saleitem)
+      if(result === true) this.dialog = true
+    },
+    ...mapActions("workshop_manage", ["getShopdata", "getOrderlist","getSale","getSaleitem"])
   },
   computed: {
-    ...mapGetters("workshop_manage", ["sales"])
+    ...mapGetters("workshop_manage", ["sales","saleitem"])
   }
 };
 </script>
 
-<style>
+<style scoped>
 #workshop_body {
   display: flex;
   width: 100%;
@@ -133,5 +164,35 @@ export default {
 
 #controller{
   padding: 15px 0;
+}
+
+#saleitems{
+  flex-wrap: wrap;
+  display: flex;
+  justify-content: center;
+  width: 900px;
+  height: 550px;
+  background-color: #ffffff;
+}
+
+.saleitem{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 450px;
+  height: 500px;
+}
+
+.v-lazy-image {
+  box-shadow: 0 0 8px gray;
+  background-color: #555555;
+  width: 400px;
+  height: 400px;
+  object-fit: scale-down;
+  opacity: 0;
+  transition: opacity .4s;
+}
+.v-lazy-image-loaded {
+  opacity: 1;
 }
 </style>

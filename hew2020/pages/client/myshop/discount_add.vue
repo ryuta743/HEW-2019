@@ -44,6 +44,7 @@
             <v-btn color="info" text @click="$router.push('/client/myshop/discount')"><v-icon>mdi-arrow-left-circle</v-icon>セット割引一覧へ戻る</v-btn>
         </div>
         <div>
+              <div v-show="alert"><v-btn color="success" text>追加に成功しました!</v-btn></div>
               <form @submit.prevent @submit="addSaleReq" style="display: flex;width: 620px;">
                 <v-text-field
                   label="セット名"
@@ -57,7 +58,7 @@
                   outlined
                   style="width: 100px;margin-left:10px;"
                 ></v-text-field>
-                <v-btn type="submit" color="info" style="width: 200;height: 55px;margin-left: 10px;" @click="addSaleReq">セット追加</v-btn>
+                <v-btn type="submit" color="info" style="width: 200;height: 55px;margin-left: 10px;">セット追加</v-btn>
               </form>
         </div>
         <div id="addItems">
@@ -65,7 +66,7 @@
                 <v-lazy-image :src="products[item].product_img"></v-lazy-image>
                 <div id="detective">
                     <h5 class="product_name">{{products[item].product_number + '.' + products[item].product_name}}</h5>
-                    <div class="product_price">単価:{{exprice(products[item].price) + '円yen'}}</div>
+                    <div class="product_price">単価:{{exprice(products[item].price) + '円'}}</div>
                     <div></div>
                 </div>
             </div>
@@ -103,6 +104,7 @@ export default {
       shop_id: 1,
       setname: '',
       rate: 0,
+      alert: false
     };
   },
   async mounted() {
@@ -137,6 +139,10 @@ export default {
         rate: this.rate
       }
       const result = await this.addSale({payload});
+      if(result) this.alert = true
+      this.addItems = [];
+      this.setname = "";
+      this.rate = 0;
     },
     ...mapActions("workshop_manage", ["getShopdata", "getProduct","getSale","addSale"])
   },

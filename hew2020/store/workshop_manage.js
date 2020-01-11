@@ -5,7 +5,8 @@ export const state = () => ({
     orderlist: [],
     details: [],
     products: [],
-    sales: []
+    sales: [],
+    saleitem: []
 })
 
 export const getters = {
@@ -14,7 +15,8 @@ export const getters = {
     orderlist: state => state.orderlist,
     details: state => state.details,
     products: state => state.products,
-    sales: state => state.sales
+    sales: state => state.sales,
+    saleitem: state => state.saleitem
 }
 
 export const mutations = {
@@ -35,6 +37,9 @@ export const mutations = {
     },
     setSales(state, val) {
         state.sales = val;
+    },
+    setSaleitem(state,val){
+        state.saleitem = val;
     }
 }
 
@@ -100,6 +105,16 @@ export const actions = {
                 throw new Error("You don't have workshop")
             }
         }
+    },
+    async getSaleitem({commit},{saleid}){
+        try{
+            console.log(saleid)
+            var saleitem = await this.$axios.$get(`http://133.18.194.128:5000/workshopManage/getSaleitem?sale_id=${saleid}`)
+        }catch(error){
+            throw new Error("Error!")
+        }
+        commit('setSaleitem',saleitem)
+        return true
     },
     async addSale({ commit }, { payload }) {
         var strong = 1000;
