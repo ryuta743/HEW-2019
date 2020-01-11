@@ -43,6 +43,23 @@
         <div id="controller">
             <v-btn color="info" text @click="$router.push('/client/myshop/discount')"><v-icon>mdi-arrow-left-circle</v-icon>セット割引一覧へ戻る</v-btn>
         </div>
+        <div>
+              <form @submit.prevent @submit="addSaleReq" style="display: flex;width: 620px;">
+                <v-text-field
+                  label="セット名"
+                  v-model="setname"
+                  outlined
+                  style="width: 300px;"
+                ></v-text-field>
+                <v-text-field
+                  label="割引率(%)"
+                  v-model="rate"
+                  outlined
+                  style="width: 100px;margin-left:10px;"
+                ></v-text-field>
+                <v-btn type="submit" color="info" style="width: 200;height: 55px;margin-left: 10px;" @click="addSaleReq">セット追加</v-btn>
+              </form>
+        </div>
         <div id="addItems">
             <div v-for="(item, index) in addItems" :key="index" class="addItem">
                 <v-lazy-image :src="products[item].product_img"></v-lazy-image>
@@ -84,6 +101,8 @@ export default {
       addItems: [],
       loading: true,
       shop_id: 1,
+      setname: '',
+      rate: 0,
     };
   },
   async mounted() {
@@ -109,7 +128,17 @@ export default {
       if(this.addItems.indexOf(index) != -1) return this.addItems.indexOf(index)
       return false
     },
-    ...mapActions("workshop_manage", ["getShopdata", "getProduct","getSale"])
+    async addSaleReq(){
+      const payload = {
+        items: this.addItems,
+        products: this.products,
+        wsid: this.shop_id,
+        salename: this.setname,
+        rate: this.rate
+      }
+      const result = await this.addSale({payload});
+    },
+    ...mapActions("workshop_manage", ["getShopdata", "getProduct","getSale","addSale"])
   },
   computed: {
     ...mapGetters("workshop_manage", ["sales","products"])

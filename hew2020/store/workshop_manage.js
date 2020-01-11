@@ -30,10 +30,10 @@ export const mutations = {
     setProduct(state, val) {
         state.products = val
     },
-    setStock(state,val){
+    setStock(state, val) {
         state.products.stock = val;
     },
-    setSales(state,val){
+    setSales(state, val) {
         state.sales = val;
     }
 }
@@ -99,6 +99,23 @@ export const actions = {
             if (error.response.status === 403) {
                 throw new Error("You don't have workshop")
             }
+        }
+    },
+    async addSale({ commit }, { payload }) {
+        var strong = 1000;
+        const saleid = new Date().getTime().toString(16) + Math.floor(strong * Math.random()).toString(16);
+        const wsid = payload.wsid;
+        const rate = payload.rate;
+        const salename = payload.salename;
+        const items = payload.items;
+        const products = payload.products;
+        try {
+            for (var i = 0; i < items.length; i++) {
+                this.$axios.$get(`http://133.18.194.128:5000/workshopManage/addSale?sale_id=${saleid}&product_id=${products[items[i]].product_id}&shop_id=${wsid}&sale_name=${salename}&rate=${rate}`);
+            }
+            return 'success'
+        } catch (error) {
+            throw new Error("Error!")
         }
     }
 }
