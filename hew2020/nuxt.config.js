@@ -1,7 +1,27 @@
 const colors = require('vuetify/es5/util/colors').default
 
+const bodyParser = require('body-parser')
+const session = require('express-session')
+
 module.exports = {
   mode: 'universal',
+
+  serverMiddleware: [
+    // body-parser middleware
+    bodyParser.json(),
+    // session middleware
+    session({
+      secret: 'tenshoku',
+      resave: false,
+      saveUninitialized: false,
+      cookie: { maxAge: 60000 }
+    }),
+    // Api middleware
+    // We add /api/login & /api/logout routes
+    '~/api/signin.js'
+  ],
+
+
   /*
   ** Headers of the page
   */
@@ -32,9 +52,7 @@ module.exports = {
   ** Plugins to load before mounting the App
   */
   plugins: [
-    {src:'~/plugins/bar_chart.js',ssr:false},
-    {src:'~/plugins/chart.js',ssr:false},
-    {src:'~/plugins/v-lazy-image'}
+    '~/plugins/chart.js'
   ],
   /*
   ** Nuxt.js dev-modules
