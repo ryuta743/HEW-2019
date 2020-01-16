@@ -13,9 +13,9 @@
           <h2>ログイン</h2>
         </v-card-text>
         <form @submit.prevent>
-          <v-text-field name="name" outlined label="メールアドレス"></v-text-field>
-          <v-text-field name="password" outlined label="パスワード" type="password"></v-text-field>
-          <v-btn color="success" @click="login" type="submit">ログイン</v-btn>
+          <v-text-field name="name" outlined label="メールアドレス" v-model="login_mail"></v-text-field>
+          <v-text-field name="password" outlined label="パスワード" type="password" v-model="login_password"></v-text-field>
+          <v-btn color="success" type="submit" @click="logindataReq">ログイン</v-btn>
           <v-btn color="grey" dark @click="loginDialog = false">キャンセル</v-btn>
         </form>
       </v-card>
@@ -286,6 +286,7 @@
 
 <script>
 import {mapActions,mapGetters} from 'vuex';
+import { toUnicode } from 'punycode';
 
 export default {
   data() {
@@ -301,6 +302,8 @@ export default {
       loginDialog: false,
       successDialog: false,
 
+      login_mail: '',
+      login_password: '',
 
       e1errorflg: 0,
 
@@ -349,7 +352,7 @@ export default {
 
     inuserdatareq() {
       const payload = {
-        user_name: this.user_name,
+        name : this.user_name,
         pass : this.user_pass,
         mail : this.user_mail,
         gender : this.gender,
@@ -365,6 +368,28 @@ export default {
       }
     },
     
+    logindataReq() {
+      const payload = {
+        mail : this.login_mail,
+        password : this.login_password,
+      }
+
+      try{
+        this.login({payload});
+      }catch(e){
+        console.log('エラー発生'),
+        console.log(e)
+      }
+
+      if(this.loginuserdata){
+        this.isLogin = true;
+        this.successDialog = true;
+        this.loginDialog = false;
+      }else{
+        console.log('ログイン失敗！')
+      }
+
+    },
 
     login() {
       this.isLogin = true;
@@ -379,9 +404,11 @@ export default {
       this.$router.push("/");
     },
     ...mapActions('userdata',['inuserdata']),
+    ...mapActions('logindata',['login']),
   },
   computed: {
     ...mapGetters('userdata',['userdata']),
+    ...mapGetters('logindata',['loginuserdata']),
   }
 };
 </script>
