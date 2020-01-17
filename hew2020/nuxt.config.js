@@ -52,7 +52,9 @@ module.exports = {
   ** Plugins to load before mounting the App
   */
   plugins: [
-    '~/plugins/chart.js'
+    '~/plugins/chart.js',
+    '~/plugins/bar_chart.js',
+    '~/plugins/v-lazy-image.js'
   ],
   /*
   ** Nuxt.js dev-modules
