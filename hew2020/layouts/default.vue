@@ -52,7 +52,7 @@
         </v-card-text>
         <v-card-text style="text-align: center;padding-bottom: 50px;">ログアウトしてよろしいですか？</v-card-text>
         <v-card-actions>
-          <v-btn color="error" style="margin: 0 auto;" outlined @click="logout">OK</v-btn>
+          <v-btn color="error" style="margin: 0 auto;" outlined @click="loguout">OK</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -397,17 +397,27 @@ export default {
       this.loginDialog = false;
     },
 
-    logout() {
-      this.isLogin = false;
-      this.successDialog = true;
-      this.logoutDialog = false;
-      this.$router.push("/");
+    async loguout(){
+      try {
+        await this.logout();
+        this.isLogin = false;
+        this.successDialog = true;
+        this.logoutDialog = false;
+        console.log('ログアウト完了')
+      } catch (e) {
+        this.formError = e.message
+      }
     },
-    ...mapActions('userdata',['inuserdata']),
-    ...mapActions('logindata',['login']),
+
+    // logout() {
+    //   this.isLogin = false;
+    //   this.successDialog = true;
+    //   this.logoutDialog = false;
+    //   this.$router.push("/");
+    // },
+    ...mapActions('logindata',['login','logout']),
   },
   computed: {
-    ...mapGetters('userdata',['userdata']),
     ...mapGetters('logindata',['loginuserdata']),
   }
 };
