@@ -9,7 +9,6 @@ export const getters = {
 export const mutations = {
     setLoginuserdata(state,sessiondata){
         state.loginuserdata = sessiondata;
-        console.log(state.loginuserdata.user_id)
     }
 }
 
@@ -27,6 +26,12 @@ export const actions = {
         console.log(sessiondata);
         commit('setLoginuserdata',sessiondata)
     },
+
+    async logout ({ commit }) {
+        await this.$axios.$post('/api/logout')
+        commit('setLoginuserdata', null)
+        console.log('コミット完了')
+    }
 }
   
   

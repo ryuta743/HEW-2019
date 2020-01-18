@@ -21,7 +21,7 @@ router.use((req, res, next) => {
 })
 
 
-
+// セッション登録用
 router.post('/sessionin', function (req, res) {
     console.log('セッションスタート');
     const user_data = req.body.kekka;
@@ -33,4 +33,10 @@ router.post('/sessionin', function (req, res) {
     }
     return res.status(401).json({ message: 'Bad credentials' })
 })
+
+// ログアウト
+router.post('/logout', (req, res) => {
+    delete req.session.loginuserdata
+    res.json({ ok: true })
+  })
 
