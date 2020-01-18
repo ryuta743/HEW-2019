@@ -24,12 +24,12 @@ router.use((req, res, next) => {
 
 router.post('/sessionin', function (req, res) {
     console.log('セッションスタート');
-    const id = req.body.id;
-    console.log(id);
-    if(id){
-      req.session.loginuserdata = {user_id : id}
+    const user_data = req.body.kekka;
+    console.log(user_data);
+    if(user_data){
+      req.session.loginuserdata = {user_data : user_data}
       console.log(req.session.loginuserdata)
-      return res.json({user_id : id})
+      return res.json({user_data : user_data})
     }
     return res.status(401).json({ message: 'Bad credentials' })
 })

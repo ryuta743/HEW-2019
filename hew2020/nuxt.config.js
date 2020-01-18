@@ -18,7 +18,7 @@ module.exports = {
     }),
     // Api middleware
     // We add /api/login & /api/logout routes
-    '~/api/signin.js'
+    '~/api/index.js'
   ],
 
 
