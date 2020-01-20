@@ -415,10 +415,10 @@ export default {
     //   this.logoutDialog = false;
     //   this.$router.push("/");
     // },
-    ...mapActions('logindata',['login','logout']),
+    ...mapActions(['login','logout']),
   },
   computed: {
-    ...mapGetters('logindata',['loginuserdata']),
+    ...mapGetters(['loginuserdata']),
   }
 };
 </script>
