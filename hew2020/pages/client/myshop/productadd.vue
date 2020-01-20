@@ -13,6 +13,9 @@
         <li @click="$router.push('/client/myshop/products')">
           <v-icon>mdi-format-list-bulleted</v-icon> 商品一覧・在庫状況
         </li>
+        <li @click="$router.push('/client/myshop/discount')">
+          <v-icon>mdi-cash-usd</v-icon> セット割引
+        </li>
         <li @click="$router.push('/client/myshop/productadd')" class="check">
           <v-icon>mdi-plus</v-icon> 新規商品登録
         </li>
@@ -33,22 +36,26 @@
             <v-flex xs12 md5>
               <h3 style="padding-bottom: 10px;">登録商品イメージ</h3>
             </v-flex>
-            <client-only style="text-align: center;">
-              <croppa
-                v-model="myCroppa"
-                placeholder="画像を選択"
-                :placeholder-font-size=20
-                :width=1150
-                :height=500
-                canvas-color="#000"
-                :file-size-limit="700000"
-                :remove-button-size="30"
-              ></croppa>
-                <div>
-                  <v-btn color="info" @click="generateImage">トリミング</v-btn>
-                  <v-btn color="primary" @click="upload">アップロード!</v-btn>
-                </div>
-            </client-only>
+            <v-flex xs12 md12>
+              <v-layout row wrap>
+                <client-only>
+                  <croppa
+                    v-model="myCroppa"
+                    placeholder="画像を選択"
+                    :placeholder-font-size=20
+                    :width=400
+                    :height=400
+                    canvas-color="#777"
+                    :file-size-limit="700000"
+                    :remove-button-size="30"
+                  ></croppa>
+                    <div>
+                      <v-btn color="info" @click="generateImage">トリミング</v-btn>
+                      <v-btn color="primary" @click="upload">アップロード!</v-btn>
+                    </div>
+                </client-only>
+              </v-layout>
+            </v-flex>
             
             <v-divider></v-divider>
             <v-card-text　v-if="imgUrl">
@@ -61,17 +68,17 @@
             <h3 style="padding-bottom: 10px;">登録商品名</h3>
             <v-layout row wrap>
               <v-flex xs12 md5>
-                <v-text-field label="商品名(日本)" outlined></v-text-field>
+                <v-text-field label="商品名(全角日本語)" outlined v-model="formData.product_name"></v-text-field>
               </v-flex>
               <v-flex xs12 md5>
-                <v-text-field label="商品名(英語)" outlined></v-text-field>
+                <v-text-field label="商品名(カナ)" outlined v-model="formData.product_name_en"></v-text-field>
               </v-flex>
             </v-layout>
             <v-divider style="padding-bottom: 20px;"></v-divider>
             <v-flex xs5 md3>
               <h3 style="padding-bottom: 10px;">販売価格</h3>
               <v-layout row wrap align-center>
-                <v-text-field label="価格" outlined type="number"></v-text-field>
+                <v-text-field label="価格" outlined type="number" v-model="formData.price"></v-text-field>
                 <h2>円</h2>
               </v-layout>
             </v-flex>
@@ -79,24 +86,24 @@
             <h3 style="padding-bottom: 10px;">在庫数</h3>
             <v-layout row wrap align-center>
               <v-flex xs5 md2>
-                <v-text-field type="number" label="初期在庫数" outlined></v-text-field>
+                <v-text-field type="number" label="初期在庫数" v-model="formData.stock" outlined></v-text-field>
               </v-flex>
               <h2>個</h2>
               <v-flex xs0 md1></v-flex>
               <v-flex xs5 md2>
-                <v-text-field type="number" label="安全在庫数" outlined></v-text-field>
+                <v-text-field type="number" label="安全在庫数" outlined v-model="formData.safty"></v-text-field>
               </v-flex>
               <h2>個</h2>
             </v-layout>
             <v-divider style="padding-bottom: 20px;"></v-divider>
             <v-flex xs12 md12>
               <h3 style="padding-bottom: 10px;">商品説明</h3>
-              <v-text-field outlined label="商品説明"></v-text-field>
+              <v-text-field outlined label="商品説明" v-model="description"></v-text-field>
             </v-flex>
             <v-divider style="padding-bottom: 20px;"></v-divider>
             <h3 style="padding-bottom: 10px;">
               商品につけるタグ
-              <span style="font-size: 15px;color: #999;">(4つまで)</span>
+              <span style="font-size: 15px;color: #999;">(3つまで)</span>
             </h3>
             <v-layout row wrap>
               <v-flex xs10 md10>
@@ -180,10 +187,10 @@
           <v-card-actions>
             <v-layout row wrap justify-end>
               <v-flex xs12 md1>
-                <v-btn color="info" style="width: 100%;" @click="check = 2">登録</v-btn>
+                <v-btn color="info" style="width: 100%;" @click="upload">登録</v-btn>
               </v-flex>
               <v-flex xs12 md1>
-                <v-btn style="width: 100%;" @click="check = 1">戻る</v-btn>
+                <v-btn style="width: 100%;" @click="check = 0">戻る</v-btn>
               </v-flex>
             </v-layout>
           </v-card-actions>
@@ -214,6 +221,7 @@
 import Vue from "vue";
 import Croppa from "vue-croppa";
 import "vue-croppa/dist/vue-croppa.css";
+import {mapActions,mapGetters} from 'vuex'
 
 
 export default {
@@ -226,8 +234,15 @@ export default {
         uploadedImg: null,
       check: 0,
       formData: {
+        product_name: "",
+        product_name_en: "",
+        price: 0,
+        stock: 0,
+        safety: 0,
+        description: '',
         tag: "",
         tags: ["陶器"],
+        img: ""
       }
     };
   },
@@ -262,6 +277,33 @@ export default {
       console.log(this.blob);
     },
     upload() {
+
+      if(!this.formData.product_name && !this.formData.product_name_en && !this.formData.price && !this.formData.stock && !this.formData.safety && !this.formData.description) return alert('未入力内容があります')
+
+
+      //トリミング
+      var type = "image/jpeg";
+      let compressionRate = 0.2;
+      let url = this.myCroppa.generateDataUrl(type, compressionRate);
+      if (!url) {
+        alert("画像が選択されていません");
+        return;
+      }
+      this.imgUrl = url;
+      // DataURL のデータ部分を抜き出し、Base64からバイナリに変換してる
+      var bin = atob(url.split(",")[1]);
+      // 空の Uint8Array ビューを作る
+      var buffer = new Uint8Array(bin.length);
+      // Uint8Array ビューに 1 バイトずつ値を埋める
+      for (var i = 0; i < bin.length; i++) {
+        buffer[i] = bin.charCodeAt(i);
+      }
+      // Uint8Array ビューのバッファーを抜き出し、それを元に Blob を作る
+      this.blob = new Blob([buffer.buffer], { type: type });
+      console.log(this.blob);
+
+      //ここからアップロード
+
       if (this.imgUrl == null) {
         alert("画像をトリミングしてください");
         return;
@@ -276,13 +318,17 @@ export default {
           app.uploadedImg = url; //アップロードしたURLを返してもらってる
           console.log(app.uploadedImg);
         });
-      setTimeout(() => {
-        alert("アップロードに成功しました");
-      }, 2000);
-    }
+      var payload = this.formData
+      payload.img = app.uploadedImg
+      await this.addProduct({payload});
+    },
+    ...mapActions("workshop_manage",["addProduct"])
   },
   mounted() {
     Vue.use(Croppa);
+  },
+  computed:{
+    ...mapGetters(["loginuserdata"])
   }
 };
 </script>

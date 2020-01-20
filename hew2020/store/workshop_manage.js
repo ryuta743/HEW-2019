@@ -132,5 +132,12 @@ export const actions = {
         } catch (error) {
             throw new Error("Error!")
         }
+    },
+    async addProduct({commit},{payload}){
+        try{
+            this.$axios.$get(`http://133.18.194.128:5000/workshopManage/addProduct`)
+        }catch(error){
+            throw new Error("Error")
+        }
     }
 }
