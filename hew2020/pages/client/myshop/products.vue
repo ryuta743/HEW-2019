@@ -13,6 +13,9 @@
         <li @click="$router.push('/client/myshop/products')" class="check">
           <v-icon>mdi-format-list-bulleted</v-icon> 商品一覧・在庫状況
         </li>
+        <li @click="$router.push('/client/myshop/discount')">
+          <v-icon>mdi-cash-usd</v-icon> セット割引
+        </li>
         <li @click="$router.push('/client/myshop/productadd')">
           <v-icon>mdi-plus</v-icon> 新規商品登録
         </li>

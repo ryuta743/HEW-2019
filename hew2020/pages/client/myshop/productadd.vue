@@ -49,10 +49,6 @@
                     :file-size-limit="700000"
                     :remove-button-size="30"
                   ></croppa>
-                    <div>
-                      <v-btn color="info" @click="generateImage">トリミング</v-btn>
-                      <v-btn color="primary" @click="upload">アップロード!</v-btn>
-                    </div>
                 </client-only>
               </v-layout>
             </v-flex>
@@ -115,7 +111,7 @@
             </h3>
             <v-layout row wrap>
               <v-flex xs10 md10>
-                <v-text-field outlined label="追加タグ" v-model="formData.tag"></v-text-field>
+                <v-text-field outlined label="追加タグ(全角カナ)" v-model="formData.tag"></v-text-field>
               </v-flex>
               <v-flex xs1 md1>
                 <v-btn color="info" style="width: 100%;height: 55px;" outlined @click="addTag">追加</v-btn>

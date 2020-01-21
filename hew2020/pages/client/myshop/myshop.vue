@@ -7,6 +7,9 @@
         <li @click="$router.push('/client/myshop/sales')"><v-icon>mdi-chart-bar</v-icon> 売上一覧</li>
         <li @click="$router.push('/client/myshop/sales_trend')"><v-icon>mdi-chart-arc</v-icon> 売上傾向表</li>
         <li @click="$router.push('/client/myshop/products')"><v-icon>mdi-format-list-bulleted</v-icon> 商品一覧・在庫状況</li>
+        <li @click="$router.push('/client/myshop/discount')">
+          <v-icon>mdi-cash-usd</v-icon> セット割引
+        </li>
         <li @click="$router.push('/client/myshop/productadd')"><v-icon>mdi-plus</v-icon> 新規商品登録</li>
         <li @click="$router.push('/client/myshop/productdel')"><v-icon>mdi-close</v-icon> 商品編集・削除</li>
         <li @click="$router.push('/client/myshop/chat')"><v-icon>mdi-chat</v-icon> チャットメッセージ</li>
