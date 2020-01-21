@@ -25,11 +25,10 @@ router.use((req, res, next) => {
 router.post('/sessionin', function (req, res) {
     console.log('セッションスタート');
     const user_data = req.body.kekka;
-    console.log(user_data);
     if(user_data){
-      req.session.loginuserdata = {user_data : user_data}
+      req.session.loginuserdata = {user_data : user_data[0]}
       console.log(req.session.loginuserdata)
-      return res.json({user_data : user_data})
+      return res.json({user_data : user_data[0]})
     }
     return res.status(401).json({ message: 'Bad credentials' })
 })

@@ -132,5 +132,13 @@ export const actions = {
         } catch (error) {
             throw new Error("Error!")
         }
+    },
+    async addProduct({commit},{payload}){
+        try{
+            const now = moment().format('YYYY-MM-DD');
+            this.$axios.$get(`http://133.18.194.128:5000/workshopManage/addProduct?shop_id=${payload.wsid}&product_name=${payload.product_name}&product_name_en=${payload.product_name_en}&product_number=${payload.product_number}&price=${payload.price}&record_date=${now}&product_detail=${payload.description}&product_img=${payload.img}&stock=${payload.stock}&safety=${payload.safety}`)
+        }catch(error){
+            throw new Error("Error")
+        }
     }
 }
