@@ -276,7 +276,7 @@ export default {
       this.blob = new Blob([buffer.buffer], { type: type });
       console.log(this.blob);
     },
-    upload() {
+    async upload() {
 
       if(!this.formData.product_name && !this.formData.product_name_en && !this.formData.price && !this.formData.stock && !this.formData.safety && !this.formData.description) return alert('未入力内容があります')
 

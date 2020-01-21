@@ -135,7 +135,7 @@ export const actions = {
     },
     async addProduct({commit},{payload}){
         try{
-            this.$axios.$get(`http://133.18.194.128:5000/workshopManage/addProduct`)
+            this.$axios.$get(`http://133.18.194.128:5000/workshopManage/addProduct?shop_id=${payload.wsid}`)
         }catch(error){
             throw new Error("Error")
         }
