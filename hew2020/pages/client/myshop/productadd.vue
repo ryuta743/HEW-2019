@@ -289,6 +289,8 @@ export default {
 
       if(!this.formData.product_name && !this.formData.product_name_en && !this.formData.price && !this.formData.stock && !this.formData.safety && !this.formData.description) return alert('未入力内容があります')
 
+      var strong = 1000;
+      const name = new Date().getTime().toString(16) + Math.floor(strong * Math.random()).toString(16);
 
       //トリミング
       var type = "image/jpeg";
@@ -320,6 +322,7 @@ export default {
       await this.$store
         .dispatch("persona/uploadImage", {
           file: this.blob,
+          name: name,
           wsid: this.loginuserdata.user_data.shop_id
         })
         .then(url => {
@@ -330,8 +333,8 @@ export default {
       var payload = this.formData
       payload.wsid = this.loginuserdata.user_data.shop_id
       console.log('uploadedImg:' + app.uploadedImg)
-      payload.img = app.uploadedImg
-      console.log('DBに入れたURL:' + payload.img)
+      payload.img = name
+      console.log('DBに入れた画像名:' + payload.img)
       await this.addProduct({payload});
       this.check = 2;
     },

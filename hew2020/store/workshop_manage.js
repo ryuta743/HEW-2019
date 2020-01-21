@@ -85,7 +85,10 @@ export const actions = {
     async getProduct({ commit }, { wsid }) {
         console.log('受け取ったデータ:' + wsid)
         try {
-            const products = await this.$axios.$get(`http://133.18.194.128:5000/workshopManage/getProducts?shop_id=${wsid}`);
+            var products = await this.$axios.$get(`http://133.18.194.128:5000/workshopManage/getProducts?shop_id=${wsid}`);
+            for(var i = 0; i < products.length; i++){
+                products[i].product_img = `https://firebasestorage.googleapis.com/v0/b/tenshoku-9b0c8.appspot.com/o/images%2F${products[i].shop_id}%2Fproducts%2F${products[i].product_img}?alt=media`;
+            }
             commit('setProduct', products)
             console.log(products)
         } catch (error) {
