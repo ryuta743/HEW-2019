@@ -9,8 +9,8 @@
           <v-flex xs12 md6>
             <form @submit.prevent>
               <v-layout row wrap>
-                <v-text-field outlined label="検索"></v-text-field>
-                <v-btn type="submit" color="info" style="height: 55px;">
+                <v-text-field outlined label="検索" v-model="product"></v-text-field>
+                <v-btn type="submit" color="info" style="height: 55px;" @click="get_product">
                   <v-icon>mdi-magnify</v-icon>
                 </v-btn>
               </v-layout>
@@ -81,9 +81,15 @@
 </template>
 
 <script>
+import {mapActions,mapGetters} from 'vuex';
+import { toUnicode } from 'punycode';
+
 export default {
   data() {
     return {
+
+      product: '',
+
       products: [
         {
           title: "陶器01",
@@ -151,6 +157,28 @@ export default {
         }
       ]
     };
+  },
+
+  methods:{
+    async get_product(){
+      var payload = {
+        product : this.product,
+      }
+      console.log(payload)
+
+      try{
+        await this.select_product({payload});
+      }catch(e){
+        console.log('エラー発生'),
+        console.log(e)
+      }
+    },
+
+    ...mapActions('products',['select_product']),
+  },
+
+  computed:{
+    ...mapGetters('products',['data']),
   }
 };
 </script>
