@@ -64,7 +64,15 @@
               <!-- <img src="https://firebasestorage.googleapis.com/v0/b/tenshoku-9b0c8.appspot.com/o/images%2Ftest3?alt=media&token=3747dfca-14b7-4476-b20d-7d23f993aa49" width="1000" height="400" alt=""> -->
             </v-card-text>
             <v-divider style="padding-bottom: 20px;"></v-divider>
-
+            <h3 style="padding-bottom: 10px;">登録商品番号</h3>
+            <v-layout row wrap>
+              <v-flex xs12 md5>
+                <v-text-field label="商品番号" outlined v-model="formData.product_number" type="number"></v-text-field>
+              </v-flex>
+            </v-layout>
+            <v-divider style="padding-bottom: 20px;"></v-divider>
+            
+            <v-divider style="padding-bottom: 20px;"></v-divider>
             <h3 style="padding-bottom: 10px;">登録商品名</h3>
             <v-layout row wrap>
               <v-flex xs12 md5>
@@ -91,14 +99,14 @@
               <h2>個</h2>
               <v-flex xs0 md1></v-flex>
               <v-flex xs5 md2>
-                <v-text-field type="number" label="安全在庫数" outlined v-model="formData.safty"></v-text-field>
+                <v-text-field type="number" label="安全在庫数" outlined v-model="formData.safety"></v-text-field>
               </v-flex>
               <h2>個</h2>
             </v-layout>
             <v-divider style="padding-bottom: 20px;"></v-divider>
             <v-flex xs12 md12>
               <h3 style="padding-bottom: 10px;">商品説明</h3>
-              <v-text-field outlined label="商品説明" v-model="description"></v-text-field>
+              <v-text-field outlined label="商品説明" v-model="formData.description"></v-text-field>
             </v-flex>
             <v-divider style="padding-bottom: 20px;"></v-divider>
             <h3 style="padding-bottom: 10px;">
@@ -236,6 +244,7 @@ export default {
       formData: {
         product_name: "",
         product_name_en: "",
+        product_number: 0,
         price: 0,
         stock: 0,
         safety: 0,
@@ -310,8 +319,8 @@ export default {
       }
       this.$store
         .dispatch("persona/uploadImage", {
-          name: "test3",
-          file: this.blob
+          file: this.blob,
+          wsid: this.loginuserdata.user_data.shop_id
         })
         .then(url => {
           // アップロード完了処理 (ローカルメンバに保存したり)
@@ -319,13 +328,16 @@ export default {
           console.log(app.uploadedImg);
         });
       var payload = this.formData
-      payload.img = app.uploadedImg
+      payload.wsid = this.loginuserdata.user_data.shop_id
+      payload.img = this.uploadedImg
       await this.addProduct({payload});
     },
-    ...mapActions("workshop_manage",["addProduct"])
+    ...mapActions("workshop_manage",["addProduct"]),
+    ...mapActions("persona",["uploadImage"])
   },
   mounted() {
     Vue.use(Croppa);
+    console.log(this.loginuserdata)
   },
   computed:{
     ...mapGetters(["loginuserdata"])
