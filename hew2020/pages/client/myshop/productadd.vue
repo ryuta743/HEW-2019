@@ -161,32 +161,32 @@
             <v-simple-table>
               <tbody>
                 <tr>
-                  <td>商品名(日)</td>
-                  <td>すごい陶器</td>
+                  <td>商品名(日本語)</td>
+                  <td>{{formData.product_name}}</td>
                 </tr>
                 <tr>
-                  <td>商品名(英)</td>
-                  <td>GreatThing</td>
+                  <td>商品名(カタカナ)</td>
+                  <td>{{formData.product_name_en}}</td>
                 </tr>
                 <tr>
                   <td>販売価格</td>
-                  <td>5500円</td>
+                  <td>{{formData.price}}</td>
                 </tr>
                 <tr>
                   <td>初期在庫数</td>
-                  <td>50個</td>
+                  <td>{{formData.stock}}</td>
                 </tr>
                 <tr>
                   <td>安全在庫数</td>
-                  <td>10個</td>
+                  <td>{{formData.safety}}</td>
                 </tr>
                 <tr>
                   <td>商品説明</td>
-                  <td>これは素晴らしい商品です</td>
+                  <td>{{formData.description}}</td>
                 </tr>
                 <tr>
                   <td>タグ</td>
-                  <td>陶器・焼き物・食器</td>
+                  <td>トウキ・サラ・ショッキ</td>
                 </tr>
               </tbody>
             </v-simple-table>
@@ -317,7 +317,7 @@ export default {
         alert("画像をトリミングしてください");
         return;
       }
-      this.$store
+      await this.$store
         .dispatch("persona/uploadImage", {
           file: this.blob,
           wsid: this.loginuserdata.user_data.shop_id
@@ -329,8 +329,11 @@ export default {
         });
       var payload = this.formData
       payload.wsid = this.loginuserdata.user_data.shop_id
-      payload.img = this.uploadedImg
+      console.log('uploadedImg:' + app.uploadedImg)
+      payload.img = app.uploadedImg
+      console.log('DBに入れたURL:' + payload.img)
       await this.addProduct({payload});
+      this.check = 2;
     },
     ...mapActions("workshop_manage",["addProduct"]),
     ...mapActions("persona",["uploadImage"])

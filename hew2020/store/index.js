@@ -14,7 +14,7 @@ export const mutations = {
 
 export const actions = {
     nuxtServerInit ({ commit }, { req }) {
-        console.log(req.session.loginuserdata);
+        console.log('nuxtServerInit:' + req.session.loginuserdata);
         if (req.session && req.session.loginuserdata) {
           commit('setLoginuserdata', req.session.loginuserdata)
         }

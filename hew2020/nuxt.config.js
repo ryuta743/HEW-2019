@@ -14,7 +14,7 @@ module.exports = {
       secret: 'tenshoku',
       resave: false,
       saveUninitialized: false,
-      cookie: { maxAge: 60000 }
+      cookie: { maxAge: 6000000000000000 }
     }),
     // Api middleware
     // We add /api/login & /api/logout routes
