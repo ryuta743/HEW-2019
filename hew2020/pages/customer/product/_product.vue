@@ -125,15 +125,19 @@
 </template>
 
 <script>
+import {mapActions,mapGetters} from 'vuex';
+
 export default {
   head() {
     return {
       script: [{ src: "https://fyu.se/embed?v=2.0" }]
     };
   },
+
   mounted() {
-    /* aa: FYU.add("7u5u1lu09a", "fyu_7u5u1lu09a", { nologo: 1 }); */
+    this.getproductdetailreq()
   },
+
   data() {
     return {
       circle: false,
@@ -159,13 +163,32 @@ export default {
     };
   },
   methods:{
+    
+    async getproductdetailreq(){
+      var p_data = {
+        product_id : this.$route.params.product
+      }
+      console.log(p_data);
+
+      try{
+        await this.getproductdetails({p_data})
+      }catch(e){
+        console.log('エラー発生')
+        console.log(e)
+      }
+    },
+
     circleOpen(){
       this.circle = true
       FYU.add("7u5u1lu09a", "fyu_7u5u1lu09a", { nologo: 1 });
     },
     reload() {
         this.$router.go({path: this.$router.currentRoute.path, force: true});
-    }
+    },
+    ...mapActions('products',['getproductdetails'])
+  },
+  computed: {
+    ...mapGetters('products',['productdetails'])
   }
 };
 </script>
