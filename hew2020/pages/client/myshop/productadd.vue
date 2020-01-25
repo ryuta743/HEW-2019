@@ -49,10 +49,6 @@
                     :file-size-limit="700000"
                     :remove-button-size="30"
                   ></croppa>
-                    <div>
-                      <v-btn color="info" @click="generateImage">トリミング</v-btn>
-                      <v-btn color="primary" @click="upload">アップロード!</v-btn>
-                    </div>
                 </client-only>
               </v-layout>
             </v-flex>
@@ -115,7 +111,7 @@
             </h3>
             <v-layout row wrap>
               <v-flex xs10 md10>
-                <v-text-field outlined label="追加タグ" v-model="formData.tag"></v-text-field>
+                <v-text-field outlined label="追加タグ(全角カナ)" v-model="formData.tag"></v-text-field>
               </v-flex>
               <v-flex xs1 md1>
                 <v-btn color="info" style="width: 100%;height: 55px;" outlined @click="addTag">追加</v-btn>
@@ -289,6 +285,8 @@ export default {
 
       if(!this.formData.product_name && !this.formData.product_name_en && !this.formData.price && !this.formData.stock && !this.formData.safety && !this.formData.description) return alert('未入力内容があります')
 
+      var strong = 1000;
+      const name = new Date().getTime().toString(16) + Math.floor(strong * Math.random()).toString(16);
 
       //トリミング
       var type = "image/jpeg";
@@ -320,6 +318,7 @@ export default {
       await this.$store
         .dispatch("persona/uploadImage", {
           file: this.blob,
+          name: name,
           wsid: this.loginuserdata.user_data.shop_id
         })
         .then(url => {
@@ -330,8 +329,8 @@ export default {
       var payload = this.formData
       payload.wsid = this.loginuserdata.user_data.shop_id
       console.log('uploadedImg:' + app.uploadedImg)
-      payload.img = app.uploadedImg
-      console.log('DBに入れたURL:' + payload.img)
+      payload.img = name
+      console.log('DBに入れた画像名:' + payload.img)
       await this.addProduct({payload});
       this.check = 2;
     },

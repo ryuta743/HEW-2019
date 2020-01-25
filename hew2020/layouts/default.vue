@@ -427,4 +427,10 @@ export default {
 *{
   font-family: 'M PLUS Rounded 1c', sans-serif;
 }
+
+@media print {
+  .no-print {
+    display: none;
+  }
+}
 </style>
