@@ -18,16 +18,12 @@
           </v-flex>
         </v-layout>
 
-        <v-layout row wrap>
-          <v-flex xs4 md2 style="margin-right: 5px;">
-            <v-subheader>検索対象</v-subheader>
-            <v-select :items="items" label="商品" outlined></v-select>
-          </v-flex>
-          <v-flex xs4 md2 style="margin-right: 5px;">
-            <v-subheader>生地</v-subheader>
-            <v-select :items="items" label="未指定" outlined></v-select>
-          </v-flex>
-        </v-layout>
+        <div v-for="(item, index) in data" :key="index">
+          <!-- これ大事別ページに飛ぶやつで押された要素が名前になる -->
+          <div @click="$router.push(`/customer/product/${item.product_id}`)">{{item.product_name}}</div>
+          {{index}}
+        </div>
+
         <v-divider></v-divider>
       </v-content>
       <v-content>
