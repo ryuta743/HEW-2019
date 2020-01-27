@@ -209,7 +209,7 @@
               <tr>
                 <td class="th"><label>お問い合わせ内容<span>必須</span></label></td>
                 <td class="input">
-                  <textarea name="content" rows="5" cols="70" placeholder="お問合せ内容を入力" style="border: 1px solid #cccccc;background: #fff;padding-left: 10px;border-radius: 4px;"></textarea>
+                  <textarea name="content" rows="5" cols="76" placeholder="お問合せ内容を入力" style="border: 1px solid #cccccc;background: #fff;padding-left: 10px;border-radius: 4px;"></textarea>
                 </td>
               </tr>
             </table>
@@ -455,7 +455,7 @@ export default {
 #product_header {
   display: flex;
   align-items: center;
-  padding: 50px 40px 20px 40px;
+  padding: 50px 30px 20px 30px;
   width: 100%;
   height: 30px;
   background-color: #ffffff;
@@ -479,7 +479,7 @@ export default {
 #search_ui {
   display: flex;
   justify-content: flex-end;
-  width: 660px;
+  width: 680px;
 }
 
 .content_title {

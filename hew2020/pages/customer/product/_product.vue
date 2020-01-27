@@ -1,4 +1,18 @@
 <template>
+  <v-layout row wrap id="product_body">
+    <div id="bread_list"> <!-- パンくずリスト -->
+      <div class="bread"><v-icon>mdi-home</v-icon>トップ</div>
+      <div class="bread">></div>
+      <div class="bread">ショップ</div>
+      <div class="bread">></div>
+      <div class="bread">工房名</div>
+    </div>
+    <div id="product_infos">
+      <div id="product_img">
+        <v-lazy-image width="100%" height="500px" />
+      </div>
+      <div id="product_details"></div>
+    </div>
   <v-container grid-list-xs>
     <v-content>
       <v-btn icon @click="$router.go(-1)">
@@ -122,6 +136,7 @@
       </v-dialog>
     </v-content>
   </v-container>
+  </v-layout>
 </template>
 
 <script>
@@ -193,8 +208,56 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+
+.sawarabi{
+  font-family: "Sawarabi Mincho";
+}
+
+#bread_list{
+  display: flex;
+  align-items: flex-end;
+  margin: 20px 0;
+  width: 100%;
+  height: 30px;
+  border-bottom: 1.2px solid #e1e1e1;
+}
+
+.bread{
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  font-size: 14px;
+  cursor: pointer;
+  width: 80px;
+  color: #444444;
+}
+
 a {
   text-decoration: none;
 }
+
+#product_body{
+  width: 1100px;
+  margin: 0 auto;
+}
+
+#product_infos{
+  width: 100%;
+  height: 600px;
+  display: flex;
+
+}
+
+#product_img{
+  width: 500px;
+  height: 500px;
+}
+
+#product_details{
+  width: 600px;
+  height: 600px;
+  background-color: #444444;
+}
+
 </style>
