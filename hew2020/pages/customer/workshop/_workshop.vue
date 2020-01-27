@@ -120,7 +120,7 @@
             </div>
           </div>
           <div id="products_more">
-            <v-btn depressed color="#ffffff" style="width: 50%;min-height: 55px;" v-if="products.length>5">もっとみる</v-btn>
+            <v-btn depressed color="#dddddd" style="width: 50%;min-height: 55px;" v-if="products.length>5">もっとみる</v-btn>
           </div>
         </div>
       </div>
@@ -149,6 +149,14 @@
               <tr>
                 <td class="sawarabi"><b>創業年度</b></td>
                 <td class="sawarabi">2019年</td>
+              </tr>
+              <tr>
+                <td class="sawarabi"><b>代表工芸品</b></td>
+                <td class="sawarabi">あああ</td>
+              </tr>
+              <tr>
+                <td class="sawarabi"><b>経歴・歴史</b></td>
+                <td class="sawarabi">ドン勝5連続獲得</td>
               </tr>
             </table>
           </div>
@@ -238,7 +246,7 @@ export default {
         {
           product_id: 1,
           title: "スマイル鉢植え",
-          product_img: 'https://tshop.r10s.jp/sixem-shop/cabinet/fabric_mie/894103_main01.jpg?fitin=275:275',
+          product_img: 'https://image1.shopserve.jp/taikeian.net/pic-labo/llimg/310a.jpg?t=20190824100607',
           rating: 4.5,
           price: 980,
           tags: ["陶器", "食卓"]
@@ -416,7 +424,7 @@ export default {
 #workshop_nav {
   display: flex;
   width: 100%;
-  height: 70px;
+  height: 60px;
   overflow: hidden;
   background-color: #e1e1e1;
 }
@@ -427,7 +435,7 @@ export default {
   justify-content: center;
   align-items: center;
   width: 33.33%;
-  height: 70px;
+  height: 60px;
 }
 
 .notactive_nav {
@@ -441,14 +449,17 @@ export default {
   width: 100%;
   background-color: #e1e1e1;
   box-sizing: border-box;
-  padding: 40px 60px;
+  padding: 40px 30px;
 }
 
 #product_header {
   display: flex;
   align-items: center;
+  padding: 50px 40px 20px 40px;
   width: 100%;
   height: 30px;
+  background-color: #ffffff;
+  border-radius: 3px 3px 0 0;
 }
 
 #result_count {
@@ -468,7 +479,7 @@ export default {
 #search_ui {
   display: flex;
   justify-content: flex-end;
-  width: 680px;
+  width: 660px;
 }
 
 .content_title {
@@ -485,11 +496,14 @@ export default {
 
 #products {
   position: relative;
-  padding-top: 30px;
+  box-sizing: border-box;
+  padding: 30px 30px;
   width: 100%;
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
+  border-radius: 0 0 3px 3px;;
+  background-color: #ffffff;
 }
 
 .product {
@@ -501,9 +515,9 @@ export default {
   margin-bottom: 60px;
 }
 
-.product:hover {
+/* .product:hover {
   box-shadow: 0 0 4px grey;
-}
+} */
 
 .product_detail {
   width: 100%;
@@ -569,7 +583,7 @@ export default {
 /* 工房スキル */
 #skill_contents{
   width: 100%;
-  height: 500px;
+  height: 450px;
 }
 
 #skill_video{
@@ -627,7 +641,7 @@ iframe{
 }
 
 #chat_message{
-  width: 830px;
+  width: 890px;
   display: flex;
   justify-content: flex-end;
 }
@@ -727,7 +741,7 @@ iframe{
   transition: all .3s ease;
 }
 .slide-fade-leave-active {
-  transition: all .3s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+  transition: all .3s ease;
 }
 .slide-fade-enter, .slide-fade-leave-to
 /* .slide-fade-leave-active below version 2.1.8 */ {
