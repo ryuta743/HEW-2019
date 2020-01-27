@@ -4,13 +4,20 @@
       <v-content>
         <h5 style="width: 100%;text-align: center;">詳細検索</h5>
         <h4 style="width: 100%;text-align: center;">ADVANCED SEARCH</h4>
+        <div>{{error}}</div>
+
+        <select v-model="selected">
+          <option disabled value="">どっちを検索する？？</option>
+          <option value="0">商品検索</option>
+          <option value="1">工房検索</option>
+        </select>
 
         <v-layout row wrap justify-center style="padding-top: 10px;">
           <v-flex xs12 md6>
             <form @submit.prevent>
               <v-layout row wrap>
-                <v-text-field outlined label="検索" v-model="product"></v-text-field>
-                <v-btn type="submit" color="info" style="height: 55px;" @click="get_product">
+                <v-text-field outlined label="検索" v-model="select_data"></v-text-field>
+                <v-btn type="submit" color="info" style="height: 55px;" @click="get_select">
                   <v-icon>mdi-magnify</v-icon>
                 </v-btn>
               </v-layout>
@@ -84,7 +91,11 @@ export default {
   data() {
     return {
 
-      product: '',
+      selected: '',
+
+      select_data: '',
+
+      error: '',
 
       products: [
         {
@@ -156,25 +167,47 @@ export default {
   },
 
   methods:{
-    async get_product(){
-      var payload = {
-        product : this.product,
-      }
-      console.log(payload)
+    async get_select(){
 
-      try{
-        await this.select_product({payload});
-      }catch(e){
-        console.log('エラー発生'),
-        console.log(e)
+      if(this.select_data == ''){
+        this.error = '未入力です'
+      }else{
+        if(this.selected == 0){
+        var payload = {
+          product : this.select_data,
+        }
+        try{
+          await this.select_product({payload});
+        }catch(e){
+          console.log('エラー発生'),
+          console.log(e)
+        }
+      }else if(this.selected == 1){
+        var payload = {
+          work_shop : this.select_data,
+        }
+        try{
+          await this.search_workshop({payload});
+        }catch(e){
+          console.log('エラー発生'),
+          console.log(e)
+        }
       }
+    }
+
+
+
+      
+      
     },
 
     ...mapActions('products',['select_product']),
+    ...mapActions('work_shop',['search_workshop'])
   },
 
   computed:{
     ...mapGetters('products',['data']),
+    ...mapGetters('work_shop',['shop_name'])
   }
 };
 </script>
