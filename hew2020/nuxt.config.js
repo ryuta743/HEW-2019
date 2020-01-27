@@ -35,7 +35,10 @@ module.exports = {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-      { rel: 'stylesheet' , href:'https://fonts.googleapis.com/css?family=M+PLUS+Rounded+1c:400&display=swap'}
+      { rel: 'stylesheet' , href:'https://fonts.googleapis.com/earlyaccess/hannari.css'},
+      { rel: 'stylesheet' , href:'https://fonts.googleapis.com/css?family=Sawarabi+Mincho'}
+      //https://fonts.googleapis.com/css?family=Sawarabi+Mincho
+      //<link href="https://fonts.googleapis.com/earlyaccess/hannari.css" rel="stylesheet">
       //<link href="https://fonts.googleapis.com/css?family=M+PLUS+Rounded+1c&display=swap" rel="stylesheet">
     ]
   },
