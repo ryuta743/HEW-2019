@@ -425,7 +425,7 @@ export default {
 
 <style>
 *{
-  font-family: 'M PLUS Rounded 1c', sans-serif;
+  font-family: "Hannari","Sawarabi Mincho";
 }
 
 @media print {
