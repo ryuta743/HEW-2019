@@ -9,7 +9,7 @@
     </div>
     <div id="product_infos">
       <div id="product_img">
-        <v-lazy-image style="width: 100%;object-fit: cover;height: 500px;vertical-align:bottom" src="https://img.table-life.com/uploads/2019/08/53e718936cdbef8f4aa20804667ed1fa.jpg" />
+        <v-lazy-image style="width: 100%;object-fit: cover;height: 500px;vertical-align:bottom" :src="productdetails.product_img" />
         <div id="circle_body">
           <v-btn color="info" dark outlined style="width: 100%;height: 100px;" @click="circleOpen">
             <v-icon>mdi-flattr</v-icon>360°
@@ -37,7 +37,7 @@
           <div class="product_tag">甲冑</div>
           <div class="product_tag">重い</div>
         </div>
-        <div id="product_price">{{ productdetails ? productdetails.price:'' }} 円 <span>(税抜)</span></div>
+        <div id="product_price">{{ productdetails ? exprice(productdetails.price):'' }} 円 <span>(税抜)</span></div>
         <div id="product_ui">
           <div id="product_selector">
             <div>在庫 <span>{{ productdetails ? productdetails.stock + '個':'' }}</span></div>
@@ -49,16 +49,25 @@
             </div>
           </div>
           <div style="width:55%;">
-            <v-btn color="success" style="width: 100%;height: 50px;" depressed>カートに入れる</v-btn>
+            <v-btn color="success" style="width: 100%;height: 50px;" depressed　@click="cart_upreq">カートに入れる</v-btn>
           </div>
         </div>
         <div id="workshop_info">
-          <div id="workshop_img"></div>
-          <div id="workshop_titles">
-            <div id="workshop_title"></div>
-            <div id="workshop_description"></div>
+          <div id="workshop_img">
+            <v-lazy-image style="width: 100%;object-fit: cover;height: 80px;vertical-align:bottom" :src=workshop_data.shop_img />
           </div>
-          <div id="workshop_favo"></div>
+          <div id="workshop_titles">
+            <div id="workshop_title">{{ workshop_data.shop_name }}</div>
+            <div id="workshop_description">{{ workshop_data.shop_description }}</div>
+          </div>
+          <div id="workshop_favo">
+            <v-hover v-slot:default="{ hover }">
+              <v-btn :color="hover ? 'red':'grey'" icon>
+                <!-- <v-btn color="red" icon> -->
+                <v-icon x-large>mdi-shield-star</v-icon>
+              </v-btn>
+            </v-hover>
+          </div>
         </div>
       </div>
     </div>
@@ -68,64 +77,6 @@
         <v-icon>mdi-chevron-left</v-icon>back
       </v-btn>
       <v-card>
-        <v-card-text>
-          <v-flex xs12 md12>
-            <v-card>
-              <v-card-title primary-title>{{$route.params.product}}</v-card-title>
-              <v-card-text style="height: 8px;">
-                <v-layout row wrap align-center>
-                  <v-rating
-                    color="yellow darken-3"
-                    background-color="grey darken-1"
-                    v-model="item.rating"
-                    readonly
-                    half-increments
-                  ></v-rating>
-                  ({{item.rating}})
-                </v-layout>
-              </v-card-text>
-              <v-card-text>
-                出品工房:
-                <nuxt-link :to="`../workshop/${item.creater}`">{{item.creater}}</nuxt-link>
-              </v-card-text>
-              <v-card-text style="font-weight: bold;">{{item.description}}</v-card-text>
-              <v-card-text>
-                関連づけられたタグ:
-                <v-chip
-                  class="ma-2"
-                  color="primary"
-                  label
-                  text-color="white"
-                  v-for="(item, index) in item.tags"
-                  :key="index"
-                >
-                  <v-icon left>mdi-label</v-icon>
-                  {{item}}
-                </v-chip>
-              </v-card-text>
-              <v-divider></v-divider>
-              <v-card-actions>
-                <v-layout row wrap>
-                  <v-flex xs12 md2>
-                    <v-btn color="success" style="width: 100%;" @click="cart_upreq">
-                      <v-icon>mdi-cart</v-icon>カートに追加
-                    </v-btn>
-                  </v-flex>
-                  <v-flex xs12 md2>
-                    <v-btn color="yellow darken-4" dark outlined style="width: 100%;">
-                      <v-icon>mdi-star</v-icon>お気に入りに追加
-                    </v-btn>
-                  </v-flex>
-                  <v-flex xs12 md2>
-                    <v-btn color="info" dark outlined style="width: 100%;" @click="circleOpen">
-                      <v-icon>mdi-flattr</v-icon>360°
-                    </v-btn>
-                  </v-flex>
-                </v-layout>
-              </v-card-actions>
-            </v-card>
-          </v-flex>
-        </v-card-text>
         <v-divider></v-divider>
         <v-card-text>
           <v-subheader>この商品を評価する</v-subheader>
@@ -195,8 +146,10 @@ export default {
     };
   },
 
-  mounted() {
-    this.getproductdetailreq()
+  async mounted() {
+    await this.getproductdetailreq();
+    await this.getShopdata({wsid:this.productdetails.shop_id})
+    console.log(this.workshop_data)
   },
 
   data() {
@@ -263,11 +216,13 @@ export default {
       return val.toLocaleString();
     },
     ...mapActions('products',['getproductdetails']),
+    ...mapActions('workshop_manage',['getShopdata']),
     ...mapActions('carts',['cart_upload'])
   },
   computed: {
     ...mapGetters('products',['productdetails']),
     ...mapGetters('carts',['cart_data']),
+    ...mapGetters('workshop_manage',['workshop_data']),
     ...mapGetters(['loginuserdata'])
   }
 };
@@ -369,6 +324,7 @@ a {
 #product_description{
   width: 100%;
   height: 150px;
+  color: #444444;
 }
 
 #product_tags{
@@ -444,18 +400,32 @@ a {
   height: 80px;
   background-color: #ffffff;
   border-radius: 300px;
+  overflow: hidden;
 }
 
 #workshop_titles{
+  box-sizing: border-box;
+  padding-left: 20px;
+  padding-top: 10px;
   width: 350px;
   height: 80px;
-  background-color: #ffffff;
+}
+
+#workshop_title{
+  font-size: 22px;
+  letter-spacing: 3px;
+}
+
+#workshop_description{
+  font-size: 14px;
+  color: #444444;
 }
 
 #workshop_favo{
+  display: flex;
+  justify-content: flex-end;
   width: 100px;
   height: 80px;
-  background-color: #e9e9e9;
 }
 
 .v-lazy-image {
