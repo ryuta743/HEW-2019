@@ -229,29 +229,29 @@
         <v-tab @click="$router.push('/contact')">コンタクト</v-tab>
       </v-tabs>
 
-      <v-btn outlined @click="loginDialog = true" v-if="!isLogin">
+      <v-btn outlined @click="loginDialog = true" v-if="loginuserdata == null ? true:false">
         <v-icon color="success">mdi-check</v-icon>ログイン
       </v-btn>
 
-      <v-btn outlined style="margin: ;" v-if="!isLogin" @click="createADialog = true">
+      <v-btn outlined style="margin: ;" v-if="loginuserdata == null ? true:false" @click="createADialog = true">
         <v-icon color="success">mdi-account</v-icon>新規登録
       </v-btn>
 
-      <v-badge left color="primary" v-if="isLogin && isCreater">
+      <v-badge left color="primary" v-if="loginuserdata !== null ? true:false">
         <span slot="badge">5</span>
         <v-btn outlined @click="$router.push('/client/myshop/myshop')">
           <v-icon color="primary">mdi-shop</v-icon>マイ工房管理
         </v-btn>
       </v-badge>
 
-      <v-badge left color="primary" v-if="isLogin">
+      <v-badge left color="primary" v-if="loginuserdata !== null ? true:false">
         <span slot="badge">0</span>
-        <v-btn outlined v-if="isLogin" @click="$router.push('/customer/cart/cart')">
+        <v-btn outlined v-if="loginuserdata !== null ? true:false" @click="$router.push('/customer/cart/cart')">
           <v-icon color="primary">mdi-cart</v-icon>カート
         </v-btn>
       </v-badge>
 
-      <div v-if="isLogin">
+      <div v-if="loginuserdata !== null ? true:false">
         <v-menu offset-y>
           <template v-slot:activator="{ on }">
             <v-btn v-on="on" outlined>

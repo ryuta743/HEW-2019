@@ -43,8 +43,8 @@
                     v-model="myCroppa"
                     placeholder="画像を選択"
                     :placeholder-font-size=20
-                    :width=400
-                    :height=400
+                    :width=500
+                    :height=500
                     canvas-color="#777"
                     :file-size-limit="700000"
                     :remove-button-size="30"
