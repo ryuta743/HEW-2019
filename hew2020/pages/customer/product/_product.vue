@@ -37,7 +37,7 @@
           <div class="product_tag">甲冑</div>
           <div class="product_tag">重い</div>
         </div>
-        <div id="product_price">{{ productdetails ? exprice(productdetails.price):'' }} 円 <span>(税抜)</span></div>
+        <div id="product_price">{{ productdetails.price ? exprice(productdetails.price):'' }} 円 <span>(税抜)</span></div>
         <div id="product_ui">
           <div id="product_selector">
             <div>在庫 <span>{{ productdetails ? productdetails.stock + '個':'' }}</span></div>
