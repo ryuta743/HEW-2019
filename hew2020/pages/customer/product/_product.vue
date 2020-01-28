@@ -32,7 +32,7 @@
           <div class="product_tag">甲冑</div>
           <div class="product_tag">重い</div>
         </div>
-        <div id="product_price">{{ productdetails ? exprice(productdetails.price):'' }} 円 <span>(税抜)</span></div>
+        <div id="product_price">{{ productdetails ? productdetails.price:'' }} 円 <span>(税抜)</span></div>
       </div>
     </div>
   <v-container grid-list-xs>
@@ -222,7 +222,6 @@ export default {
         console.log(e)
       }
     },
-
     circleOpen(){
       this.circle = true
       FYU.add("7u5u1lu09a", "fyu_7u5u1lu09a", { nologo: 1 });
