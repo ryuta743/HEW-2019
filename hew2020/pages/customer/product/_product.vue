@@ -238,17 +238,19 @@ export default {
       }
     },
 
-    async getcart_upreq(){
+    async cart_upreq(){
       var payload = {
-        product_id : this.$route.params.product
+        product_id : this.$route.params.product,
+        user_id : this.loginuserdata.user_data.user_id
       }
-      console.log(p_data);
+      console.log(payload);
       try{
-        await this.cart_upload({p_data})
+        await this.cart_upload({payload})
       }catch(e){
         console.log('エラー発生')
         console.log(e)
       }
+      alert('完了');
     },
     circleOpen(){
       this.circle = true
@@ -265,7 +267,8 @@ export default {
   },
   computed: {
     ...mapGetters('products',['productdetails']),
-    ...mapGetters('carts',['cart_data'])
+    ...mapGetters('carts',['cart_data']),
+    ...mapGetters(['loginuserdata'])
   }
 };
 </script>
