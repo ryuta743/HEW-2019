@@ -9,7 +9,12 @@
     </div>
     <div id="product_infos">
       <div id="product_img">
-        <v-lazy-image width="100%" height="500px" alt="商品画像" />
+        <v-lazy-image style="width: 100%;object-fit: cover;height: 500px;vertical-align:bottom" src="https://img.table-life.com/uploads/2019/08/53e718936cdbef8f4aa20804667ed1fa.jpg" />
+        <div id="circle_body">
+          <v-btn color="info" dark outlined style="width: 100%;height: 100px;" @click="circleOpen">
+            <v-icon>mdi-flattr</v-icon>360°
+          </v-btn>
+        </div>
       </div>
       <div id="product_details">
         <div id="product_titles">
@@ -33,6 +38,28 @@
           <div class="product_tag">重い</div>
         </div>
         <div id="product_price">{{ productdetails ? productdetails.price:'' }} 円 <span>(税抜)</span></div>
+        <div id="product_ui">
+          <div id="product_selector">
+            <div>在庫 <span>{{ productdetails ? productdetails.stock + '個':'' }}</span></div>
+            <div>数量 
+              <span>
+                <select>
+                </select>
+              </span>
+            </div>
+          </div>
+          <div style="width:55%;">
+            <v-btn color="success" style="width: 100%;height: 50px;" depressed>カートに入れる</v-btn>
+          </div>
+        </div>
+        <div id="workshop_info">
+          <div id="workshop_img"></div>
+          <div id="workshop_titles">
+            <div id="workshop_title"></div>
+            <div id="workshop_description"></div>
+          </div>
+          <div id="workshop_favo"></div>
+        </div>
       </div>
     </div>
   <v-container grid-list-xs>
@@ -174,6 +201,7 @@ export default {
 
   data() {
     return {
+      selectItem: 0,
       circle: false,
       item: {
         title: "",
@@ -278,22 +306,31 @@ a {
 
 #product_infos{
   width: 100%;
-  height: 600px;
+  height: 620px;
   display: flex;
-
+  border-radius: 3px;
+  overflow: hidden;
 }
 
 #product_img{
   width: 500px;
-  height: 500px;
+  height: 600px;
+}
+
+#circle_body{
+  box-sizing: border-box;
+  padding-top: 10px;
+  width: 100%;
+  height: 120px;
+  background-color: #ffffff;
 }
 
 #product_details{
   box-sizing: border-box;
   padding:0px 20px;
   width: 600px;
-  height: 600px;
-  background-color: #444444;
+  height: 620px;
+  background-color: #ffffff;
 }
 
 #product_titles{
@@ -346,7 +383,7 @@ a {
   min-width: 50px;
   height: 20px;
   margin: 0 10px 15px 10px;
-  background-color: #999999;
+  background-color: #e1e1e1;
   border-radius: 2px;
   font-size: 12px;
 }
@@ -365,6 +402,65 @@ a {
   font-size: 12px;
   padding-top: 10px;
   margin-left: 10px;
+}
+
+#product_ui{
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  padding-left: 40px;
+  width: 100%;
+  height: 100px;
+}
+
+#product_selector{
+  box-sizing: border-box;
+  padding-top: 25px;
+  font-size: 14px;
+  color: #333333;
+  width: 55%;
+  height: 100px;
+}
+
+#workshop_info{
+  display: flex;
+  box-sizing: border-box;
+  padding: 10px 20px 10px 20px;
+  width: 100%;
+  height: 100px;
+  background-color: #F1F1F1;
+  border-radius: 3px;
+}
+
+#product_selector span{
+  margin-left: 10px;
+}
+
+#workshop_img{
+  width: 80px;
+  height: 80px;
+  background-color: #ffffff;
+  border-radius: 300px;
+}
+
+#workshop_titles{
+  width: 350px;
+  height: 80px;
+  background-color: #ffffff;
+}
+
+#workshop_favo{
+  width: 100px;
+  height: 80px;
+  background-color: #e9e9e9;
+}
+
+.v-lazy-image {
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+.v-lazy-image-loaded {
+  opacity: 1;
 }
 
 </style>
