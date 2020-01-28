@@ -20,8 +20,9 @@ export const actions = {
         console.log('コロナウイルス到来！！');
         const user_id = payload.user_id;
         const product_id = payload.product_id;
+        const count = payload.count;
         const now = moment().format('YYYY-MM-DD')
-        const cartdata = await this.$axios.$get(`http://133.18.194.128:5000/cart/cart_up?cart_data=${product_id}&user_data=${user_id}&date=${now}`);
+        const cartdata = await this.$axios.$get(`http://133.18.194.128:5000/cart/cart_up?cart_data=${product_id}&user_data=${user_id}&count=${count}&date=${now}`);
         console.log('APIから戻ってきた!!');
         console.log(cartdata);
         commit("setCart_data", cartdata);
