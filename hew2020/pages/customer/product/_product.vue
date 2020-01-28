@@ -61,7 +61,7 @@
               <v-card-actions>
                 <v-layout row wrap>
                   <v-flex xs12 md2>
-                    <v-btn color="success" style="width: 100%;">
+                    <v-btn color="success" style="width: 100%;" @click="cart_upreq">
                       <v-icon>mdi-cart</v-icon>カートに追加
                     </v-btn>
                   </v-flex>
@@ -178,15 +178,26 @@ export default {
     };
   },
   methods:{
-    
     async getproductdetailreq(){
       var p_data = {
         product_id : this.$route.params.product
       }
       console.log(p_data);
-
       try{
         await this.getproductdetails({p_data})
+      }catch(e){
+        console.log('エラー発生')
+        console.log(e)
+      }
+    },
+
+    async getcart_upreq(){
+      var payload = {
+        product_id : this.$route.params.product
+      }
+      console.log(p_data);
+      try{
+        await this.cart_upload({p_data})
       }catch(e){
         console.log('エラー発生')
         console.log(e)
@@ -200,10 +211,12 @@ export default {
     reload() {
         this.$router.go({path: this.$router.currentRoute.path, force: true});
     },
-    ...mapActions('products',['getproductdetails'])
+    ...mapActions('products',['getproductdetails']),
+    ...mapActions('carts',['cart_upload'])
   },
   computed: {
-    ...mapGetters('products',['productdetails'])
+    ...mapGetters('products',['productdetails']),
+    ...mapGetters('carts',['cart_data'])
   }
 };
 </script>
