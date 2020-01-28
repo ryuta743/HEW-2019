@@ -1,23 +1,10 @@
 const colors = require('vuetify/es5/util/colors').default
 
-const bodyParser = require('body-parser')
-const session = require('express-session')
-
 module.exports = {
   mode: 'universal',
 
   serverMiddleware: [
-    // body-parser middleware
-    bodyParser.json(),
-    // session middleware
-    session({
-      secret: 'tenshoku',
-      resave: false,
-      saveUninitialized: false,
-      cookie: { maxAge: 6000000000000000 }
-    }),
-    // Api middleware
-    // We add /api/login & /api/logout routes
+    
     '~/api/index.js'
   ],
 
