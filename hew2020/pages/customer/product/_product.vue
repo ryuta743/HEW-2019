@@ -9,9 +9,31 @@
     </div>
     <div id="product_infos">
       <div id="product_img">
-        <v-lazy-image width="100%" height="500px" />
+        <v-lazy-image width="100%" height="500px" alt="商品画像" />
       </div>
-      <div id="product_details"></div>
+      <div id="product_details">
+        <div id="product_titles">
+          <div id="product_title">{{productdetails ? productdetails.product_name:''}}</div>
+          <div id="product_rate">
+            <v-rating
+                color="yellow darken-3"
+                background-color="grey darken-1"
+                v-model="item.rating"
+                readonly
+                half-increments
+            ></v-rating>
+            <p>(12)</p>
+          </div>
+        </div>
+        <div id="product_description">
+          {{ productdetails ? productdetails.product_detail:'' }}
+        </div>
+        <div id="product_tags">
+          <div class="product_tag">甲冑</div>
+          <div class="product_tag">重い</div>
+        </div>
+        <div id="product_price">{{ productdetails ? exprice(productdetails.price):'' }} 円 <span>(税抜)</span></div>
+      </div>
     </div>
   <v-container grid-list-xs>
     <v-content>
@@ -20,9 +42,6 @@
       </v-btn>
       <v-card>
         <v-card-text>
-          <v-flex xs12 md12>
-            <img src="https://picsum.photos/1500/600?random=1" alt style="width: 100%;" />
-          </v-flex>
           <v-flex xs12 md12>
             <v-card>
               <v-card-title primary-title>{{$route.params.product}}</v-card-title>
@@ -211,6 +230,9 @@ export default {
     reload() {
         this.$router.go({path: this.$router.currentRoute.path, force: true});
     },
+    exprice(val){
+      return val.toLocaleString();
+    },
     ...mapActions('products',['getproductdetails']),
     ...mapActions('carts',['cart_upload'])
   },
@@ -268,9 +290,82 @@ a {
 }
 
 #product_details{
+  box-sizing: border-box;
+  padding:0px 20px;
   width: 600px;
   height: 600px;
   background-color: #444444;
+}
+
+#product_titles{
+  display: flex;
+  width: 100%;
+  height: 110px;
+}
+
+#product_title{
+  display: flex;
+  box-sizing: border-box;
+  padding-left: 40px;
+  font-size: 30px;
+  align-items: center;
+  width: 50%;
+  height: 110px;
+}
+
+#product_rate{
+  display: flex;
+  justify-content: flex-end;
+  font-size: 30px;
+  align-items: center;
+  width: 50%;
+  height: 110px;
+  font-size: 11px;
+}
+
+#product_rate p{
+  margin-top: 23px;
+}
+
+#product_description{
+  width: 100%;
+  height: 150px;
+}
+
+#product_tags{
+  display: flex;
+  align-items: flex-end;
+  width: 100%;
+  height: 50px;
+  border-bottom: 1.2px solid #999999;
+}
+
+.product_tag{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 50px;
+  height: 20px;
+  margin: 0 10px 15px 10px;
+  background-color: #999999;
+  border-radius: 2px;
+  font-size: 12px;
+}
+
+#product_price{
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 0 0 0 40px;
+  width: 100%;
+  height: 100px;
+  font-size: 30px;
+}
+
+#product_price span{
+  font-size: 12px;
+  padding-top: 10px;
+  margin-left: 10px;
 }
 
 </style>
