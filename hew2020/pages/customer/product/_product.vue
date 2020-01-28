@@ -7,6 +7,7 @@
       <div class="bread">></div>
       <div class="bread">工房名</div>
     </div>
+    
     <div id="product_infos">
       <div id="product_img">
         <v-lazy-image style="width: 100%;object-fit: cover;height: 500px;vertical-align:bottom" :src="productdetails.product_img" />
@@ -37,13 +38,24 @@
           <div class="product_tag">甲冑</div>
           <div class="product_tag">重い</div>
         </div>
-        <div id="product_price">{{ productdetails.price ? exprice(productdetails.price):'' }} 円 <span>(税抜)</span></div>
+        <div id="product_price">
+          {{ productdetails.price ? exprice(productdetails.price):'' }} 円 <span>(税抜)</span>
+          <div id="product_favo">
+            <v-hover v-slot:default="{ hover }">
+              <v-btn :color="hover ? '#F8CE38':'grey'" icon>
+                <!-- <v-btn color="red" icon> -->
+                <v-icon x-large>mdi-star-circle-outline</v-icon>
+              </v-btn>
+            </v-hover>
+          </div>
+        </div>
         <div id="product_ui">
           <div id="product_selector">
             <div>在庫 <span>{{ productdetails ? productdetails.stock + '個':'' }}</span></div>
             <div>数量 
               <span>
-                <select>
+                <select v-model="count">
+                  <option :value="item" v-for="(item, index) in stock" :key="index">{{ item + '個' }}</option>
                 </select>
               </span>
             </div>
@@ -71,12 +83,53 @@
         </div>
       </div>
     </div>
-  <v-container grid-list-xs>
-    <v-content>
-      <v-btn icon @click="$router.go(-1)">
-        <v-icon>mdi-chevron-left</v-icon>back
-      </v-btn>
-      <v-card>
+
+    <div id="any_info">
+      <div id="info_table">
+        <div style="font-size: 22px;margin-bottom: 15px;">商品の情報</div>
+        <table>
+          <tr>
+            <td class="th">サイズ</td>
+            <td>{{ productdetails ? productdetails.size:'' }}</td>
+          </tr>
+          <tr>
+            <td class="th">素材</td>
+            <td>{{ productdetails ? productdetails.material:'' }}</td>
+          </tr>
+          <tr>
+            <td class="th">重量</td>
+            <td>{{ productdetails ? productdetails.weight:'' }}</td>
+          </tr>
+          <tr>
+            <td class="th">評価</td>
+            <td>
+              <v-rating
+                color="yellow darken-3"
+                background-color="grey darken-1"
+                v-model="item.rating"
+                readonly
+                half-increments
+                size="14px"
+              ></v-rating>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div id="any_search">
+        <div style="font-size: 22px;margin-bottom: 15px;">他の商品を探す</div>
+        <div id="workshop_btn">
+          <v-btn @click="$router.push(`/customer/workshop/${workshop_data.shop_id}`)" color="#DC3739" style="color: white;width: 65%;height: 65px;font-size: 20px;" class="sawarabi" depressed>同じ工房の商品を見る</v-btn>
+        </div>
+        <div id="tag_search_title" class="sawarabi">タグで探す</div>
+        <div id="search_tags">
+          <div class="search_tag">甲冑</div>
+          <div class="search_tag">重い</div>
+        </div>
+      </div>
+    </div>
+
+    <div id="reviews">
+      <v-card flat>
         <v-divider></v-divider>
         <v-card-text>
           <v-subheader>この商品を評価する</v-subheader>
@@ -131,8 +184,7 @@
           </v-layout>
         </v-card>
       </v-dialog>
-    </v-content>
-  </v-container>
+    </div>
   </v-layout>
 </template>
 
@@ -150,12 +202,17 @@ export default {
     await this.getproductdetailreq();
     await this.getShopdata({wsid:this.productdetails.shop_id})
     console.log(this.workshop_data)
+    for(var i = 0; i<this.productdetails.stock ; i++){
+      this.stock.push(i+1);
+    }
   },
 
   data() {
     return {
       selectItem: 0,
       circle: false,
+      stock: [],
+      count: 1,
       item: {
         title: "",
         rating: 4.5,
@@ -194,7 +251,8 @@ export default {
     async cart_upreq(){
       var payload = {
         product_id : this.$route.params.product,
-        user_id : this.loginuserdata.user_data.user_id
+        user_id : this.loginuserdata.user_data.user_id,
+        count: this.count
       }
       console.log(payload);
       try{
@@ -266,6 +324,7 @@ a {
   width: 100%;
   height: 620px;
   display: flex;
+  flex-wrap: wrap;
   border-radius: 3px;
   overflow: hidden;
 }
@@ -278,6 +337,7 @@ a {
 #circle_body{
   box-sizing: border-box;
   padding-top: 10px;
+  padding-left: 10px;
   width: 100%;
   height: 120px;
   background-color: #ffffff;
@@ -300,11 +360,12 @@ a {
 #product_title{
   display: flex;
   box-sizing: border-box;
-  padding-left: 40px;
+  padding-left: 30px;
   font-size: 30px;
   align-items: center;
   width: 50%;
   height: 110px;
+  white-space: nowrap
 }
 
 #product_rate{
@@ -350,8 +411,7 @@ a {
 #product_price{
   display: flex;
   align-items: center;
-  box-sizing: border-box;
-  padding: 0 0 0 40px;
+  justify-content: flex-end;
   width: 100%;
   height: 100px;
   font-size: 30px;
@@ -361,6 +421,14 @@ a {
   font-size: 12px;
   padding-top: 10px;
   margin-left: 10px;
+}
+
+#product_favo{
+  width: 60%;
+  box-sizing: border-box;
+  padding-right: 20px;
+  display: flex;
+  justify-content: flex-end;
 }
 
 #product_ui{
@@ -426,6 +494,86 @@ a {
   justify-content: flex-end;
   width: 100px;
   height: 80px;
+}
+
+#any_info{
+  padding-top: 80px;
+  display: flex;
+  width: 100%;
+  height: 350px;
+  background-color: #ffffff
+}
+
+#info_table{
+  margin-left: 10px;
+  width: 45%;
+}
+
+#info_table table{
+}
+
+#info_table td{
+  font-size: 13px;
+  width: 300px;
+  height: 10px;
+  padding: 8px 0 8px 15px;
+  border: 1px solid #e8e8e8;
+  border-width: 1px 0 1px 0;
+  box-sizing: border-box;
+  background-color: #ffffff;
+}
+
+#info_table td.th{
+  width: 200px;
+  border: 1px solid #e8e8e8;
+  border-width: 1px 0 1px 0;
+  background-color: #f9f9f9;
+}
+
+#any_search{
+  box-sizing: border-box;
+  padding-left: 40px;
+  width: 50%;
+  height: 350px;
+}
+
+#workshop_btn{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+#tag_search_title{
+  width: 100%;
+  padding-top: 30px;
+  padding-left: 70px;
+}
+
+#search_tags{
+  display: flex;
+  width: 100%;
+  padding-top: 10px;
+  padding-left: 90px;
+}
+
+.search_tag{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 80px;
+  height: 40px;
+  margin: 0 40px 15px 10px;
+  background-color: #e1e1e1;
+  border-radius: 2px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+#reviews{
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0 10px 0 10px;
+  background-color: #ffffff;
 }
 
 .v-lazy-image {
