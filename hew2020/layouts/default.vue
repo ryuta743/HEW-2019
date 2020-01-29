@@ -116,7 +116,7 @@
 
               <v-flex md10 xs8>
                 <v-subheader>国籍</v-subheader>
-                <v-select outlined :items="countorys" label="在住している国を選択してください" v-model="countory"></v-select>
+                <v-select outlined :items="countrys" label="在住している国を選択してください" item-text="label" item-value="value" v-model="country"></v-select>
               </v-flex>
               <v-flex md11 xs9>
                 <v-divider style="margin-top: 10px;"></v-divider>
@@ -125,10 +125,10 @@
               <v-flex md10 xs8>
                 <v-subheader>性別</v-subheader>
                 <v-layout row wrap style="padding-bottom: 30px;">
-                  <v-radio-group v-model="gender">
-                    <v-radio label="男性" value="0"></v-radio>
-                    <v-radio label="女性" value="1"></v-radio>
-                    <v-radio label="その他" value="2"></v-radio>
+                  <v-radio-group :item="genders" v-model="gender">
+                    <v-radio label="男性" value=0></v-radio>
+                    <v-radio label="女性" value=1></v-radio>
+                    <v-radio label="その他" value=2></v-radio>
                   </v-radio-group>
                 </v-layout>
               </v-flex>
@@ -140,7 +140,7 @@
               <v-flex md10 xs8>
                 <v-subheader>日本伝統工芸品関係者（伝統工芸職人）の方は下のボックスにチェックを入れてください</v-subheader>
                 <v-layout row wrap align-center>
-                  <v-checkbox label="日本伝統工芸品関係者です" value="1"  v-model="craft"></v-checkbox>
+                  <v-checkbox label="日本伝統工芸品関係者です" value=1  v-model="craft"></v-checkbox>
                   <v-layout row wrap justify-end>
                     <v-btn color="primary" @click="e1check2">確認</v-btn>
                   </v-layout>
@@ -171,7 +171,7 @@
                 </tr>
                 <tr>
                   <td>国籍</td>
-                  <td>{{countory}}</td>
+                  <td>{{countrys[country]}}</td>
                 </tr>
                 <tr>
                   <td>ご質問</td>
@@ -196,7 +196,7 @@
                     <br />お疲れ様でした！
                   </v-card-text>
                   <v-card-text style="text-align: center;">
-                    <v-btn color="primary" @click="createADialog = false">OK</v-btn>
+                    <v-btn color="primary" @click="createADialog = false; e1 = 1">OK</v-btn>
                   </v-card-text>
                 </v-card>
               </v-flex>
@@ -310,11 +310,29 @@ export default {
       user_mail: '',
       user_pass: '',
       user_name: '',
-      gender: 0,
-      genders: ["男", "女" ,"その他"],
-      countorys: ["日本(Japan)", "アメリカ合衆国(U.S.A)", "中国 (china)" ,"ロシア (russia)" ,"タイ(thailand)" ,"フランス(france)","その他(sonota)"],
-      countory: '',
-      craft:0,
+      gender: null,
+      genders: [
+        {label:'男' , value: 0},
+        {label:'女' , value: 1},
+        {label:'その他' , value: 2}
+      ],
+      countrys: [
+        {label:'日本(japan)' , value: 1},
+        {label:'アメリカ合衆国(U.S.A)' , value: 2},
+        {label:'中国 (china)' , value: 3},
+        {label:'ロシア (russia)' , value: 4},
+        {label:'タイ(thailand)' , value: 5},
+        {label:'フランス(france)' , value: 6},
+        {label:'韓国(korea)' , value: 7},
+        {label:'その他(other)' , value: 8},
+      ],
+      // countrys: ["日本(Japan)", "アメリカ合衆国(U.S.A)", "中国 (china)" ,"ロシア (russia)" ,"タイ(thailand)" ,"フランス(france)","その他(sonota)"],
+      country: 0,
+      craft: 0,
+      usertype: [
+        {label:'部外者' , value: 0},
+        {label:'関係者' , value: 1}
+      ],
       items: [
         {
           icon: "mdi-account-box",
@@ -343,9 +361,10 @@ export default {
     },
 
     e1check2() {
-      if(this.user_name == '' || this.countorys == '' || this.gender == ''){
+      if(this.user_name == '' || this.countrys == '' || this.gender == ''){
         this.e1errorflg = 1
       }else{
+        console.log(this.countrys[this.country])
         this.e1 = 3
       }
     },
@@ -355,17 +374,18 @@ export default {
         name : this.user_name,
         pass : this.user_pass,
         mail : this.user_mail,
-        gender : this.gender,
-        countory : this.countory,
-        user_type : this.craft,
+        gender : this.genders[this.gender].value,
+        country : this.country,
+        user_type : this.usertype[this.craft].value,
       }
-
       try{
         this.inuserdata({payload});
+        this.e1 = 4
       }catch(e){
         console.log('エラー発生'),
         console.log(e)
       }
+      this.e1 = 4
     },
     
     async logindataReq() {
@@ -416,9 +436,11 @@ export default {
     //   this.$router.push("/");
     // },
     ...mapActions(['login','logout']),
+    ...mapActions('userdata',['inuserdata'])
   },
   computed: {
     ...mapGetters(['loginuserdata']),
+    ...mapGetters('userdata',['userdata'])
   }
 };
 </script>
