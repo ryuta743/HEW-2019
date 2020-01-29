@@ -200,7 +200,8 @@ export default {
 
   async mounted() {
     await this.getproductdetailreq();
-    await this.getShopdata({wsid:this.productdetails.shop_id})
+    console.log(this.productdetails.shop_id)
+    this.getShopdata({wsid:this.productdetails.shop_id})
     console.log(this.workshop_data)
     for(var i = 0; i<this.productdetails.stock ; i++){
       this.stock.push(i+1);
