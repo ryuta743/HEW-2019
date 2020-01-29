@@ -167,15 +167,16 @@
                 </tr>
                 <tr>
                   <td>性別</td>
-                  <td>{{genders[gender]}}</td>
+                  <td>{{genders_2[gender]}}</td>
                 </tr>
                 <tr>
                   <td>国籍</td>
-                  <td>{{countrys[country]}}</td>
+                  <td>{{countrys_2[country]}}</td>
                 </tr>
                 <tr>
                   <td>ご質問</td>
-                  <td>{{craft}}</td>
+                  <td v-if="craft==0">私は工房関係者ではありません</td>
+                  <td v-else-if="craft==1">私は工房関係者です</td>
                 </tr>
               </tbody>
             </v-simple-table>
@@ -316,18 +317,21 @@ export default {
         {label:'女' , value: 1},
         {label:'その他' , value: 2}
       ],
+      genders_2:['男','女','その他'],
+
+      country: null,
       countrys: [
-        {label:'日本(japan)' , value: 1},
-        {label:'アメリカ合衆国(U.S.A)' , value: 2},
-        {label:'中国 (china)' , value: 3},
-        {label:'ロシア (russia)' , value: 4},
-        {label:'タイ(thailand)' , value: 5},
-        {label:'フランス(france)' , value: 6},
-        {label:'韓国(korea)' , value: 7},
-        {label:'その他(other)' , value: 8},
+        {label:'日本(japan)' , value: 0},
+        {label:'アメリカ合衆国(U.S.A)' , value: 1},
+        {label:'中国 (china)' , value: 2},
+        {label:'ロシア (russia)' , value: 3},
+        {label:'タイ(thailand)' , value: 4},
+        {label:'フランス(france)' , value: 5},
+        {label:'韓国(korea)' , value: 6},
+        {label:'その他(other)' , value: 7},
       ],
-      // countrys: ["日本(Japan)", "アメリカ合衆国(U.S.A)", "中国 (china)" ,"ロシア (russia)" ,"タイ(thailand)" ,"フランス(france)","その他(sonota)"],
-      country: 0,
+      countrys_2:['日本(japan)','アメリカ合衆国(U.S.A)','中国(china)','ロシア(russia)','タイ(thailand)','フランス(france)','韓国(korea)','その他(other)'],
+      
       craft: 0,
       usertype: [
         {label:'部外者' , value: 0},
