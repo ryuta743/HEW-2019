@@ -140,7 +140,7 @@
               <v-flex md10 xs8>
                 <v-subheader>日本伝統工芸品関係者（伝統工芸職人）の方は下のボックスにチェックを入れてください</v-subheader>
                 <v-layout row wrap align-center>
-                  <v-checkbox label="日本伝統工芸品関係者です" value=1  v-model="craft"></v-checkbox>
+                  <v-checkbox label="日本伝統工芸品関係者です" true-value="1" false-value="0"  v-model="craft"></v-checkbox>
                   <v-layout row wrap justify-end>
                     <v-btn color="primary" @click="e1check2">確認</v-btn>
                   </v-layout>
@@ -370,6 +370,7 @@ export default {
       }else{
         console.log(this.countrys[this.country])
         this.e1 = 3
+        console.log(this.craft);
       }
     },
 
