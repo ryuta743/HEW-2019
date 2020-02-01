@@ -13,32 +13,40 @@
         <h4 style="width: 100%;text-align: center;">ADVANCED SEARCH</h4>
         <div>{{error}}</div>
 
-        <select v-model="selected">
-          <option disabled value="">どっちを検索する？？</option>
-          <option value="0">商品検索</option>
-          <option value="1">工房検索</option>
-        </select>
-
         <v-layout row wrap justify-center style="padding-top: 10px;">
           <v-flex xs12 md6>
             <form @submit.prevent>
               <v-layout row wrap>
-                <v-text-field outlined label="検索" v-model="select_data" color="grey"></v-text-field>
+                <v-text-field outlined label="キーワード" v-model="select_data" color="grey"></v-text-field>
                 <v-btn type="submit" color="grey" style="height: 55px;" @click="get_select" depressed>
                   <v-icon>mdi-magnify</v-icon>
                 </v-btn>
               </v-layout>
             </form>
           </v-flex>
+          <div id="advance">
+                <label>検索対象:</label>
+                <select v-model="selected" id="search_select">
+                  <option disabled value="">未選択</option>
+                  <option value="0">商品</option>
+                  <option value="1">工房</option>
+                </select>
+                <label style="margin-left: 40px;">表示順(商品):</label>
+                <select v-model="howdisp_p" id="search_select">
+                  <option disabled value="">未選択</option>
+                  <option value="0">価格が安い順</option>
+                  <option value="1">評価が高い順</option>
+                </select>
+                <label style="margin-left: 40px;">表示順(工房):</label>
+                <select v-model="howdisp_w" id="search_select">
+                  <option disabled value="">未選択</option>
+                  <option value="0">新しい順</option>
+                  <option value="1">評価が高い順</option>
+                </select>
+            </div>
         </v-layout>
 
-        <div v-for="(item, index) in data" :key="index">
-          <!-- これ大事別ページに飛ぶやつで押された要素が名前になる -->
-          <div @click="$router.push(`/customer/product/${item.product_id}`)">{{item.product_name}}</div>
-          {{index}}
-        </div>
-
-        <!-- <v-divider></v-divider> -->
+        <v-divider style="margin-top: 15px;"></v-divider>
       </v-content>
       <v-content>
 
@@ -46,21 +54,41 @@
           
             <div id="products_header">
                 <div id="search_word">{{ search_word ? search_word:'新規商品一覧' }}</div>
-                <div id="search_count">{{ '-全' + products.length + '件' }}</div>
+                <div id="search_count">{{ '-全' + data.length + '件' }}</div>
             </div>
 
-            <v-card id="product" @click="$router.push(`/customer/product/${item.product_id}`)" flat v-for="(item, index) in products" :key="index">
+            <v-card id="product" @click="$router.push(`/customer/product/${item.product_id}`)" flat v-for="(item, index) in data" :key="index">
               <div id="product_img">
-                <v-lazy-image :src="item.src" style="width: 100%;object-fit: cover;height: 100%;vertical-align:bottom"/>
+                <v-lazy-image :src="item.product_img" style="width: 100%;object-fit: cover;height: 100%;vertical-align:bottom"/>
               </div>
               <v-card-text style="heigh: 150px;">
-                <div id="product_name">{{item.title}}</div>
+                <div id="product_name">{{item.product_name}}</div>
                 <div id="product_price">¥{{exprice(item.price)}}</div>
                 <div id="product_rate">
                   <v-rating
                       color="yellow darken-3"
                       background-color="grey darken-1"
-                      v-model="item.rating"
+                      v-model="rate"
+                      size="14px"
+                      readonly
+                      half-increments
+                  ></v-rating>
+                </div>
+              </v-card-text>      
+            </v-card>
+
+            <v-card id="product" @click="$router.push(`/customer/workshop/${item.shop_id}`)" flat v-for="(item, index) in shop_name" :key="index">
+              <div id="product_img">
+                <v-lazy-image :src="item.shop_img" style="width: 100%;object-fit: cover;height: 100%;vertical-align:bottom"/>
+              </div>
+              <v-card-text style="heigh: 150px;">
+                <div id="product_name">{{item.shop_name}}</div>
+                <div id="product_price" style="font-size: 12px;">{{ item.shop_description.slice(0,12) + '...' }}</div>
+                <div id="product_rate">
+                  <v-rating
+                      color="yellow darken-3"
+                      background-color="grey darken-1"
+                      v-model="rate"
                       size="14px"
                       readonly
                       half-increments
@@ -87,11 +115,17 @@ export default {
 
       selected: '',
 
+      howdisp_p: '',
+
+      howdisp_w: '',
+
       select_data: '',
 
       search_word: '',
 
       error: '',
+
+      rate: 12,
 
       products: [
         {
@@ -165,7 +199,15 @@ export default {
           price: 3000,
           tags: ["陶器", "食卓"],
           creater: "ここに出品工房情報"
-        }
+        },{
+          product_id: 1,
+          title: "やばいこけし",
+          src: "https://ichi-point.jp/wp-content/uploads/2018/01/IMG_1490-1.jpg",
+          rating: 5.0,
+          price: 3000,
+          tags: ["陶器", "食卓"],
+          creater: "ここに出品工房情報"
+        },
       ]
     };
   },
@@ -193,16 +235,13 @@ export default {
         }
         try{
           await this.search_workshop({payload});
+          this.search_word = this.select_data;
         }catch(e){
           console.log('エラー発生'),
           console.log(e)
         }
       }
-    }
-
-
-
-      
+    } 
       
     },
     exprice(val){
@@ -258,8 +297,8 @@ a {
 }
 
 #products{
-  justify-content:space-between
-
+  display: flex;
+  height: 500px;
 }
 
 #products_header{
@@ -270,6 +309,8 @@ a {
 }
 
 #search_word{
+  box-sizing: border-box;
+  padding-left: 15px;
   font-size: 26px;
   min-width: 50px;
   margin-right: 30px;
@@ -280,9 +321,23 @@ a {
   width: 100px
 }
 
+#advance{
+  color: #444;
+}
+
+#search_select{
+  width: 70px;
+  color: #444444;
+  outline: 0;
+  border: 1.2px solid grey;
+  border-width: 0 0 1.2px 0;
+  border-radius: 1px;
+}
+
 #product{
   width: 250px;
   margin-bottom: 20px;
+  margin-left: 15px
 }
 
 #product_img{
