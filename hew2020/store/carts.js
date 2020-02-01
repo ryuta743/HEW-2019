@@ -2,16 +2,21 @@ import moment from '~/plugins/moment';
 
 export const state = () =>({
     cart_data: null,
+    getcartdata:null,
 })
 
 export const getters = {
     cart_data: state => state.cart_data,
+    getcartdata: state => state.getcartdata,
 }
 
 export const mutations = {
     setCart_data(state,cart_data){
         state.cart_data = cart_data;
         console.log(cart_data)
+    },
+    setGetcartdata(state,getcartdata){
+        state.getcartdata = getcartdata;
     },
 }
 
@@ -26,5 +31,12 @@ export const actions = {
         console.log('APIから戻ってきた!!');
         console.log(cartdata);
         commit("setCart_data", cartdata);
+    },
+    
+    async get_cartdata({commit},{userid}){
+        console.log('カート情報引き出し')
+        const u_id = userid.data;
+        const get_cart = await this.$axios.$get(`http://133.18.194.128:5000/cart/get_cart_data?user_id=${u_id}`);
+        console.log(get_cart)
     },
 }

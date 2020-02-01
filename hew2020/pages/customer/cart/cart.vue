@@ -104,23 +104,34 @@ export default {
     };
   },
   mounted() {
-    this.cart_upreq()
+    this.get_cartdataReq()
   },
   methods:{
-    
-    async cart_upreq(){
-      var p_data = {
-        product_id : this.$route.params.product
+    async get_cartdataReq(){
+      var userid = {
+        data : this.loginuserdata.user_data.user_id
       }
-      console.log(p_data);
 
       try{
-        await this.getproductdetails({p_data})
+        await this.get_cartdata({userid})
       }catch(e){
-        console.log('エラー発生')
-        console.log(e)
+        console.log( 'エラー発生' + e )
       }
     },
+    
+    // async cart_upreq(){
+    //   var p_data = {
+    //     product_id : this.$route.params.product
+    //   }
+    //   console.log(p_data);
+
+    //   try{
+    //     await this.getproductdetails({p_data})
+    //   }catch(e){
+    //     console.log('エラー発生')
+    //     console.log(e)
+    //   }
+    // },
 
     circleOpen(){
       this.circle = true
@@ -130,10 +141,11 @@ export default {
         this.$router.go({path: this.$router.currentRoute.path, force: true});
     },
     ...mapActions('products',['getproductdetails']),
-    ...mapActions([])
+    ...mapActions('carts',['get_cartdata']),
   },
   computed: {
     ...mapGetters('products',['productdetails']),
+    ...mapGetters('cart',['getcartdata']),
     ...mapGetters(['loginuserdata'])
   }
   // methods:{
