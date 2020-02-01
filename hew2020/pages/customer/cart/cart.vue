@@ -108,10 +108,7 @@ export default {
   },
   methods:{
     async get_cartdataReq(){
-      var userid = {
-        data : this.loginuserdata.user_data.user_id
-      }
-
+      var userid = this.loginuserdata.user_data.user_id;
       try{
         await this.get_cartdata({userid})
       }catch(e){
