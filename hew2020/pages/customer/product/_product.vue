@@ -206,6 +206,7 @@ export default {
     for(var i = 0; i<this.productdetails.stock ; i++){
       this.stock.push(i+1);
     }
+    await this.get_cartdata({userid:this.loginuserdata.user_data.user_id});
   },
 
   data() {
@@ -250,20 +251,42 @@ export default {
     },
 
     async cart_upreq(){
-      var payload = {
-        product_id : this.$route.params.product,
-        user_id : this.loginuserdata.user_data.user_id,
-        count: this.count
+      var num
+      for(var i=0 ; i<getcartdata.length ; i++){
+        if(getcartdata[i].product_id==this.$route.params.product){
+          num = i
+          break;
+        }
       }
-      console.log(payload);
-      try{
-        await this.cart_upload({payload})
-      }catch(e){
-        console.log('エラー発生')
-        console.log(e)
+
+      if(num == null){
+        var upd_data = this.getcartdata[num]
+        try{
+          await this.upd_cart(upd_data)
+        }catch(e){
+          console.log('エラー発生')
+          console.log(e)
+        }
+      }else{
+        var payload = {
+          product_id : this.$route.params.product,
+          user_id : this.loginuserdata.user_data.user_id,
+          count: this.count
+        }
+        console.log(payload);
+        try{
+          await this.cart_upload({payload})
+        }catch(e){
+          console.log('エラー発生')
+          console.log(e)
+        }
       }
+
+      
       alert('完了');
     },
+
+
     circleOpen(){
       this.circle = true
       FYU.add("7u5u1lu09a", "fyu_7u5u1lu09a", { nologo: 1 });
@@ -276,11 +299,11 @@ export default {
     },
     ...mapActions('products',['getproductdetails']),
     ...mapActions('workshop_manage',['getShopdata']),
-    ...mapActions('carts',['cart_upload'])
+    ...mapActions('carts',['cart_upload','get_cartdata','upd_cart'])
   },
   computed: {
     ...mapGetters('products',['productdetails']),
-    ...mapGetters('carts',['cart_data']),
+    ...mapGetters('carts',['cart_data','getcartdata','updata_data']),
     ...mapGetters('workshop_manage',['workshop_data']),
     ...mapGetters(['loginuserdata'])
   }
