@@ -39,6 +39,6 @@ export const actions = {
         const u_id = userid.data;
         const get_cart = await this.$axios.$get(`http://133.18.194.128:5000/cart/get_cart_data?user_id=${u_id}`);
         console.log(get_cart)
-        commit("setGetcartdata", get_cart[0]);
+        commit("setGetcartdata", get_cart);
     },
 }
