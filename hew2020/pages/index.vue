@@ -4,14 +4,8 @@
       <div class="text-center">
         <v-carousel cycle height="750px" show-arrows-on-hover hide-delimiter-background>
           <v-carousel-item>
-            <img src="../static/mainVisual05.jpg" alt="メインビジュアル" style="width: 100%;">
+            <img src="../static/topimg.png" alt="メインビジュアル" style="width: 100%;height: 600px;object-fit: cover;">
           </v-carousel-item>
-          <!-- <v-carousel-item>
-            <img src="../static/mainVisual03.jpg" alt="メインビジュアル" style="width: 100%;">
-          </v-carousel-item>
-          <v-carousel-item>
-            <img src="../static/mainVisual04.jpg" alt="メインビジュアル" style="width: 100%;">
-          </v-carousel-item> -->
         </v-carousel>
       </div>
 
