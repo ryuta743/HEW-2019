@@ -252,22 +252,17 @@ export default {
 
     async cart_upreq(){
       var num
-      for(var i=0 ; i<getcartdata.length ; i++){
-        if(getcartdata[i].product_id==this.$route.params.product){
+      for(var i=0 ; i<this.getcartdata.length ; i++){
+        console.log(i)
+        console.log(this.getcartdata[i].product_id)
+        console.log(this.$route.params.product)
+        if(this.getcartdata[i].product_id==this.$route.params.product){
           num = i
           break;
         }
       }
 
       if(num == null){
-        var upd_data = this.getcartdata[num]
-        try{
-          await this.upd_cart(upd_data)
-        }catch(e){
-          console.log('エラー発生')
-          console.log(e)
-        }
-      }else{
         var payload = {
           product_id : this.$route.params.product,
           user_id : this.loginuserdata.user_data.user_id,
@@ -276,14 +271,27 @@ export default {
         console.log(payload);
         try{
           await this.cart_upload({payload})
+          location.reload();
+          alert('カート追加完了です');
+        }catch(e){
+          console.log('エラー発生')
+          console.log(e)
+        }
+      }else{
+        var data = {
+          upd_obj : this.getcartdata[num],
+          count : this.count
+        }
+        console.log(data.upd_obj)
+        try{
+          await this.upd_cart({data})
+          location.reload();
+          alert('カート追加完了しました')
         }catch(e){
           console.log('エラー発生')
           console.log(e)
         }
       }
-
-      
-      alert('完了');
     },
 
 
