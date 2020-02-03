@@ -222,7 +222,8 @@
     <v-app-bar :clipped-left="clipped" flat class="no-print">
       <!-- <v-app-bar-nav-icon @click.stop="drawer = !drawer" /> -->
       <!-- <v-btn outlined>ここにlogo</v-btn> -->
-      <img src="../static/tenshokuLogoH.png" alt="ロゴ" width="150px">
+      <img src="../static/hewlogo.png" alt="ロゴ" width="50px">
+      <div id="site_title"><span>天職</span>tenshoku</div>
       <v-tabs style="padding-left: 10px;">
         <v-tab @click="$router.push('/')">トップ</v-tab>
         <v-tab @click="$router.push('/shop')">ショップ</v-tab>
@@ -453,6 +454,15 @@ export default {
 <style>
 *{
   font-family: "Hannari","Sawarabi Mincho";
+}
+
+#site_title{
+  width: 500px;
+  padding-top:15px;
+}
+
+#site_title span{
+  font-size: 25px
 }
 
 @media print {
