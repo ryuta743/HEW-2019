@@ -316,7 +316,7 @@ export default {
 }
 
 #new_products{
-  margin-top: 10px;
+  margin-top: 15px;
   display: flex;
   width: 100%;
   justify-content: space-between
