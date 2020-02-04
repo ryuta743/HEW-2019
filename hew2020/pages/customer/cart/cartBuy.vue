@@ -5,13 +5,19 @@
         <v-card-title primary-title>購入必要情報入力</v-card-title>
         <v-divider></v-divider>
         <v-card-text>
-          <h3>名前</h3>
+          <h3>名前</h3><br>
           <v-layout row wrap>
             <v-text-field label="姓" outlined v-model="sei"></v-text-field>
             <v-text-field label="名" outlined v-model="mei"></v-text-field>
           </v-layout>
           <v-divider style="padding-bottom: 10px;"></v-divider>
-          <h3>住所</h3>
+          <h3>連絡先</h3><br>
+          <v-layout row wrap>
+            <v-text-field label="電話番号" outlined v-model="tel"></v-text-field>
+            <v-text-field label="メールアドレス" outlined v-model="mail"></v-text-field>
+          </v-layout>
+          <v-divider style="padding-bottom: 10px;"></v-divider>
+          <h3>住所</h3><br>
           <v-flex xs12 md4>
             <v-text-field label="国名" outlined v-model="country"></v-text-field>
           </v-flex>
@@ -33,15 +39,16 @@
             <v-text-field label="建物名・部屋番号" outlined v-model="address_05"></v-text-field>
           </v-flex>
           <v-divider style="padding-bottom: 10px;"></v-divider>
+          <h3>購入情報</h3><br>
           <v-select outlined :items="moneys" label="お支払い方法" item-text="label" item-value="value" v-model="buy_type"></v-select>
-          <!-- <div v-if="buy_type==1">
+          <div v-if="buy_type==1">
             <v-layout row wrap>
               <v-text-field label="カード番号(半角)" outlined v-model="card_num"></v-text-field>
               <v-select outlined :items="years" label="カード有効期限(年)" item-text="label" item-value="value" v-model="year"></v-select>
               <v-select outlined :items="months" label="カード有効期限(月)" item-text="label" item-value="value" v-model="month"></v-select> 
               <v-text-field label="セキュリティコード(カード背面の4桁か3桁の番号)" outlined v-model="card_sec"></v-text-field>
             </v-layout>    
-          </div> -->
+          </div>
           <v-divider style="padding-bottom: 10px;"></v-divider>
           <v-layout row wrap>
             <v-flex xs6 md1>
@@ -66,6 +73,8 @@ export default {
     return{
       sei: '',
       mei: '',
+      tel: '',
+      mail: '',
       country: '',
       address_01: '',
       address_02: '',
@@ -108,26 +117,35 @@ export default {
         {label: "11月" , value:10},
         {label: "12月" , value:11},
       ],
-      month: 0,
+      month: null,
       card_sec: 0,
     };
   },
   methods: {
     buycheckreq(){
-      const buy_userdata = {
-        sei : this.sei,
-        mei : this.mei,
-        country : this.country,
-        address_01 : this.address_01,
-        address_02 : this.address_02,
-        address_03 : this.address_03,
-        address_04 : this.address_04,
-        address_05 : this.address_05,
-        buy_type : this.buy_type,
+      const buy_data = {
+          buy_userdata : {
+          sei : this.sei,
+          mei : this.mei,
+          tel : this.tel,
+          mail : this.mail,
+          country : this.country,
+          address_01 : this.address_01,
+          address_02 : this.address_02,
+          address_03 : this.address_03,
+          address_04 : this.address_04,
+          address_05 : this.address_05,
+          buy_type : this.buy_type,
+        },
+        credit_data : {
+          card_num : this.card_num,
+          year : this.year,
+          month : this.month,
+          card_sec : this.card_sec
+        }
       }
-      console.log(buy_userdata)
-       try{
-        this.buycheck({buy_userdata});
+      try{
+        this.buycheck({buy_data});
       }catch(e){
         console.log('エラー発生'),
         console.log(e)

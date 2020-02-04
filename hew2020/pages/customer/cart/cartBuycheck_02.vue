@@ -4,27 +4,29 @@
       <v-card>
         <v-card-text>
           <v-icon size="20px" color="success">mdi-check-circle</v-icon>
-          <div>
+          <!-- <div>
+            <p>購入者情報</p>
             <tr>
-              <p>お届け先情報：</p>
-              <td>{{checkdata.sei}}</td>
-              <td>{{checkdata.mei}}　</td>
-              <td>{{checkdata.country}}　</td>
-              <td>{{checkdata.address_01}}</td>
-              <td>{{checkdata.address_02}}</td>
-              <td>{{checkdata.address_03}}</td>
-              <td>{{checkdata.address_04}}</td>
-              <td>{{checkdata.address_05}}　</td>
-              <td>{{buytype[checkdata.buy_type]}}</td>
+              <td>{{checkdata.buy_userdata.sei}}</td>
+              <td>{{checkdata.buy_userdata.mei}}　</td>
+              <td>{{check.data.buy_userdata.tel}}</td>
+              <td>{{checkdtaa.buy_userdata.mail}}</td> 
             </tr>
+            <p>お届け先情報：</p>
             <tr>
-              <p>クレジットカード情報：</p>
-              <td>{{creditdata.carednum}}</td>
-              <td>{{creditdata.year}}</td>
-              <td>{{creditdata.month}}</td>
-              <td>{{creditdata.cardsec}}</td>
+              <td>{{checkdata.buy_userdata.country}}　</td>
+              <td>{{checkdata.buy_userdata.address_01}}</td>
+              <td>{{checkdata.buy_userdata.address_02}}</td>
+              <td>{{checkdata.buy_userdata.address_03}}</td>
+              <td>{{checkdata.buy_userdata.address_04}}</td>
+              <td>{{checkdata.buy_userdata.address_05}}　</td>
             </tr>
-          </div>
+            <p>購入情報</p>
+            <tr>
+              <td>{{buytype[checkdata.buy_userdata.buy_type]}}</td>
+              <td></td>
+            </tr>
+          </div> -->
           <hr>
         </v-card-text>
         <v-card-actions>
