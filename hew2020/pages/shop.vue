@@ -263,7 +263,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .sawarabi{
   font-family: "Sawarabi Mincho";
 }

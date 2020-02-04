@@ -1,8 +1,8 @@
 import moment from '~/plugins/moment';
 
 export const state = () =>({
-    cart_data: null,
-    getcartdata:null,
+    cart_data: [],
+    getcartdata:[],
     updata_data:null,
 })
 
