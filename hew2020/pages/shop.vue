@@ -9,8 +9,7 @@
 
     <v-container grid-list-xs>
       <v-content>
-        <h5 style="width: 100%;text-align: center;">詳細検索</h5>
-        <h4 style="width: 100%;text-align: center;">ADVANCED SEARCH</h4>
+        <h4 style="width: 100%;text-align: center;">詳細検索</h4>
         <div>{{error}}</div>
 
         <v-layout row wrap justify-center style="padding-top: 10px;">
@@ -302,7 +301,7 @@ a {
 
 #products{
   display: flex;
-  height: 500px;
+  min-height: 500px;
 }
 
 #products_header{
