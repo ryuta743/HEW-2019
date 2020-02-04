@@ -49,7 +49,7 @@ export const actions = {
         commit('setProductdetails',product_details[0])
     },
     async get_newproduct({commit}){
-        console.log('頑張れ正都！！');
+        console.log('正都は優しさが溢れてすごい人！！');
         const new_productdata = await this.$axios.$get(`http://133.18.194.128:5000/product/get_newdata`);
         console.log(new_productdata)
         commit('setProductdetails',new_productdata)
