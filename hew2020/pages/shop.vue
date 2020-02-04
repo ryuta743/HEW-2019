@@ -110,6 +110,9 @@ import {mapActions,mapGetters} from 'vuex';
 import { toUnicode } from 'punycode';
 
 export default {
+  async mounted() {
+  await  this.get_newproductReq()
+  },
   data() {
     return {
 
@@ -214,7 +217,6 @@ export default {
 
   methods:{
     async get_select(){
-
       if(this.select_data == ''){
         this.error = '未入力です'
       }else{
@@ -241,14 +243,16 @@ export default {
           console.log(e)
         }
       }
-    } 
-      
+    }
+    },
+    async get_newproductReq(){
+      await this.get_newproduct();
     },
     exprice(val){
       return val.toLocaleString();
     },
 
-    ...mapActions('products',['select_product']),
+    ...mapActions('products',['select_product','get_newproduct']),
     ...mapActions('work_shop',['search_workshop'])
   },
 
@@ -259,7 +263,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 .sawarabi{
   font-family: "Sawarabi Mincho";
 }
