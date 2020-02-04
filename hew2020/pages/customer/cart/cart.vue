@@ -33,8 +33,8 @@
                   <div class="product_img">
                     <v-lazy-image :src="item.product_img" class="target" @click="$router.push(`/customer/product/${item.product_id}`)" style="width: 100%;height: 100%;object-fit: cover;" />
                   </div>
-                  <v-card-text class="target" @click="$router.push(`/customer/product/${item.product_name}`)" style="height: 10px;color: #707070;">{{item.product_name}}</v-card-text>
-                  <v-card-text class="target" @click="$router.push(`/customer/product/${item.product_name}`)">
+                  <v-card-text class="target" @click="$router.push(`/customer/product/${item.product_id}`)" style="height: 10px;color: #707070;">{{item.product_name}}</v-card-text>
+                  <v-card-text class="target" @click="$router.push(`/customer/product/${item.product_id}`)">
                     <div class="product_price" style="color: #707070;">{{ '¥' + exprice(item.price) }}</div>
                     <div class="product_rate">
                       <v-layout row wrap align-center>
