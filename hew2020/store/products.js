@@ -1,13 +1,11 @@
 export const state = () =>({
     data: [],
     productdetails: {},
-    newproductdata: null,
 })
 
 export const getters = {
     data: state => state.data,
     productdetails: state => state.productdetails,
-    newproductdata: state => state.newproductdata,
 }
 
 export const mutations = {
@@ -17,9 +15,6 @@ export const mutations = {
     },
     setProductdetails(state,productdetails){
         state.productdetails = productdetails;
-    },
-    setNewproductdata(state,newproductdata){
-        state.newproductdata = newproductdata;
     },
 }
 
@@ -52,6 +47,6 @@ export const actions = {
         console.log('正都は優しさが溢れてすごい人！！');
         const new_productdata = await this.$axios.$get(`http://133.18.194.128:5000/product/get_newdata`);
         console.log(new_productdata)
-        commit('setProductdetails',new_productdata)
+        commit('setData',new_productdata)
     },
 }
