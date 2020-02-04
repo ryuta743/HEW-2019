@@ -137,7 +137,8 @@ export default {
     ...mapActions('buy',['buycheck'])
   },
   computed: {
-    ...mapGetters('buy',['checkdata','creditdata'])
+    ...mapGetters('buy',['checkdata','creditdata']),
+    ...mapGetters('cart',['get_cartdata'])
   },
 };
 </script>
