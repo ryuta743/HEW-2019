@@ -1,6 +1,6 @@
 <template>
 　<div id="workshop_body">
-    <v-container grid-list-xs style="min-height: 100vh;width: 15%;" id="workshop_nav">
+    <div style="min-height: 100vh;width: 15%;" id="workshop_nav">
       <ul>
         <li @click="$router.push('/client/myshop/myshop')">
           <v-icon>mdi-home</v-icon> 管理ツールトップ
@@ -26,31 +26,31 @@
           <v-icon>mdi-chat</v-icon> チャットメッセージ
         </li>
       </ul>
-    </v-container>
+    </div>
     <v-container grid-list-xs style="min-height: 85vh;width: 85%;overflow-y: scroll;">
       <v-btn color="info" icon :loading="loading" v-if="loading" large></v-btn>
       <v-content v-if="!loading">
         <div id="sub_title">
           <h3>注文No.{{$route.params.order}}</h3>
           <div class="flex-grow-1"></div>
-          <v-btn color="grey" dark @click="$router.push('/client/myshop/orderlist')">注文一覧へ戻る</v-btn>
+          <v-btn color="grey" dark @click="$router.push('/client/myshop/orderlist')" depressed>注文一覧へ戻る</v-btn>
         </div>
-        <v-card>
-          <v-card>
+        <v-card flat>
+          <v-card flat="">
             <v-card-text>
               <v-layout row wrap>
                 <v-flex xs12 md6>
                   <h5>注文者名:</h5>
-                  <h4>{{ orderlist[0] ? orderlist[0].user_name:'' }}</h4>
-                </v-flex>
-                <v-flex xs12 md6>
+                  <h4 style="padding-bottom: 20px;">{{ orderlist[0] ? orderlist[0].user_name:'' }}</h4>
                   <h5>お届け先国:</h5>
                   {{ orderlist[0] ? orderlist[0].countory:'' }}<br>
+                </v-flex>
+                <v-flex xs12 md6>
                   <h5>お届け郵便番号:</h5>
                   {{ orderlist[0] ? orderlist[0].post_address:'' }}<br>
-                  <h5>お届け先住所:</h5>
+                  <h5 style="padding-top: 20px;">お届け先住所:</h5>
                   {{ orderlist[0] ? orderlist[0].address:'' }}<br>
-                  <h5>注文日:</h5>
+                  <h5 style="padding-top: 20px;">注文日:</h5>
                   {{ orderlist[0] ? orderlist[0].buy_date:'' }}
                 </v-flex>
               </v-layout>
@@ -63,6 +63,7 @@
                 <thead>
                   <tr>
                     <th style="color: #111;text-align: center;">商品番号</th>
+                    <th style="color: #111;text-align: center;">商品画像</th>
                     <th style="color: #111;text-align: center;">商品名</th>
                     <th style="color: #111;text-align: center;">個数</th>
                     <th style="color: #111;text-align: center;">単価</th>
@@ -72,6 +73,9 @@
                 <tbody>
                   <tr v-for="(item, index) in details" :key="index">
                     <td style="color: #111;text-align: center;">{{item.product_number}}</td>
+                    <td style="color: #111;text-align: center;">
+                      <v-lazy-image :src="item.product_img" style="width: 50px;height: 50px;object-fit: cover;" />
+                    </td>
                     <td style="color: #111;text-align: center;">{{item.product_name}}</td>
                     <td style="color: #111;text-align: center;">{{item.count}}</td>
                     <td style="color: #111;text-align: center;">{{exprice(item.price)}}円</td>
@@ -144,7 +148,6 @@ import {mapActions,mapGetters} from 'vuex'
 export default {
   data() {
     return {
-      shop_id: 1,
       loading: true,
       dialog: false,
       complete_dialog: false,
@@ -157,8 +160,9 @@ export default {
     };
   },
   async mounted() {
-    var r1 = this.getOrderlist({ wsid: this.shop_id });
-    var r2 = this.getOrderdetail({ wsid: this.shop_id,order_number: this.$route.params.order });
+    if(!this.loginuserdata.user_data.shop_id) return
+    var r1 = this.getOrderlist({ wsid: this.loginuserdata.user_data.shop_id });
+    var r2 = this.getOrderdetail({ wsid: this.loginuserdata.user_data.shop_id,order_number: this.$route.params.order });
     var r3 = await r1;
     var r4 = await r2;
     this.loading = false
@@ -173,7 +177,8 @@ export default {
     checkStatus(){
       return this.orderlist[0].status==0 ? true:false
     },
-    ...mapGetters("workshop_manage", ["workshop_data","orderlist","details"])
+    ...mapGetters("workshop_manage", ["workshop_data","orderlist","details"]),
+    ...mapGetters(['loginuserdata'])
   }
 };
 </script>
@@ -185,7 +190,10 @@ export default {
 }
 
 #workshop_nav {
-  border: 1.2px solid #dee5ec;
+  padding-top: 40px;
+  padding-left: 10px;
+  border: 1.2px solid #DEE5EC;
+  border-width: 1.2px 1.2px 1.2px 0;
   background-color: #ffffff;
 }
 
@@ -215,5 +223,13 @@ export default {
   padding: 20px;
   border-bottom: 1.2px solid #e6e6e6;
   margin-bottom: 10px;
+}
+
+.v-lazy-image {
+  opacity: 0;
+  transition: opacity .4s;
+}
+.v-lazy-image-loaded {
+  opacity: 1;
 }
 </style>

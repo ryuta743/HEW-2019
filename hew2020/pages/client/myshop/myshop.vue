@@ -1,6 +1,6 @@
 <template>
   <div id="workshop_body">
-    <v-container grid-list-xs style="min-height: 100vh;width: 15%;" id="workshop_nav" v-if="haveWorkshop">
+    <div style="min-height: 100vh;width: 15%;" id="workshop_nav" v-if="haveWorkshop">
       <ul>
         <li @click="$router.push('/client/myshop/myshop')" class="check"><v-icon>mdi-home</v-icon> 管理ツールトップ</li>
         <li @click="$router.push('/client/myshop/orderlist')"><v-icon>mdi-format-list-checks</v-icon> 注文一覧</li>
@@ -14,7 +14,7 @@
         <li @click="$router.push('/client/myshop/productdel')"><v-icon>mdi-close</v-icon> 商品編集・削除</li>
         <li @click="$router.push('/client/myshop/chat')"><v-icon>mdi-chat</v-icon> チャットメッセージ</li>
       </ul>
-    </v-container>
+    </div>
     <v-container grid-list-xs style="width: 85%;">
       <v-btn color="info" icon :loading="loading" v-if="loading" large></v-btn>
       <v-content v-if="!loading">
@@ -63,7 +63,7 @@
                       </tr>
                       <tr>
                         <td>管理人</td>
-                        <td>{{ workshop_data.shop_owner }}</td>
+                        <td>{{ loginuserdata.user_data.user_name }}</td>
                       </tr>
                       <tr>
                         <td>工房説明文</td>
@@ -97,8 +97,7 @@ export default {
   data() {
     return {
       loading: true,
-      haveWorkshop: true,
-      shop_id: 1,
+      haveWorkshop: false,
       datacollection: null,
       options: {
         scales: {
@@ -123,8 +122,11 @@ export default {
     };
   },
   async mounted() {
-    await this.getShopdata({wsid:this.shop_id})
-    this.loading = false
+    if(this.loginuserdata.user_data.shop_id){
+      await this.getShopdata({wsid:this.loginuserdata.user_data.shop_id})
+      this.loading = false
+      this.haveWorkshop = true
+    }
     if (process.client) {
       this.fillData();
     }
@@ -147,7 +149,8 @@ export default {
     ...mapActions('workshop_manage',['getShopdata'])
   },
   computed:{
-    ...mapGetters('workshop_manage',['workshop_data'])
+    ...mapGetters('workshop_manage',['workshop_data']),
+    ...mapGetters(['loginuserdata'])
   }
 };
 </script>
@@ -166,7 +169,10 @@ export default {
 }
 
 #workshop_nav{
+  padding-top: 40px;
+  padding-left: 10px;
   border: 1.2px solid #DEE5EC;
+  border-width: 1.2px 1.2px 1.2px 0;
   background-color: #ffffff;
 }
 

@@ -6,7 +6,8 @@ export const state = () => ({
     details: [],
     products: [],
     sales: [],
-    saleitem: []
+    saleitem: [],
+    order_sales: []
 })
 
 export const getters = {
@@ -16,7 +17,8 @@ export const getters = {
     details: state => state.details,
     products: state => state.products,
     sales: state => state.sales,
-    saleitem: state => state.saleitem
+    saleitem: state => state.saleitem,
+    order_sales: state => state.order_sales
 }
 
 export const mutations = {
@@ -40,6 +42,9 @@ export const mutations = {
     },
     setSaleitem(state,val){
         state.saleitem = val;
+    },
+    setOrderSales(state,val){
+        state.order_sales = val;
     }
 }
 
@@ -57,6 +62,9 @@ export const actions = {
     async getOrderlist({ commit }, { wsid }) {
         try {
             const ws_inf = await this.$axios.$get(`http://133.18.194.128:5000/workshopManage/getOrderlist?shop_id=${wsid}`);
+            for(var i = 0; i<ws_inf.length ; i++){
+                ws_inf[i].buy_date = moment(ws_inf[i].buy_date).format("YYYY年MM月DD日");
+            }
             commit('setOrderlist', ws_inf)
         } catch (error) {
             if (error.response.status === 403) {
@@ -73,6 +81,9 @@ export const actions = {
                 for (var i = 0; ws_inf.length > i; i++) {
                     if (ws_inf[i].proccess == 1) ws_inf[i].proccess = true;
                 };
+                for(var n = 0; n<ws_inf.length ; n++){
+                    ws_inf[n].product_img = `https://firebasestorage.googleapis.com/v0/b/tenshoku-9b0c8.appspot.com/o/images%2F${ws_inf[n].shop_id}%2Fproducts%2F${ws_inf[n].product_img}?alt=media`;
+                }
             }
             commit('setOrderdetail', ws_inf)
             console.log(ws_inf)
@@ -102,6 +113,24 @@ export const actions = {
         try {
             const sales = await this.$axios.$get(`http://133.18.194.128:5000/workshopManage/getSale?shop_id=${wsid}`);
             commit('setSales', sales)
+            console.log(sales)
+        } catch (error) {
+            if (error.response.status === 403) {
+                throw new Error("You don't have workshop")
+            }
+        }
+    },
+    async getOrderSales({ commit }, { wsid }){
+        console.log('受け取ったデータ:' + wsid)
+        try {
+            const sales = await this.$axios.$get(`http://133.18.194.128:5000/workshopManage/getOrderSales?shop_id=${wsid}`);
+            for(var i = 0; i<sales.length ; i++){
+                sales[i].product_img = `https://firebasestorage.googleapis.com/v0/b/tenshoku-9b0c8.appspot.com/o/images%2F${sales[i].shop_id}%2Fproducts%2F${sales[i].product_img}?alt=media`;
+            }
+            for(var n = 0; n<sales.length ; n++){
+                sales[n].record_date = moment(sales[n].record_date).format("YYYY年MM月DD日");
+            }
+            commit('setOrderSales', sales)
             console.log(sales)
         } catch (error) {
             if (error.response.status === 403) {
