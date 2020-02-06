@@ -142,6 +142,9 @@ export const actions = {
         try{
             console.log(saleid)
             var saleitem = await this.$axios.$get(`http://133.18.194.128:5000/workshopManage/getSaleitem?sale_id=${saleid}`)
+            for(var i = 0; i<saleitem.length ; i++){
+                saleitem[i].product_img = `https://firebasestorage.googleapis.com/v0/b/tenshoku-9b0c8.appspot.com/o/images%2F${saleitem[i].shop_id}%2Fproducts%2F${saleitem[i].product_img}?alt=media`;
+            }
         }catch(error){
             throw new Error("Error!")
         }
