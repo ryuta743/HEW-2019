@@ -2,12 +2,12 @@ import moment from '~/plugins/moment';
 
 export const state = () =>({
     checkdata: null,
-    creditdata: null,
+    buy_data: null,
 })
 
 export const getters = {
     checkdata: state => state.checkdata,
-    creditdata: state => state.creditdata,
+    buy_data: state => state.buy_data,
 }
 
 export const mutations = {
@@ -15,53 +15,78 @@ export const mutations = {
         state.checkdata = checkdata;
         console.log(checkdata)
     },
-    setCreditdata(state,creditdata){
-        state.creditdata = creditdata;
-        console.log(creditdata)
+    setBuy_data(state,buy_data){
+        state.buy_data = buy_data;
+        console.log(buy_data)
     },
 }
 
 export const actions = {
-    buycheck({commit},{buy_userdata}){
+    buycheck({commit},{buy_data}){
         console.log('storeきたよ')
-        commit("setCheckdata", buy_userdata);
+        console.log(buy_data)
+        commit("setCheckdata", buy_data);
     }, 
-    buycheck2({commit},{credit_data}){
-        console.log('storeきたよ')
-        commit("setCreditdata", credit_data);
+    async   insert_buy({commit},{buydata}){
+        console.log('購入するためのstoreきたよ')
+        console.log(buydata)
+
+        const saleid = new Date().getTime().toString(16) + Math.floor(1000 * Math.random()).toString(16);
+
+        var kind = [];
+        for(var c=0; c<buydata[1].cartdata.length; c++){
+            if(kind.indexOf(buydata[1].cartdata[c].shop_id) === -1){
+                kind.indexOf(buydata[1].cartdata[c].shop_id)
+                kind.push(buydata[1].cartdata[c].shop_id)
+            }
+        }
+
+        for(var a=0; a<kind.length; a++){
+            var shop_id = buydata[1].cartdata[a].shop_id
+            var now = moment().format('YYYY-MM-DD')
+            var user_id = buydata[2].user_data.user_data.user_id
+            var user_name = buydata[2].user_data.user_data.user_name
+            var country = buydata[0].country
+            var postalcode = buydata[0].postalcode
+            var address = buydata[0].address
+            var total = buydata[0].total
+            var buy_type = buydata[0].buy_type
+            var mail = buydata[0].mail
+            var tel = buydata[0].tel
+            var cart_buy = await this.$axios.$get(`http://133.18.194.128:5000/buy/cart_buy?order_id=${saleid}&shop_id=${shop_id}&now=${now}&country=${country}&postalcode=${postalcode}&address=${address}&total=${total}&user_id=${user_id}&user_name=${user_name}&buy_type=${buy_type}&mail=${mail}&tel=${tel}`);
+            console.log(cart_buy)
+        }
+
+        for(var i = 0; i<buydata[1].cartdata.length ; i++){
+            var shop_id = buydata[1].cartdata[i].shop_id
+            var now = moment().format('YYYY-MM-DD')
+            var country = buydata[0].country
+            var postalcode = buydata[0].postalcode
+            var address = buydata[0].address
+            var total = buydata[0].total
+            var user_id = buydata[2].user_data.user_data.user_id
+            var user_name = buydata[2].user_data.user_data.user_name
+            var buy_type = buydata[0].buy_type
+            var mail = buydata[0].mail
+            var tel = buydata[0].tel
+            var product_id = buydata[1].cartdata[i].product_id
+            var product_name = buydata[1].cartdata[i].product_name
+            var price = buydata[1].cartdata[i].price
+            var count = buydata[1].cartdata[i].count
+            var buy_detail = await this.$axios.$get(`http://133.18.194.128:5000/buy/buy_details?order_id=${saleid}&shop_id=${shop_id}&user_id=${user_id}&user_name=${user_name}&product_id=${product_id}&product_name=${product_name}&price=${price}&count=${count}`);
+            console.log('buy_detai:'+buy_detail)
+        }
+
+        for(var z=0; z<buydata[1].cartdata.length; z++){
+            var p_id = buydata[1].cartdata[z].product_id
+            var now_count = await this.$axios.$get(`http://133.18.194.128:5000/product/now_count?p_id=${p_id}`);
+            console.log(now_count)
+            var new_count = now_count[0].stock - buydata[1].cartdata[z].count
+            console.log(new_count)
+            var upd_count = await this.$axios.$get(`http://133.18.194.128:5000/product/upd_count?new_count=${new_count}&p_id=${p_id}`);
+            console.log(upd_count)
+        }
+
+        commit("setBuy_data",cart_buy);
     }, 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//     async cart_upload({commit},{payload}){
-//         console.log('コロナウイルス到来！！');
-//         const user_id = payload.user_id;
-//         const product_id = payload.product_id;
-//         const count = payload.count;
-//         const now = moment().format('YYYY-MM-DD')
-//         const cartdata = await this.$axios.$get(`http://133.18.194.128:5000/cart/cart_up?checkdata=${product_id}&user_data=${user_id}&count=${count}&date=${now}`);
-//         console.log('APIから戻ってきた!!');
-//         console.log(cartdata);
-//         commit("setCheckdata", cartdata);
-//     },
