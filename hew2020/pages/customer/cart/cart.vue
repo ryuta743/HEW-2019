@@ -27,7 +27,7 @@
                   <v-card-text style="display: flex;">
                     <v-btn color="error" outlined @click="cartKill(index)" small><v-icon hover color="red">mdi-close</v-icon></v-btn>
                     <div class="item_count">
-                      <input type="number" v-model="item.count" style="width: 20px;">個
+                      <input type="number" v-model="item.count" style="width: 30px;">個
                     </div>
                   </v-card-text>
                   <div class="product_img">
