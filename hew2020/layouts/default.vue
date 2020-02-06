@@ -188,7 +188,7 @@
           <v-stepper-content step="4">
             <v-layout row wrap justify-center>
               <v-flex md10>
-                <v-card>
+                <v-card flat>
                   <v-card-text style="text-align:center;">
                     <v-icon size="50px" color="success">mdi-check</v-icon>
                   </v-card-text>
@@ -420,6 +420,7 @@ export default {
         this.successDialog = true;
         this.logoutDialog = false;
         console.log('ログアウト完了')
+        this.$router.push('/')
       } catch (e) {
         this.formError = e.message
       }
