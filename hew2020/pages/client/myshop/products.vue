@@ -53,11 +53,11 @@
                       <v-chip color="red" v-if="item.stock < item.safety" dark>安全在庫{{item.safety - item.stock}}個不足</v-chip>
                   </v-card-text>
                   <v-flex xs12 md12>
-                    <v-lazy-image style="width: 100%;object-fit: scale-down;min-height: 350px;" :src="item.product_img" @click="$router.push(`/customer/product/${item.product_name}`)"></v-lazy-image>
+                    <v-lazy-image style="width: 100%;object-fit: scale-down;min-height: 350px;" :src="item.product_img" @click="$router.push(`/customer/product/${item.product_id}`)"></v-lazy-image>
                   </v-flex>
-                  <v-card-text style="font-weight: bold;height: 10px;" @click="$router.push(`/customer/product/${item.product_name}`)">{{item.product_name}}</v-card-text>
-                  <v-card-text style="height : 10px;" @click="$router.push(`/customer/product/${item.product_name}`)">
-                    <v-layout row wrap align-center @click="$router.push(`/customer/product/${item.product_name}`)">
+                  <v-card-text style="font-weight: bold;height: 10px;" @click="$router.push(`/customer/product/${item.product_id}`)">{{item.product_name}}</v-card-text>
+                  <v-card-text style="height : 10px;" @click="$router.push(`/customer/product/${item.product_id}`)">
+                    <v-layout row wrap align-center @click="$router.push(`/customer/product/${item.product_id}`)">
                       <v-rating
                         color="yellow darken-3"
                         background-color="grey darken-1"
