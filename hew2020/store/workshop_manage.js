@@ -184,11 +184,11 @@ export const actions = {
         try{
             if(payload.which === 1){
                 //削除
-                //this.$axios.$get(`http://133.18.194.128:5000/workshopManage/addSale?product_id=${payload.product_id}&which=0&order_number=${payload.order}`);
+                this.$axios.$get(`http://133.18.194.128:5000/workshopManage/proccessUp?product_id=${payload.product_id}&which=0&order_number=${payload.order}`);
                 commit('setProccess',{target: payload.target,flg:0})
                 return
             }else{
-                //this.$axios.$get(`http://133.18.194.128:5000/workshopManage/addSale?product_id=${payload.product_id}&which=1&order_number=${payload.order}`);
+                this.$axios.$get(`http://133.18.194.128:5000/workshopManage/proccessUp?product_id=${payload.product_id}&which=1&order_number=${payload.order}`);
                 commit('setProccess',{target: payload.target,flg:1})
                 return
             }
