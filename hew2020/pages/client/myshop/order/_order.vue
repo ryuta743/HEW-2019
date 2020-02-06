@@ -33,10 +33,13 @@
         <div id="sub_title">
           <h3>注文No.{{$route.params.order}}</h3>
           <div class="flex-grow-1"></div>
+          <v-btn color="success" text @click="$router.push(`/client/myshop/order_print/${$route.params.order}`)"><v-icon>mdi-cash-100</v-icon>領収書発行</v-btn>
+          <v-btn color="success" text @click="$router.push(`/client/myshop/delivery/${$route.params.order}`)"><v-icon>mdi-package-variant</v-icon>納品書発行</v-btn>
+          <v-btn color="success" text @click="$router.push(`/client/myshop/invoice/${$route.params.order}`)" style="margin-right: 20px;"><v-icon>mdi-ferry</v-icon>インボイス発行</v-btn>
           <v-btn color="grey" dark @click="$router.push('/client/myshop/orderlist')" depressed>注文一覧へ戻る</v-btn>
         </div>
         <v-card flat>
-          <v-card flat="">
+          <v-card>
             <v-card-text>
               <v-layout row wrap>
                 <v-flex xs12 md6>
@@ -80,7 +83,8 @@
                     <td style="color: #111;text-align: center;">{{item.count}}</td>
                     <td style="color: #111;text-align: center;">{{exprice(item.price)}}円</td>
                     <td style="display: flex;justify-content: center;box-sizing: border-box;padding-bottom:60px;">
-                      <v-checkbox v-model="item.proccess"></v-checkbox>
+                      <v-checkbox disabled v-model="item.proccess"></v-checkbox>
+                      <v-btn :color="item.proccess===1 ? 'red':'info'" @click="processcheck(index)" style="color: #fff;margin-top: 15px;" depressed>{{ item.proccess===1 ? '解除':'完了' }}</v-btn>
                     </td>
                   </tr>
                 </tbody>
@@ -91,10 +95,7 @@
           <v-card-actions>
             <!-- v-if="orderlist[0] ? checkStatus:''" -->
             <v-layout row wrap justify-center v-if="orderlist[0] ? checkStatus:''">
-              <v-btn color="success" @click="dialog = true">発送完了</v-btn>
-              <v-btn color="white" @click="$router.push(`/client/myshop/order_print/${$route.params.order}`)">領収書発行</v-btn>
-              <v-btn color="white" @click="$router.push(`/client/myshop/delivery/${$route.params.order}`)">納品書発行</v-btn>
-              <v-btn color="white" @click="$router.push(`/client/myshop/invoice/${$route.params.order}`)">インボイス発行</v-btn>
+              <v-btn color="success" @click="dialog = true" depressed>発送完了</v-btn>
             </v-layout>
           </v-card-actions>
         </v-card>
@@ -171,7 +172,17 @@ export default {
     exprice(val){
       return val.toLocaleString();
     },
-    ...mapActions("workshop_manage", ["getOrderdetail","getOrderlist"])
+    async processcheck(i){
+        //削除アップデート
+        var payload = {
+          which: this.details[i].proccess,
+          product: this.details[i].product_id,
+          order: this.details[i].order_number,
+          target: i
+        }
+        await this.proccessUp({payload})
+    },
+    ...mapActions("workshop_manage", ["getOrderdetail","getOrderlist","proccessUp"])
   },
   computed: {
     checkStatus(){

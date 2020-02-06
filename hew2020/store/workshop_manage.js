@@ -45,6 +45,11 @@ export const mutations = {
     },
     setOrderSales(state,val){
         state.order_sales = val;
+    },
+    setProccess(state,val){
+        state.details[val.target].proccess = val.flg;
+        console.log(val)
+        console.log(state.details[val.target].proccess)
     }
 }
 
@@ -171,6 +176,22 @@ export const actions = {
         try{
             const now = moment().format('YYYY-MM-DD');
             this.$axios.$get(`http://133.18.194.128:5000/workshopManage/addProduct?shop_id=${payload.wsid}&product_name=${payload.product_name}&product_name_en=${payload.product_name_en}&product_number=${payload.product_number}&price=${payload.price}&record_date=${now}&product_detail=${payload.description}&product_img=${payload.img}&stock=${payload.stock}&safety=${payload.safety}&size=${payload.size}&mate=${payload.mate}&weight=${payload.weight}`)
+        }catch(error){
+            throw new Error("Error")
+        }
+    },
+    async proccessUp({commit},{payload}){
+        try{
+            if(payload.which === 1){
+                //削除
+                //this.$axios.$get(`http://133.18.194.128:5000/workshopManage/addSale?product_id=${payload.product_id}&which=0&order_number=${payload.order}`);
+                commit('setProccess',{target: payload.target,flg:0})
+                return
+            }else{
+                //this.$axios.$get(`http://133.18.194.128:5000/workshopManage/addSale?product_id=${payload.product_id}&which=1&order_number=${payload.order}`);
+                commit('setProccess',{target: payload.target,flg:1})
+                return
+            }
         }catch(error){
             throw new Error("Error")
         }
