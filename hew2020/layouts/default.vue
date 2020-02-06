@@ -420,6 +420,7 @@ export default {
         this.successDialog = true;
         this.logoutDialog = false;
         console.log('ログアウト完了')
+        this.$router.push('/')
       } catch (e) {
         this.formError = e.message
       }
