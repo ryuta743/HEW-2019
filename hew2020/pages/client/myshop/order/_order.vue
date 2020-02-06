@@ -84,7 +84,7 @@
                     <td style="color: #111;text-align: center;">{{exprice(item.price)}}円</td>
                     <td style="display: flex;justify-content: center;box-sizing: border-box;padding-bottom:60px;">
                       <v-checkbox disabled v-model="item.proccess"></v-checkbox>
-                      <v-btn :color="item.proccess===1 ? 'red':'info'" @click="processcheck(index)" style="color: #fff;margin-top: 15px;" depressed>{{ item.proccess===1 ? '解除':'完了' }}</v-btn>
+                      <v-btn :color="item.proccess ? 'red':'info'" @click="processcheck(index)" style="color: #fff;margin-top: 15px;" depressed>{{ item.proccess ? '解除':'完了' }}</v-btn>
                     </td>
                   </tr>
                 </tbody>
@@ -176,7 +176,7 @@ export default {
         //削除アップデート
         var payload = {
           which: this.details[i].proccess,
-          product: this.details[i].product_id,
+          product_id: this.details[i].product_id,
           order: this.details[i].order_number,
           target: i
         }
