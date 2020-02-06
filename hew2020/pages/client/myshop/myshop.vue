@@ -126,6 +126,10 @@ export default {
       await this.getShopdata({wsid:this.loginuserdata.user_data.shop_id})
       this.loading = false
       this.haveWorkshop = true
+    }else{
+      if(this.loginuserdata.user_data && this.loginuserdata.user_data.user_type == 1){
+        this.loading = false
+      }
     }
     if (process.client) {
       this.fillData();
