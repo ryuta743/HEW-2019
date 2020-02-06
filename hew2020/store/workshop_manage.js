@@ -149,8 +149,7 @@ export const actions = {
         return true
     },
     async addSale({ commit }, { payload }) {
-        var strong = 1000;
-        const saleid = new Date().getTime().toString(16) + Math.floor(strong * Math.random()).toString(16);
+        const saleid = new Date().getTime().toString(16) + Math.floor(1000 * Math.random()).toString(16);
         const wsid = payload.wsid;
         const rate = payload.rate;
         const salename = payload.salename;
