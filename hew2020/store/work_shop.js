@@ -1,9 +1,11 @@
 export const state = () =>({
     shop_name: [],
+    mall: [],
 })
 
 export const getters = {
     shop_name: state => state.shop_name,
+    mall: state => state.mall,
 }
 
 export const mutations = {
@@ -11,6 +13,12 @@ export const mutations = {
         state.shop_name = shop_name;
         console.log(shop_name)
     },
+    setMall(state,mall){
+        state.mall.push(mall);
+    },
+    setMall_init(state,mall){
+        state.mall.shift(mall);
+    }
 }
 
 export const actions = {
@@ -23,4 +31,20 @@ export const actions = {
         console.log(shopdata);
         commit("setShop_name", shopdata)
     },
+    async mall_init({commit}){
+        console.log('配列を初期化しにきたべ')
+        for(var c=0; c<4; c++){
+            commit("setMall_init")
+        }
+    },
+    async random_mall({commit},{random_id}){
+        console.log('いんぽです')
+        console.log(random_id)
+        for(var i=0; i<random_id.length; i++){
+            var shop_id = random_id[i]
+            var randomshop_data = await this.$axios.$get(`http://133.18.194.128:5000/workshop/random_shop?shop_id=${shop_id}`);
+            console.log(randomshop_data)
+            commit("setMall", randomshop_data)
+        }
+    }
 }
