@@ -87,6 +87,9 @@ export const actions = {
             console.log(upd_count)
         }
 
-        commit("setBuy_data",cart_buy);
+        const del_cart = await this.$axios.$get(`http://133.18.194.128:5000/cart/delete_cart?user_id=${buydata[2].user_data.user_data.user_id}`);
+        console.log(del_cart)
+
+        commit("setBuy_data",del_cart);
     }, 
 }

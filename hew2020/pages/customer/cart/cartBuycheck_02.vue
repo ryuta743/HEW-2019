@@ -86,6 +86,9 @@ export default {
       ]
       try{
         await this.insert_buy({buydata})
+        if(this.buy_data === 7){
+          this.$router.push(`/customer/cart/cartBuy_end`)
+        }
       }catch(e){
         console.log('エラー発生')
         console.log(e)
