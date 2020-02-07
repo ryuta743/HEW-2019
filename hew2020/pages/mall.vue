@@ -3,7 +3,7 @@
     <h5 style="width: 100%;text-align: center;">ランダムモール</h5>
     <h4 style="width: 100%;text-align: center;">RANDOM MALL</h4>
     <h4 style="width: 100%;text-align: center;padding-bottom: 10px;">
-      <v-btn color="info" style="border-radius: 300px;">
+      <v-btn color="info" style="border-radius: 300px;" @click="get_workshopReq">
         <v-icon>mdi-reload</v-icon>
       </v-btn>
     </h4>
@@ -37,7 +37,12 @@
 </template>
 
 <script>
+import {mapActions,mapGetters} from 'vuex';
+
 export default {
+  async mounted() {
+    await this.get_workshopReq();
+  },
   data() {
     return {
       items: [
@@ -107,6 +112,33 @@ export default {
         }
       ]
     };
+  },
+  methods:{
+    async get_workshopReq(){
+      var random_id = []
+      for(var i=0; i<4;){
+        var min = 1 ;
+        var max = 10 ;
+        var randam = Math.floor( Math.random() * (max + 1 - min) ) + min ;
+        if(random_id.indexOf(randam) === -1){
+          random_id.push(randam)
+          i++
+        }
+      }
+      try{
+        await this.mall_init()
+        await this.random_mall({random_id})
+        console.log(this.mall)
+      }catch(e){
+        console.log('エラー発生')
+        console.log(e)
+      }
+    },
+
+    ...mapActions('work_shop',['random_mall','mall_init']),
+  },
+  computed:{
+    ...mapGetters('work_shop',['mall']),
   }
 };
 </script>
