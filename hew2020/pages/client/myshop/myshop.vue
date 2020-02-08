@@ -43,7 +43,7 @@
                     </div>
                     <div id="ws_posi">
                       <div id="ws_icon">
-                        <img :src=workshop_data.shop_img style="width: 100px;" />
+                        <img :src=workshop_data.shop_img style="width: 100px;height: 100px;object-fit: cover;" />
                       </div>
                       <div id="ws_name"><v-icon color="white" small>mdi-hammer</v-icon>{{ workshop_data.shop_name }}</div>
                     </div>

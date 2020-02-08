@@ -78,18 +78,19 @@ export default {
   data() {
     return {
       loading: true,
-      shop_id: 1,
     };
   },
   async mounted() {
-    await this.getOrderlist({ wsid: this.shop_id });
+    //if(this.loginuserdata.user_data)
+    await this.getOrderlist({ wsid: this.loginuserdata.user_data.shop_id });
     this.loading = false
   },
   methods: {
     ...mapActions("workshop_manage", ["getShopdata", "getOrderlist"])
   },
   computed: {
-    ...mapGetters("workshop_manage", ["workshop_data","orderlist"])
+    ...mapGetters("workshop_manage", ["workshop_data","orderlist"]),
+    ...mapGetters(["loginuserdata"])
   }
 };
 </script>

@@ -225,7 +225,12 @@
 </template>
 
 <script>
+import {mapGetters,mapActions} from 'vuex';
+
 export default {
+  async mounted() {
+    await this.get_workshopReq();
+  },
   data() {
     return {
       now_page: 0,
@@ -243,54 +248,6 @@ export default {
           "便利だけど人為的なものが身の回りに増える現代生活。自然素材なら安心して使うことができます。陶芸は地球の一部を拝借しての楽しい手作り生活です。「ゆう工房」は人為を感じない土味ある焼きものを提案しています。"
       },
       products: [
-        /* {
-          product_id: 1,
-          title: "スマイル鉢植え",
-          product_img: 'https://image1.shopserve.jp/taikeian.net/pic-labo/llimg/310a.jpg?t=20190824100607',
-          rating: 4.5,
-          price: 980,
-          tags: ["陶器", "食卓"]
-        },
-        {
-          product_id: 2,
-          title: "天職茶碗",
-          product_img: 'https://image1.shopserve.jp/taikeian.net/pic-labo/llimg/310a.jpg?t=20190824100607',
-          rating: 5,
-          price: 3000,
-          tags: ["陶器", "食卓"]
-        },
-        {
-          product_id: 3,
-          title: "味噌茶碗",
-          product_img: 'https://base-ec2if.akamaized.net/w=1024,a=1,q=90,u=0/images/user/blog/79663/blog/e5ae64b3059a46195f0afded25141798.jpg',
-          rating: 3.5,
-          price: 3000,
-          tags: ["陶器", "食卓"]
-        },
-        {
-          product_id: 4,
-          title: "小鳥のおもちゃ",
-          product_img: 'https://shop6-makeshop.akamaized.net/shopimages/hinohara/0000000001922.jpg',
-          rating: 1.5,
-          price: 2500,
-          tags: ["陶器", "食卓"]
-        },
-        {
-          product_id: 5,
-          title: "小鳥のおもちゃ",
-          product_img: 'https://shop6-makeshop.akamaized.net/shopimages/hinohara/0000000001922.jpg',
-          rating: 1.5,
-          price: 2500,
-          tags: ["陶器", "食卓"]
-        },
-        {
-          product_id: 6,
-          title: "小鳥のおもちゃ",
-          product_img: 'https://shop6-makeshop.akamaized.net/shopimages/hinohara/0000000001922.jpg',
-          rating: 1.5,
-          price: 2500,
-          tags: ["陶器", "食卓"]
-        } */
       ]
     };
   },
@@ -298,6 +255,21 @@ export default {
     exprice(val){
       return val.toLocaleString();
     },
+    async get_workshopReq(){
+      const shop_data = {
+        shop_id : this.$route.params.workshop
+      }
+      try{
+        await this.get_workshop({shop_data})
+      }catch(e){
+        console.log('エラー発生')
+        console.log(e)
+      }
+    },
+    ...mapActions('work_shop',['get_workshop'])
+  },
+  computed:{
+    ...mapGetters('work_shop',['workshop_data'])
   }
 };
 </script>
