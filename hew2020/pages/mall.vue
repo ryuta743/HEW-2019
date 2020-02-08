@@ -7,7 +7,8 @@
         <v-icon>mdi-reload</v-icon>
       </v-btn>
     </h4>
-    <v-flex xs12 md6 v-for="(item, index) in items" :key="index" @click="$router.push(`/customer/workshop/${item.title}`)">
+    <!-- <v-flex xs12 md6 v-for="(item, index) in items" :key="index" @click="$router.push(`/customer/workshop/${item.title}`)"> -->
+    <v-flex xs12 md6 v-for="(item, index) in items" :key="index" @click="get_workshop_dataReq">
       <v-hover v-slot:default="{ hover }">
         <v-card>
           <v-img :src="item.src" />
@@ -47,39 +48,9 @@ export default {
     return {
       items: [
         {
-          title: "宮崎ガラス細工",
-          src: "https://picsum.photos/500/300?random=1",
-          description: "ここに説明が入ります",
-          products: [
-            {
-              src: "https://picsum.photos/500/300?random=5"
-            },
-            {
-              src: "https://picsum.photos/500/300?random=6"
-            },
-            {
-              src: "https://picsum.photos/500/300?random=7"
-            }
-          ]
-        },
-        {
-          title: "北九州組み紐工房",
-          src: "https://picsum.photos/500/300?random=2",
-          description: "ここに説明が入ります",
-          products: [
-            {
-              src: "https://picsum.photos/500/300?random=5"
-            },
-            {
-              src: "https://picsum.photos/500/300?random=6"
-            },
-            {
-              src: "https://picsum.photos/500/300?random=7"
-            }
-          ]
-        },
-        {
-          title: "一宮",
+          shop_id: null,
+          title: null,
+          // title: "宮崎ガラス細工",
           src: "https://picsum.photos/500/300?random=3",
           description: "ここに説明が入ります",
           products: [
@@ -95,7 +66,42 @@ export default {
           ]
         },
         {
-          title: "the empire",
+          shop_id: null,
+          title: null,
+          src: "https://picsum.photos/500/300?random=3",
+          description: "ここに説明が入ります",
+          products: [
+            {
+              src: "https://picsum.photos/500/300?random=5"
+            },
+            {
+              src: "https://picsum.photos/500/300?random=6"
+            },
+            {
+              src: "https://picsum.photos/500/300?random=7"
+            }
+          ]
+        },
+        {
+          shop_id: null,
+          title: null,
+          src: "https://picsum.photos/500/300?random=3",
+          description: "ここに説明が入ります",
+          products: [
+            {
+              src: "https://picsum.photos/500/300?random=5"
+            },
+            {
+              src: "https://picsum.photos/500/300?random=6"
+            },
+            {
+              src: "https://picsum.photos/500/300?random=7"
+            }
+          ]
+        },
+        {
+          shop_id: null,
+          title: null,
           src: "https://picsum.photos/500/300?random=4",
           description: "ここに説明が入ります",
           products: [
@@ -136,8 +142,38 @@ export default {
         await this.mall_init()
         await this.random_mall({random_id})
         console.log(this.mall)
+        // 0
+        this.items[0].shop_id = this.mall[0][0].shop_id
+        this.items[0].title = this.mall[0][0].shop_name
+        this.items[0].src = this.mall[0][0].shop_img
+        this.items[0].description = this.mall[0][0].shop_description
+        console.log(this.items[0].description)
+        // 1
+        this.items[1].shop_id = this.mall[1][0].shop_id
+        this.items[1].title = this.mall[1][0].shop_name
+        this.items[1].src = this.mall[1][0].shop_img
+        this.items[1].description = this.mall[1][0].shop_description
+        // 2
+        this.items[2].shop_id = this.mall[2][0].shop_id
+        this.items[2].title = this.mall[2][0].shop_name
+        this.items[2].src = this.mall[2][0].shop_img
+        this.items[2].description = this.mall[2][0].shop_description
+        // 3
+        this.items[3].shop_id = this.mall[3][0].shop_id
+        this.items[3].title = this.mall[3][0].shop_name
+        this.items[3].src = this.mall[3][0].shop_img
+        this.items[3].description = this.mall[3][0].shop_description
       }catch(e){
         console.log('エラー発生')
+        console.log(e)
+      }
+    },
+
+    async get_workshop_dataReq(){
+      try{
+        
+      }catch(e){
+        console.log('エラー発生！！')
         console.log(e)
       }
     },
