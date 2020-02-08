@@ -114,11 +114,15 @@
 <script>
 import Logo from "~/components/Logo.vue";
 import VuetifyLogo from "~/components/VuetifyLogo.vue";
+import {mapActions,mapGetters} from 'vuex';
 
 export default {
   components: {
     Logo,
     VuetifyLogo
+  },
+  async mounted() {
+    await  this.get_newproductReq()
   },
   data() {
     return {
@@ -238,9 +242,16 @@ export default {
     };
   },
   methods:{
+    async get_newproductReq(){
+      await this.get_newproduct();
+    },
     exprice(val){
       return val.toLocaleString();
     },
+    ...mapActions('products',['get_newproduct']),
+  },
+  computed:{
+    ...mapGetters('products',['data'])
   }
 };
 </script>
