@@ -57,6 +57,7 @@ export const actions = {
     async getShopdata({ commit }, { wsid }) {
         try {
             const ws_inf = await this.$axios.$get(`http://133.18.194.128:5000/workshopManage/getShopdata?shop_id=${wsid}`);
+            console.log(ws_inf)
             commit('setWorkshop', ws_inf[0])
         } catch (error) {
             if (error.response.status == 403) {
