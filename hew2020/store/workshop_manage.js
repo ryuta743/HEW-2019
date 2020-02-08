@@ -66,9 +66,14 @@ export const actions = {
     },
     async getOrderlist({ commit }, { wsid }) {
         try {
-            const ws_inf = await this.$axios.$get(`http://133.18.194.128:5000/workshopManage/getOrderlist?shop_id=${wsid}`);
-            for(var i = 0; i<ws_inf.length ; i++){
-                ws_inf[i].buy_date = moment(ws_inf[i].buy_date).format("YYYY年MM月DD日");
+            console.log(wsid)
+            var ws_inf = [];
+            ws_inf = await this.$axios.$get(`http://133.18.194.128:5000/workshopManage/getOrderlist?shop_id=${wsid}`);
+            console.log(ws_inf)
+            if(ws_inf.length > 0){
+                for(var i = 0; i<ws_inf.length ; i++){
+                    ws_inf[i].buy_date = moment(ws_inf[i].buy_date).format("YYYY年MM月DD日");
+                }
             }
             commit('setOrderlist', ws_inf)
         } catch (error) {

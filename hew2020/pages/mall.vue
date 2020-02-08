@@ -8,10 +8,10 @@
       </v-btn>
     </h4>
     <!-- <v-flex xs12 md6 v-for="(item, index) in items" :key="index" @click="$router.push(`/customer/workshop/${item.title}`)"> -->
-    <v-flex xs12 md6 v-for="(item, index) in items" :key="index" @click="get_workshop_dataReq">
+    <v-flex xs12 md6 v-for="(item, index) in items" :key="index" @click="$router.push(`/customer/workshop/${item.shop_id}`)">
       <v-hover v-slot:default="{ hover }">
         <v-card>
-          <v-img :src="item.src" />
+          <v-img :src="item.src" style="width: 100%;height: 100%;object-fit: cover;" />
           <v-expand-transition>
             <div
               v-if="hover"
