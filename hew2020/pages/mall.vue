@@ -115,10 +115,17 @@ export default {
   },
   methods:{
     async get_workshopReq(){
+      try{
+        await this.shop_count()
+        console.log(this.shop_countdata.count_data)
+      }catch(e){
+        console.log('エラー発生')
+        console.log(e)
+      }
       var random_id = []
       for(var i=0; i<4;){
         var min = 1 ;
-        var max = 10 ;
+        var max = this.shop_countdata.count_data;
         var randam = Math.floor( Math.random() * (max + 1 - min) ) + min ;
         if(random_id.indexOf(randam) === -1){
           random_id.push(randam)
@@ -135,10 +142,10 @@ export default {
       }
     },
 
-    ...mapActions('work_shop',['random_mall','mall_init']),
+    ...mapActions('work_shop',['random_mall','mall_init','shop_count']),
   },
   computed:{
-    ...mapGetters('work_shop',['mall']),
+    ...mapGetters('work_shop',['mall','shop_countdata']),
   }
 };
 </script>
