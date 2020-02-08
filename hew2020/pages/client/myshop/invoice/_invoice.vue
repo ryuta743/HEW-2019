@@ -29,6 +29,13 @@
               </div>
               <div id="addressee">
                   <h5 class="gosi">お届け先<small class="gosi">(Addressee):</small></h5>
+                  <div class="gosi" style="font-size: 12px;padding-top: 10px;padding-left: 5px;">
+                      <!-- Takashi Kuwahata -->{{ loginuserdata.user_data.user_name }}<br>
+                      <!-- 13-2,Gohonmatsu 1-chome -->{{ workshop_data.address }}<br>
+                      <!-- Mimatachou,MIYAZAKI --><br>
+                      {{ workshop_data.postal_code }},JAPAN<br>
+                      TEL:0986-27-7307
+                  </div>
               </div>
           </div>
           <div id="rightbox">
