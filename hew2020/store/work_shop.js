@@ -2,12 +2,14 @@ export const state = () =>({
     shop_name: [],
     mall: [],
     shop_countdata: null,
+    workshop_data: null,
 })
 
 export const getters = {
     shop_name: state => state.shop_name,
     mall: state => state.mall,
     shop_countdata: state => state.shop_countdata,
+    workshop_data: state => state.workshop_data,
 }
 
 export const mutations = {
@@ -24,6 +26,10 @@ export const mutations = {
     setShop_countdata(state,shop_countdata){
         state.shop_countdata = shop_countdata;
         console.log(shop_countdata)
+    },
+    setWorkshop_data(state,workshop_data){
+        state.workshop_data = workshop_data
+        console.log(workshop_data)
     },
 }
 
@@ -59,5 +65,14 @@ export const actions = {
         let count = count_shop[0]
         console.log(count);
         commit("setShop_countdata", count)
+    },
+    // 工房詳細データ引き出し
+    async get_workshop({commit},{shop_data}){
+        console.log('頑張れ！！マサトmasato')
+        const shop_id = shop_data.shop_id
+        console.log(shop_id)
+        const workshopdata = await this.$axios.$get(`http://133.18.194.128:5000/workshop/get_workshop_data?shop_id=${shop_id}`);
+        console.log(workshopdata)
+        // commit("setWorkshop_data", workshopdata)
     }
 }
