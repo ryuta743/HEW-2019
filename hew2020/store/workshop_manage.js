@@ -7,7 +7,8 @@ export const state = () => ({
     products: [],
     sales: [],
     saleitem: [],
-    order_sales: []
+    order_sales: [],
+    trends:[]
 })
 
 export const getters = {
@@ -18,7 +19,8 @@ export const getters = {
     products: state => state.products,
     sales: state => state.sales,
     saleitem: state => state.saleitem,
-    order_sales: state => state.order_sales
+    order_sales: state => state.order_sales,
+    trends: state => state.trends
 }
 
 export const mutations = {
@@ -45,6 +47,9 @@ export const mutations = {
     },
     setOrderSales(state,val){
         state.order_sales = val;
+    },
+    setTrend(state,val){
+        state.trends = val;
     },
     setProccess(state,val){
         state.details[val.target].proccess = val.flg;
@@ -161,6 +166,25 @@ export const actions = {
         }
         commit('setSaleitem',saleitem)
         return true
+    },
+    async getTrend({commit},{wsid}){
+        try{
+            var trends = await this.$axios.$get(`http://133.18.194.128:5000/workshopManage/getTrend?shop_id=${wsid}`)
+            var trends_item = [];
+            var total = 0;
+            for(var i=3;i<trends.length;i++){
+                total += trends[i].datacount;
+            }
+            trends_item.push(trends[0]);
+            trends_item.push(trends[1]);
+            trends_item.push(trends[2]);
+            trends_item.push({product_name:'その他',datacount:total})
+
+            console.log(trends_item)
+        }catch(error){
+            throw new Error("Error!")
+        }
+        commit('setTrend',trends_item)
     },
     async addSale({ commit }, { payload }) {
         const saleid = new Date().getTime().toString(16) + Math.floor(1000 * Math.random()).toString(16);
