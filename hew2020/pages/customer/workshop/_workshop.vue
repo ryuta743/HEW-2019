@@ -104,13 +104,13 @@
               />
             </div>
             <div class="product_detail">
-              <div class="product_title">{{item.title}}</div>
+              <div class="product_title">{{item.product_name}}</div>
               <div class="product_price">¥ {{exprice(item.price)}}（税抜）</div>
               <div class="product_rate">
                 <v-rating
                   color="yellow darken-3"
                   background-color="grey darken-1"
-                  v-model="item.rating"
+                  v-model="rating"
                   readonly
                   size="15px"
                   half-increments
@@ -176,7 +176,7 @@
         <div style="margin-bottom:7px;color: #444;" class="sawarabi">お仕事連絡用メールアドレス</div>
         <div id="contact_mail">
           <div id="mail_icon"><v-icon x-large color="white">mdi-email</v-icon></div>
-          <div id="mailaddress">tenshoku20@hal.co.jp</div>
+          <div id="mailaddress">{{ workshop_data.work_mail }}</div>
         </div>
         <div style="margin-bottom:7px;color: #444;" class="sawarabi">お仕事連絡用電話番号</div>
         <div id="contact_mail">
@@ -247,7 +247,8 @@ export default {
         tags: ["陶器", "自然"],
         description:
           "便利だけど人為的なものが身の回りに増える現代生活。自然素材なら安心して使うことができます。陶芸は地球の一部を拝借しての楽しい手作り生活です。「ゆう工房」は人為を感じない土味ある焼きものを提案しています。"
-      }
+      },
+      rating: 4
     };
   },
   methods:{
@@ -511,7 +512,8 @@ export default {
   width: 100%;
   height: 35px;
   letter-spacing: 2px;
-  font-size: 18px;
+  color: #444;
+  font-size: 15px;
   font-family: "Sawarabi Mincho";
 }
 
