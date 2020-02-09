@@ -63,8 +63,8 @@
                         <tbody>
                             <tr v-for="(item, index) in trends" :key="index">
                                 <td>{{index!=3 ? index + 1 + '位':''}}</td>
-                                <td style="font-size: 11px;width: 128px;">{{item.product_name}}</td>
-                                <td>{{item.datacount}}個</td>
+                                <td style="font-size: 11px;width: 128px;">{{ trends[index] != undefind ? item.product_name:''}}</td>
+                                <td>{{ trends[index] != undefind ? item.datacount:'' }}個</td>
                             </tr>
                         </tbody>
                     </v-simple-table>
@@ -100,12 +100,15 @@ export default {
   async mounted() {
       if(!this.loginuserdata.user_data) return
       await this.getTrend({wsid:this.loginuserdata.user_data.shop_id})
-      if (process.client) {
-        this.fillData();
-      }
       var today = new Date();
       this.year = today.getFullYear();
       this.month = today.getMonth() + 1;
+      if (process.client) {
+        if(this.trends[2] != undefined){
+          this.fillData();
+        }
+      }
+      
   },
   methods:{
       fillData() {
