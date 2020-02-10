@@ -98,8 +98,23 @@ export default {
     this.get_cartdataReq()
   },
   methods:{
+    async cartKill(index){
+      const userid = this.loginuserdata.user_data.user_id;
+      console.log(index)
+      const del_data = {
+        userid : this.loginuserdata.user_data.user_id,
+        product_id : this.getcartdata[index].product_id
+      }
+      console.log(del_data)
+      try{
+        await this.del_cart({del_data})
+      }catch(e){
+        console.log('エラー発生')
+        console.log(e)
+      }
+    },
     async get_cartdataReq(){
-      var userid = this.loginuserdata.user_data.user_id;
+      const userid = this.loginuserdata.user_data.user_id;
       try{
         await this.get_cartdata({userid})
       }catch(e){
@@ -132,11 +147,11 @@ export default {
         this.$router.go({path: this.$router.currentRoute.path, force: true});
     },
     ...mapActions('products',['getproductdetails']),
-    ...mapActions('carts',['get_cartdata']),
+    ...mapActions('carts',['get_cartdata','del_cart']),
   },
   computed: {
     ...mapGetters('products',['productdetails']),
-    ...mapGetters('carts',['getcartdata']),
+    ...mapGetters('carts',['getcartdata','del_result']),
     ...mapGetters(['loginuserdata'])
   }
   // methods:{

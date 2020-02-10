@@ -4,12 +4,14 @@ export const state = () =>({
     cart_data: [],
     getcartdata:[],
     updata_data:null,
+    del_result:null,
 })
 
 export const getters = {
     cart_data: state => state.cart_data,
     getcartdata: state => state.getcartdata,
     updata_data: state => state.updata_data,
+    del_result: state => state.del_result,
 }
 
 export const mutations = {
@@ -24,6 +26,10 @@ export const mutations = {
     setUpdata_data(state,updata_data){
         state.updata_data = updata_data;
         console.log(updata_data)
+    },
+    setDel_result(state,del_result){
+        state.del_result = del_result;
+        console.log('カートデータは消えた' + del_result)
     },
 }
 
@@ -64,5 +70,15 @@ export const actions = {
         }
         console.log(get_cart)
         commit("setGetcartdata", get_cart);
+    },
+
+    async del_cart({commit},{del_data}){
+        console.log('カート出る')
+        const user_id = del_data.userid;
+        console.log(user_id);
+        const product_id = del_data.product_id;
+        console.log(product_id);
+        var delete_cart = await this.$axios.$get(`http://133.18.194.128:5000/cart/del_cartdata?user_id=${user_id}&product_id=${product_id}`);
+        commit("setGetcartdata", delete_cart);
     },
 }
