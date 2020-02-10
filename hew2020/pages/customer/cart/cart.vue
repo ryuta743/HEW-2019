@@ -112,6 +112,7 @@ export default {
         console.log('エラー発生')
         console.log(e)
       }
+      await this.get_cartdataReq();
     },
     async get_cartdataReq(){
       const userid = this.loginuserdata.user_data.user_id;
