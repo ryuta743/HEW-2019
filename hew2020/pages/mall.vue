@@ -140,38 +140,33 @@ export default {
       }
       try{
         await this.mall_init()
+        await this.products_list_init()
         await this.random_mall({random_id})
         console.log(this.mall)
-        // 0
-        this.items[0].shop_id = this.mall[0][0].shop_id
-        this.items[0].title = this.mall[0][0].shop_name
-        this.items[0].src = this.mall[0][0].shop_img
-        this.items[0].description = this.mall[0][0].shop_description
-        console.log(this.items[0].description)
-        // 1
-        this.items[1].shop_id = this.mall[1][0].shop_id
-        this.items[1].title = this.mall[1][0].shop_name
-        this.items[1].src = this.mall[1][0].shop_img
-        this.items[1].description = this.mall[1][0].shop_description
-        // 2
-        this.items[2].shop_id = this.mall[2][0].shop_id
-        this.items[2].title = this.mall[2][0].shop_name
-        this.items[2].src = this.mall[2][0].shop_img
-        this.items[2].description = this.mall[2][0].shop_description
-        // 3
-        this.items[3].shop_id = this.mall[3][0].shop_id
-        this.items[3].title = this.mall[3][0].shop_name
-        this.items[3].src = this.mall[3][0].shop_img
-        this.items[3].description = this.mall[3][0].shop_description
+        await this.products_list({random_id})
+        console.log(this.products_data)
+        for(var c=0; c<4; c++){
+          this.items[c].shop_id = this.mall[c][0].shop_id
+          this.items[c].title = this.mall[c][0].shop_name
+          this.items[c].src = this.mall[c][0].shop_img
+          this.items[c].description = this.mall[c][0].shop_description
+          console.log(this.items[c].title)
+          for(var z=0; z<3; z++){
+            this.items[c].products[z] = this.products_data[c][z].product_img
+            console.log(this.items[c].products[z])
+          }
+        }
       }catch(e){
         console.log('エラー発生')
         console.log(e)
       }
     },
     ...mapActions('work_shop',['random_mall','mall_init','shop_count']),
+    ...mapActions('products',['products_list','products_list_init']),
   },
   computed:{
     ...mapGetters('work_shop',['mall','shop_countdata']),
+    ...mapGetters('products',['products_data']),
   }
 };
 </script>

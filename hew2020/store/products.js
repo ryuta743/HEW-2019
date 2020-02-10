@@ -1,11 +1,13 @@
 export const state = () =>({
     data: [],
     productdetails: {},
+    products_data: [],
 })
 
 export const getters = {
     data: state => state.data,
     productdetails: state => state.productdetails,
+    products_data: state => state.products_data,
 }
 
 export const mutations = {
@@ -15,6 +17,13 @@ export const mutations = {
     },
     setProductdetails(state,productdetails){
         state.productdetails = productdetails;
+    },
+    setProducts_data(state,products_data){
+        state.products_data.push(products_data);
+        console.log(products_data)
+    },
+    setProducts_data_init(state,products_data){
+        state.products_data.shift(products_data);
     },
 }
 
@@ -51,5 +60,22 @@ export const actions = {
         }
         console.log(new_productdata)
         commit('setData',new_productdata)
+    },
+    async products_list({commit},{random_id}){
+        console.log('愛の力で商品データ取りにきたよ')
+        console.log(random_id)
+        for(var c=0; c<random_id.length; c++){
+            var shop_id = random_id[c]
+            console.log(shop_id)
+            var product_data = await this.$axios.$get(`http://133.18.194.128:5000/product/random_shop_products?shop_id=${shop_id}`);
+            console.log(product_data)
+            commit('setProducts_data', product_data)
+        }
+    },
+    async products_list_init({commit}){
+        console.log('消してやるぜーーー')
+        for(var z=0; z<4; z++){
+            commit("setProducts_data_init")
+        }
     },
 }
