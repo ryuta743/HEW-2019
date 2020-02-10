@@ -79,6 +79,5 @@ export const actions = {
         const product_id = del_data.product_id;
         console.log(product_id);
         var delete_cart = await this.$axios.$get(`http://133.18.194.128:5000/cart/del_cartdata?user_id=${user_id}&product_id=${product_id}`);
-        commit("setGetcartdata", delete_cart);
     },
 }
