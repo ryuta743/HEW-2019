@@ -2,7 +2,7 @@ export const state = () =>({
     shop_name: [],
     mall: [],
     shop_countdata: null,
-    workshop_data: null,
+    workshop_data: {},
 })
 
 export const getters = {
@@ -73,6 +73,6 @@ export const actions = {
         console.log(shop_id)
         const workshopdata = await this.$axios.$get(`http://133.18.194.128:5000/workshop/get_workshop_data?shop_id=${shop_id}`);
         console.log(workshopdata)
-        // commit("setWorkshop_data", workshopdata)
+        commit("setWorkshop_data", workshopdata[0])
     }
 }
