@@ -168,16 +168,6 @@ export default {
         console.log(e)
       }
     },
-
-    async get_workshop_dataReq(){
-      try{
-        
-      }catch(e){
-        console.log('エラー発生！！')
-        console.log(e)
-      }
-    },
-
     ...mapActions('work_shop',['random_mall','mall_init','shop_count']),
   },
   computed:{
