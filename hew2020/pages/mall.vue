@@ -88,7 +88,6 @@ export default {
     ],
   },
   async mounted() {
-    await this.get_workshopReq();
     this.move_shopper();
     console.log(this.mall)
   },
@@ -213,6 +212,7 @@ export default {
       alert('商品がクリックされました')
     },
     async move_shopper(){
+      await this.get_workshopReq();
       $('#shopper').css({'left':'-300px'});
       $('#shopper2').css({'right':'-300px'});
       $('#shopper3').css({'left':'-2000px'});
@@ -220,9 +220,9 @@ export default {
 
       $('#shopper').animate({'left':'2000px'},13000);
       $('#shopper2').animate({'right':'2000px'},16000);
-      $('#shopper3').animate({'left':'2000px'},20000);
-      $('#shopper4').animate({'right':'2000px'},20000);
-      setTimeout(this.move_shopper,24000);
+      $('#shopper3').animate({'left':'2000px'},24000);
+      $('#shopper4').animate({'right':'2000px'},24000);
+      setTimeout(this.move_shopper,26000);
     },
     ...mapActions('work_shop',['random_mall','mall_init','shop_count']),
     ...mapActions('products',['products_list','products_list_init']),
