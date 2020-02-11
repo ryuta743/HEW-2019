@@ -68,6 +68,9 @@ export const actions = {
             var shop_id = random_id[c]
             console.log(shop_id)
             var product_data = await this.$axios.$get(`http://133.18.194.128:5000/product/random_shop_products?shop_id=${shop_id}`);
+            for(var i = 0; i<product_data.length ; i++){
+                product_data[i].product_img = `https://firebasestorage.googleapis.com/v0/b/tenshoku-9b0c8.appspot.com/o/images%2F${shop_id}%2Fproducts%2F${product_data[i].product_img}?alt=media`;
+            }
             console.log(product_data)
             commit('setProducts_data', product_data)
         }
