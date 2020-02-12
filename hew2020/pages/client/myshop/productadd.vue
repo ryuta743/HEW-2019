@@ -379,15 +379,18 @@ export default {
       await this.addProduct({payload});
       this.check = 2;
       // ここからタグ追加処理
-      const tag_data = this.formData.tags;
-      console.log(tag_data);
-      await this.tag_add({tag_data})
+      const tag_datas = {
+        tag_data: this.formData.tags,
+        shop_id: payload.wsid
+      }
+      console.log(tag_datas);
+      await this.tag_add({tag_datas})
     },
-    async tag_tuika(){
-      const tag_data = this.formData.tags;
-      console.log(tag_data);
-      await this.tag_add({tag_data})
-    },
+    // async tag_tuika(){
+    //   const tag_data = this.formData.tags;
+    //   console.log(tag_data);
+    //   await this.tag_add({tag_data})
+    // },
     ...mapActions("workshop_manage",["addProduct","tag_add"]),
     ...mapActions("persona",["uploadImage"]),
   },

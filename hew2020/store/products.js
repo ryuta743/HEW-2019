@@ -2,12 +2,14 @@ export const state = () =>({
     data: [],
     productdetails: {},
     products_data: [],
+    tags: null,
 })
 
 export const getters = {
     data: state => state.data,
     productdetails: state => state.productdetails,
     products_data: state => state.products_data,
+    tags: state => state.tags,
 }
 
 export const mutations = {
@@ -24,6 +26,10 @@ export const mutations = {
     },
     setProducts_data_init(state,products_data){
         state.products_data.shift(products_data);
+    },
+    setTags(state,tags){
+        state.tags = tags;
+        console.log(tags)
     },
 }
 
@@ -49,7 +55,7 @@ export const actions = {
         const product_details = await this.$axios.$get(`http://133.18.194.128:5000/product/get_details?id_data=${p_data.product_id}`);
         product_details[0].product_img = `https://firebasestorage.googleapis.com/v0/b/tenshoku-9b0c8.appspot.com/o/images%2F${product_details[0].shop_id}%2Fproducts%2F${product_details[0].product_img}?alt=media`;
         console.log('おかえり');
-        console.log(product_details[0],[0])
+        console.log(product_details)
         commit('setProductdetails',product_details[0])
     },
     async get_newproduct({commit}){

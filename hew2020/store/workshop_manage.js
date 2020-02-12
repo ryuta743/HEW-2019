@@ -226,17 +226,18 @@ export const actions = {
             throw new Error("Error")
         }
     },
-    async tag_add({commit},{tag_data}){
-        const product_id = await this.$axios.$get(`http://133.18.194.128:5000/workshopManage/newest_product`);
+    async tag_add({commit},{tag_datas}){
+        const product_id = await this.$axios.$get(`http://133.18.194.128:5000/workshopManage/newest_product?shop_id=${tag_datas.shop_id}`);
         console.log(product_id)
-        for(var i=0; i<tag_data.length; i++){
-            const tag_jp = tag_data[i].japan
-            const tag_en = tag_data[i].english
+        for(var i=0; i<tag_datas.tag_data.length; i++){
+            const tag_jp = tag_datas.tag_data[i].japan
+            const tag_en = tag_datas.tag_data[i].english
             console.log(tag_jp)
             console.log(tag_en)
             const productid = product_id[0].product_id
             console.log(productid)
             let product_data = await this.$axios.$get(`http://133.18.194.128:5000/workshopManage/tag_add?product_id=${productid}&tag_jp=${tag_jp}&tag_en=${tag_en}`);
+            console.log(product_data)
         }     
     }
 }
