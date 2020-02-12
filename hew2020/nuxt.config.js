@@ -78,12 +78,23 @@ module.exports = {
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
+    '@nuxtjs/proxy'
   ],
   /*
   ** Axios module configuration
   ** See https://axios.nuxtjs.org/options
   */
   axios: {
+    proxy:true
+  },
+
+  proxy: {
+    '/api2': {
+      target: 'http://133.18.194.128:5000',
+      pathRewrite: {
+        '^/api2': '/'
+      }
+    }
   },
   /*
   ** vuetify module configuration
