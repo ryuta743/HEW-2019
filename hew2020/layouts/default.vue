@@ -85,7 +85,6 @@
           <v-stepper-content step="1">
             <v-layout row wrap justify-center>
               <v-flex md10>
-
                 <v-subheader>メールアドレス</v-subheader>
                 <v-text-field label id="id" outlined v-model="user_mail"></v-text-field>
               </v-flex>
