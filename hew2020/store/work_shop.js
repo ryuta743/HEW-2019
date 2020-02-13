@@ -3,6 +3,7 @@ export const state = () =>({
     mall: [],
     shop_countdata: null,
     workshop_data: {},
+    favo_shop:[]
 })
 
 export const getters = {
@@ -10,6 +11,7 @@ export const getters = {
     mall: state => state.mall,
     shop_countdata: state => state.shop_countdata,
     workshop_data: state => state.workshop_data,
+    favo_shop: state => state.favo_shop
 }
 
 export const mutations = {
@@ -31,6 +33,9 @@ export const mutations = {
         state.workshop_data = workshop_data
         console.log(workshop_data)
     },
+    setFavo_shop(state,val){
+        state.favo_shop = val;
+    }
 }
 
 export const actions = {
@@ -74,5 +79,22 @@ export const actions = {
         const workshopdata = await this.$axios.$get(`http://133.18.194.128:5000/workshop/get_workshop_data?shop_id=${shop_id}`);
         console.log(workshopdata)
         commit("setWorkshop_data", workshopdata[0])
+    },
+    async get_favoshop({commit},{user_id}){
+        var favo_shop = await this.$axios.$get(`http://133.18.194.128:5000/workshop/get_favoshop?user_id=${user_id}`);
+        var favo_shops =[]
+        for(var i = 0;i<favo_shop.length;i++){
+            favo_shops.push(favo_shop[i].shop_id);
+        }
+        console.log(favo_shops)
+        commit('setFavo_shop',favo_shops);
+    },
+    async add_favoshop({commit},{payload}){
+        const result = await this.$axios.$get(`http://133.18.194.128:5000/workshop/add_favoshop?user_id=${payload.user_id}&shop_id=${payload.shop_id}`);
+        console.log('追加完了' + result)
+    },
+    async del_favoshop({commit},{payload}){
+        const result = await this.$axios.$get(`http://133.18.194.128:5000/workshop/del_favoshop?user_id=${payload.user_id}&shop_id=${payload.shop_id}`);
+        console.log('削除完了' + result)
     }
 }
