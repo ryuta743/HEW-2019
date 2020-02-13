@@ -43,8 +43,14 @@
             </div>
           </div>
           <div id="workshop_ui">
-            <v-hover v-slot:default="{ hover }">
-              <v-btn :color="hover ? 'red':'grey'" icon>
+            <v-hover v-slot:default="{ hover }" v-if="favo_shop.indexOf(workshop_data.shop_id) == -1 ? true:false"> 
+              <v-btn :color="hover ? 'red':'grey'" icon @click="add_favoshop_req(0)">
+                <!-- <v-btn color="red" icon> -->
+                <v-icon x-large>mdi-shield-star</v-icon>
+              </v-btn>
+            </v-hover>
+            <v-hover v-slot:default="{ hover }" v-if="favo_shop.indexOf(workshop_data.shop_id) != -1 ? true:false"> 
+              <v-btn :color="hover ? 'grey':'red'" icon @click="add_favoshop_req(1)">
                 <!-- <v-btn color="red" icon> -->
                 <v-icon x-large>mdi-shield-star</v-icon>
               </v-btn>
@@ -231,6 +237,9 @@ export default {
   async mounted() {
     await this.get_workshopReq();
     await this.getProduct({wsid:this.workshop_data.shop_id})
+    if(this.loginuserdata){
+      await this.get_favoshop({user_id:this.loginuserdata.user_data.user_id});
+    }
   },
   data() {
     return {
@@ -266,12 +275,23 @@ export default {
         console.log(e)
       }
     },
-    ...mapActions('work_shop',['get_workshop']),
+    async add_favoshop_req(i){
+      const payload = {
+        user_id: this.loginuserdata.user_data.user_id,
+        shop_id: this.workshop_data.shop_id
+      }
+      console.log(payload)
+      if(i == 0) await this.add_favoshop({payload});
+      if(i == 1) await this.del_favoshop({payload});
+      await this.get_favoshop({user_id:this.loginuserdata.user_data.user_id});
+    },
+    ...mapActions('work_shop',['get_workshop','add_favoshop','get_favoshop','del_favoshop']),
     ...mapActions('workshop_manage',['getProduct'])
   },
   computed:{
-    ...mapGetters('work_shop',['workshop_data']),
-    ...mapGetters('workshop_manage',['products'])
+    ...mapGetters('work_shop',['workshop_data','favo_shop']),
+    ...mapGetters('workshop_manage',['products']),
+    ...mapGetters(['loginuserdata'])
   }
 };
 </script>
