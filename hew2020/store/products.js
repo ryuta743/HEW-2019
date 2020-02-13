@@ -3,8 +3,7 @@ export const state = () =>({
     productdetails: {},
     products_data: [],
     tags: null,
-    favo_data: null,
-
+    tags_results: null,
 })
 
 export const getters = {
@@ -12,7 +11,7 @@ export const getters = {
     productdetails: state => state.productdetails,
     products_data: state => state.products_data,
     tags: state => state.tags,
-    favo_data: state => state.favo_data,
+    tags_results: state => state.tags_results,
 }
 
 export const mutations = {
@@ -34,9 +33,9 @@ export const mutations = {
         state.tags = tags;
         console.log(tags)
     },
-    setFavo_data(state,favo_data){
-        state.favo_data = favo_data;
-        console.log(favo_data)
+    setTags_results(state,tags_results){
+        state.tags_results = tags_results;
+        console.log(tags_results)
     },
 }
 
@@ -73,8 +72,8 @@ export const actions = {
         const product_details = await this.$axios.$get(`http://133.18.194.128:5000/product/get_details?id_data=${p_data.product_id}`);
         product_details[0].product_img = `https://firebasestorage.googleapis.com/v0/b/tenshoku-9b0c8.appspot.com/o/images%2F${product_details[0].shop_id}%2Fproducts%2F${product_details[0].product_img}?alt=media`;
         console.log('おかえり');
-        console.log(product_details[0])
-        commit('setProductdetails',product_details)
+        console.log(product_details)
+        commit('setProductdetails',product_details[0])
     },
     async get_newproduct({commit}){
         console.log('正都は優しさが溢れてすごい人！！');
@@ -104,31 +103,5 @@ export const actions = {
         for(var z=0; z<4; z++){
             commit("setProducts_data_init")
         }
-    },
-    async product_favo({commit},{favo_data}){
-        console.log('お気に入り登録');
-        console.log(favo_data);
-        const user_id = favo_data.user_id
-        const product_id = favo_data.product_id
-        const product_favo_data= await this.$axios.$get(`http://133.18.194.128:5000/product/product_favo?user_id=${user_id}&product_id=${product_id}`);
-        console.log('おかえり');
-        console.log(product_favo_data)
-    },
-    async get_favo_data({commit},{user_data}){
-        console.log('お気に入り登録');
-        console.log(user_data);
-        const user_id = user_data.user_id
-        const product_favo = await this.$axios.$get(`http://133.18.194.128:5000/product/favo_data?user_id=${user_id}`);
-        console.log('おかえり');
-        console.log(product_favo)
-    },
-    async del_product_favo({commit},{del_data}){
-        console.log('お気に入り登録解除');
-        console.log(del_data);
-        const user_id = del_data.user_id
-        const product_id = del_data.product_id
-        const del_product_favo = await this.$axios.$get(`http://133.18.194.128:5000/product/del_favo_data?user_id=${user_id}&product_id=${product_id}`);
-        console.log('おかえり');
-        console.log(del_product_favo)
     },
 }

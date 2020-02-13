@@ -10,7 +10,7 @@
     
     <div id="product_infos">
       <div id="product_img">
-        <v-lazy-image style="width: 100%;object-fit: cover;height: 500px;vertical-align:bottom" :src="productdetails[0].product_img" />
+        <v-lazy-image style="width: 100%;object-fit: cover;height: 500px;vertical-align:bottom" :src="productdetails.product_img" />
         <div id="circle_body">
           <v-btn color="info" dark outlined style="width: 100%;height: 100px;" @click="circleOpen">
             <v-icon>mdi-flattr</v-icon>360°
@@ -19,7 +19,7 @@
       </div>
       <div id="product_details">
         <div id="product_titles">
-          <div id="product_title">{{productdetails[0] ? productdetails[0].product_name:''}}</div>
+          <div id="product_title">{{productdetails ? productdetails.product_name:''}}</div>
           <div id="product_rate">
             <v-rating
                 color="yellow darken-3"
@@ -32,29 +32,26 @@
           </div>
         </div>
         <div id="product_description">
-          {{ productdetails[0] ? productdetails[0].product_detail:'' }}
+          {{ productdetails ? productdetails.product_detail:'' }}
         </div>
         <div id="product_tags">
-          <div class="product_tag">{{productdetails[0].tag}}</div>
+          <div class="product_tag">甲冑</div>
           <div class="product_tag">重い</div>
-          <div class="product_tag"></div>
         </div>
         <div id="product_price">
           {{ productdetails.price ? exprice(productdetails.price):'' }} 円 <span>(税抜)</span>
           <div id="product_favo">
             <v-hover v-slot:default="{ hover }">
-              <v-btn :color="hover ? '#F8CE38':'grey'" icon @click="product_favo_Req">
+              <v-btn :color="hover ? '#F8CE38':'grey'" icon>
                 <!-- <v-btn color="red" icon> -->
                 <v-icon x-large>mdi-star-circle-outline</v-icon>
               </v-btn>
             </v-hover>
-            <v-btn color="red" @click="del_favo_dataReq">お気に入り解除</v-btn>
           </div>
-
         </div>
         <div id="product_ui">
           <div id="product_selector">
-            <div>在庫 <span>{{ productdetails[0] ? productdetails[0].stock + '個':'' }}</span></div>
+            <div>在庫 <span>{{ productdetails ? productdetails.stock + '個':'' }}</span></div>
             <div>数量 
               <span>
                 <select v-model="count">
@@ -93,15 +90,15 @@
         <table>
           <tr>
             <td class="th">サイズ</td>
-            <td>{{ productdetails[0] ? productdetails[0].size:'' }}</td>
+            <td>{{ productdetails ? productdetails.size:'' }}</td>
           </tr>
           <tr>
             <td class="th">素材</td>
-            <td>{{ productdetails[0] ? productdetails[0].material:'' }}</td>
+            <td>{{ productdetails ? productdetails.material:'' }}</td>
           </tr>
           <tr>
             <td class="th">重量</td>
-            <td>{{ productdetails[0] ? productdetails[0].weight:'' }}</td>
+            <td>{{ productdetails ? productdetails.weight:'' }}</td>
           </tr>
           <tr>
             <td class="th">評価</td>
@@ -300,31 +297,7 @@ export default {
         }
       }
     },
-    async product_favo_Req(){
-      var favo_data = {
-        user_id : this.loginuserdata.user_data.user_id,
-        product_id : this.$route.params.product,
-      }
-      console.log(favo_data)
-      try{
-        await this.product_favo({favo_data})
-      }catch(e){
-        console.log('エラー発生')
-        console.log(e)
-      }
-    },
-    async del_favo_dataReq(){
-      const del_data = {
-        user_id: this.loginuserdata.user_data.user_id,
-        product_id: this.$route.params.product,
-      }
-      try{
-        await this.del_product_favo({del_data})
-      }catch(e){
-        console.log('エラー発生')
-        console.log(e)
-      }
-    },
+
 
     circleOpen(){
       this.circle = true
@@ -336,12 +309,12 @@ export default {
     exprice(val){
       return val.toLocaleString();
     },
-    ...mapActions('products',['getproductdetails','product_favo','del_product_favo']),
+    ...mapActions('products',['getproductdetails']),
     ...mapActions('workshop_manage',['getShopdata']),
     ...mapActions('carts',['cart_upload','get_cartdata','upd_cart'])
   },
   computed: {
-    ...mapGetters('products',['productdetails','favo_flg']),
+    ...mapGetters('products',['productdetails']),
     ...mapGetters('carts',['cart_data','getcartdata','updata_data']),
     ...mapGetters('workshop_manage',['workshop_data']),
     ...mapGetters(['loginuserdata'])
