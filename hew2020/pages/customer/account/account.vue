@@ -172,15 +172,6 @@
               color="success"
               outlined
               style="margin: 0 5px 0 5px;"
-              @click="$router.push('/customer/account/account_change')"
-            >
-              <v-icon></v-icon>アカウント変更
-            </v-btn>
-            <v-btn
-              x-large
-              color="success"
-              outlined
-              style="margin: 0 5px 0 5px;"
               @click="favProductDialog = true"
             >
               <v-icon>mdi-star-circle</v-icon>お気に入り商品
@@ -215,7 +206,7 @@ import {mapActions,mapGetters} from 'vuex';
 
 export default {
   mounted(){
-    console.log(this.loginuserdata.user_data)
+    this.get_favo_dataReq()
   },
   data() {
     return {
@@ -374,6 +365,17 @@ export default {
     };
   },
   methods:{
+    async get_favo_dataReq(){
+      const user_data = {
+        user_id: this.loginuserdata.user_data.user_id,
+      }
+      console.log(user_data)
+      try{
+        await this.get_favo_data({user_data})
+      }catch(e){
+        console.log( 'エラー発生' + e )
+      }
+    },
     async upd_user_dataReq(){
       if(this.acc_change == 0){
         console.log(0)
@@ -441,10 +443,12 @@ export default {
         }
       }
     },
-    ...mapActions('userdata',['upd_user_data'])
+    ...mapActions('userdata',['upd_user_data']),
+    ...mapActions('products',['get_favo_data']),
   },
   computed:{
-    ...mapGetters(['loginuserdata'])
+    ...mapGetters(['loginuserdata']),
+    ...mapGetters('products',['favo_data']),
   },
 };
 </script>
