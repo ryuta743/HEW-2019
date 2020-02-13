@@ -167,6 +167,7 @@ export default {
         console.log(payload.tags)
         try{
           await this.search_tags({payload});
+          this.search_word = this.select_data;
         }catch(e){
           console.log('エラー発生'),
           console.log(e)

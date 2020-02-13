@@ -64,7 +64,7 @@ export const actions = {
             tags[i].product_img = `https://firebasestorage.googleapis.com/v0/b/tenshoku-9b0c8.appspot.com/o/images%2F${tags[i].shop_id}%2Fproducts%2F${tags[i].product_img}?alt=media`;
         }
         console.log(tags);
-        commit("setTags_results", tags)
+        commit("setData", tags)
     },
     async getproductdetails({commit},{p_data}){
         console.log('頑張れ正都！！');
