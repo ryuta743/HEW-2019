@@ -29,6 +29,7 @@
                   <option disabled value="">未選択</option>
                   <option value="0">商品</option>
                   <option value="1">工房</option>
+                  <option value="2">タグ</option>
                 </select>
                 <label style="margin-left: 40px;">表示順(商品):</label>
                 <select v-model="howdisp_p" id="search_select">
@@ -159,6 +160,17 @@ export default {
           console.log('エラー発生'),
           console.log(e)
         }
+      }else if(this.selected == 2){
+        var payload = {
+          tags: this.select_data
+        }
+        console.log(payload.tags)
+        try{
+          await this.search_tags({payload});
+        }catch(e){
+          console.log('エラー発生'),
+          console.log(e)
+        }
       }
     }
     },
@@ -169,12 +181,12 @@ export default {
       return val.toLocaleString();
     },
 
-    ...mapActions('products',['select_product','get_newproduct']),
+    ...mapActions('products',['select_product','get_newproduct','search_tags']),
     ...mapActions('work_shop',['search_workshop'])
   },
 
   computed:{
-    ...mapGetters('products',['data']),
+    ...mapGetters('products',['data','tags_results']),
     ...mapGetters('work_shop',['shop_name'])
   }
 };

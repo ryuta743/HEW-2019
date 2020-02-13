@@ -3,6 +3,7 @@ export const state = () =>({
     productdetails: {},
     products_data: [],
     tags: null,
+    tags_results: null,
 })
 
 export const getters = {
@@ -10,6 +11,7 @@ export const getters = {
     productdetails: state => state.productdetails,
     products_data: state => state.products_data,
     tags: state => state.tags,
+    tags_results: state => state.tags_results,
 }
 
 export const mutations = {
@@ -31,6 +33,10 @@ export const mutations = {
         state.tags = tags;
         console.log(tags)
     },
+    setTags_results(state,tags_results){
+        state.tags_results = tags_results;
+        console.log(tags_results)
+    },
 }
 
 export const actions = {
@@ -48,6 +54,17 @@ export const actions = {
             productname[i].tags = await this.$axios.$get(`http://133.18.194.128:5000/product/get_product?pro_data=${productname[i].product_id}`);//product_idでタグを持ってくるAPI
         } */
         commit("setData", productname)
+    },
+    async search_tags({commit},{payload}){
+        console.log('タグ検索ストアまで届いた');
+        console.log(payload)
+        var tags = await this.$axios.$get(`http://133.18.194.128:5000/product/get_tags?tags=${payload.tags}`);
+        console.log('APIから戻ってきた');
+        for(var i = 0; i<tags.length ; i++){
+            tags[i].product_img = `https://firebasestorage.googleapis.com/v0/b/tenshoku-9b0c8.appspot.com/o/images%2F${tags[i].shop_id}%2Fproducts%2F${tags[i].product_img}?alt=media`;
+        }
+        console.log(tags);
+        commit("setTags_results", tags)
     },
     async getproductdetails({commit},{p_data}){
         console.log('頑張れ正都！！');
