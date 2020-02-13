@@ -10,7 +10,7 @@
     
     <div id="product_infos">
       <div id="product_img">
-        <v-lazy-image style="width: 100%;object-fit: cover;height: 500px;vertical-align:bottom" :src="productdetails.product_img" />
+        <v-lazy-image style="width: 100%;object-fit: cover;height: 500px;vertical-align:bottom" :src="productdetails[0].product_img" />
         <div id="circle_body">
           <v-btn color="info" dark outlined style="width: 100%;height: 100px;" @click="circleOpen">
             <v-icon>mdi-flattr</v-icon>360°
@@ -19,7 +19,7 @@
       </div>
       <div id="product_details">
         <div id="product_titles">
-          <div id="product_title">{{productdetails ? productdetails.product_name:''}}</div>
+          <div id="product_title">{{productdetails[0] ? productdetails[0].product_name:''}}</div>
           <div id="product_rate">
             <v-rating
                 color="yellow darken-3"
@@ -32,11 +32,12 @@
           </div>
         </div>
         <div id="product_description">
-          {{ productdetails ? productdetails.product_detail:'' }}
+          {{ productdetails[0] ? productdetails[0].product_detail:'' }}
         </div>
         <div id="product_tags">
-          <div class="product_tag">甲冑</div>
+          <div class="product_tag">{{productdetails[0].tag}}</div>
           <div class="product_tag">重い</div>
+          <div class="product_tag"></div>
         </div>
         <div id="product_price">
           {{ productdetails.price ? exprice(productdetails.price):'' }} 円 <span>(税抜)</span>
@@ -53,7 +54,7 @@
         </div>
         <div id="product_ui">
           <div id="product_selector">
-            <div>在庫 <span>{{ productdetails ? productdetails.stock + '個':'' }}</span></div>
+            <div>在庫 <span>{{ productdetails[0] ? productdetails[0].stock + '個':'' }}</span></div>
             <div>数量 
               <span>
                 <select v-model="count">
@@ -92,15 +93,15 @@
         <table>
           <tr>
             <td class="th">サイズ</td>
-            <td>{{ productdetails ? productdetails.size:'' }}</td>
+            <td>{{ productdetails[0] ? productdetails[0].size:'' }}</td>
           </tr>
           <tr>
             <td class="th">素材</td>
-            <td>{{ productdetails ? productdetails.material:'' }}</td>
+            <td>{{ productdetails[0] ? productdetails[0].material:'' }}</td>
           </tr>
           <tr>
             <td class="th">重量</td>
-            <td>{{ productdetails ? productdetails.weight:'' }}</td>
+            <td>{{ productdetails[0] ? productdetails[0].weight:'' }}</td>
           </tr>
           <tr>
             <td class="th">評価</td>
