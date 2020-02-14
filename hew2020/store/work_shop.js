@@ -82,12 +82,13 @@ export const actions = {
     },
     async get_favoshop({commit},{user_id}){
         var favo_shop = await this.$axios.$get(`http://133.18.194.128:5000/workshop/get_favoshop?user_id=${user_id}`);
-        var favo_shops =[]
+        var favo_shops = [];
         for(var i = 0;i<favo_shop.length;i++){
             favo_shops.push(favo_shop[i].shop_id);
         }
         console.log(favo_shops)
-        commit('setFavo_shop',favo_shops);
+        commit('setFavo_shop',favo_shop);
+        return favo_shops;
     },
     async add_favoshop({commit},{payload}){
         const result = await this.$axios.$get(`http://133.18.194.128:5000/workshop/add_favoshop?user_id=${payload.user_id}&shop_id=${payload.shop_id}`);
