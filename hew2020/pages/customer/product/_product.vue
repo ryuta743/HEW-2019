@@ -228,13 +228,10 @@ export default {
 
   data() {
     return {
-<<<<<<< HEAD
       review_text: '',
       review_point: 0,
-=======
       favo_shops: [],
       product_favos: [],
->>>>>>> master
       selectItem: 0,
       circle: false,
       stock: [],
@@ -389,12 +386,9 @@ export default {
     exprice(val){
       return val.toLocaleString();
     },
-<<<<<<< HEAD
     ...mapActions('reviews',['product_review','get_reviews']),
     ...mapActions('products',['getproductdetails','product_favo','del_product_favo']),
-=======
     ...mapActions('products',['getproductdetails','product_favo','del_product_favo','get_favo_data']),
->>>>>>> master
     ...mapActions('workshop_manage',['getShopdata']),
     ...mapActions('work_shop',['get_workshop','add_favoshop','get_favoshop','del_favoshop']),
     ...mapActions('carts',['cart_upload','get_cartdata','upd_cart'])
