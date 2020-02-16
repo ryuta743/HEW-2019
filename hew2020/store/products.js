@@ -5,6 +5,7 @@ export const state = () =>({
     tags: null,
     tags_results: null,
     favo_data: [],
+    tag_data: null,
 })
 
 export const getters = {
@@ -14,6 +15,7 @@ export const getters = {
     tags: state => state.tags,
     tags_results: state => state.tags_results,
     favo_data: state => state.favo_data,
+    tag_data: state => state.tag_data,
 }
 
 export const mutations = {
@@ -42,6 +44,9 @@ export const mutations = {
     setFavo_data(state,favo_data){
         state.favo_data = favo_data;
         console.log(favo_data)
+    },
+    setTag_data(state,tag_data){
+        state.tag_data = tag_data;
     },
 }
 
@@ -80,6 +85,14 @@ export const actions = {
         console.log('おかえり');
         console.log(product_details)
         commit('setProductdetails',product_details[0])
+    },
+    async get_tagdata({commit},{p_data}){
+        console.log('ロード時のタグデータ取得');
+        const product_id = p_data.product_id
+        const get_tag= await this.$axios.$get(`http://133.18.194.128:5000/product/get_tag?product_id=${product_id}`);
+        console.log('おかえり');
+        console.log(get_tag)
+        commit('setTag_data',get_tag)
     },
     async get_newproduct({commit}){
         console.log('正都は優しさが溢れてすごい人！！');
