@@ -86,7 +86,7 @@ export const actions = {
         for(var i = 0;i<favo_shop.length;i++){
             favo_shops.push(favo_shop[i].shop_id);
         }
-        console.log(favo_shops)
+        console.log(favo_shop)
         commit('setFavo_shop',favo_shop);
         return favo_shops;
     },

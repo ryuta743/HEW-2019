@@ -41,13 +41,18 @@
         <div id="product_price">
           {{ productdetails.price ? exprice(productdetails.price):'' }} 円 <span>(税抜)</span>
           <div id="product_favo">
-            <v-hover v-slot:default="{ hover }">
+            <v-hover v-slot:default="{ hover }" v-if="product_favos.indexOf(productdetails.product_id) == -1 ? true:false">
               <v-btn :color="hover ? '#F8CE38':'grey'" icon @click="product_favo_Req">
                 <!-- <v-btn color="red" icon> -->
                 <v-icon x-large>mdi-star-circle-outline</v-icon>
               </v-btn>
             </v-hover>
-            <v-btn color="red" @click="del_favo_dataReq">お気に入り解除</v-btn>
+            <v-hover v-slot:default="{ hover }" v-if="product_favos.indexOf(productdetails.product_id) != -1 ? true:false">
+              <v-btn :color="hover ? 'grey':'#F8CE38'" icon @click="del_favo_dataReq">
+                <!-- <v-btn color="red" icon> -->
+                <v-icon x-large>mdi-star-circle-outline</v-icon>
+              </v-btn>
+            </v-hover>
           </div>
         </div>
         <div id="product_ui">
@@ -74,8 +79,14 @@
             <div id="workshop_description">{{ workshop_data.shop_description }}</div>
           </div>
           <div id="workshop_favo">
-            <v-hover v-slot:default="{ hover }">
-              <v-btn :color="hover ? 'red':'grey'" icon>
+            <v-hover v-slot:default="{ hover }" v-if="favo_shops.indexOf(workshop_data.shop_id) == -1 ? true:false"> 
+              <v-btn :color="hover ? 'red':'grey'" icon @click="add_favoshop_req(0)">
+                <!-- <v-btn color="red" icon> -->
+                <v-icon x-large>mdi-shield-star</v-icon>
+              </v-btn>
+            </v-hover>
+            <v-hover v-slot:default="{ hover }" v-if="favo_shops.indexOf(workshop_data.shop_id) != -1 ? true:false"> 
+              <v-btn :color="hover ? 'grey':'red'" icon @click="add_favoshop_req(1)">
                 <!-- <v-btn color="red" icon> -->
                 <v-icon x-large>mdi-shield-star</v-icon>
               </v-btn>
@@ -209,12 +220,21 @@ export default {
       this.stock.push(i+1);
     }
     await this.getcartdataReq();
+    this.product_favos = await this.get_favo_data({user_data: this.loginuserdata.user_data});
+    var result = await this.get_favoshop({user_id:this.loginuserdata.user_data.user_id});
+    this.favo_shops = result;
+    console.log('商品ID達',this.product_favos)
   },
 
   data() {
     return {
+<<<<<<< HEAD
       review_text: '',
       review_point: 0,
+=======
+      favo_shops: [],
+      product_favos: [],
+>>>>>>> master
       selectItem: 0,
       circle: false,
       stock: [],
@@ -262,6 +282,17 @@ export default {
 
     async getcartdataReq(){
       await this.get_cartdata({userid:this.loginuserdata.user_data.user_id});
+    },
+    async add_favoshop_req(i){
+      const payload = {
+        user_id: this.loginuserdata.user_data.user_id,
+        shop_id: this.workshop_data.shop_id
+      }
+      console.log(payload)
+      if(i == 0) await this.add_favoshop({payload});
+      if(i == 1) await this.del_favoshop({payload});
+      var result = await this.get_favoshop({user_id:this.loginuserdata.user_data.user_id});
+      this.favo_shops = result;
     },
 
     async getproductdetailreq(){
@@ -332,6 +363,7 @@ export default {
         console.log('エラー発生')
         console.log(e)
       }
+      this.product_favos = await this.get_favo_data({user_data: this.loginuserdata.user_data})
     },
     async del_favo_dataReq(){
       const del_data = {
@@ -344,6 +376,7 @@ export default {
         console.log('エラー発生')
         console.log(e)
       }
+      this.product_favos = await this.get_favo_data({user_data: this.loginuserdata.user_data})
     },
 
     circleOpen(){
@@ -356,9 +389,14 @@ export default {
     exprice(val){
       return val.toLocaleString();
     },
+<<<<<<< HEAD
     ...mapActions('reviews',['product_review','get_reviews']),
     ...mapActions('products',['getproductdetails','product_favo','del_product_favo']),
+=======
+    ...mapActions('products',['getproductdetails','product_favo','del_product_favo','get_favo_data']),
+>>>>>>> master
     ...mapActions('workshop_manage',['getShopdata']),
+    ...mapActions('work_shop',['get_workshop','add_favoshop','get_favoshop','del_favoshop']),
     ...mapActions('carts',['cart_upload','get_cartdata','upd_cart'])
   },
   computed: {
@@ -366,6 +404,7 @@ export default {
     ...mapGetters('products',['productdetails','favo_flg']),
     ...mapGetters('carts',['cart_data','getcartdata','updata_data']),
     ...mapGetters('workshop_manage',['workshop_data']),
+    ...mapGetters('work_shop',['favo_shop']),
     ...mapGetters(['loginuserdata'])
   }
 };

@@ -4,7 +4,7 @@ export const state = () =>({
     products_data: [],
     tags: null,
     tags_results: null,
-    favo_data: null,
+    favo_data: [],
 })
 
 export const getters = {
@@ -126,6 +126,12 @@ export const actions = {
         const product_favo = await this.$axios.$get(`http://133.18.194.128:5000/product/favo_data?user_id=${user_id}`);
         console.log('おかえり');
         console.log(product_favo)
+        var product_favos = [];
+        for(var i = 0 ; i<product_favo.length ; i++){
+            product_favos.push(product_favo[i].product_id);
+        }
+        commit('setFavo_data',product_favo)
+        return product_favos;
     },
     async del_product_favo({commit},{del_data}){
         console.log('お気に入り登録解除');

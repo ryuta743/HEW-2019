@@ -45,21 +45,21 @@
           <thead>
             <tr>
               <th style="color: #111;">商品名</th>
-              <th style="color: #111;">出品工房名</th>
+              <th style="color: #111;">商品説明</th>
               <th style="color: #111;">価格</th>
               <th style="color: #111;"></th>
             </tr>
           </thead>
           <tbody>
-            <tr v-for="(favProduct, index) in favProducts" :key="index">
-              <td>{{favProduct.title}}</td>
-              <td>{{favProduct.creater}}</td>
-              <td>{{favProduct.price}}円</td>
+            <tr v-for="(product, index) in favo_data" :key="index">
+              <td>{{product.product_name.slice(0,19)}}</td>
+              <td>{{product.product_detail.slice(0,19)}}...</td>
+              <td>{{product.price}}円</td>
               <td>
                 <v-btn
                   color="info"
                   outlined
-                  @click="$router.push(`/customer/product/${favProduct.title}`)"
+                  @click="$router.push(`/customer/product/${product.product_id}`)"
                 >商品ページへ</v-btn>
               </td>
             </tr>
@@ -87,14 +87,14 @@
             </tr>
           </thead>
           <tbody>
-            <tr v-for="(favWorkshop, index) in favWorkshops" :key="index">
-              <td>{{favWorkshop.title}}</td>
-              <td>{{favWorkshop.description.slice(0,19)}}...</td>
+            <tr v-for="(workshop, index) in favo_shop" :key="index">
+              <td>{{workshop.shop_name}}</td>
+              <td>{{workshop.shop_description.slice(0,19)}}...</td>
               <td>
                 <v-btn
                   color="info"
                   outlined
-                  @click="$router.push(`/customer/workshop/${favWorkshop.title}`)"
+                  @click="$router.push(`/customer/workshop/${workshop.shop_id}`)"
                 >工房ページへ</v-btn>
               </td>
             </tr>
@@ -205,8 +205,9 @@
 import {mapActions,mapGetters} from 'vuex';
 
 export default {
-  mounted(){
-    this.get_favo_dataReq()
+  async mounted(){
+    await this.get_favo_dataReq();
+    await this.get_favoshop({user_id:this.loginuserdata.user_data.user_id});
   },
   data() {
     return {
@@ -445,10 +446,12 @@ export default {
     },
     ...mapActions('userdata',['upd_user_data']),
     ...mapActions('products',['get_favo_data']),
+    ...mapActions('work_shop',['get_favoshop'])
   },
   computed:{
     ...mapGetters(['loginuserdata']),
     ...mapGetters('products',['favo_data']),
+    ...mapGetters('work_shop',['favo_shop'])
   },
 };
 </script>
