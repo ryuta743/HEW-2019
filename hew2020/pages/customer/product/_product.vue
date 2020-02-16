@@ -134,13 +134,13 @@
         <v-divider></v-divider>
         <v-card-text>
           <v-subheader>この商品を評価する</v-subheader>
-          <v-rating></v-rating>
+          <v-rating v-model="review_point"></v-rating>
           <v-layout row wrap justify-center>
             <v-flex xs9 md11>
-              <v-text-field label placeholder="商品レビュー" outlined></v-text-field>
+              <v-text-field label placeholder="商品レビュー" outlined v-model="review_text"></v-text-field>
             </v-flex>
             <v-flex xs2 md1>
-              <v-btn color="success" style="height: 55px;width: 100%;">送信</v-btn>
+              <v-btn color="success" style="height: 55px;width: 100%;" @click="in_review">送信</v-btn>
             </v-flex>
           </v-layout>
           <v-divider />
@@ -201,6 +201,7 @@ export default {
 
   async mounted() {
     await this.getproductdetailreq();
+    await this.get_reviewsReq()
     console.log(this.productdetails.shop_id)
     this.getShopdata({wsid:this.productdetails.shop_id})
     console.log(this.workshop_data)
@@ -212,6 +213,8 @@ export default {
 
   data() {
     return {
+      review_text: '',
+      review_point: 0,
       selectItem: 0,
       circle: false,
       stock: [],
@@ -238,6 +241,25 @@ export default {
     };
   },
   methods:{
+    async in_review(){
+      console.log(this.review_text)
+      console.log(this.review_point)
+      const review_data = {
+        product_id: this.$route.params.product,
+        user_id: this.loginuserdata.user_data.user_id,
+        review_point: this.review_point,
+        review_text: this.review_text
+      }
+      await this.product_review({review_data})
+    },
+
+    async get_reviewsReq(){
+      const get_review_data = {
+        product_id: this.$route.params.product
+      }
+      await this.get_reviews({get_review_data})
+    },
+
     async getcartdataReq(){
       await this.get_cartdata({userid:this.loginuserdata.user_data.user_id});
     },
@@ -334,11 +356,13 @@ export default {
     exprice(val){
       return val.toLocaleString();
     },
+    ...mapActions('reviews',['product_review','get_reviews']),
     ...mapActions('products',['getproductdetails','product_favo','del_product_favo']),
     ...mapActions('workshop_manage',['getShopdata']),
     ...mapActions('carts',['cart_upload','get_cartdata','upd_cart'])
   },
   computed: {
+    ...mapGetters('reviews',['reviews_data']),
     ...mapGetters('products',['productdetails','favo_flg']),
     ...mapGetters('carts',['cart_data','getcartdata','updata_data']),
     ...mapGetters('workshop_manage',['workshop_data']),
