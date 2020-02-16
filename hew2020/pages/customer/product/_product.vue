@@ -299,6 +299,7 @@ export default {
       console.log(p_data);
       try{
         await this.getproductdetails({p_data})
+        await this.get_tagdata({p_data})
       }catch(e){
         console.log('エラー発生')
         console.log(e)
@@ -388,14 +389,14 @@ export default {
     },
     ...mapActions('reviews',['product_review','get_reviews']),
     ...mapActions('products',['getproductdetails','product_favo','del_product_favo']),
-    ...mapActions('products',['getproductdetails','product_favo','del_product_favo','get_favo_data']),
+    ...mapActions('products',['getproductdetails','product_favo','del_product_favo','get_favo_data','get_tagdata']),
     ...mapActions('workshop_manage',['getShopdata']),
     ...mapActions('work_shop',['get_workshop','add_favoshop','get_favoshop','del_favoshop']),
     ...mapActions('carts',['cart_upload','get_cartdata','upd_cart'])
   },
   computed: {
     ...mapGetters('reviews',['reviews_data']),
-    ...mapGetters('products',['productdetails','favo_flg']),
+    ...mapGetters('products',['productdetails','favo_flg','tag_data']),
     ...mapGetters('carts',['cart_data','getcartdata','updata_data']),
     ...mapGetters('workshop_manage',['workshop_data']),
     ...mapGetters('work_shop',['favo_shop']),
