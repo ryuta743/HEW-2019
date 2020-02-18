@@ -197,8 +197,9 @@
                     <v-icon size="50px" color="success">mdi-check</v-icon>
                   </v-card-text>
                   <v-card-text style="text-align: center;font-size: 20px;">
-                    登録が完了いたしました！
-                    <br />お疲れ様でした！
+                    天職にご登録いただき誠にありがとうございます。
+                    <br />先ほど登録完了メールを送りました。お手数ですがご確認ください。
+                    <br />お疲れ様でした。
                   </v-card-text>
                   <v-card-text style="text-align: center;">
                     <v-btn color="primary" @click="createADialog = false; e1 = 1">OK</v-btn>
@@ -410,11 +411,13 @@ export default {
       }
       try{
         this.inuserdata({payload});
+        this.new_user_mail({payload});
         this.e1 = 4
       }catch(e){
         console.log('エラー発生'),
         console.log(e)
       }
+
       this.e1 = 4
     },
     
@@ -482,7 +485,8 @@ export default {
     //   this.$router.push("/");
     // },
     ...mapActions(['login','logout','record','order_reset']),
-    ...mapActions('userdata',['inuserdata'])
+    ...mapActions('userdata',['inuserdata']),
+    ...mapActions('mail',['new_user_mail'])
   },
   computed: {
     ...mapGetters(['loginuserdata','order','order_result']),
