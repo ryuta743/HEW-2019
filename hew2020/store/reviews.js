@@ -1,16 +1,17 @@
 import moment from '~/plugins/moment';
 
 export const state = () =>({
-    review_data: null,
+    reviews_data: null,
 })
 
 export const getters = {
-    review_data: state => state.review_data
+    reviews_data: state => state.reviews_data
 }
 
 export const mutations = {
-    setReview_data(state,{review_data}){
-        state.review_data = review_data;
+    setReviews_data(state,reviews_data){
+        state.reviews_data = reviews_data;
+        console.log('あああ'+reviews_data)
     }
 }
 
@@ -37,6 +38,6 @@ export const actions = {
         console.log(product_id)
         const reviews = await this.$axios.$get(`http://133.18.194.128:5000/review/get_review?product_id=${product_id}`);
         console.log(reviews)
-        commit('setReview_data', reviews)
+        commit('setReviews_data', reviews)
     },
 }

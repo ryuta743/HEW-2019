@@ -35,8 +35,8 @@
           {{ productdetails ? productdetails.product_detail:'' }}
         </div>
         <div id="product_tags">
-          <div class="product_tag">甲冑</div>
-          <div class="product_tag">重い</div>
+          <div class="product_tag" v-for="(item, index) in tag_data" :key="index">{{item.tag}}</div>
+          <!-- <div class="product_tag">重い</div> -->
         </div>
         <div id="product_price">
           {{ productdetails.price ? exprice(productdetails.price):'' }} 円 <span>(税抜)</span>
@@ -134,8 +134,7 @@
         </div>
         <div id="tag_search_title" class="sawarabi">タグで探す</div>
         <div id="search_tags">
-          <div class="search_tag">甲冑</div>
-          <div class="search_tag">重い</div>
+          <div class="search_tag" v-for="(item, index) in tag_data" :key="index">{{item.tag}}</div>
         </div>
       </div>
     </div>
@@ -156,19 +155,19 @@
           </v-layout>
           <v-divider />
         </v-card-text>
-        <v-card-text v-for="(item, index) in reviews" :key="index">
-          {{item.name}}
+        <v-card-text v-for="(item, index) in reviews_data" :key="index">
+          {{item.user_name}}
           <v-layout row wrap align-center>
             <v-rating
-              v-model="item.rating"
+              v-model="item.evaluation"
               color="yellow darken-3"
               background-color="grey darken-1"
               readonly
               size="19px"
             />
-            ({{item.rating}})
+            ({{item.evaluation}})
           </v-layout>
-          {{item.review}}
+          {{item.comment}}
           <v-divider style="margin-top: 5px;"></v-divider>
         </v-card-text>
       </v-card>
@@ -194,6 +193,27 @@
               </v-card-text>
             </v-flex>
           </v-layout>
+        </v-card>
+      </v-dialog>
+      <v-dialog
+        v-model="dialog"
+        persistent
+        :overlay="false"
+        max-width="500px"
+        transition="dialog-transition"
+      >
+        <v-card>
+          <v-card-text style="padding: 10px;">
+            <v-layout row wrap justify-center align-center>
+              <h3>
+                <v-icon>mdi-check</v-icon>
+              </h3>
+              <h3>投稿しました</h3>
+            </v-layout>
+            <v-layout row wrap justify-center>
+              <v-btn color="success" @click="load">OK</v-btn>
+            </v-layout>
+          </v-card-text>
         </v-card>
       </v-dialog>
     </div>
@@ -228,6 +248,7 @@ export default {
 
   data() {
     return {
+      dialog:false,
       review_text: '',
       review_point: 0,
       favo_shops: [],
@@ -268,6 +289,16 @@ export default {
         review_text: this.review_text
       }
       await this.product_review({review_data})
+      this.review_point=0;
+      this.review_text='';
+      await this.get_reviewsReq()
+      this.dialog=true;
+    },
+
+    async load(){
+      await this.getproductdetailreq();
+      await this.get_reviewsReq()
+      this.dialog=false;
     },
 
     async get_reviewsReq(){
