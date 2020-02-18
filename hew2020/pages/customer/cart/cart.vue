@@ -16,6 +16,10 @@
           <v-divider></v-divider>
           <v-card-text style="min-height: 500px;">
             <v-layout row wrap>
+              <div id ="null_cart" v-if="getcartdata.length==0">
+                <img src="/grey_logo.png" style="width: 100px;">
+                <p>カートに商品がありません</p>
+              </div>
               <v-flex
                 xs12
                 md3
@@ -164,6 +168,18 @@ export default {
 </script>
 
 <style scoped>
+#null_cart{
+  text-align: center;
+  font-size: 1em;
+  width:500px;
+  margin-left: 300px;
+  margin-top: 150px;
+}
+
+#null_cart img{
+  opacity: 0.3;
+}
+
 .target {
   cursor: pointer;
 }
