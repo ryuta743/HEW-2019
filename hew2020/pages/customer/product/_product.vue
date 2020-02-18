@@ -24,11 +24,11 @@
             <v-rating
                 color="yellow darken-3"
                 background-color="grey darken-1"
-                v-model="item.rating"
+                v-model="avg"
                 readonly
                 half-increments
             ></v-rating>
-            <p>(12)</p>
+            <p>{{avg}}</p>
           </div>
         </div>
         <div id="product_description">
@@ -305,6 +305,7 @@ export default {
     async load(){
       await this.getproductdetailreq();
       await this.get_reviewsReq()
+      await this.get_avg()
       this.dialog=false;
     },
 
@@ -331,9 +332,12 @@ export default {
     },
 
     async get_avg(){
+      this.all_review_point = 0;
+      console.log(this.avg)
       for(var c=0; c<this.reviews_data.length; c++){
         this.all_review_point += this.reviews_data[c].evaluation 
       }
+      console.log(this.avg)
       this.avg = Math.round(this.all_review_point / this.reviews_data.length * 10)
       this.avg = this.avg / 10
       console.log(this.avg)

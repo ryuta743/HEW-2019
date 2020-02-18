@@ -71,6 +71,7 @@ app.get('/send_mail', function (req,res) {
         subject : req.query.subject,
         text    : req.query.mail
     };
+    console.log(message)
     // ここからメール送る関数
     transporter.sendMail(message, function(err, response) {
         console.log(err || response);

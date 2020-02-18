@@ -1,7 +1,7 @@
 import moment from '~/plugins/moment';
 
 export const state = () =>({
-    reviews_data: null,
+    reviews_data: {},
 })
 
 export const getters = {

@@ -22,4 +22,13 @@ export const actions = {
         const reply_mail =  await this.$axios.$get(`/api/send_mail?to=${to}&subject=${subject}&mail=${mail}`)
         console.log(reply_mail)
     },
+    async　new_user_mail({commit},{payload}){
+        const to = payload.mail
+        const subject = payload.name+'様の新規登録が完了しました';
+        const mail = '天職へようこそ！！'+payload.name+'様の登録が完了いたしましたのでご連絡させていただきました。何かご不明な点や質問などございましたら、サイトのお問い合わせまたはコンタクトからご連絡ください。';
+        console.log('ここからだ')
+        console.log(mail)
+        const reply_mail =  await this.$axios.$get(`/api/send_mail?to=${to}&subject=${subject}&mail=${mail}`)
+        console.log(reply_mail)
+    },
 }

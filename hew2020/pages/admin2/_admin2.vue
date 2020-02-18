@@ -7,8 +7,8 @@
           <v-divider></v-divider>
           <v-subheader>お問い合わせ返信</v-subheader>
           <p>{{contact_detail.user_mail ? contact_detail.user_mail:''}}</p>
-          <p>{{contact_detail.contact_id ? contact_detail.contact_id:''}}</p>
-          <v-text-field outlined type="mail" label='宛先' v-model="to"></v-text-field>
+          <p>{{contact_detail.contact_detail ? contact_detail.contact_detail:''}}</p>
+          <!-- <v-text-field outlined type="mail" label='宛先' v-model="to"></v-text-field> -->
           <v-text-field outlined label='件名' v-model="subject"></v-text-field>
           <v-card-text>
             <v-textarea
@@ -53,6 +53,7 @@ export default {
         await this.get_contact_detail({contact_data})
       },
       async reply_mailReq(){
+        this.to = this.contact_detail.user_mail
         try{
           const mail_data={
             to: this.to,
