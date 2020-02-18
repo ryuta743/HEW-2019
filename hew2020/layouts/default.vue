@@ -299,7 +299,7 @@
             <p>利用規約</p>
             <p>プライバシー</p>
             <p>ヘルプ</p>
-            <p>お問い合わせ</p>
+            <nuxt-link to="/contact" id="footer_link">お問い合わせ</nuxt-link>
           </div>
         </div>
       </div>
@@ -556,12 +556,18 @@ export default {
   margin-left: 15px;
   border-left: 1px solid #ffffff;
   padding-left: 15px;
+  font-size: 14.5px;
+  
 }
 
 #navi p{
-  font-size: 14.5px;
   padding-bottom: 0px;
   margin-bottom: 10px; 
+}
+
+#footer_link{
+  text-decoration: none;
+  color: #fff;
 }
 
 #login_button{
