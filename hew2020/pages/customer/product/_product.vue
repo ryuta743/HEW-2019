@@ -114,15 +114,19 @@
           </tr>
           <tr>
             <td class="th">評価</td>
-            <td>
+            <td v-if="reviews_data.length>0">
+              <p style="padding-left: 8px;">{{avg}}点</p>
               <v-rating
                 color="yellow darken-3"
                 background-color="grey darken-1"
-                v-model="item.rating"
+                v-model="avg"
                 readonly
                 half-increments
                 size="14px"
               ></v-rating>
+            </td>
+            <td v-else>
+              <p style="padding-top: 15px;">評価がされていません</p>
             </td>
           </tr>
         </table>
@@ -244,10 +248,13 @@ export default {
     var result = await this.get_favoshop({user_id:this.loginuserdata.user_data.user_id});
     this.favo_shops = result;
     console.log('商品ID達',this.product_favos)
+    await this.get_avg()
   },
 
   data() {
     return {
+      all_review_point: 0,
+      avg: 0,
       dialog:false,
       review_text: '',
       review_point: 0,
@@ -321,6 +328,15 @@ export default {
       if(i == 1) await this.del_favoshop({payload});
       var result = await this.get_favoshop({user_id:this.loginuserdata.user_data.user_id});
       this.favo_shops = result;
+    },
+
+    async get_avg(){
+      for(var c=0; c<this.reviews_data.length; c++){
+        this.all_review_point += this.reviews_data[c].evaluation 
+      }
+      this.avg = Math.round(this.all_review_point / this.reviews_data.length * 10)
+      this.avg = this.avg / 10
+      console.log(this.avg)
     },
 
     async getproductdetailreq(){
