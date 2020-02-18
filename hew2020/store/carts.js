@@ -66,6 +66,7 @@ export const actions = {
         console.log(u_id)
         var get_cart = await this.$axios.$get(`http://133.18.194.128:5000/cart/get_cart_data?user_id=${u_id}`);
         for(var i=0; i<get_cart.length ;i++){
+            get_cart[i].product_img_origin = get_cart[i].product_img;
             get_cart[i].product_img = `https://firebasestorage.googleapis.com/v0/b/tenshoku-9b0c8.appspot.com/o/images%2F${get_cart[i].shop_id}%2Fproducts%2F${get_cart[i].product_img}?alt=media`;
         }
         console.log(get_cart)

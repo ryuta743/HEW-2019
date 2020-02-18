@@ -30,7 +30,7 @@ export const actions = {
     },
 
     // 商品購入処理
-    async   insert_buy({commit},{buydata}){
+    async insert_buy({commit},{buydata}){
         console.log('購入するためのstoreきたよ')
         console.log(buydata)
 
@@ -80,6 +80,7 @@ export const actions = {
             var price = buydata[1].cartdata[i].price
             var count = buydata[1].cartdata[i].count
             var buy_detail = await this.$axios.$get(`http://133.18.194.128:5000/buy/buy_details?order_id=${saleid}&shop_id=${shop_id}&user_id=${user_id}&user_name=${user_name}&product_id=${product_id}&product_name=${product_name}&price=${price}&count=${count}`);
+            //LINEAPI処理
             console.log('buy_detai:'+buy_detail)
         }
 
@@ -92,6 +93,13 @@ export const actions = {
             console.log(new_count)
             var upd_count = await this.$axios.$get(`http://133.18.194.128:5000/product/upd_count?new_count=${new_count}&p_id=${p_id}`);
             console.log(upd_count)
+            const line_id = await this.$axios.$get(`http://133.18.194.128:5000/linebot/get_lineid?shop_id=${buydata[1].cartdata[z].shop_id}`);
+            console.log('lineID',line_id)
+            if(line_id.length > 0){
+                if(buydata[1].cartdata[z].safety >= new_count){
+                    this.$axios.$get(`https://hidden-woodland-14194.herokuapp.com/sendm?shop_id=${buydata[1].cartdata[z].shop_id}&image=${buydata[1].cartdata[z].product_img_origin}&product_number=${buydata[1].cartdata[z].product_number}&product_name=${buydata[1].cartdata[z].product_name}&line_id=${line_id[0].line_id}`);
+                }
+            }
         }
 
         // カート内データを消す処理
