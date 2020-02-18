@@ -4,7 +4,7 @@ module.exports = {
   mode: 'universal',
 
   serverMiddleware: [
-    '~/api/index.js'
+    '~/api/index.js',
   ],
 
 
