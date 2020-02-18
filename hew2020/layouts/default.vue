@@ -5,18 +5,24 @@
       v-model="loginDialog"
       scrollable
       :overlay="false"
-      max-width="700px"
+      max-width="400px"
       transition="dialog-transition"
     >
-      <v-card style="padding: 15px 15px 60px 15px;">
+      <v-card style="padding: 20px 25px 30px 25px;">
         <v-card-text style="text-align: center;padding: 20px;">
+          <img src="../static/hewlogo.png" alt="ロゴ" width="50px">
           <h2>ログイン</h2>
         </v-card-text>
         <form @submit.prevent>
-          <v-text-field name="name" outlined label="メールアドレス" v-model="login_mail"></v-text-field>
-          <v-text-field name="password" outlined label="パスワード" type="password" v-model="login_password"></v-text-field>
-          <v-btn color="success" type="submit" @click="logindataReq">ログイン</v-btn>
-          <v-btn color="grey" dark @click="loginDialog = false">キャンセル</v-btn>
+          <v-text-field name="name" outlined label="メールアドレス" v-model="login_mail" id="text_field" style="padding: 0;"></v-text-field>
+          <v-text-field name="password" outlined label="パスワード" type="password" v-model="login_password" id="text_field"></v-text-field>
+          <div id="login_button">
+            <v-btn color="success" type="submit" @click="logindataReq" depressed id="suc_btn">ログイン</v-btn>
+            <v-btn color="grey" dark @click="loginDialog = false" depressed id="can_btn">キャンセル</v-btn>
+          </div>
+          <div id="chan_pass">
+            <nuxt-link to="/change_pass" id="change_pass">パスワードを忘れた方はこちらから</nuxt-link>
+          </div>
         </form>
       </v-card>
     </v-dialog>
@@ -92,7 +98,6 @@
                 <v-subheader>パスワード</v-subheader>
                 <v-text-field label type="password" id="id" outlined v-model="user_pass"></v-text-field>
               </v-flex>
-              <h1 v-if="e1errorflg == 1" style="color: red;">未入力の場所あるよ</h1>
             </v-layout>
 
             <v-layout row wrap justify-end>
@@ -277,8 +282,30 @@
 
     <nuxt />
 
-    <v-footer style="height: 400px;" dark class="no-print">
-      <span>&copy; ここはフッター</span>
+    <div id="foo">
+      <p>PAGE</p>
+      <p></p>
+      <p>TOP</p>
+    </div>
+    <v-footer style="height: 300px;" dark class="no-print">
+      <div id="ter">
+        <div id="foo_logo">
+          <img src="/grey_logo.png" alt="天職くん" style="width: 150px;">
+          <div id="footer_title"><span>天職</span>tenshoku</div>
+        </div>
+        <div id="footer_nav">
+          <h2>天職</h2>
+          <div id="navi">
+            <p>利用規約</p>
+            <p>プライバシー</p>
+            <p>ヘルプ</p>
+            <p>お問い合わせ</p>
+          </div>
+        </div>
+      </div>
+      <div id="copy">
+        <p>Copyright　2020　Tenshoku　ALL　RIGHTS　RESERVED.</p>
+      </div>
     </v-footer>
   </v-app>
 </template>
@@ -465,6 +492,105 @@ export default {
 </script>
 
 <style scoped>
+#foo{
+  display: flex;
+  background-color: #989898;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+#foo p{
+  margin: 0;
+  padding: 0;
+  font-size: 25px;
+}
+
+#copy{
+  width: 100%;
+  display: flex;
+  font-size: 0.8em;
+}
+
+#copy p{
+  margin: 0 auto;
+}
+
+.triangle{
+  border-right: 23px solid transparent;
+  border-bottom: 24px solid #b2ce54;
+  border-left: 23px solid transparent; 
+}
+
+#ter{
+  padding-left: 70px;
+  display: flex;
+}
+
+#ter img{
+  padding-left: 20px;
+}
+
+#foo_logo{
+  width: 270px;
+}
+
+#footer_title{
+  width: 500px;
+  font-size: 23px;
+  padding-bottom: 5px;
+}
+
+#footer_title span{
+  font-size: 35px;
+  padding-right: 10px;
+  padding-bottom: 0; 
+}
+
+#footer_nav h2{
+  font-size: 15px;
+  margin-bottom: 17px;
+}
+
+#navi{
+  margin-left: 15px;
+  border-left: 1px solid #ffffff;
+  padding-left: 15px;
+}
+
+#navi p{
+  font-size: 14.5px;
+  padding-bottom: 0px;
+  margin-bottom: 10px; 
+}
+
+#login_button{
+  text-align: center;
+}
+
+#chan_pass{
+  width: 100%;
+  text-align: center;
+  padding-top: 20px;
+}
+
+#change_pass{
+  font-size: 0.8em;
+  text-decoration: none;
+}
+
+#suc_btn{
+  width: 350px;
+  margin-bottom: 10px; 
+}
+
+#can_btn{
+  width: 350px;
+}
+
+#text_field{
+  width: 100px;
+}
 
 #record_btn{
   position: fixed;
@@ -526,6 +652,10 @@ export default {
 
 #site_title span{
   font-size: 25px
+}
+
+.v-input__slot{
+  margin-bottom: 0px;
 }
 
 @media print {
