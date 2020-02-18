@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <v-app style="background-color: #fff;background-image: url(/wasi.png);">
     <!-- ログインダイアログ -->
     <v-dialog
       v-model="loginDialog"
