@@ -8,7 +8,7 @@
     </div>
 
     <v-container grid-list-xs>
-      <v-content>
+      <v-content style="background-color: white;padding-top: 15px;border-radius: 4px;">
         <h4 style="width: 100%;text-align: center;">詳細検索</h4>
         <div>{{error}}</div>
 
