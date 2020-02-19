@@ -2,7 +2,7 @@
   <v-layout>
     <v-flex xs12 sm12 md12>
       <div id="top">
-            <img src="../static/topimg.png" alt="メインビジュアル" style="width: 100%;height: 600px;object-fit: cover;opacity: 0.5;">
+            <img src="../static/topimg.png" alt="メインビジュアル" style="width: 100%;height: 600px;object-fit: cover;opacity: 0.6;">
             <input type="text" id="keyword_input" placeholder="キーワード">
             <img src="../static/madejp.png" alt="madeinjapan" id="madejp">
             <div id="loop_body">

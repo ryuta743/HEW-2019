@@ -1,14 +1,14 @@
 <template>
   <v-layout row wrap id="shop_body">
 
-    <div id="bread_list"> <!-- パンくずリスト -->
-      <div class="bread"><v-icon>mdi-home</v-icon>トップ</div>
+    <!-- <div id="bread_list">  --><!-- パンくずリスト -->
+      <!-- <div class="bread"><v-icon>mdi-home</v-icon>トップ</div>
       <div class="bread">></div>
       <div class="bread">ショップ</div>
-    </div>
+    </div> -->
 
     <v-container grid-list-xs>
-      <v-content style="background-color: white;padding-top: 15px;border-radius: 4px;">
+      <v-content style="padding-top: 15px;border-radius: 4px;">
         <h4 style="width: 100%;text-align: center;">詳細検索</h4>
         <div>{{error}}</div>
 
