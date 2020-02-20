@@ -1,8 +1,6 @@
 <template>
-  <v-container grid-list-xs style="padding: 50px 0 50px 0;">
-    <v-content style="height: 100vh;">
-      <v-card>
-        <v-card-text id="box">
+      <div id="check_body">
+        <div id="box">
           <v-icon size="20px" color="success">mdi-check-circle</v-icon>
           <div>
             <h2>購入者情報</h2>
@@ -34,31 +32,29 @@
             <h1>購入商品確認</h1>
               <br>
               <div id="item_box">
-                <v-card id="buy_product" flat v-for="(item, index) in getcartdata" :key="index" >
-                  <div id="product_img">
+                <div class="buy_product" flat v-for="(item, index) in getcartdata" :key="index" >
+                  <div class="product_img">
                     <v-lazy-image :src="item.product_img" style="width: 100%;object-fit: cover;height: 100%;vertical-align:bottom"/>
                   </div>
-                  <v-card-text style="heigh: 150px;" id="moji">
+                  <div style="heigh: 150px;" id="moji">
                     <div id="product_name">{{item.product_name}}</div>
                     <div id="product_price">¥{{item.price}}</div>
-                  </v-card-text>
-                </v-card>
+                  </div>
+                </div>
               </div>
               <!-- <p>商品名：{{getcartdata[0].product_name}}</p>
               <p>購入される個数：{{getcartdata[0].count}}個</p>
               <p>単価：{{getcartdata[0].price}}円</p> -->
           </div>
           <hr>
-          <v-card-actions>
+          <div>
             <v-layout row wrap justify-end>
               <v-btn color="success" @click="buyReq">OK</v-btn>
               <v-btn color="red" style="color: #fff;" @click="$router.push('/customer/cart/cart')">キャンセル</v-btn>
             </v-layout>
-          </v-card-actions>
-        </v-card-text>
-      </v-card>
-    </v-content>
-  </v-container>
+          </div>
+        </div>
+      </div>
 </template>
 
 <script>
@@ -121,22 +117,36 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+  #check_body{
+    border: 1.2px solid #ddd;
+    width: 1100px;
+    height: auto;
+    box-sizing: border-box;
+    padding: 50px;
+    background-color: #fff;
+    margin: 20px auto;
+  }
+
   #box{
-    width:1185px;
+    width:1000px;
   }
   #item_box{
+    width: 100%;
     display: flex;
-    min-height: 500px;
-    background-color: aqua;
     flex-wrap: wrap;
     padding-bottom: 50px;
   }
   #item_box0{
+    width: 1100px;
     padding-bottom: 30px;
   }
-  #buy_product{
-    width: 300px;
+  .product_img{
+    width: 250px;
+    height: 250px;
+  }
+  .buy_product{
+    width: 250px;
     height: 300px;
     margin: 0 40px 90px 40px; 
   }

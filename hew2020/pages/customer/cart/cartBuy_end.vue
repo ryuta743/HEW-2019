@@ -13,7 +13,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 #buy_end p{
     font-size: 100pt;
     color: gray;

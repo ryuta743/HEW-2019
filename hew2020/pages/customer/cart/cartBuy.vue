@@ -176,7 +176,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
   #v-card{
     width: 800px;
     margin: 0 auto;
