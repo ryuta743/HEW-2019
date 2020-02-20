@@ -1,8 +1,8 @@
 <template>
-  <v-container grid-list-xs>
+  <v-container grid-list-xs style="padding: 50px 0 50px 0;">
     <v-content style="height: 100vh;">
       <v-card>
-        <v-card-text>
+        <v-card-text id="box">
           <v-icon size="20px" color="success">mdi-check-circle</v-icon>
           <div>
             <h2>購入者情報</h2>
@@ -13,12 +13,12 @@
             <br>
             <h2>お届け先情報</h2>
             <tr>
-              <td>{{checkdata[0].country}}</td>
-              <td>{{checkdata[0].address_01}}</td>
-              <td>{{checkdata[0].address_02}}</td>
-              <td>{{checkdata[0].address_03}}</td>
-              <td>{{checkdata[0].address_04}}</td>
-              <td>{{checkdata[0].address_05}}</td>
+              <td>{{checkdata[0].country ? checkdata[0].country:''}}</td>
+              <td>{{checkdata[0].address_01 ? checkdata[0].address_01:''}}</td>
+              <td>{{checkdata[0].address_02 ? checkdata[0].address_02:''}}</td>
+              <td>{{checkdata[0].address_03 ? checkdata[0].address_03:''}}</td>
+              <td>{{checkdata[0].address_04 ? checkdata[0].address_04:''}}</td>
+              <td>{{checkdata[0].address_05 ? checkdata[0].address_05:''}}</td>
             </tr>
             <br><br>
             <h2>購入情報</h2>
@@ -30,17 +30,32 @@
           </div>
           <hr>
           <br>
-          <div>
+          <div id="item_box0">
             <h1>購入商品確認</h1>
+              <br>
+              <div id="item_box">
+                <v-card id="buy_product" flat v-for="(item, index) in getcartdata" :key="index" >
+                  <div id="product_img">
+                    <v-lazy-image :src="item.product_img" style="width: 100%;object-fit: cover;height: 100%;vertical-align:bottom"/>
+                  </div>
+                  <v-card-text style="heigh: 150px;" id="moji">
+                    <div id="product_name">{{item.product_name}}</div>
+                    <div id="product_price">¥{{item.price}}</div>
+                  </v-card-text>
+                </v-card>
+              </div>
+              <!-- <p>商品名：{{getcartdata[0].product_name}}</p>
+              <p>購入される個数：{{getcartdata[0].count}}個</p>
+              <p>単価：{{getcartdata[0].price}}円</p> -->
           </div>
-          <br>
           <hr>
+          <v-card-actions>
+            <v-layout row wrap justify-end>
+              <v-btn color="success" @click="buyReq">OK</v-btn>
+              <v-btn color="red" style="color: #fff;" @click="$router.push('/customer/cart/cart')">キャンセル</v-btn>
+            </v-layout>
+          </v-card-actions>
         </v-card-text>
-        <v-card-actions>
-          <v-layout row wrap justify-end>
-            <v-btn color="success" @click="buyReq">OK</v-btn>
-          </v-layout>
-        </v-card-actions>
       </v-card>
     </v-content>
   </v-container>
@@ -107,4 +122,28 @@ export default {
 </script>
 
 <style>
+  #box{
+    width:1185px;
+  }
+  #item_box{
+    display: flex;
+    min-height: 500px;
+    background-color: aqua;
+    flex-wrap: wrap;
+    padding-bottom: 50px;
+  }
+  #item_box0{
+    padding-bottom: 30px;
+  }
+  #buy_product{
+    width: 300px;
+    height: 300px;
+    margin: 0 40px 90px 40px; 
+  }
+  #moji{
+    font-size: 15px;
+  }
+  #product_hr{
+    margin-top: 1px;
+  }
 </style>
