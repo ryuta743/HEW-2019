@@ -224,17 +224,15 @@
         </v-list-item>
       </v-list>
     </v-navigation-drawer>-->
-    <v-app-bar :clipped-left="clipped" flat class="no-print">
+    <v-app-bar :clipped-left="clipped" flat class="no-print" style="height: 65px;">
       <!-- <v-app-bar-nav-icon @click.stop="drawer = !drawer" /> -->
       <!-- <v-btn outlined>ここにlogo</v-btn> -->
       <img src="../static/hewlogo.png" alt="ロゴ" width="50px">
       <div id="site_title"><span>天職</span>tenshoku</div>
-      <v-tabs style="padding-left: 10px;">
-        <v-tab @click="$router.push('/')">トップ</v-tab>
-        <v-tab @click="$router.push('/shop')">ショップ</v-tab>
-        <v-tab @click="$router.push('/mall')">モール</v-tab>
-        <v-tab @click="$router.push('/contact')">コンタクト</v-tab>
-      </v-tabs>
+
+      <div id="search_box">
+        <input type="text" id="search_input" placeholder="キーワード">
+      </div>
 
       <v-btn text @click="loginDialog = true" v-if="loginuserdata == null ? true:false">
         <v-icon color="#DC3839">mdi-login</v-icon>ログイン
@@ -272,6 +270,12 @@
         </v-menu>
       </div>
     </v-app-bar>
+    <div id="subnav">
+      <div class="sub_item" @click="$router.push('/')"><v-icon color="green darken-2">mdi-home</v-icon>トップ</div>
+      <div class="sub_item" @click="$router.push('/shop')"><v-icon color="orange darken-2">mdi-gift</v-icon>ショップ</div>
+      <div class="sub_item" @click="$router.push('/mall')"><v-icon color="purple darken-2">mdi-shopping-search</v-icon>ランダムモール</div>
+      <div class="sub_item" @click="$router.push('/contact')"><v-icon color="teal darken-2">mdi-email</v-icon>お問い合わせ</div>
+    </div>
     <div id="record_btn">
       <v-btn color="error" icon @click="record_req"><v-icon x-large>mdi-microphone</v-icon></v-btn>
     </div>
@@ -496,6 +500,36 @@ export default {
 </script>
 
 <style scoped>
+#subnav{
+  border-top: 1.2px solid #dddddd;
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  height: 45px;
+  font-size: 14px;
+  background-color: #fefefe;
+}
+
+.sub_item:hover{
+  background-color: #ddd;
+}
+
+.sub_item{
+  font-weight: bold;
+  color: #999;
+  cursor: pointer;
+  transition: 0.5s;
+  width: 450px;
+  height: 45px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.sub_item .v-icon{
+  margin-right: 5px;
+}
+
 #foo{
   display: flex;
   background-color: #989898;
@@ -656,8 +690,19 @@ export default {
 }
 
 #site_title{
-  width: 500px;
+  width: 530px;
   padding-top:15px;
+}
+
+#search_box{
+  width: 600px;
+}
+
+#search_input{
+  width: 400px;
+  padding: 5px 5px 5px 15px;
+  border: 1.2px solid #ddd;
+  border-radius: 3px
 }
 
 #site_title span{
