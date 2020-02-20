@@ -230,6 +230,10 @@
       <img src="../static/hewlogo.png" alt="ロゴ" width="50px">
       <div id="site_title"><span>天職</span>tenshoku</div>
 
+      <div id="search_box">
+        <input type="text" id="search_input" placeholder="キーワード">
+      </div>
+
       <v-btn text @click="loginDialog = true" v-if="loginuserdata == null ? true:false">
         <v-icon color="#DC3839">mdi-login</v-icon>ログイン
       </v-btn>
@@ -686,8 +690,19 @@ export default {
 }
 
 #site_title{
-  width: 1300px;
+  width: 530px;
   padding-top:15px;
+}
+
+#search_box{
+  width: 600px;
+}
+
+#search_input{
+  width: 400px;
+  padding: 5px 5px 5px 15px;
+  border: 1.2px solid #ddd;
+  border-radius: 3px
 }
 
 #site_title span{
