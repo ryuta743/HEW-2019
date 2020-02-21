@@ -3,11 +3,13 @@ import moment from '~/plugins/moment';
 export const state = () =>({
     checkdata: null,
     buy_data: null,
+    buyhis_data:{},
 })
 
 export const getters = {
     checkdata: state => state.checkdata,
     buy_data: state => state.buy_data,
+    buyhis_data: state => state.buyhis_data,
 }
 
 export const mutations = {
@@ -18,6 +20,10 @@ export const mutations = {
     setBuy_data(state,buy_data){
         state.buy_data = buy_data;
         console.log(buy_data)
+    },
+    setBuyhis_data(state,buyhis_data){
+        state.buyhis_data = buyhis_data;
+        console.log(buyhis_data)
     },
 }
 
@@ -107,5 +113,13 @@ export const actions = {
         console.log(del_cart)
 
         commit("setBuy_data",del_cart);
-    }, 
+    },
+    async get_buy_history({commit},{user_id}){
+        console.log('購入履歴取得');
+        console.log(user_id)
+        const get_buy_his = await this.$axios.$get(`http://133.18.194.128:5000/buy/get_buy_history?user_id=${user_id}`);
+        console.log('おかえり');
+        console.log(get_buy_his)
+        commit('setBuyhis_data',get_buy_his)
+    },
 }
