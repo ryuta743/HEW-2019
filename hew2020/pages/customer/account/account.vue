@@ -20,11 +20,11 @@
             </tr>
           </thead>
           <tbody>
-            <tr v-for="(purchaseProduct, index) in purchaseProducts" :key="index">
-              <td>{{purchaseProduct.title}}</td>
-              <td>{{purchaseProduct.creater}}</td>
-              <td>{{purchaseProduct.date}}</td>
-              <td>{{purchaseProduct.price}}円</td>
+            <tr v-for="(item,index) in buyhis_data" :key="index">
+              <td>{{item.product_name}}</td>
+              <td>{{item.shop_name}}</td>
+              <td>{{item.buy_date}}</td>
+              <td>{{item.price}}円</td>
             </tr>
           </tbody>
         </v-simple-table>
@@ -208,6 +208,7 @@ export default {
   async mounted(){
     await this.get_favo_dataReq();
     await this.get_favoshop({user_id:this.loginuserdata.user_data.user_id});
+    await this.get_buy_history({user_id:this.loginuserdata.user_data.user_id})
   },
   data() {
     return {
@@ -261,100 +262,6 @@ export default {
           creater: "ゆう工房",
           date: "2019/8/29"
         },
-        {
-          title: "陶器02",
-          price: 3000,
-          creater: "ゆう工房",
-          date: "2019/8/29"
-        },
-        {
-          title: "陶器03",
-          price: 3000,
-          creater: "ゆう工房",
-          date: "2019/8/29"
-        },
-        {
-          title: "陶器01",
-          price: 3000,
-          creater: "ゆう工房",
-          date: "2019/8/29"
-        },
-        {
-          title: "陶器02",
-          price: 3000,
-          creater: "ゆう工房",
-          date: "2019/8/29"
-        },
-        {
-          title: "陶器03",
-          price: 3000,
-          creater: "ゆう工房",
-          date: "2019/8/29"
-        },
-        {
-          title: "陶器01",
-          price: 3000,
-          creater: "ゆう工房",
-          date: "2019/8/29"
-        },
-        {
-          title: "陶器02",
-          price: 3000,
-          creater: "ゆう工房",
-          date: "2019/8/29"
-        },
-        {
-          title: "陶器03",
-          price: 3000,
-          creater: "ゆう工房",
-          date: "2019/8/29"
-        },
-        {
-          title: "陶器01",
-          price: 3000,
-          creater: "ゆう工房",
-          date: "2019/8/29"
-        },
-        {
-          title: "陶器02",
-          price: 3000,
-          creater: "ゆう工房",
-          date: "2019/8/29"
-        },
-        {
-          title: "陶器03",
-          price: 3000,
-          creater: "ゆう工房",
-          date: "2019/8/29"
-        }
-      ],
-      favProducts: [
-        {
-          title: "陶器01",
-          price: 3000,
-          creater: "ゆう工房"
-        },
-        {
-          title: "陶器02",
-          price: 3000,
-          creater: "ゆう工房",
-          date: "2019/8/29"
-        },
-        {
-          title: "陶器03",
-          price: 3000,
-          creater: "ゆう工房"
-        },
-        {
-          title: "陶器01",
-          price: 3000,
-          creater: "ゆう工房"
-        },
-        {
-          title: "陶器02",
-          price: 3000,
-          creater: "ゆう工房"
-        }
       ],
       favWorkshops:[
           {
@@ -446,12 +353,14 @@ export default {
     },
     ...mapActions('userdata',['upd_user_data']),
     ...mapActions('products',['get_favo_data']),
-    ...mapActions('work_shop',['get_favoshop'])
+    ...mapActions('work_shop',['get_favoshop']),
+    ...mapActions('buy',['get_buy_history']),
   },
   computed:{
     ...mapGetters(['loginuserdata']),
     ...mapGetters('products',['favo_data']),
-    ...mapGetters('work_shop',['favo_shop'])
+    ...mapGetters('work_shop',['favo_shop']),
+    ...mapGetters('buy',['buyhis_data']),
   },
 };
 </script>
