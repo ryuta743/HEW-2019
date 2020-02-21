@@ -200,6 +200,27 @@
         </v-card>
       </v-dialog>
       <v-dialog
+        v-model="dialog_02"
+        persistent
+        :overlay="false"
+        max-width="500px"
+        transition="dialog-transition"
+      >
+        <v-card>
+          <v-card-text style="padding: 10px;">
+            <v-layout row wrap justify-center align-center>
+              <h3>
+                <v-icon style="margin-bottom: 10px;">mdi-check</v-icon>
+              </h3>
+              <h3 style="margin-bottom: 10px;">投稿しました</h3>
+            </v-layout>
+            <v-layout row wrap justify-center>
+              <v-btn color="success" @click="load">OK</v-btn>
+            </v-layout>
+          </v-card-text>
+        </v-card>
+      </v-dialog>
+      <v-dialog
         v-model="dialog"
         persistent
         :overlay="false"
@@ -210,12 +231,12 @@
           <v-card-text style="padding: 10px;">
             <v-layout row wrap justify-center align-center>
               <h3>
-                <v-icon>mdi-check</v-icon>
+                <v-icon style="margin-bottom: 10px;">mdi-check</v-icon>
               </h3>
-              <h3>投稿しました</h3>
+              <h3 style="margin-bottom: 10px;">カートに追加しました</h3>
             </v-layout>
             <v-layout row wrap justify-center>
-              <v-btn color="success" @click="load">OK</v-btn>
+              <v-btn color="success" @click="dialog=false">OK</v-btn>
             </v-layout>
           </v-card-text>
         </v-card>
@@ -253,6 +274,8 @@ export default {
 
   data() {
     return {
+      dialog: false,
+      dialog_02: false,
       all_review_point: 0,
       avg: 0,
       dialog:false,
@@ -299,14 +322,14 @@ export default {
       this.review_point=0;
       this.review_text='';
       await this.get_reviewsReq()
-      this.dialog=true;
+      this.dialog_02=true;
     },
 
     async load(){
       await this.getproductdetailreq();
       await this.get_reviewsReq()
       await this.get_avg()
-      this.dialog=false;
+      this.dialog_02=false;
     },
 
     async get_reviewsReq(){
@@ -379,7 +402,7 @@ export default {
         try{
           await this.cart_upload({payload})
           await this.getcartdataReq()
-          alert('カート追加完了です');
+          this.dialog = true
         }catch(e){
           console.log('エラー発生')
           console.log(e)
@@ -393,7 +416,7 @@ export default {
         try{
           await this.upd_cart({data})
           await this.getcartdataReq()
-          alert('カート追加完了しました')
+          this.dialog = true
         }catch(e){
           console.log('エラー発生')
           console.log(e)
