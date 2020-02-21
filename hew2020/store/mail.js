@@ -31,4 +31,17 @@ export const actions = {
         const reply_mail =  await this.$axios.$get(`/api/send_mail?to=${to}&subject=${subject}&mail=${mail}`)
         console.log(reply_mail)
     },
+    async buy_mail({commit},{buydata}){
+        const to = buydata[0].mail
+        const subject = '購入手続きが完了しました';
+        const name = buydata[0].name;
+        const total = buydata[0].total
+        const type=['[銀行振り込み]','[クレジットカード]','[AmazonPay]']
+        const mail = total+'円の購入処理が完了しました'+'お支払い方法'+type[buydata[0].buy_type];
+        console.log('ここからだ')
+        console.log(mail)
+        const reply_mail =  await this.$axios.$get(`/api/send_mail?to=${to}&subject=${subject}&mail=${mail}`)
+        console.log(reply_mail)
+    },
+
 }

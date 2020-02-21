@@ -110,6 +110,7 @@ export default {
       ]
       try{
         await this.insert_buy({buydata})
+        await this.buy_mail({buydata})
         if(this.buy_data === 7){
           this.$router.push(`/customer/cart/cartBuy_end`)
         }
@@ -119,7 +120,8 @@ export default {
       }
     },
 
-    ...mapActions('buy',['insert_buy'])
+    ...mapActions('buy',['insert_buy']),
+    ...mapActions('mail',['buy_mail'])
   },
   computed: {
     ...mapGetters('buy',['checkdata','buy_data']),
