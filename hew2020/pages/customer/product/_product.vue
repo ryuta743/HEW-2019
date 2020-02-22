@@ -545,28 +545,29 @@ a {
 }
 
 #product_titles{
-  display: flex;
+  overflow: hidden;
   width: 100%;
   height: 110px;
 }
 
 #product_title{
   display: flex;
+  align-items: center;
+  float: left;
+  height: 110px;
   box-sizing: border-box;
   padding-left: 30px;
   font-size: 30px;
-  align-items: center;
-  width: 50%;
-  height: 110px;
-  white-space: nowrap
+  width: 60%;
 }
 
 #product_rate{
+  float: left;
   display: flex;
   justify-content: flex-end;
   font-size: 30px;
   align-items: center;
-  width: 50%;
+  width: 40%;
   height: 110px;
   font-size: 11px;
 }
