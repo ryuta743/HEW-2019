@@ -28,7 +28,7 @@
                 readonly
                 half-increments
             ></v-rating>
-            <p>{{avg}}</p>
+            <p>({{avg}})</p>
           </div>
         </div>
         <div id="product_description">
@@ -556,6 +556,7 @@ a {
   align-items: center;
   float: left;
   height: 110px;
+  word-break: break-all;
   box-sizing: border-box;
   padding-left: 30px;
   font-size: 30px;
