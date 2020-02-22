@@ -62,6 +62,7 @@ module.exports = {
   ** Plugins to load before mounting the App
   */
   plugins: [
+    '@/plugins/mixin-common-methods',
     '~/plugins/chart.js',
     '~/plugins/bar_chart.js',
     '~/plugins/v-lazy-image.js'

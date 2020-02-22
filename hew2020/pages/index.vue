@@ -51,7 +51,7 @@
                 <v-lazy-image :src="item.product_img" style="width: 100%;object-fit: cover;height: 100%;vertical-align:bottom"/>
               </div>
               <v-card-text style="heigh: 150px;">
-                <div id="product_name">{{item.product_name}}</div>
+                <div id="product_name">{{truncate(item.product_name,14)}}</div>
                 <div id="product_price">¥{{exprice(item.price)}}</div>
                 <div id="product_rate">
                   <v-rating
@@ -76,7 +76,7 @@
                 <v-lazy-image :src="item.product_img" style="width: 100%;object-fit: cover;height: 100%;vertical-align:bottom"/>
               </div>
               <v-card-text style="heigh: 150px;">
-                <div id="product_name">{{item.product_name}}</div>
+                <div id="product_name">{{truncate(item.product_name,14)}}</div>
                 <div id="product_price">¥{{exprice(item.price)}}</div>
                 <div id="product_rate">
                   <v-rating

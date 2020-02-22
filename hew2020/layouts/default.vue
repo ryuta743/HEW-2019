@@ -393,7 +393,6 @@ export default {
         this.e1 = 2
       }
     },
-
     e1check2() {
       if(this.user_name == '' || this.countrys == '' || this.gender == ''){
         this.e1errorflg = 1
