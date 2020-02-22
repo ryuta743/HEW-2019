@@ -48,6 +48,10 @@ export const actions = {
         console.log(shopdata);
         commit("setShop_name", shopdata)
     },
+    async workshop_del({commit}){
+        const del = []
+        commit("setShop_name", del)
+    },
     async mall_init({commit}){
         console.log('配列を初期化しにきたべ')
         for(var c=0; c<4; c++){
