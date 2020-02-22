@@ -10,7 +10,6 @@
     <v-container grid-list-xs>
       <v-content style="padding-top: 15px;border-radius: 4px;">
         <h4 style="width: 100%;text-align: center;">詳細検索</h4>
-        <div>{{error}}</div>
 
         <v-layout row wrap justify-center style="padding-top: 10px;">
           <v-flex xs12 md6>
@@ -54,7 +53,8 @@
           
             <div id="products_header">
                 <div id="search_word">{{ search_word ? search_word:'新規商品一覧' }}</div>
-                <div id="search_count">{{ '-全' + data.length + '件' }}</div>
+                <div id="search_count" v-if="selected==1">{{ '-全' + counter + '件' }}</div>
+                <div id="search_count" v-else>{{ '-全' + counter + '件' }}</div>
             </div>
 
             <v-card id="product" @click="$router.push(`/customer/product/${item.product_id}`)" flat v-for="(item, index) in data" :key="index">
@@ -126,25 +126,31 @@ export default {
 
       search_word: '',
 
-      error: '',
-
       rate: 12,
+
+      counter: 0,
 
     };
   },
 
   methods:{
     async get_select(){
-      if(this.select_data == ''){
-        this.error = '未入力です'
+      if(this.selected == ''){
+        alert('項目を選択してください')
       }else{
         if(this.selected == 0){
         var payload = {
           product : this.select_data,
         }
         try{
+          await this.workshop_del()
           await this.select_product({payload});
           this.search_word = this.select_data;
+          if(this.data == 0){
+            this.counter = 0
+          }else{
+            this.counter = this.data.length
+          }
         }catch(e){
           console.log('エラー発生'),
           console.log(e)
@@ -154,8 +160,15 @@ export default {
           work_shop : this.select_data,
         }
         try{
+          await this.data_del()
           await this.search_workshop({payload});
           this.search_word = this.select_data;
+          if(this.shop_name == 0){
+            this.counter = 0
+          }else{
+            this.counter = this.shop_name.length
+          }
+          
         }catch(e){
           console.log('エラー発生'),
           console.log(e)
@@ -166,8 +179,14 @@ export default {
         }
         console.log(payload.tags)
         try{
+          await this.workshop_del()
           await this.search_tags({payload});
           this.search_word = this.select_data;
+          if(this.data == 0){
+            this.counter = 0
+          }else{
+            this.counter = this.data.length
+          }
         }catch(e){
           console.log('エラー発生'),
           console.log(e)
@@ -177,13 +196,14 @@ export default {
     },
     async get_newproductReq(){
       await this.get_newproduct();
+      this.counter = this.data.length
     },
     exprice(val){
       return val.toLocaleString();
     },
 
-    ...mapActions('products',['select_product','get_newproduct','search_tags']),
-    ...mapActions('work_shop',['search_workshop'])
+    ...mapActions('products',['select_product','get_newproduct','search_tags','data_del']),
+    ...mapActions('work_shop',['search_workshop','workshop_del'])
   },
 
   computed:{

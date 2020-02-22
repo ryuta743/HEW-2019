@@ -66,6 +66,10 @@ export const actions = {
         } */
         commit("setData", productname)
     },
+    async data_del({commit}){
+        const del = []
+        commit("setData", del)
+    },
     async search_tags({commit},{payload}){
         console.log('タグ検索ストアまで届いた');
         console.log(payload)
