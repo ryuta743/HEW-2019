@@ -356,13 +356,14 @@ export default {
 
     async get_avg(){
       this.all_review_point = 0;
-      console.log(this.avg)
       for(var c=0; c<this.reviews_data.length; c++){
         this.all_review_point += this.reviews_data[c].evaluation 
       }
       console.log(this.avg)
-      this.avg = Math.round(this.all_review_point / this.reviews_data.length * 10)
-      this.avg = this.avg / 10
+      if(this.all_review_point !== 0){
+        this.avg = Math.round(this.all_review_point / this.reviews_data.length * 10)
+        this.avg = this.avg / 10
+      }
       console.log(this.avg)
     },
 
