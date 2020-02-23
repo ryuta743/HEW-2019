@@ -191,36 +191,36 @@
         </div>
         <div id="contact_form">
           <div class="sawarabi" style="font-size: 19px;">お問い合わせフォーム</div>
-          <div style="margin: 10px 0;font-size: 14px;color: #444444;">お問い合わせ内容をご入力の上、「確認画面へ」ボタンをクリックしてください。</div>
+          <div style="margin: 10px 0;font-size: 14px;color: #444444;">お問い合わせ内容をご入力の上、「送信」ボタンをクリックしてください。</div>
           <form @submit.prevent>
             <table>
               <tr>
                 <td class="th"><label>お名前<span>必須</span></label></td>
                 <td class="input">
-                  <input type="text" name="name" placeholder="例）山田太郎">
+                  <input type="text" name="name" placeholder="例）山田太郎" v-model="your_name">
                 </td>
               </tr>
               <tr>
                 <td class="th"><label>あなたのメールアドレス<span>必須</span></label></td>
                 <td class="input">
-                  <input type="text" name="name" placeholder="例）tenshoku20@hal.co.jp">
+                  <input type="text" name="name" placeholder="例）tenshoku20@hal.co.jp" v-model="your_mail">
                 </td>
               </tr>
               <tr>
                 <td class="th"><label>あなたの電話番号<span style="background-color: #999999;">任意</span></label></td>
                 <td class="input">
-                  <input type="text" name="name" placeholder="例）tenshoku20@hal.co.jp">
+                  <input type="text" name="name" placeholder="例）00011112222" v-model="your_tel">
                 </td>
               </tr>
               <tr>
                 <td class="th"><label>お問い合わせ内容<span>必須</span></label></td>
                 <td class="input">
-                  <textarea name="content" rows="5" cols="76" placeholder="お問合せ内容を入力" style="border: 1px solid #cccccc;background: #fff;padding-left: 10px;border-radius: 4px;"></textarea>
+                  <textarea name="content" rows="5" cols="76" placeholder="お問合せ内容を入力" style="border: 1px solid #cccccc;background: #fff;padding-left: 10px;border-radius: 4px;" v-model="mail_text"></textarea>
                 </td>
               </tr>
             </table>
           </form>
-          <div id="form_btn"><v-btn depressed　color="success" style="width: 150px;">送信</v-btn></div>
+          <div id="form_btn"><v-btn depressed　color="success" style="width: 150px;" @click="request_mailReq">送信</v-btn></div>
         </div>
       </div>
       </transition>
@@ -245,6 +245,10 @@ export default {
   },
   data() {
     return {
+      your_name:'',
+      your_mail:'',
+      your_tel:'',
+      mail_text:'',
       now_page: 0,
       favo_shops: [],
       nav_item: ["商品", "工房スキル", "コンタクト"],
@@ -289,8 +293,26 @@ export default {
       var result = await this.get_favoshop({user_id:this.loginuserdata.user_data.user_id});
       this.favo_shops = result;
     },
+    async request_mailReq(){
+      console.log(this.workshop_data.work_mail)
+      const mail_data = {
+        work_mail: this.workshop_data.work_mail,
+        name: this.your_name,
+        your_mail: this.your_mail,
+        tel: this.your_tel,
+        mail_text: this.mail_text
+      }
+      console.log(mail_data)
+      try{
+        await this.request_mail({mail_data})
+      }catch(e){
+        console.log('エラー発生')
+        console.log(e)
+      }
+    },
     ...mapActions('work_shop',['get_workshop','add_favoshop','get_favoshop','del_favoshop']),
-    ...mapActions('workshop_manage',['getProduct'])
+    ...mapActions('workshop_manage',['getProduct']),
+    ...mapActions('mail',['request_mail'])
   },
   computed:{
     ...mapGetters('work_shop',['workshop_data','favo_shop']),
