@@ -227,31 +227,31 @@
     <v-app-bar :clipped-left="clipped" flat class="no-print" style="height: 65px;">
       <!-- <v-app-bar-nav-icon @click.stop="drawer = !drawer" /> -->
       <!-- <v-btn outlined>ここにlogo</v-btn> -->
-      <img src="../static/hewlogo.png" alt="ロゴ" width="50px">
-      <div id="site_title"><span>天職</span>tenshoku</div>
+      <img src="../static/hewlogo.png" alt="ロゴ" width="50px" class="no-print">
+      <div id="site_title" class="no-print"><span class="no-print">天職</span>tenshoku</div>
 
-      <div id="search_box">
-        <input type="text" id="search_input" placeholder="キーワード">
+      <div id="search_box" class="no-print">
+        <input type="text" id="search_input" placeholder="キーワード" class="no-print">
       </div>
 
-      <v-btn text @click="loginDialog = true" v-if="loginuserdata == null ? true:false">
-        <v-icon color="#DC3839">mdi-login</v-icon>ログイン
+      <v-btn text @click="loginDialog = true" v-if="loginuserdata == null ? true:false" class="no-print">
+        <v-icon color="#DC3839" class="no-print">mdi-login</v-icon>ログイン
       </v-btn>
 
-      <v-btn text style="margin: ;" v-if="loginuserdata == null ? true:false" @click="createADialog = true">
-        <v-icon color="#DC3839">mdi-account-plus</v-icon>新規登録
+      <v-btn text style="margin: ;" v-if="loginuserdata == null ? true:false" @click="createADialog = true" class="no-print">
+        <v-icon color="#DC3839" class="no-print">mdi-account-plus</v-icon>新規登録
       </v-btn>
 
-      <v-btn text @click="$router.push('/client/myshop/myshop')" v-if="loginuserdata !== null ? true:false">
-        <v-icon color="primary">mdi-store</v-icon>マイ工房管理
+      <v-btn text @click="$router.push('/client/myshop/myshop')" v-if="loginuserdata !== null ? true:false" class="no-print">
+        <v-icon color="primary" class="no-print">mdi-store</v-icon>マイ工房管理
       </v-btn>
 
-        <v-btn text v-if="loginuserdata !== null ? true:false" @click="$router.push('/customer/cart/cart')">
-          <v-icon color="primary">mdi-cart</v-icon>カート
+        <v-btn text v-if="loginuserdata !== null ? true:false" @click="$router.push('/customer/cart/cart')" class="no-print">
+          <v-icon color="primary" class="no-print">mdi-cart</v-icon>カート
         </v-btn>
 
-      <div v-if="loginuserdata !== null ? true:false">
-        <v-menu offset-y>
+      <div v-if="loginuserdata !== null ? true:false" class="no-print">
+        <v-menu offset-y class="no-print">
           <template v-slot:activator="{ on }">
             <v-btn v-on="on" text>
               <v-icon color="primary">mdi-account</v-icon>アカウント
@@ -270,14 +270,14 @@
         </v-menu>
       </div>
     </v-app-bar>
-    <div id="subnav">
-      <div class="sub_item" @click="$router.push('/')"><v-icon color="green darken-2">mdi-home</v-icon>トップ</div>
-      <div class="sub_item" @click="$router.push('/shop')"><v-icon color="orange darken-2">mdi-gift</v-icon>ショップ</div>
-      <div class="sub_item" @click="$router.push('/mall')"><v-icon color="purple darken-2">mdi-shopping-search</v-icon>ランダムモール</div>
-      <div class="sub_item" @click="$router.push('/contact')"><v-icon color="teal darken-2">mdi-email</v-icon>お問い合わせ</div>
+    <div id="subnav" class="no-print">
+      <div class="sub_item no-print" @click="$router.push('/')"><v-icon color="green darken-2">mdi-home</v-icon>トップ</div>
+      <div class="sub_item no-print" @click="$router.push('/shop')"><v-icon color="orange darken-2">mdi-gift</v-icon>ショップ</div>
+      <div class="sub_item no-print" @click="$router.push('/mall')"><v-icon color="purple darken-2">mdi-shopping-search</v-icon>ランダムモール</div>
+      <div class="sub_item no-print" @click="$router.push('/contact')"><v-icon color="teal darken-2">mdi-email</v-icon>お問い合わせ</div>
     </div>
-    <div id="record_btn">
-      <v-btn color="error" icon @click="record_req"><v-icon x-large>mdi-microphone</v-icon></v-btn>
+    <div id="record_btn" class="no-print">
+      <v-btn color="error" class="no-print" icon @click="record_req"><v-icon x-large>mdi-microphone</v-icon></v-btn>
     </div>
     <div id="order_box" v-if="order != ''">
       {{ order }}
@@ -287,10 +287,10 @@
 
     <nuxt />
 
-    <div id="foo">
-      <p>PAGE</p>
-      <p></p>
-      <p>TOP</p>
+    <div id="foo" class="no-print">
+      <p class="no-print">PAGE</p>
+      <p class="no-print"></p>
+      <p class="no-print">TOP</p>
     </div>
     <v-footer style="height: 300px;" dark class="no-print">
       <div id="ter">
