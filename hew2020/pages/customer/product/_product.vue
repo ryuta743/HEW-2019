@@ -7,7 +7,19 @@
       <div class="bread">></div>
       <div class="bread">工房名</div>
     </div>
-    
+    <div id="fullimage">
+      <div
+        class="cloudimage-360"
+        data-folder="https://scaleflex.ultrafast.io/https://scaleflex.airstore.io/demo/chair-360-72/"
+        data-filename="chair_{index}.jpg?v1"
+        data-amount="72"
+        data-magnifier="2"
+        data-full-screen="true"
+        data-autoplay="true"
+        data-speed="100"
+        id="sasa"
+      ></div>
+    </div>
     <div id="product_infos">
       <div id="product_img">
         <v-lazy-image style="width: 100%;object-fit: cover;height: 500px;vertical-align:bottom" :src="productdetails.product_img" />
@@ -251,7 +263,10 @@ import {mapActions,mapGetters} from 'vuex';
 export default {
   head() {
     return {
-      script: [{ src: "https://fyu.se/embed?v=2.0" }]
+      script: [
+        { src: "https://fyu.se/embed?v=2.0" },
+        { src: "https://cdn.scaleflex.it/plugins/js-cloudimage-360-view/2/js-cloudimage-360-view.min.js" }
+      ]
     };
   },
 
@@ -270,6 +285,7 @@ export default {
     this.favo_shops = result;
     console.log('商品ID達',this.product_favos)
     await this.get_avg()
+    await window.CI360.init();
   },
 
   data() {
@@ -482,6 +498,18 @@ export default {
 
 <style scoped>
 
+#fullimage{
+  border: 2px solid #DEE5ED;
+  border-radius: 3px;
+  width: 160px;
+  height: 160px;
+  position: fixed;
+  bottom: 5px;
+  right: 5px;
+  background-color: #fff;
+  z-index: 100;
+}
+
 .sawarabi{
   font-family: "Sawarabi Mincho";
 }
@@ -582,6 +610,7 @@ a {
   width: 100%;
   height: 150px;
   color: #444444;
+  line-height: 30px;
 }
 
 #product_tags{
