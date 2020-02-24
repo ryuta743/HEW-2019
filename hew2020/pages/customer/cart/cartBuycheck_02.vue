@@ -72,6 +72,7 @@
 import {mapActions,mapGetters} from 'vuex';
 
 export default {
+middleware: 'auth',
   mounted() {
     for(var i = 0; i<this.getcartdata.length; i++){
       this.goukei += this.getcartdata[i].price * this.getcartdata[i].count

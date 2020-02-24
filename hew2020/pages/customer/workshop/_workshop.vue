@@ -234,6 +234,8 @@
 import {mapGetters,mapActions} from 'vuex';
 
 export default {
+middleware: 'auth',
+
   async mounted() {
     await this.get_workshopReq();
     await this.getProduct({wsid:this.workshop_data.shop_id})
