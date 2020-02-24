@@ -57,7 +57,7 @@
                   <v-rating
                       color="yellow darken-3"
                       background-color="grey darken-1"
-                      v-model="ws_rate"
+                      v-model="item.rate"
                       size="14px"
                       readonly
                       half-increments

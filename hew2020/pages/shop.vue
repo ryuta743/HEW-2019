@@ -68,7 +68,7 @@
                   <v-rating
                       color="yellow darken-3"
                       background-color="grey darken-1"
-                      v-model="rate"
+                      v-model="item.rate"
                       size="14px"
                       readonly
                       half-increments
@@ -88,7 +88,7 @@
                   <v-rating
                       color="yellow darken-3"
                       background-color="grey darken-1"
-                      v-model="rate"
+                      v-model="data.review"
                       size="14px"
                       readonly
                       half-increments
@@ -196,6 +196,7 @@ export default {
     },
     async get_newproductReq(){
       await this.get_newproduct();
+      console.log(this.data)
       this.counter = this.data.length
     },
     exprice(val){
