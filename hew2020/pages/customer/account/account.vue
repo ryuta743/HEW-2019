@@ -205,6 +205,7 @@
 import {mapActions,mapGetters} from 'vuex';
 
 export default {
+middleware: 'auth',
   async mounted(){
     await this.get_favo_dataReq();
     await this.get_favoshop({user_id:this.loginuserdata.user_data.user_id});

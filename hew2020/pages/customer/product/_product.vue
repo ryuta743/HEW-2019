@@ -261,6 +261,7 @@
 import {mapActions,mapGetters} from 'vuex';
 
 export default {
+middleware: 'auth',
   head() {
     return {
       script: [

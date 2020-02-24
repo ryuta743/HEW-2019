@@ -96,6 +96,8 @@
 <script>
 import {mapActions,mapGetters,mapMutations} from 'vuex'
 export default {
+middleware: 'auth',
+
   data() {
     return {
       loading: true,

@@ -80,6 +80,7 @@
 import {mapActions,mapGetters} from 'vuex';
 
 export default {
+middleware: 'auth',
   mounted(){
     console.log(this.loginuserdata.user_data.user_mail)
     this.mail = this.loginuserdata.user_data.user_mail

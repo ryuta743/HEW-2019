@@ -257,6 +257,8 @@ import {mapActions,mapGetters} from 'vuex'
 
 
 export default {
+middleware: 'auth',
+
   data() {
     return {
       myCroppa: null, //v-model croppa
