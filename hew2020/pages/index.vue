@@ -137,7 +137,8 @@ export default {
   },
   async mounted() {
     await  this.get_newproductReq();
-    $('#loopslider').each(function(){
+    if (process.client) {
+      $('#loopslider').each(function(){
         var loopsliderWidth = $(this).width();
         var loopsliderHeight = $(this).height();
         $(this).children('ul').wrapAll('<div id="loopslider_wrap"></div>');
@@ -171,6 +172,7 @@ export default {
  
         $('#loopslider_wrap ul').clone().appendTo('#loopslider_wrap');
     });
+    }
   },
   data() {
     return {

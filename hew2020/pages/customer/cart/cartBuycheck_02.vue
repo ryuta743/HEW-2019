@@ -3,15 +3,14 @@
         <h1 style="margin-left:20px;">購入確認</h1>
         <br><hr>
         <div id="box">
-          <v-icon size="20px" color="success">mdi-check-circle</v-icon>
-          <h1 style="margin-left: 70px;">購入者情報確認</h1>
+          <h2 style="margin-left: 70px;"><v-icon size="20px" color="success">mdi-check-circle</v-icon>購入者情報確認</h2>
           <div id="boss">
             <div class="mboss">
               <h2>購入者</h2>
               <div class="person">
                 <p>お電話番号:{{checkdata[0].tel}}</p>
                 <p>メールアドレス：{{checkdata[0].mail}}</p>
-                <p>合計金額：{{goukei}}円</p>
+                <p>合計支払額：{{exprice(goukei)}}円</p>
               </div>
             </div>
             <br>
@@ -44,7 +43,7 @@
           <hr>
           <br>
           <div id="item_box0">
-            <h1 id="buy_check">購入商品確認</h1>
+            <h2 id="buy_check"><v-icon size="20px" color="success">mdi-check-circle</v-icon>購入商品確認</h2>
               <br>
               <div id="item_box">
                 <div class="buy_product" flat v-for="(item, index) in getcartdata" :key="index" >
@@ -53,17 +52,16 @@
                   </div>
                   <div style="heigh: 150px;" id="moji">
                     <div id="product_name">{{item.product_name}}</div>
-                    <div id="border"></div>
-                    <div id="product_price">¥{{item.price}}</div>
+                    <div id="product_price">¥{{exprice(item.price)}}</div>
                   </div>
                 </div>
               </div>
           </div>
           <hr>
           <div id="btn_box" style="margin-left: 28px;">
-            <v-layout row wrap justify-end>
-              <v-btn color="success" @click="buyReq" class="btn">OK</v-btn>
-              <v-btn color="grey lighten-3" @click="$router.push('/customer/cart/cartBuy')" style="margin-left: 20px;" class="btn">キャンセル</v-btn>
+            <v-layout row wrap justify-center>
+              <v-btn color="success" @click="buyReq" class="btn" depressed>OK</v-btn>
+              <v-btn color="grey lighten-3" @click="$router.push('/customer/cart/cartBuy')" style="margin-left: 20px;" class="btn" depressed>キャンセル</v-btn>
             </v-layout>
           </div>
         </div>
@@ -119,6 +117,9 @@ export default {
         console.log(e)
       }
     },
+    exprice(val){
+      return val.toLocaleString();
+    },
 
     ...mapActions('buy',['insert_buy']),
     ...mapActions('mail',['buy_mail'])
@@ -143,18 +144,25 @@ export default {
     margin: 20px auto;
   }
   #box{
+    padding: 40px 0;
     width:1000px;
-
   }
   #boss{
-    width:600px;
+    display: flex;
+    flex-wrap: wrap;
+    width:850px;
     margin-left: 75px;
+    border: 1.5px solid #ddd;
+    border-radius: 2px;
+    margin-bottom: 40px;
   }
   .mboss{
+    width: 360px;
+    height: 200px;
     padding: 20px;
   }
   .person{
-    margin-left: 40px;
+    margin-top: 20px;
   }
   #buy_check{
     margin-left: 75px;
@@ -170,6 +178,7 @@ export default {
     width: 1000px;
     padding-bottom: 40px;
   }
+
   .product_img{
     width: 268px;
     height: 268px;
@@ -177,7 +186,6 @@ export default {
     border: 2px;
   }
   .buy_product{
-    background-color: #eeffee;
     width: 270px;
     height: 327.5px;
     margin: 20px 10px 0px 10px ; 
@@ -189,18 +197,22 @@ export default {
     margin-right:5px;
   }
   #moji{
-    text-align: center;
     font-size: 15px;
-    padding: 5px 0 5px 5px;
+    box-sizing: border-box;
+    padding: 5px 5px 5px 10px;
   }
   #product_name{
+    color: #666;
     margin:2.5px;
   }
   #product_price{
     margin:2.5px;
+    color: #666;
+    font-size: 12px;
+    padding-left: 10px;
   }
   #btn_box{
-    width: 220px;
+    width: 100%;
     padding-top: 20px;
     margin-right: 50px;
   }

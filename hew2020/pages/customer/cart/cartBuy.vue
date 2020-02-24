@@ -60,13 +60,13 @@
               </v-layout>    
             </div>
             <!-- <v-divider style="padding-bottom: 10px;"></v-divider> -->
-            <v-layout row wrap>
+            <v-layout row wrap justify-center>
               <v-flex xs6 md3>
-                <v-btn id="v-btn" color="success" style="margin-right: 10px;" @click="buycheckreq">確認</v-btn>
+                <v-btn id="v-btn" color="success" style="margin-right: 10px;" @click="buycheckreq" depressed>確認</v-btn>
                 <!-- <v-btn color="success" style="width: 100%;" @click="$router.push('/customer/cart/complete')">確認</v-btn> -->
               </v-flex>
               <v-flex xs6 md3>
-                <v-btn id="v-btn" color="grey lighten-3" style="width: 100" @click="$router.push('/customer/cart/cart')">キャンセル</v-btn>
+                <v-btn id="v-btn" color="grey lighten-3" style="width: 100" @click="$router.push('/customer/cart/cart')" depressed>キャンセル</v-btn>
               </v-flex>
             </v-layout>
           </div>
