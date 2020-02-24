@@ -51,6 +51,15 @@ export const mutations = {
 }
 
 export const actions = {
+    async get_newproduct({commit}){
+        console.log('正都は優しさが溢れてすごい人！！');
+        const new_productdata = await this.$axios.$get(`http://133.18.194.128:5000/product/get_newdata`)
+        for(var i = 0; i<new_productdata.length ; i++){
+            new_productdata[i].product_img = `https://firebasestorage.googleapis.com/v0/b/tenshoku-9b0c8.appspot.com/o/images%2F${new_productdata[i].shop_id}%2Fproducts%2F${new_productdata[i].product_img}?alt=media`;
+        }
+        console.log(new_productdata)
+        commit('setData',new_productdata)
+    },
     async select_product({commit},{payload}){
         console.log('お前は最強だ正都様');
         console.log(payload.product);
@@ -98,15 +107,18 @@ export const actions = {
         console.log(get_tag)
         commit('setTag_data',get_tag)
     },
-    async get_newproduct({commit}){
-        console.log('正都は優しさが溢れてすごい人！！');
-        const new_productdata = await this.$axios.$get(`http://133.18.194.128:5000/product/get_newdata`);
-        for(var i = 0; i<new_productdata.length ; i++){
-            new_productdata[i].product_img = `https://firebasestorage.googleapis.com/v0/b/tenshoku-9b0c8.appspot.com/o/images%2F${new_productdata[i].shop_id}%2Fproducts%2F${new_productdata[i].product_img}?alt=media`;
-        }
-        console.log(new_productdata)
-        commit('setData',new_productdata)
-    },
+    // async get_newproduct({commit}){
+    //     console.log('正都は優しさが溢れてすごい人！！');
+    //     const new_productdata = await this.$axios.$get(`http://133.18.194.128:5000/product/get_newdata`);
+    //     for(var i = 0; i<new_productdata.length ; i++){
+    //         new_productdata[i].product_img = `https://firebasestorage.googleapis.com/v0/b/tenshoku-9b0c8.appspot.com/o/images%2F${new_productdata[i].shop_id}%2Fproducts%2F${new_productdata[i].product_img}?alt=media`;
+    //         // const reviews = await this.$axios.$get(`http://133.18.194.128:5000/review/get_evaluation?product_id=${new_productdata[i].product_id}`);
+    //         // new_data.review.push(reviews[0])
+    //     }
+    //     // console.log(new_data.review)
+    //     console.log(new_productdata)
+    //     // commit('setData',new_data)
+    // },
     async products_list({commit},{random_id}){
         console.log('愛の力で商品データ取りにきたよ')
         console.log(random_id)
