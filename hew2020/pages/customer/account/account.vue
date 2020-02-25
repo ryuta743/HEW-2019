@@ -259,7 +259,6 @@
 import { mapActions, mapGetters } from "vuex";
 
 export default {
-<<<<<<< HEAD
   middleware: 'auth',
   head() {
     return {
@@ -267,10 +266,6 @@ export default {
     }
   },
   async mounted(){
-=======
-  middleware: "auth",
-  async mounted() {
->>>>>>> あ
     await this.get_favo_dataReq();
     await this.get_favoshop({ user_id: this.loginuserdata.user_data.user_id });
     await this.get_buy_history({
