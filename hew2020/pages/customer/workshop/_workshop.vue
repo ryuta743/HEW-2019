@@ -317,17 +317,12 @@
 import { mapGetters, mapActions } from "vuex";
 
 export default {
-<<<<<<< HEAD
   middleware: 'auth',
   head() {
     return {
       title: this.workshop_data.shop_name
     }
   },
-=======
-  middleware: "auth",
-
->>>>>>> あ
   async mounted() {
     await this.get_workshopReq();
     await this.getProduct({ wsid: this.workshop_data.shop_id });
