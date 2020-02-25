@@ -10,7 +10,12 @@
 
 <script>
 export default {
-middleware: 'auth',
+    middleware: 'auth',
+    head() {
+        return {
+        title: '購入完了'
+    }
+  },
 }
 </script>
 

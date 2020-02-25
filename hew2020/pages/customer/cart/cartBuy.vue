@@ -80,7 +80,12 @@
 import {mapActions,mapGetters} from 'vuex';
 
 export default {
-middleware: 'auth',
+  middleware: 'auth',
+  head() {
+    return {
+      title: '購入情報入力'
+    }
+  },
   mounted(){
     console.log(this.loginuserdata.user_data.user_mail)
     this.mail = this.loginuserdata.user_data.user_mail

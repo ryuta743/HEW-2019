@@ -67,7 +67,12 @@
 import {mapActions,mapGetters} from 'vuex';
 
 export default {
-middleware: 'auth',
+  middleware: 'auth',
+  head() {
+    return {
+      title: 'カート'
+    }
+  },
   data() {
     return {
       rate: 5,

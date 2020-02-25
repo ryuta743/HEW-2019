@@ -205,7 +205,12 @@
 import {mapActions,mapGetters} from 'vuex';
 
 export default {
-middleware: 'auth',
+  middleware: 'auth',
+  head() {
+    return {
+      title: 'アカウントページ'
+    }
+  },
   async mounted(){
     await this.get_favo_dataReq();
     await this.get_favoshop({user_id:this.loginuserdata.user_data.user_id});

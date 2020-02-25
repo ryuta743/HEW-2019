@@ -72,7 +72,12 @@
 import {mapActions,mapGetters} from 'vuex';
 
 export default {
-middleware: 'auth',
+  middleware: 'auth',
+  head() {
+    return {
+      title: '購入情報確認'
+    }
+  },
   mounted() {
     for(var i = 0; i<this.getcartdata.length; i++){
       this.goukei += this.getcartdata[i].price * this.getcartdata[i].count

@@ -110,6 +110,11 @@ import {mapActions,mapGetters} from 'vuex';
 import { toUnicode } from 'punycode';
 
 export default {
+  head() {
+    return {
+      title: 'ショップページ'
+    }
+  },
   async mounted() {
   await  this.get_newproductReq()
   },

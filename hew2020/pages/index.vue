@@ -6,16 +6,18 @@
             <input type="text" id="keyword_input" placeholder="キーワード">
             <img src="../static/madejp.png" alt="madeinjapan" id="madejp">
             <div id="loop_body">
-              <div id="loopslider">
-                <ul>
-                  <li><img src="https://ichi-point.jp/wp-content/uploads/2018/08/IM_KG02001-01.jpg" width="200" height="200" alt="" /></li>
-                  <li><img src="https://ichi-point.jp/wp-content/uploads/2017/05/HR71009-2-600x600.jpg" width="200" height="200" alt="" /></li>
-                  <li><img src="https://ichi-point.jp/wp-content/uploads/2018/07/BS99004_img.jpg" width="200" height="200" alt="" /></li>
-                  <li><img src="https://ichi-point.jp/wp-content/uploads/2018/09/KG92006_11.jpg" width="200" height="200" alt="" /></li>
-                  <li><img src="https://ichi-point.jp/wp-content/uploads/2017/05/HR71009-2-600x600.jpg" width="200" height="200" alt="" /></li>
-                  <li><img src="https://ichi-point.jp/wp-content/uploads/2018/11/HR91003.jpg" width="200" height="200" alt="" /></li>
-                </ul>
-              </div>
+              <client-only>
+                <div id="loopslider">
+                  <ul>
+                    <li><img src="https://ichi-point.jp/wp-content/uploads/2018/08/IM_KG02001-01.jpg" width="200" height="200" alt="" /></li>
+                    <li><img src="https://ichi-point.jp/wp-content/uploads/2017/05/HR71009-2-600x600.jpg" width="200" height="200" alt="" /></li>
+                    <li><img src="https://ichi-point.jp/wp-content/uploads/2018/07/BS99004_img.jpg" width="200" height="200" alt="" /></li>
+                    <li><img src="https://ichi-point.jp/wp-content/uploads/2018/09/KG92006_11.jpg" width="200" height="200" alt="" /></li>
+                    <li><img src="https://ichi-point.jp/wp-content/uploads/2017/05/HR71009-2-600x600.jpg" width="200" height="200" alt="" /></li>
+                    <li><img src="https://ichi-point.jp/wp-content/uploads/2018/11/HR91003.jpg" width="200" height="200" alt="" /></li>
+                  </ul>
+                </div>
+              </client-only>
             </div>    
       </div>
       
@@ -126,10 +128,14 @@ import VuetifyLogo from "~/components/VuetifyLogo.vue";
 import {mapActions,mapGetters} from 'vuex';
 
 export default {
-  head:{
-    script:[
-      {src:"http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"}
-    ]
+  head() {
+    return {
+      script:[
+        {src:"http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"}
+      ],
+      // nuxt.config.jsの%sに反映される内容
+      title: 'トップページ'
+    }
   },
   components: {
     Logo,
