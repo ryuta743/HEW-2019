@@ -62,8 +62,12 @@
 import {mapGetters,mapActions} from 'vuex';
 
 export default {
-middleware: 'auth',
-
+  middleware: 'auth',
+  head() {
+    return {
+      title: 'チャット'
+    }
+  },
   data() {
     return {
       userid: "05",

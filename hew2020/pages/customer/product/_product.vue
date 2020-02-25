@@ -267,7 +267,8 @@ middleware: 'auth',
       script: [
         { src: "https://fyu.se/embed?v=2.0" },
         { src: "https://cdn.scaleflex.it/plugins/js-cloudimage-360-view/2/js-cloudimage-360-view.min.js" }
-      ]
+      ],
+      title: this.productdetails.product_name
     };
   },
 

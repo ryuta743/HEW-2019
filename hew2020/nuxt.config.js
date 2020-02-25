@@ -12,11 +12,11 @@ module.exports = {
   ** Headers of the page
   */
   head: {
-    title: process.env.npm_package_name || '',
+    //title: process.env.npm_package_name || '',
     htmlAttrs: {
       prefix: 'og: http://ogp.me/ns#'
     },
-    titleTemplate: '天職 - 天職tenshoku',
+    titleTemplate: '天職 - %s',
     meta: [
       { charset: 'utf-8' },
       { name: 'theme-color', content: '#212121' },

@@ -50,7 +50,12 @@
 import {mapActions,mapGetters} from 'vuex';
 
 export default {
-middleware: 'auth',
+  middleware: 'auth',
+  head() {
+    return {
+      title: 'お問い合わせページ'
+    }
+  },
   data() {
     return {
       contact_text: '',

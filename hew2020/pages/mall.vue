@@ -84,10 +84,13 @@
 import {mapActions,mapGetters} from 'vuex';
 
 export default {
-  head: {
-    script: [
-      { src: "https://code.jquery.com/jquery-3.3.1.js" }
-    ],
+  head() {
+    return {
+      script:[
+        {src:"http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"}
+      ],
+      title: '街へ出る'
+    }
   },
   async mounted() {
     this.move_shopper();
