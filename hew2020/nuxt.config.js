@@ -12,30 +12,29 @@ module.exports = {
   ** Headers of the page
   */
   head: {
-    titleTemplate: '%s - ' + process.env.npm_package_name,
     title: process.env.npm_package_name || '',
     htmlAttrs: {
       prefix: 'og: http://ogp.me/ns#'
     },
-    titleTemplate: '%s - HackmdBase',
+    titleTemplate: '天職 - 天職tenshoku',
     meta: [
       { charset: 'utf-8' },
       { name: 'theme-color', content: '#212121' },
       { name: 'apple-mobile-web-app-capable', content: 'yes' },
       /* { name: 'apple-mobile-web-app-status-bar-style', content: 'black-translucent' }, */
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: 'メイドインジャパンの工芸品が工房から直接帰るショッピングサイト！' },
+      { hid: 'description', name: 'description', content: 'メイドインジャパンの工芸品が工房から直接購入できるショッピングサイト！' },
       { hid: 'og:site_name', property: 'og:site_name', content: '天職' },
       { hid: 'og:type', property: 'og:type', content: 'website' },
       { hid: 'og:url', property: 'og:url', content: 'https://hackmdbase-fire.herokuapp.com' },
       { hid: 'og:title', property: 'og:title', content: '天職' },
-      { hid: 'og:description', property: 'og:description', content: 'メイドインジャパンの工芸品が工房から直接帰るショッピングサイト！' },
+      { hid: 'og:description', property: 'og:description', content: 'メイドインジャパンの工芸品が工房から直接購入できるショッピングサイト！' },
       { hid: 'og:image', property: 'og:image', content: 'https://hackmdbase-fire.herokuapp.com/img/hackmdbase2.png' },
       { property: 'fb:app_id', content: '373239600269292' },
       { name: 'twitter:card', content: 'summary' },
       { name: 'twitter:site', content: '@aspirational_ta' },
       { name: 'twitter:title', content: '天職' },
-      { name: 'twitter:description', content: 'メイドインジャパンの工芸品が工房から直接帰るショッピングサイト！' },
+      { name: 'twitter:description', content: 'メイドインジャパンの工芸品が工房から直接購入できるショッピングサイト！' },
       { name: 'twitter:image', content: 'https://hackmdbase-fire.herokuapp.com/img/hackmdbase2.png' },
     ],
     link: [
