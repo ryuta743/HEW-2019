@@ -1,5 +1,74 @@
 <template>
   <v-container>
+    <!-- アカウント情報変更ダイアログ -->
+    <v-dialog
+      v-model="change_dialog"
+      overlay="false"
+      max-width="600px"
+      transition="dialog-transition"
+    >
+      <v-card scrollable>
+        <div id="acc_change">
+          <div id="selecter">
+            <select name="account" v-model="acc_change" id="select_box" autofocus>
+              <option value="0" selected>名前</option>
+              <option value="1">国籍</option>
+              <option value="2">性別</option>
+              <option value="3">メールアドレス</option>
+              <option value="4">工房関係者</option>
+            </select>
+            <div id="change_btn">
+              <v-btn class="btn elevation-0" color="success" @click="upd_user_dataReq">変更</v-btn>
+            </div>
+          </div>
+          <v-text-field label="名前" outlined v-model="user_name" v-if="acc_change==0"></v-text-field>
+          <v-flex v-if="acc_change==1">
+            <v-select
+              outlined
+              :items="countrys"
+              label="在住している国を選択してください"
+              item-text="label"
+              item-value="value"
+              v-model="country"
+            ></v-select>
+          </v-flex>
+          <div id="radio_box">
+            <div v-if="acc_change==2">
+              <v-layout row wrap style="padding-bottom: 30px;">
+                <div id="mama">
+                  <v-radio-group :item="genders" v-model="gender">
+                    <div id=" oya">
+                      <div class="child">
+                        <v-radio label="男性" value="0"></v-radio>
+                      </div>
+                      <div class="child">
+                        <v-radio label="女性" value="1"></v-radio>
+                      </div>
+                      <div class="child">
+                        <v-radio label="その他" value="2"></v-radio>
+                      </div>
+                    </div>
+                  </v-radio-group>
+                </div>
+              </v-layout>
+            </div>
+          </div>
+          <v-text-field label="メールアドレス" outlined v-model="user_mail" v-if="acc_change==3"></v-text-field>
+          <div id="check_box">
+            <v-layout row wrap align-center>
+              <v-checkbox
+                label="日本伝統工芸品関係者です"
+                true-value="1"
+                false-value="0"
+                v-model="craft"
+                v-if="acc_change==4"
+              ></v-checkbox>
+            </v-layout>
+          </div>
+        </div>
+      </v-card>
+    </v-dialog>
+
     <!-- 購入履歴ダイアログ -->
     <v-dialog
       v-model="purchaseHistoryDialog"
@@ -104,36 +173,10 @@
     </v-dialog>
 
     <v-content>
-      <h5 style="width: 100%;text-align: center;">登録情報</h5>
-      <h4 style="width: 100%;text-align: center;padding: 0 0 5px 0;">REGISTRATION INFORMATION</h4>
-      <select v-model="acc_change">
-        <option disabled value="">未選択</option>
-        <option value="0">名前</option>
-        <option value="1">国籍</option>
-        <option value="2">性別</option>
-        <option value="3">メールアドレス</option>
-        <option value="4">工房関係者</option>
-      </select>
-      <v-btn color="success" @click="upd_user_dataReq">変更</v-btn>
-      <v-text-field label="名前" outlined v-model="user_name" v-if="acc_change==0"></v-text-field>
-      <v-flex md10 xs8 v-if="acc_change==1">
-        <v-select outlined :items="countrys" label="在住している国を選択してください" item-text="label" item-value="value" v-model="country"></v-select>
-      </v-flex>
-      <v-flex md10 xs8 v-if="acc_change==2">
-        <v-layout row wrap style="padding-bottom: 30px;">
-          <v-radio-group :item="genders" v-model="gender">
-            <v-radio label="男性" value=0></v-radio>
-            <v-radio label="女性" value=1></v-radio>
-            <v-radio label="その他" value=2></v-radio>
-          </v-radio-group>
-        </v-layout>
-      </v-flex>
-      <v-text-field label="メールアドレス" outlined v-model="user_mail" v-if="acc_change==3"></v-text-field>
-      <v-flex md10 xs8>
-        <v-layout row wrap align-center>
-          <v-checkbox label="日本伝統工芸品関係者です" true-value="1" false-value="0"  v-model="craft" v-if="acc_change==4"></v-checkbox>
-        </v-layout>
-      </v-flex>
+      <div id="acc_info">
+        <h5 style="width: 100%;text-align: center;">登録情報</h5>
+        <h4 style="width: 100%;text-align: center;padding: 0 0 5px 0;">REGISTRATION INFORMATION</h4>
+      </div>
       <v-card>
         <v-simple-table>
           <tbody>
@@ -162,11 +205,22 @@
       </v-card>
     </v-content>
     <v-content>
-      <h5 style="width: 100%;text-align: center;">アカウントメニュー</h5>
-      <h4 style="width: 100%;text-align: center;padding: 0 0 5px 0;">ACOUNT MENU</h4>
+      <div id="page_name">
+        <h5 style="width: 100%;text-align: center;">アカウントメニュー</h5>
+        <h4 style="width: 100%;text-align: center;padding: 0 0 5px 0;">ACOUNT MENU</h4>
+      </div>
       <v-card>
         <v-card-text>
           <v-layout row wrap justify-center>
+            <v-btn
+              x-large
+              color="success"
+              outlined
+              style="margin: 0 5px 0 5px;"
+              @click="change_dialog = true"
+            >
+              <v-icon>mdi-account-edit</v-icon>アカウント変更
+            </v-btn>
             <v-btn
               x-large
               color="success"
@@ -202,9 +256,10 @@
 </template>
 
 <script>
-import {mapActions,mapGetters} from 'vuex';
+import { mapActions, mapGetters } from "vuex";
 
 export default {
+<<<<<<< HEAD
   middleware: 'auth',
   head() {
     return {
@@ -212,52 +267,65 @@ export default {
     }
   },
   async mounted(){
+=======
+  middleware: "auth",
+  async mounted() {
+>>>>>>> あ
     await this.get_favo_dataReq();
-    await this.get_favoshop({user_id:this.loginuserdata.user_data.user_id});
-    await this.get_buy_history({user_id:this.loginuserdata.user_data.user_id})
+    await this.get_favoshop({ user_id: this.loginuserdata.user_data.user_id });
+    await this.get_buy_history({
+      user_id: this.loginuserdata.user_data.user_id
+    });
   },
   data() {
     return {
-      acc_change: null,
-      user_mail: '',
-      user_pass: '',
-      user_name: '',
+      acc_change: 0,
+      user_mail: "",
+      user_pass: "",
+      user_name: "",
       gender: null,
       genders: [
-        {label:'男' , value: 0},
-        {label:'女' , value: 1},
-        {label:'その他' , value: 2}
+        { label: "男", value: 0 },
+        { label: "女", value: 1 },
+        { label: "その他", value: 2 }
       ],
-      genders_2:['男','女','その他'],
+      genders_2: ["男", "女", "その他"],
 
       country: null,
       countrys: [
-        {label:'日本(japan)' , value: 0},
-        {label:'アメリカ合衆国(U.S.A)' , value: 1},
-        {label:'中国 (china)' , value: 2},
-        {label:'ロシア (russia)' , value: 3},
-        {label:'タイ(thailand)' , value: 4},
-        {label:'フランス(france)' , value: 5},
-        {label:'韓国(korea)' , value: 6},
-        {label:'その他(other)' , value: 7},
+        { label: "日本(japan)", value: 0 },
+        { label: "アメリカ合衆国(U.S.A)", value: 1 },
+        { label: "中国 (china)", value: 2 },
+        { label: "ロシア (russia)", value: 3 },
+        { label: "タイ(thailand)", value: 4 },
+        { label: "フランス(france)", value: 5 },
+        { label: "韓国(korea)", value: 6 },
+        { label: "その他(other)", value: 7 }
       ],
-      countrys_2:['日本(japan)','アメリカ合衆国(U.S.A)','中国(china)','ロシア(russia)','タイ(thailand)','フランス(france)','韓国(korea)','その他(other)'],
-      
+      countrys_2: [
+        "日本(japan)",
+        "アメリカ合衆国(U.S.A)",
+        "中国(china)",
+        "ロシア(russia)",
+        "タイ(thailand)",
+        "フランス(france)",
+        "韓国(korea)",
+        "その他(other)"
+      ],
+
       craft: 0,
       usertype: [
-        {label:'部外者' , value: 0},
-        {label:'関係者' , value: 1}
+        { label: "部外者", value: 0 },
+        { label: "関係者", value: 1 }
       ],
-      usertype2:['客','工房関係者'],
-
-
-
+      usertype2: ["客", "工房関係者"],
 
       item: {
         name: "寺田神",
         countory: "日本(Japan)",
         mail: "terada_manji@hal.co.jp"
       },
+      change_dialog: false,
       purchaseHistoryDialog: false,
       favWorkshopDialog: false,
       favProductDialog: false,
@@ -267,109 +335,169 @@ export default {
           price: 3000,
           creater: "ゆう工房",
           date: "2019/8/29"
-        },
+        }
       ],
-      favWorkshops:[
-          {
-              title:"ゆう工房",
-              description:'便利だけど人為的なものが身の回りに増える現代生活。自然素材なら安心して使うことができます。陶芸は地球の一部を拝借しての楽しい手作り生活です。「ゆう工房」は人為を感じない土味ある焼きものを提案しています。'
-          }
+      favWorkshops: [
+        {
+          title: "ゆう工房",
+          description:
+            "便利だけど人為的なものが身の回りに増える現代生活。自然素材なら安心して使うことができます。陶芸は地球の一部を拝借しての楽しい手作り生活です。「ゆう工房」は人為を感じない土味ある焼きものを提案しています。"
+        }
       ],
-      countrys_7:['日本(japan)','アメリカ合衆国(U.S.A)','中国(china)','ロシア(russia)','タイ(thailand)','フランス(france)','韓国(korea)','その他(other)'],
+      countrys_7: [
+        "日本(japan)",
+        "アメリカ合衆国(U.S.A)",
+        "中国(china)",
+        "ロシア(russia)",
+        "タイ(thailand)",
+        "フランス(france)",
+        "韓国(korea)",
+        "その他(other)"
+      ]
     };
   },
-  methods:{
-    async get_favo_dataReq(){
+  methods: {
+    async get_favo_dataReq() {
       const user_data = {
-        user_id: this.loginuserdata.user_data.user_id,
-      }
-      console.log(user_data)
-      try{
-        await this.get_favo_data({user_data})
-      }catch(e){
-        console.log( 'エラー発生' + e )
+        user_id: this.loginuserdata.user_data.user_id
+      };
+      console.log(user_data);
+      try {
+        await this.get_favo_data({ user_data });
+      } catch (e) {
+        console.log("エラー発生" + e);
       }
     },
-    async upd_user_dataReq(){
-      if(this.acc_change == 0){
-        console.log(0)
+    async upd_user_dataReq() {
+      if (this.acc_change == 0) {
+        console.log(0);
         const user_data = {
           change_type: this.acc_change,
           userid: this.loginuserdata.user_data.user_id,
           change_data: this.user_name
+        };
+        try {
+          await this.upd_user_data({ user_data });
+          alert("登録されている名前の変更が完了しました");
+          this.change_dialog = false;
+        } catch (e) {
+          console.log("エラー発生" + e);
         }
-        try{
-          await this.upd_user_data({user_data})
-          alert('登録されている名前の変更が完了しました')
-        }catch(e){
-          console.log( 'エラー発生' + e )
-        }
-      }else if(this.acc_change == 1){
-        console.log(1)
+      } else if (this.acc_change == 1) {
+        console.log(1);
         const user_data = {
           change_type: this.acc_change,
           userid: this.loginuserdata.user_data.user_id,
           change_data: this.country
+        };
+        try {
+          await this.upd_user_data({ user_data });
+          alert("在住している国の変更が完了しました");
+          this.change_dialog = false;
+        } catch (e) {
+          console.log("エラー発生" + e);
         }
-        try{
-          await this.upd_user_data({user_data})
-          alert('在住している国の変更が完了しました')
-        }catch(e){
-          console.log( 'エラー発生' + e )
-        }
-      }else if(this.acc_change == 2){
-        console.log(2)
+      } else if (this.acc_change == 2) {
+        console.log(2);
         const user_data = {
           change_type: this.acc_change,
           userid: this.loginuserdata.user_data.user_id,
           change_data: this.gender
+        };
+        try {
+          await this.upd_user_data({ user_data });
+          alert("登録されている性別の変更が完了しました");
+          this.change_dialog = false;
+        } catch (e) {
+          console.log("エラー発生" + e);
         }
-        try{
-          await this.upd_user_data({user_data})
-          alert('登録されている性別の変更が完了しました')
-        }catch(e){
-          console.log( 'エラー発生' + e )
-        }
-      }else if(this.acc_change == 3){
-        console.log(3)
+      } else if (this.acc_change == 3) {
+        console.log(3);
         const user_data = {
           change_type: this.acc_change,
           userid: this.loginuserdata.user_data.user_id,
           change_data: this.user_mail
+        };
+        try {
+          await this.upd_user_data({ user_data });
+          alert("登録されているメールアドレスの変更が完了しました");
+          this.change_dialog = false;
+        } catch (e) {
+          console.log("エラー発生" + e);
         }
-        try{
-          await this.upd_user_data({user_data})
-          alert('登録されているメールアドレスの変更が完了しました')
-        }catch(e){
-          console.log( 'エラー発生' + e )
-        }
-      }else if(this.acc_change == 4){
-        console.log(4)
+      } else if (this.acc_change == 4) {
+        console.log(4);
         const user_data = {
           change_type: this.acc_change,
           userid: this.loginuserdata.user_data.user_id,
           change_data: this.craft
-        }
-        try{
-          await this.upd_user_data({user_data})
-        }catch(e){
-          console.log( 'エラー発生' + e )
+        };
+        try {
+          await this.upd_user_data({ user_data });
+          alert("工房関係者の変更が完了しました");
+          this.change_dialog = false;
+        } catch (e) {
+          console.log("エラー発生" + e);
         }
       }
     },
-    ...mapActions('userdata',['upd_user_data']),
-    ...mapActions('products',['get_favo_data']),
-    ...mapActions('work_shop',['get_favoshop']),
-    ...mapActions('buy',['get_buy_history']),
+    ...mapActions("userdata", ["upd_user_data"]),
+    ...mapActions("products", ["get_favo_data"]),
+    ...mapActions("work_shop", ["get_favoshop"]),
+    ...mapActions("buy", ["get_buy_history"])
   },
-  computed:{
-    ...mapGetters(['loginuserdata']),
-    ...mapGetters('products',['favo_data']),
-    ...mapGetters('work_shop',['favo_shop']),
-    ...mapGetters('buy',['buyhis_data']),
-  },
+  computed: {
+    ...mapGetters(["loginuserdata"]),
+    ...mapGetters("products", ["favo_data"]),
+    ...mapGetters("work_shop", ["favo_shop"]),
+    ...mapGetters("buy", ["buyhis_data"])
+  }
 };
 </script>
 
-<style>
+<style scoped>
+#selecter {
+  padding: 20px 0 5px 0;
+  width: 175px;
+  margin: 10px auto;
+  display: flex;
+}
+#change_btn {
+  margin: 0;
+  padding: 0;
+}
+#select_box {
+  border: #222 solid 1px;
+  margin-right: 3px;
+}
+#acc_change {
+  background-color: #fff;
+  width: 500px;
+  height: 160px;
+  margin: 0 auto;
+  text-align: center;
+}
+#mama {
+  display: flex;
+}
+#oya {
+  clear: both;
+}
+.child {
+  float: left;
+}
+#radio_box {
+  width: 250px;
+  margin: 0 auto;
+}
+#check_box {
+  width: 200px;
+  margin: 0 auto;
+}
+#acc_info {
+  padding: 30px 0 30px 0;
+}
+#page_name {
+  padding: 20px 0 20px 0;
+}
 </style>
