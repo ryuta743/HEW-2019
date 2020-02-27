@@ -46,6 +46,10 @@ module.exports = {
       //https://fonts.googleapis.com/css?family=Sawarabi+Mincho
       //<link href="https://fonts.googleapis.com/earlyaccess/hannari.css" rel="stylesheet">
       //<link href="https://fonts.googleapis.com/css?family=M+PLUS+Rounded+1c&display=swap" rel="stylesheet">
+    ],
+    script:[
+      { src: "https://cdn.scaleflex.it/plugins/js-cloudimage-360-view/2/js-cloudimage-360-view.min.js" },
+      {src:"http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"}
     ]
   },
   /*
