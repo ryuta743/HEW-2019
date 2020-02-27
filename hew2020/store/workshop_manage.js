@@ -8,7 +8,8 @@ export const state = () => ({
     sales: [],
     saleitem: [],
     order_sales: [],
-    trends:[]
+    trends:[],
+    end_data:{},
 })
 
 export const getters = {
@@ -20,7 +21,8 @@ export const getters = {
     sales: state => state.sales,
     saleitem: state => state.saleitem,
     order_sales: state => state.order_sales,
-    trends: state => state.trends
+    trends: state => state.trends,
+    end_data: state=> state.end_data,
 }
 
 export const mutations = {
@@ -55,10 +57,23 @@ export const mutations = {
         state.details[val.target].proccess = val.flg;
         console.log(val)
         console.log(state.details[val.target].proccess)
+    },
+    setEnd_data(state,end_data){
+        state.end_data = end_data
+        console.log(end_data)
     }
 }
 
 export const actions = {
+    async get_order_lists({ commit }, {order_data}) {
+        console.log('おつ')
+        const order_number = order_data.order_num
+        const shop_id = order_data.shop_id
+        console.log(order_number)
+        const enddata = await this.$axios.$get(`http://133.18.194.128:5000/workshopManage/get_order_lists?order_number=${order_number}&shop_id=${shop_id}`);
+        commit('setEnd_data',enddata)
+        console.log(enddata)
+    },
     async getShopdata({ commit }, { wsid }) {
         try {
             const ws_inf = await this.$axios.$get(`http://133.18.194.128:5000/workshopManage/getShopdata?shop_id=${wsid}`);
@@ -239,5 +254,14 @@ export const actions = {
             let product_data = await this.$axios.$get(`http://133.18.194.128:5000/workshopManage/tag_add?product_id=${productid}&tag_jp=${tag_jp}&tag_en=${tag_en}`);
             console.log(product_data)
         }     
-    }
+    },
+    async shipping_comp({ commit }, { shipping_data }) {
+        console.log('ストアきたよ')
+        const order_id = shipping_data.data[0].order_number
+        console.log(order_id)
+        const shipping_end_flg = await this.$axios.$get(`http://133.18.194.128:5000/workshopManage/shipping_end?order_number=${order_id}`);
+        console.log(shipping_end_flg)
+        const enddata = await this.$axios.$get(`http://133.18.194.128:5000/workshopManage/get_order_lists?order_number=${order_id}&shop_id=${shipping_data.data[0].shop_id}`);
+        commit('setEnd_data',enddata)
+    },
 }
