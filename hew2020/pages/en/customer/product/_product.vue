@@ -265,10 +265,6 @@ middleware: 'auth',
   layout: 'default_en',
   head() {
     return {
-      script: [
-        { src: "https://fyu.se/embed?v=2.0" },
-        { src: "https://cdn.scaleflex.it/plugins/js-cloudimage-360-view/2/js-cloudimage-360-view.min.js" }
-      ],
       title: this.productdetails.product_name_en
     };
   },
@@ -277,7 +273,8 @@ middleware: 'auth',
     await this.getproductdetailreq();
     await this.get_reviewsReq()
     console.log(this.productdetails.shop_id)
-    this.getShopdata({wsid:this.productdetails.shop_id})
+    console.log('こうおぶID',this.productdetails.shop_id)
+    await this.getShopdata({wsid:this.productdetails.shop_id})
     console.log(this.workshop_data)
     for(var i = 0; i<this.productdetails.stock ; i++){
       this.stock.push(i+1);
