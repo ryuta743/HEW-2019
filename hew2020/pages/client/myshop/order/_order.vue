@@ -135,8 +135,8 @@
           <v-divider></v-divider>
           <v-card-actions>
             <!-- v-if="orderlist[0] ? checkStatus:''" -->
-            <!-- <v-layout row wrap justify-center v-if="orderlist[0] ? checkStatus:''"> -->
-            <v-layout row wrap justify-center v-if="this.end_data[0].status == 0">
+            <v-layout row wrap justify-center v-if="end_data[0] ? checkStatus:''">
+            <!-- <v-layout row wrap justify-center v-if="this.end_data[0].status == 0 ? this.end_data[0].status:null"> -->
               <v-btn color="success" @click="dialog = true" depressed>発送完了</v-btn>
             </v-layout>
           </v-card-actions>
@@ -215,7 +215,7 @@ export default {
     var r3 = await r1;
     var r4 = await r2;
     this.loading = false;
-    this.get_order_listsReq();
+    await this.get_order_listsReq();
   },
   methods: {
     exprice(val) {
@@ -228,7 +228,6 @@ export default {
       }
       console.log(order_data)
       await this.get_order_lists({order_data});
-      console.log(this.end_data[0].status)
     },
     async processcheck(i) {
       //削除アップデート
@@ -277,7 +276,7 @@ export default {
   },
   computed: {
     checkStatus() {
-      return this.orderlist[0].status == 0 ? true : false;
+      return this.end_data[0].status == 0 ? true : false;
     },
     ...mapGetters("workshop_manage", ["workshop_data", "orderlist", "details", "end_data"]),
     ...mapGetters(["loginuserdata"])
