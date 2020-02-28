@@ -237,13 +237,9 @@
       transition="dialog-transition"
     >
       <v-card id="box">
-        <v-card-text style="padding: 10px;">
-          <h2>音声操作</h2>
-          <div id="moji_box" style="display: flex;">
-            <div id="flex_box">
-              <div id="order_box" v-if="order != ''">{{ order }}</div>
-              {{ monitor() }}
-            </div>
+        <v-card-text style="padding: 10px; color: #fff;">
+          <h2 style="padding-bottom: 20px;">音声操作</h2>
+          <div id="moji_box">
             <div id="sound_wrap">
               <v-layout row wrap justify-center align-center>
                 <div id="record_btn" class="no-print">
@@ -252,14 +248,18 @@
                   </v-btn>
                 </div>
               </v-layout>
+              <div id="flex_box">
+                <div id="order_box" v-if="order != ''">{{ order }}</div>
+                {{ monitor() }}
+              </div>
             </div>
           </div>
-          <h4>マイクボタンを押して操作内容を話してください</h4>
+          <h4 style="padding-top: 50px;">マイクボタンを押して操作内容を話してください</h4>
           <br />
           <p>※周辺の音が入ったり、聞き取りに失敗すると正しく動作しない場合がございます</p>
           <br />
           <v-layout row wrap justify-center>
-            <v-btn color="success" @click="sound_dialog = false">OK</v-btn>
+            <v-btn color="success" @click="sound_dialog = false">閉じる</v-btn>
           </v-layout>
         </v-card-text>
       </v-card>
@@ -726,9 +726,10 @@ export default {
 }
 
 #order_box {
+  color: #080808;
   position: relative;
   top: 20px;
-  left: 200px;
+  left: 0;
   width: auto;
   height: auto;
   background-color: white;
@@ -739,7 +740,7 @@ export default {
   display: inline-block;
 }
 
-#order_box:before {
+/* #order_box:before {
   content: "";
   position: absolute;
   top: 50%;
@@ -748,9 +749,19 @@ export default {
   border: 12px solid transparent;
   border-left: 13.5px solid #fff;
   z-index: 2;
+} */
+
+#order_box:before {
+  content: "";
+  position: absolute;
+  top: -30px;
+  left: 50%;
+  margin-left: -15px;
+  border: 15px solid transparent;
+  border-bottom: 15px solid #e1e1e1;
 }
 
-#order_box:after {
+/* #order_box:after {
   content: "";
   position: absolute;
   top: 50%;
@@ -759,7 +770,7 @@ export default {
   border: 14px solid transparent;
   border-left: 15px solid #e1e1e1;
   z-index: 1;
-}
+} */
 
 .v-btn {
   color: #444;
@@ -801,7 +812,9 @@ export default {
   }
 }
 #box {
-  height: 300px;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  height: 350px;
   text-align: center;
 }
 #sound_wrap {
@@ -809,6 +822,9 @@ export default {
   height: 100px;
   margin: 0 auto;
   padding-top: 40px;
+}
+#record_btn {
+  position: relative;
 }
 #sound_box {
   margin-right: 25px;
