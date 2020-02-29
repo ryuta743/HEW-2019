@@ -285,14 +285,14 @@
         <span class="no-print">天職</span>tenshoku
       </div>
 
+      <div id="search_box" class="no-print">
+        <input type="text" id="search_input" placeholder="キーワード" class="no-print" />
+      </div>
+
       <div id="sound_box">
         <v-btn class="btn elevation-0" @click="sound_dialog = true">
           <v-icon color="#348484" class="no-print">mdi-microphone-outline</v-icon>
         </v-btn>
-      </div>
-
-      <div id="search_box" class="no-print">
-        <input type="text" id="search_input" placeholder="キーワード" class="no-print" />
       </div>
 
       <v-btn
