@@ -238,7 +238,7 @@
     >
       <v-card id="box">
         <v-card-text style="padding: 10px; color: #fff;">
-          <h2 style="padding-bottom: 20px;">音声操作</h2>
+          <h2 style="padding:20px 0 20px 0;">音声操作</h2>
           <div id="moji_box">
             <div id="sound_wrap">
               <v-layout row wrap justify-center align-center>
@@ -254,12 +254,12 @@
               </div>
             </div>
           </div>
-          <h4 style="padding-top: 50px;">マイクボタンを押して操作内容を話してください</h4>
+          <h4 style="padding-top: 20px;">マイクボタンを押して操作内容を話してください</h4>
           <br />
           <p>※周辺の音が入ったり、聞き取りに失敗すると正しく動作しない場合がございます</p>
           <br />
           <v-layout row wrap justify-center>
-            <v-btn color="success" @click="sound_dialog = false">閉じる</v-btn>
+            <v-btn depressed color="success" @click="sound_dialog = false">閉じる</v-btn>
           </v-layout>
         </v-card-text>
       </v-card>
@@ -821,7 +821,7 @@ export default {
   width: 300px;
   height: 100px;
   margin: 0 auto;
-  padding-top: 40px;
+  padding-top: 30px;
 }
 #record_btn {
   position: relative;
