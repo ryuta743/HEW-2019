@@ -62,7 +62,7 @@ export const actions = {
             if(order.match('ショップ') || order.match('検索') || order.match('ショップ') || order.match('shop')){
               this.$router.push('/shop')
             }
-            if(order.match('モール') || order.match('ランダム') || order.match('楽しい') || order.match('面白い')){
+            if(order.match('街へ出る') || order.match('ランダム') || order.match('楽しい') || order.match('面白い') || order.match('街')){
                 this.$router.push('/mall')
             }
             if(order.match('問い合わせ') || order.match('コンタクト') || order.match('連絡') || order.match('メール')){

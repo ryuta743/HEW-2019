@@ -170,57 +170,87 @@
             <div
               class="genre"
               style="background-image : url(../syuki.jpg); background-size:cover;"
-            >酒器</div>
-            <div class="genre" style="background-image : url(../hasi.jpg); background-size:cover;">箸</div>
+            >
+              <div class="carvon">酒器</div>
+            </div>
+            <div class="genre" style="background-image : url(../hasi.jpg); background-size:cover;">
+              <div class="carvon">箸</div>
+            </div>
             <div
               class="genre"
               style="background-image : url(../hasioki.jpg); background-size:cover;"
-            >箸置き</div>
+            >
+              <div class="carvon">箸置き</div>
+            </div>
             <div
               class="genre"
               style="background-image : url(../okoubukuro.jpg); background-size:cover;"
-            >お香袋</div>
-            <div class="genre" style="background-image : url(../sara.jpg); background-size:cover;">皿</div>
+            >
+              <div class="carvon">お香袋</div>
+            </div>
+            <div class="genre" style="background-image : url(../sara.jpg); background-size:cover;">
+              <div class="carvon">皿</div>
+            </div>
             <div
               class="genre"
               style="background-image : url(../wainn.png); background-size:cover;"
-            >ワイン</div>
+            >
+              <div class="carvon">ワイン</div>
+            </div>
             <div
               class="genre"
               style="background-image : url(../sensu.jpg); background-size:cover;"
-            >扇子</div>
+            >
+              <div class="carvon">扇子</div>
+            </div>
             <div
               class="genre"
               style="background-image : url(../marura-.jpg); background-size:cover;"
-            >マフラー</div>
+            >
+              <div class="carvon">マフラー</div>
+            </div>
             <div
               class="genre"
               style="background-image : url(../wasi.jpg); background-size:cover;"
-            >和紙</div>
+            >
+              <div class="carvon">和紙</div>
+            </div>
             <div
               class="genre"
               style="background-image : url(../fuurinn.jpg); background-size:cover;"
-            >風鈴</div>
+            >
+              <div class="carvon">風鈴</div>
+            </div>
             <div
               class="genre"
               style="background-image : url(../biidoro.jpg); background-size:cover;"
-            >びいどろ</div>
+            >
+              <div class="carvon">びいどろ</div>
+            </div>
             <div
               class="genre"
               style="background-image : url(../tugaru.jpg); background-size:cover;"
-            >津軽</div>
+            >
+              <div class="carvon">津軽</div>
+            </div>
             <div
               class="genre"
               style="background-image : url(../piasu.jpg); background-size:cover;"
-            >ピアス</div>
+            >
+              <div class="carvon">ピアス</div>
+            </div>
             <div
               class="genre"
               style="background-image : url(../necklace.jpeg); background-size:cover;"
-            >ネックレス</div>
+            >
+              <div class="carvon">ネックレス</div>
+            </div>
             <div
               class="genre"
               style="background-image : url(../gurasu.jpeg); background-size:cover;"
-            >グラス</div>
+            >
+              <div class="carvon">グラス</div>
+            </div>
           </div>
         </div>
       </div>
@@ -541,6 +571,18 @@ export default {
   padding-left: 8px;
 }
 
+.carvon{
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.5);
+  position: absolute;
+  border-radius: 3px;
+}
+
 #finding {
   margin-top: 50px;
   widows: 100%;
@@ -552,19 +594,21 @@ export default {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+  color: white;
 }
 
 .genre {
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 1px;
+  border-radius: 3px;
   width: 205px;
   height: 90px;
   margin-bottom: 40px;
   font-size: 18px;
   background-color: #dee5ed;
-  color: #666;
+  background-position: center;
 }
 
 #keyword_input {
