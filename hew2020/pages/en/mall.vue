@@ -278,7 +278,7 @@ export default {
   cursor: pointer;
   position: absolute;
   left: -300px;
-  top: 160px;
+  bottom: 20px;
   width: 300px;
   height: 400px;
 }
@@ -297,7 +297,7 @@ export default {
   cursor: pointer;
   position: absolute;
   right: -2000px;
-  top: 160px;
+  bottom: 20px;
   width: 300px;
   height: 400px;
   z-index: 0;

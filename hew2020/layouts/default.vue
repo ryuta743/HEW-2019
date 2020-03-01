@@ -360,7 +360,7 @@
         <v-icon color="orange darken-2">mdi-gift</v-icon>ショップ
       </div>
       <div class="sub_item no-print" @click="$router.push('/mall')">
-        <v-icon color="purple darken-2">mdi-shopping-search</v-icon>ランダムモール
+        <v-icon color="purple darken-2">mdi-shopping-search</v-icon>街へ出る
       </div>
       <div class="sub_item no-print" @click="$router.push('/contact')">
         <v-icon color="teal darken-2">mdi-email</v-icon>お問い合わせ
