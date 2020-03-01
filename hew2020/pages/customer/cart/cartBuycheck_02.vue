@@ -114,7 +114,7 @@ export default {
       ]
       try{
         await this.insert_buy({buydata})
-        await this.buy_mail({buydata})
+        this.buy_mail({buydata})
         if(this.buy_data === 7){
           this.$router.push(`/customer/cart/cartBuy_end`)
         }
