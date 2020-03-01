@@ -254,7 +254,7 @@
               </div>
             </div>
           </div>
-          <h4 style="padding-top: 20px;">マイクボタンを押して操作内容を話してください</h4>
+          <h4 style="padding-top: 30px;">マイクボタンを押して操作内容を話してください</h4>
           <br />
           <p>※周辺の音が入ったり、聞き取りに失敗すると正しく動作しない場合がございます</p>
           <br />
@@ -814,7 +814,7 @@ export default {
 #box {
   background-color: rgba(0, 0, 0, 0.8);
   color: #fff;
-  height: 350px;
+  height: 370px;
   text-align: center;
 }
 #sound_wrap {
