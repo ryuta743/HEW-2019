@@ -3,31 +3,31 @@
     <div style="min-height: 100vh;width: 15%;" id="workshop_nav">
       <ul>
         <li @click="$router.push('/client/myshop/myshop')">
-          <v-icon>mdi-home</v-icon>管理ツールトップ
+          <v-icon>mdi-home</v-icon> 管理ツールトップ
         </li>
         <li @click="$router.push('/client/myshop/orderlist')" class="check">
-          <v-icon>mdi-format-list-checks</v-icon>注文一覧
+          <v-icon>mdi-format-list-checks</v-icon> 注文一覧
         </li>
         <li @click="$router.push('/client/myshop/sales')">
-          <v-icon>mdi-chart-bar</v-icon>売上一覧
+          <v-icon>mdi-chart-bar</v-icon> 売上一覧
         </li>
         <li @click="$router.push('/client/myshop/sales_trend')">
-          <v-icon>mdi-chart-arc</v-icon>売上傾向表
+          <v-icon>mdi-chart-arc</v-icon> 売上傾向表
         </li>
         <li @click="$router.push('/client/myshop/products')">
-          <v-icon>mdi-format-list-bulleted</v-icon>商品一覧・在庫状況
+          <v-icon>mdi-format-list-bulleted</v-icon> 商品一覧・在庫状況
         </li>
         <li @click="$router.push('/client/myshop/discount')">
-          <v-icon>mdi-cash-usd</v-icon>セット割引
+          <v-icon>mdi-cash-usd</v-icon> セット割引
         </li>
         <li @click="$router.push('/client/myshop/productadd')">
-          <v-icon>mdi-plus</v-icon>新規商品登録
+          <v-icon>mdi-plus</v-icon> 新規商品登録
         </li>
         <li @click="$router.push('/client/myshop/productdel')">
-          <v-icon>mdi-close</v-icon>商品編集・削除
+          <v-icon>mdi-close</v-icon> 商品編集・削除
         </li>
         <li @click="$router.push('/client/myshop/chat')">
-          <v-icon>mdi-chat</v-icon>チャットメッセージ
+          <v-icon>mdi-chat</v-icon> チャットメッセージ
         </li>
       </ul>
     </div>
@@ -35,7 +35,7 @@
       <v-btn color="info" icon :loading="loading" v-if="loading" large></v-btn>
       <v-content v-if="!loading">
         <div id="sub_title">
-          <h3>注文No.{{$route.params.order}}</h3>
+          <h3>注文No.{{$route.query.number}}</h3>
           <div class="flex-grow-1"></div>
           <v-btn
             color="success"
@@ -191,7 +191,11 @@
 import { mapActions, mapGetters } from "vuex";
 export default {
   middleware: "auth",
-
+  head() {
+    return {
+      title: '工房管理'
+    }
+  },
   data() {
     return {
       loading: true,
