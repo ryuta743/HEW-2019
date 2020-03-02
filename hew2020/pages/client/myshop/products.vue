@@ -97,7 +97,11 @@
 import {mapActions,mapGetters,mapMutations} from 'vuex'
 export default {
 middleware: 'auth',
-
+  head() {
+    return {
+      title: '工房管理'
+    }
+  },
   data() {
     return {
       loading: true,
