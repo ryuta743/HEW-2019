@@ -107,17 +107,20 @@ export const actions = {
         console.log('受け取ったデータ:' + wsid)
         try {
             console.log('aa')
+            var total = 0;
             const ws_inf = await this.$axios.$get(`http://133.18.194.128:5000/workshopManage/getOrderdetail?shop_id=${wsid}&order_number=${order_number}`);
             if (ws_inf.length > 0) {
                 for (var i = 0; ws_inf.length > i; i++) {
                     if (ws_inf[i].proccess == 1) ws_inf[i].proccess = true;
+                    total = total + ws_inf[i].price * ws_inf[i].count;
                 };
                 for(var n = 0; n<ws_inf.length ; n++){
                     ws_inf[n].product_img = `https://firebasestorage.googleapis.com/v0/b/tenshoku-9b0c8.appspot.com/o/images%2F${ws_inf[n].shop_id}%2Fproducts%2F${ws_inf[n].product_img}?alt=media`;
                 }
+                ws_inf[0].price_all = total;
             }
             commit('setOrderdetail', ws_inf)
-            console.log(ws_inf)
+            console.log('注文詳細',ws_inf)
         } catch (error) {
             if (error.response.status === 403) {
                 throw new Error("You don't have workshop")
